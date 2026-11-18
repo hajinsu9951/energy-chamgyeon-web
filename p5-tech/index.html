@@ -1,0 +1,1621 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>프로그램 5 · 적정기술 프로토타이핑 | 에너지참견시점</title>
+<meta name="description" content="디자인 씽킹 5단계로 사용자의 불편을 정의하고, 태양전지와 주변 재료로 적정기술 시제품을 만들어 비교 실험하고 개선하는 5차시 기술 수업">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<!-- 확인 필요: 적용 학년 — 지도안·PPT는 '고등학교 1학년 기술·가정', 보고서 Ⅱ장 검사 대상은 '중학교 3학년 1개 반'으로 서로 다름. 화면에는 학년을 쓰지 않음 -->
+<style>
+/* ── 프로그램 5 전용 보충 스타일 ── */
+.intro .art{position:absolute;inset:0;z-index:0}
+.intro .art svg{width:100%;height:100%;display:block}
+.intro .scene > img.blurbg{filter:blur(22px) brightness(.42) saturate(.8);transform:scale(1.15)}
+.tw{animation:tw 3.2s ease-in-out infinite}
+.tw:nth-child(3n){animation-delay:1.1s}.tw:nth-child(4n){animation-delay:2s}
+@keyframes tw{50%{opacity:.25}}
+.flowline{stroke-dasharray:10 16;animation:dash 1s linear infinite}
+@keyframes dash{to{stroke-dashoffset:-26}}
+.s2-cone{animation:breathe 4s ease-in-out infinite;transform-origin:800px 470px}
+@keyframes breathe{50%{opacity:.72}}
+.s2-ray{opacity:0;transition:opacity 1.4s var(--ease) .3s}
+.on .s2-ray{opacity:1}
+.s2-cone,.s2-floor{opacity:0;transition:opacity 1.6s var(--ease) 1s}
+.on .s2-floor{opacity:1}
+.on .s2-cone{opacity:1}
+.s3g{transform:translate(-370px,-70px) scale(1.5)}
+@media (max-width:760px){.s3g{transform:translate(59px,-10px) scale(.95)}}
+@media (max-width:480px){.intro-ui{gap:.45rem}.dots{gap:.3rem}.dots button{width:16px}.dots button.on{width:28px}}
+/* 장면 3: 낮(모으기) → 밤(켜기) 두 박자. 기본 상태 = 밤(움직임 줄이기 설정 시 마지막 상태로 보임) */
+.s3-ph{opacity:0}
+.on .s3-ph{animation:fall 2.2s cubic-bezier(.5,0,.9,.6) infinite}
+.on .s3-ph:nth-child(2){animation-delay:.35s}.on .s3-ph:nth-child(3){animation-delay:.7s}.on .s3-ph:nth-child(4){animation-delay:1.05s}
+.on .s3-ph:nth-child(5){animation-delay:1.4s}.on .s3-ph:nth-child(6){animation-delay:1.75s}.on .s3-ph:nth-child(7){animation-delay:.2s}.on .s3-ph:nth-child(8){animation-delay:.9s}
+@keyframes fall{0%{opacity:0;transform:translateY(-320px)}15%{opacity:1}85%{opacity:1}100%{opacity:0;transform:translateY(0)}}
+.s3-dayon{opacity:0}.s3-nighton{opacity:1}
+.on .s3-dayon{animation:s3day 8.2s linear both}
+.on .s3-nighton{animation:s3night 8.2s linear both}
+@keyframes s3day{0%,42%{opacity:1}54%,100%{opacity:0}}
+@keyframes s3night{0%,48%{opacity:0}60%,100%{opacity:1}}
+.s3-bulb{fill:#FFE6B8}
+.on .s3-bulb{animation:s3bulb 8.2s linear both}
+@keyframes s3bulb{0%,50%{fill:#3a332b}60%,100%{fill:#FFE6B8}}
+.s3-chg{transform-box:fill-box;transform-origin:left center;transform:scaleX(.78)}
+.on .s3-chg{animation:s3chg 8.2s linear both}
+@keyframes s3chg{0%{transform:scaleX(.06)}45%{transform:scaleX(1)}100%{transform:scaleX(.78)}}
+.intro canvas.motes{width:100%;height:100%}
+.frame{position:absolute;z-index:2;right:6vw;top:13vh;width:min(26vw,340px);border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.frame img{width:100%}
+.frame figcaption{position:absolute;left:0;right:0;bottom:0;padding:.5rem .8rem;background:rgba(29,26,22,.8);color:var(--champ);font-size:.82rem}
+.on .frame img{animation:kenburns 9s var(--ease) both}
+@media (max-width:760px){.frame{top:11vh;right:50%;margin-right:-28vw;width:56vw;max-height:38vh}.frame img{max-height:38vh;object-fit:cover}}
+.vs{display:grid;gap:.6rem;max-width:760px;margin:1rem auto 0;text-align:left}
+.vs p{margin:0;padding:.7rem 1rem;border-radius:12px;font-weight:500;font-size:clamp(.95rem,1.7vw,1.15rem)}
+.vs .no{background:rgba(180,83,42,.18);border:1px solid rgba(180,83,42,.55);color:var(--ink2)}
+.vs .no span{text-decoration:line-through;text-decoration-color:var(--rust);text-decoration-thickness:2px}
+.vs .yes{background:var(--amberT);border:1px solid var(--amber);color:var(--ink)}
+.vs b{color:var(--amber);margin-right:.4rem}.vs .no b{color:var(--rust)}
+.dt{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin:1.2rem auto 1.4rem;max-width:980px}
+.dt div{flex:1 1 140px;max-width:180px;border:1px solid var(--line2);border-radius:16px;padding:.8rem .6rem;background:rgba(29,26,22,.7);opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.on .dt div{opacity:1;transform:none}
+.on .dt div:nth-child(2){transition-delay:.25s}.on .dt div:nth-child(3){transition-delay:.5s}.on .dt div:nth-child(4){transition-delay:.75s}.on .dt div:nth-child(5){transition-delay:1s}
+.dt b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(1.15rem,2.2vw,1.6rem);color:var(--ink)}
+.dt i{font-style:normal;color:var(--amber);font-weight:700;font-size:.82rem}
+.dt small{display:block;color:var(--champ);font-size:.82rem}
+@media (max-width:640px){.dt div{flex:1 1 30%;padding:.5rem .3rem}.dt small{display:none}}
+
+.ivory .attr{color:var(--amber-dark)}.ivory .quote em,.ivory .amber,.ivory .head em{color:var(--amber-dark)}
+#rubric .tbl td:first-child{min-width:8.5em}
+@media (min-width:901px){.rank{position:sticky;top:80px}}
+@media (max-width:640px){.tabs button{padding:.45rem .85rem;font-size:.92rem}}
+/* 공통 소품 */
+.fig{margin:.6rem 0 1rem}
+.fig img{border-radius:14px;border:1px solid var(--line);max-height:360px;width:auto;max-width:100%;object-fit:contain;background:#111}
+.fig figcaption{color:var(--grey);font-size:.85rem;margin-top:.35rem}
+.figrow{display:flex;gap:.8rem;flex-wrap:wrap}
+.figrow .fig{flex:1 1 220px;margin:0}
+.figrow .fig img{max-height:260px;width:100%;object-fit:cover}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.chip{border:1px solid var(--line2);border-radius:12px;padding:.55rem .85rem;background:var(--champT)}
+.chip b{color:var(--amber);display:block;font-size:.95rem}
+.chip span{color:var(--ink2);font-size:.92rem}
+.ivory .chip{background:#fff;border-color:rgba(29,26,22,.14)}.ivory .chip b{color:var(--amber-dark)}.ivory .chip span{color:var(--ink-sub)}
+.sent{font-family:var(--serif);font-weight:800;font-size:clamp(1.1rem,2.4vw,1.6rem);line-height:1.5;padding:.8rem 1.1rem;border-radius:14px;margin:.5rem 0}
+.sent.no{background:var(--rustT);border:1px solid rgba(180,83,42,.6)}
+.sent.yes{background:var(--amberT);border:1px solid var(--amber)}
+.sent small{display:block;font-family:var(--sans);font-weight:500;font-size:.9rem;color:var(--champ);margin-top:.2rem}
+.formula{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;font-size:clamp(1rem,2vw,1.25rem);font-weight:500}
+.formula span{background:var(--amberT);border:1px solid var(--amber);color:var(--ink);border-radius:10px;padding:.2rem .6rem}
+.mini{font-size:.9rem;color:var(--grey)}
+.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:1rem}
+#act .cols2{grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr))}
+.elab .lcol{display:flex;flex-direction:column;gap:1rem;min-width:0}
+.elab .lossbox{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:1rem 1.1rem}
+.elab .lossbox h4{margin:.1rem 0 .3rem;font-size:.95rem;color:var(--champ);font-weight:500}
+.mt{margin-top:1rem}
+.tbl.sm td,.tbl.sm th{padding:.5rem .5rem;font-size:.92rem}
+
+/* (a) 에너지 전환 회로 */
+.elab{display:grid;grid-template-columns:1.45fr 1fr;gap:1.2rem;align-items:start}
+@media (max-width:900px){.elab{grid-template-columns:1fr}.elab .lcol{display:contents}.elab .board{order:1}.elab .ctrl{order:2}.elab .lossbox{order:3}}
+.elab .board{background:#14110E;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.elab svg{display:block;width:100%;height:auto}
+.elab .sky{transition:fill .8s}
+.elab.day .sky{fill:#2E2720}.elab.night .sky{fill:#0F0D0B}
+.elab .sun,.elab .moon{transition:opacity .6s;cursor:pointer}
+.elab.night .sun{opacity:0;pointer-events:none}.elab.day .moon{opacity:0;pointer-events:none}
+.elab .ray{opacity:0;transition:opacity .5s}
+.elab.day .ray{opacity:1}
+.wire{fill:none;stroke:#6A5D4F;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.fl{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:8 12;opacity:0;transition:opacity .4s}
+.fl.go{opacity:1;animation:dash .9s linear infinite}
+.elab .bat{cursor:pointer}
+.elab .bat,.elab .modg,.elab .batw,.elab .bypass{transition:opacity .4s}
+.elab:not(.bat-on) .bat,.elab:not(.bat-on) .modg,.elab:not(.bat-on) .batw{opacity:.2}
+.elab.bat-on .bypass{opacity:0}
+.elab .sml{font:500 14px var(--sans);fill:var(--grey)}
+.elab .heat{opacity:0;transition:opacity .5s}
+.elab .heat.on{opacity:1}
+.elab .heat path{fill:none;stroke:#E08A5E;stroke-width:2.5;stroke-linecap:round}
+.elab .heat text{font:700 15px var(--sans);fill:#E08A5E}
+.elab .sw circle{fill:#14110E;stroke:#EBCB94;stroke-width:2.5}
+.elab .loadg{opacity:0;transition:opacity .35s;pointer-events:none}
+.elab.l-led .g-led,.elab.l-motor .g-motor,.elab.l-buzzer .g-buzzer{opacity:1;pointer-events:auto}
+.elab .loadg{cursor:pointer}
+.elab .ledglow{opacity:0;transition:opacity .5s}
+.elab.out .ledglow{opacity:1}
+.elab .ledbulb{fill:#3A332B;transition:fill .5s}
+.elab.out .ledbulb{fill:#FFE6B8}
+.elab .fan{transform-box:fill-box;transform-origin:center}
+.elab.out .fan{animation:spin .7s linear infinite}
+.elab.out.rev .fan{animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.elab .wave{opacity:0}
+.elab.out .wave{animation:wave 1s ease-out infinite}
+.elab.out .wave:nth-of-type(2){animation-delay:.25s}.elab.out .wave:nth-of-type(3){animation-delay:.5s}
+@keyframes wave{0%{opacity:0}30%{opacity:1}100%{opacity:0}}
+.elab .term{font:700 20px var(--sans);fill:var(--champ)}
+.elab .lbl{font:500 18px var(--sans);fill:var(--ink2)}
+.elab .lname{font:700 22px var(--sans);fill:var(--ink)}
+.elab .elbl{font:700 19px var(--sans);fill:var(--amber);transition:opacity .4s}
+.elab .elbl.dim{opacity:.18}
+.ctrl{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:1.1rem 1.1rem 1rem}
+.ctrl h4{margin:.2rem 0 .5rem;font-size:.95rem;color:var(--champ);font-weight:500}
+.seg{display:flex;gap:.35rem;flex-wrap:wrap;margin-bottom:.9rem}
+.seg button{appearance:none;flex:1 1 auto;border:1px solid var(--line2);background:transparent;color:var(--ink2);border-radius:12px;padding:.55rem .7rem;font:500 .95rem var(--sans);cursor:pointer;transition:.2s}
+.seg button[aria-pressed="true"]{background:var(--amber);border-color:var(--amber);color:var(--bg);font-weight:700}
+@media (max-width:640px){.elab .lbl,.elab .elbl{font-size:25px}.elab .lname{font-size:27px}.elab .term{font-size:26px}.elab .e1{transform:translate(-40px,-10px)}.elab .sml{font-size:16px}.elab .heat text{font-size:20px}}
+.chain{display:flex;align-items:center;gap:.35rem;flex-wrap:wrap;margin:.4rem 0 .8rem}
+.chain span{border-radius:999px;padding:.35rem .8rem;font-weight:700;font-size:.95rem;border:1px solid var(--amber);color:var(--amber);background:var(--amberT);transition:.3s}
+.chain span.off{border-color:var(--line);color:var(--grey);background:transparent}
+.chain i{font-style:normal;color:var(--grey)}
+.chain span small{font-weight:500;font-size:.78rem;margin-left:.15rem}
+.chain span.hl{border-style:dashed;border-color:#E08A5E;color:#E08A5E;background:var(--rustT)}
+.chain span.hl.off{border-color:var(--line);color:var(--grey);background:transparent}
+.loss{margin:.2rem 0 .9rem}
+.loss .lb{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.45rem 0 .35rem}
+.loss .lb i{display:block}
+.loss .k1{background:#7A4A35}.loss .k2{background:#E08A5E}.loss .k3{background:var(--amber)}
+.loss .lg{display:flex;flex-wrap:wrap;gap:.3rem .9rem;font-size:.85rem;color:var(--ink2)}
+.loss .lg b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:.3rem;vertical-align:middle}
+.loss p{margin:.35rem 0 0}
+.msg{border-left:3px solid var(--amber);padding:.6rem .9rem;background:var(--champT);border-radius:0 12px 12px 0;min-height:4.4em;color:var(--ink)}
+.msg.warn{border-color:var(--rust);background:var(--rustT)}
+.gauge{height:8px;border-radius:4px;background:rgba(246,243,238,.12);overflow:hidden;margin:.3rem 0 .2rem}
+.gauge i{display:block;height:100%;background:linear-gradient(90deg,var(--champ),var(--amber));width:50%;transition:width .25s linear}
+
+/* (c) 문장 분류 + 의뢰 카드 */
+.sorter{display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:1rem;align-items:stretch}
+@media (max-width:900px){.sorter{grid-template-columns:1fr}.sorter .bin.l{order:2}.sorter .bin.r{order:3}}
+.bin{border:1.5px dashed var(--line2);border-radius:18px;padding:.9rem;min-height:180px}
+.bin h4{margin:0 0 .5rem;font-size:1.05rem}
+.bin.l h4{color:var(--amber)}.bin.r h4{color:#E08A5E}
+.bin ol{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink2)}
+.bin li{margin:.25rem 0;animation:fadein .4s}
+.bin li.wrong{color:#E08A5E}
+.qcard{position:relative;min-height:250px;display:flex;flex-direction:column;justify-content:center;border-radius:22px;padding:1.4rem;background:linear-gradient(160deg,#352E27,#26211C);border:1px solid var(--line2);box-shadow:0 18px 40px rgba(0,0,0,.35);transition:transform .45s var(--ease),opacity .45s}
+.qcard.fly-l{transform:translateX(-60%) rotate(-10deg);opacity:0}
+.qcard.fly-r{transform:translateX(60%) rotate(10deg);opacity:0}
+.qcard.enter{transform:translateY(20px) scale(.96);opacity:0;transition:none}
+.qcard .qn{color:var(--grey);font-size:.85rem}
+.qcard .qt{font-family:var(--serif);font-weight:800;font-size:clamp(1.2rem,2.4vw,1.6rem);line-height:1.5;margin:.4rem 0 1rem}
+.qcard .qb{display:flex;gap:.5rem;flex-wrap:wrap}
+.qcard .qb .btn{flex:1 1 140px;justify-content:center}
+.qfb{min-height:3.2em;margin-top:.7rem;color:var(--champ);font-size:.95rem}
+.qfb.bad{color:#E08A5E}
+.score{font-weight:700;color:var(--amber);font-variant-numeric:tabular-nums}
+.deck7{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:.8rem;perspective:1200px}
+.rq{position:relative;height:268px;cursor:pointer;border:0;padding:0;background:transparent;font:inherit;color:inherit;text-align:left}
+.rq .in{position:absolute;inset:0;transition:transform .7s var(--ease);transform-style:preserve-3d}
+.rq.flip .in{transform:rotateY(180deg)}
+.rq .f,.rq .b{position:absolute;inset:0;border-radius:18px;padding:1rem;-webkit-backface-visibility:hidden;backface-visibility:hidden;border:1px solid var(--line2);display:flex;flex-direction:column}
+.rq .f{background:linear-gradient(170deg,#3A3129,#211D19)}
+.rq .f .num{font-family:var(--serif);font-weight:800;font-size:2.6rem;color:var(--amber);line-height:1}
+.rq .f .rg{margin-top:.35rem;font-weight:700;font-size:1.25rem}
+.rq .f .tp{color:var(--champ);font-size:.95rem}
+.rq .f .kind{margin-top:auto;align-self:flex-start;font-size:.72rem;color:var(--grey);border:1px solid var(--line);border-radius:999px;padding:.05rem .5rem}
+.rq .b{background:var(--panel2);transform:rotateY(180deg);font-size:.82rem;line-height:1.5;color:var(--ink2);gap:.3rem;overflow:hidden;padding:.85rem}
+.rq .b b{color:var(--amber);font-size:.95rem}
+.rq.pick .f,.rq.pick .b{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber) inset}
+.rq.hl .f{box-shadow:0 0 0 2px var(--amber) inset,0 0 30px rgba(242,180,90,.45)}
+.rq .use{margin-top:auto;align-self:flex-start;font-size:.8rem;padding:.35rem .7rem;white-space:nowrap}
+.pickbar{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin:1rem 0}
+.pickbar .now{color:var(--champ)}
+.pickbar .now b{color:var(--amber)}
+
+/* (b) 평가 행렬 */
+.mx{display:grid;grid-template-columns:1.2fr 1fr;gap:1.2rem;align-items:start}
+@media (max-width:900px){.mx{grid-template-columns:1fr}}
+.mrow{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:.9rem 1rem;margin-bottom:.7rem}
+.mrow .nm{width:100%;background:var(--bg);border:1px solid var(--line2);border-radius:10px;color:var(--ink);font:500 1rem var(--sans);padding:.5rem .7rem;margin-bottom:.5rem}
+.mrow .nm:focus{border-color:var(--amber)}
+.sl{display:grid;grid-template-columns:7.6em 1fr 2.2em;align-items:center;gap:.6rem;margin:.25rem 0}
+.sl label{font-size:.9rem;color:var(--ink2)}
+.sl output{font-weight:700;color:var(--amber);text-align:right;font-variant-numeric:tabular-nums}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:rgba(246,243,238,.16);outline-offset:6px}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--amber);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--amber);cursor:pointer}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--amber);border:3px solid var(--bg);cursor:pointer}
+.rank{position:relative;background:#14110E;border:1px solid var(--line);border-radius:20px;padding:1rem}
+.rank h4{margin:0 0 .7rem;color:var(--champ);font-weight:500}
+.rlist{position:relative}
+.ritem{position:absolute;left:0;right:0;height:78px;transition:top .7s var(--ease)}
+.ritem .rin{height:70px;border:1px solid var(--line);border-radius:14px;padding:.5rem .8rem;display:grid;grid-template-columns:2.2em 1fr auto;align-items:center;gap:.6rem;background:var(--panel);transition:border-color .3s,box-shadow .3s}
+.ritem.win .rin{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset,0 0 24px rgba(242,180,90,.25)}
+.ritem .rk{font-family:var(--serif);font-weight:800;font-size:1.6rem;color:var(--amber);text-align:center}
+.ritem .rn{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ritem .rb{height:6px;border-radius:3px;background:rgba(246,243,238,.12);margin-top:.35rem;overflow:hidden}
+.ritem .rb i{display:block;height:100%;background:linear-gradient(90deg,var(--champ),var(--amber));transition:width .7s var(--ease)}
+.ritem .rt{font-weight:700;font-size:1.35rem;font-variant-numeric:tabular-nums}
+.ritem .rt small{font-size:.8rem;color:var(--grey);font-weight:400}
+.ritem .rin > div{min-width:0}
+.ritem .rt{white-space:nowrap}
+@media (max-width:520px){.ritem .rin{grid-template-columns:1.6em minmax(0,1fr) auto;gap:.45rem;padding:.5rem .6rem}.ritem .rn{font-size:.92rem}.ritem .badge{display:none}}
+.ritem .badge{font-size:.72rem;font-weight:700;color:var(--bg);background:var(--amber);border-radius:999px;padding:.05rem .5rem;margin-left:.4rem;vertical-align:middle}
+
+/* 회로 오류 탐정 */
+.det{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:.7rem;margin:.6rem 0}
+.det button{appearance:none;border:1px solid var(--line2);background:#14110E;border-radius:14px;padding:.4rem .4rem .6rem;cursor:pointer;color:var(--ink);font:500 .92rem var(--sans);text-align:center}
+.det svg{width:100%;height:auto;display:block}
+.det .ans{display:block;min-height:1.5em;color:var(--grey)}
+.det button.shown .ans{color:var(--amber);font-weight:700}
+.det button.shown.bad .ans{color:#E08A5E}
+.det .wl{fill:none;stroke:var(--champ);stroke-width:3;stroke-linecap:round}
+.det text{font:700 13px var(--sans);fill:var(--champ)}
+
+/* 고장 점검 */
+.ts .q{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.6rem .8rem;border:1px solid var(--line);border-radius:12px;margin:.4rem 0;opacity:.35;transition:.3s}
+.ts .q.act{opacity:1;border-color:var(--amber)}
+.ts .q.ok{opacity:.85}
+.ts .q b{flex:1 1 220px}
+.ts .fix{color:#E08A5E;font-weight:500;flex-basis:100%;display:none}
+.ts .q.no .fix{display:block}
+.ts .done{display:none;font-family:var(--serif);font-weight:800;font-size:1.6rem;color:var(--amber)}
+.ts.fin .done{display:block}
+.ts .tbtn{min-width:4em}
+
+/* 문장 만들기 */
+.builder{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem}
+input.pad{min-height:0;height:auto;padding:.6rem .8rem}
+.preview{font-family:var(--serif);font-weight:800;font-size:clamp(1.1rem,2.2vw,1.45rem);line-height:1.5;padding:.9rem 1.1rem;border-radius:14px;border:1px solid var(--amber);background:var(--amberT);margin:.8rem 0 .4rem}
+.preview .ph{color:var(--grey)}
+.pwarn{color:#E08A5E;min-height:1.4em;font-size:.95rem}
+
+/* (d) 결과 막대 */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.1rem 1.2rem}
+.kpi .k{color:var(--champ);font-weight:500}
+.kpi .v{font-size:clamp(1.6rem,3.6vw,2.4rem);font-weight:700;font-variant-numeric:tabular-nums;line-height:1.2;margin:.3rem 0}
+.kpi .v .ar{color:var(--grey);font-weight:400;margin:0 .25rem}
+.kpi .v .post{color:var(--amber)}
+.kpi .p{color:var(--grey);font-size:.9rem}
+.legend{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;font-size:.9rem;color:var(--ink2);margin:.4rem 0 .8rem}
+.legend i{display:inline-block;width:22px;height:8px;border-radius:4px;margin-right:.35rem;vertical-align:middle}
+.items{display:grid;gap:.55rem}
+.it{display:grid;grid-template-columns:minmax(150px,15rem) 1fr 5rem;gap:.7rem;align-items:center;transition:opacity .3s}
+.it .nm{font-size:.92rem;color:var(--ink2);line-height:1.35}
+.it .nm b{color:var(--grey);font-weight:500;margin-right:.2rem}
+.it .bars{position:relative;display:grid;gap:3px}
+.it .bars span{display:block;height:9px;border-radius:5px;width:0;transition:width 1.3s var(--ease)}
+.it .bars .pre{background:#6E6458}
+.it .bars .post{background:var(--amber)}
+.items.in .it .pre{width:var(--pre)}
+.items.in .it .post{width:var(--post)}
+.items.in .it:nth-child(n) .post{transition-delay:.35s}
+.it .dl2{font-weight:700;font-variant-numeric:tabular-nums;text-align:right;font-size:.95rem}
+.it .dl2.up{color:var(--amber)}.it .dl2.dn{color:#E08A5E}.it .dl2.eq{color:var(--grey)}
+.it .vals{display:block;font-weight:400;color:var(--grey);font-size:max(.8rem,13px)}
+.it.hi .nm{color:var(--ink);font-weight:500}
+.items.f-up .it:not(.hi){display:none}
+.items.f-dn .it:not(.down){display:none}
+.axis{display:grid;grid-template-columns:minmax(150px,15rem) 1fr 5rem;gap:.7rem;color:var(--grey);font-size:max(.78rem,13px);margin-top:.3rem}
+.axis div{display:flex;justify-content:space-between}
+@media (max-width:640px){.it,.axis{grid-template-columns:1fr 4.4rem}.it .nm{grid-column:1/-1}.axis>span:first-child{display:none}}
+.caution{border:1px solid rgba(180,83,42,.6);background:var(--rustT);border-radius:16px;padding:1rem 1.2rem;margin-top:1.2rem}
+.caution h4{margin:0 0 .4rem;color:#E8A27E}
+.caution ul{margin:0;padding-left:1.1rem}.caution li{margin:.25rem 0;color:var(--ink2)}
+
+/* 평가 30점 막대 */
+.pts{display:flex;height:54px;border-radius:14px;overflow:hidden;margin:1rem 0 .4rem;border:1px solid rgba(29,26,22,.15)}
+.pts div{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:var(--ink-dark);text-align:center;line-height:1.2;padding:0 .3rem}
+.pts .a{flex:10;background:#F2B45A}.pts .b{flex:5;background:#EBCB94}.pts .c{flex:5;background:#DCD5CA}.pts .d{flex:10;background:#D9A55A}
+@media (max-width:520px){.pts div{font-size:.72rem}}
+.gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem}
+.gallery figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.gallery img{width:100%;height:200px;object-fit:cover}
+.gallery figcaption{padding:.5rem .8rem;color:var(--ink2);font-size:.86rem}
+.privacy{color:var(--grey);font-size:.82rem;margin:.5rem 0 0}
+.ivory .flow .st small,.ivory .card small{color:var(--ink-sub)}
+body.proj .step img{max-height:38vh}
+.backlink{display:inline-block;font-size:.85rem;color:var(--grey);margin-bottom:.6rem}
+.backlink:hover{color:var(--amber)}
+/* 페트병 전구 그림(직접 그림) */
+.pet{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.6rem 0 1rem}
+.pet figure{margin:0;background:#14110E;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pet svg{display:block;width:100%;height:auto}
+.pet figcaption{padding:.45rem .8rem;color:var(--ink2);font-size:.88rem}
+@media (max-width:520px){.pet{grid-template-columns:1fr}}
+.safe .card p{font-size:.95rem}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span>· 05</a>
+    <nav aria-label="이 페이지 차례">
+      <a href="#intro">시작</a><a href="#goal">질문</a><a href="#lesson">수업 진행</a><a href="#energy">에너지 전환</a><a href="#define">문제 정의</a><a href="#matrix">평가 행렬</a><a href="#act">활동지</a><a href="#rubric">평가</a><a href="#result">결과</a><a href="#ppt">PPT</a>
+    </nav>
+    <div class="tools"><button class="tbtn" data-toggle="tmode">교사 모드</button><button class="tbtn" data-toggle="proj">크게 보기</button><button class="tbtn" data-toggle="fs">전체 화면</button></div>
+  </div>
+</header>
+
+<!-- ══════════ 몰입형 인트로 ══════════ -->
+<section class="intro" id="intro" data-hold-last aria-label="인트로">
+
+  <!-- 장면 1: 불 꺼진 마을의 밤 -->
+  <div class="scene" data-dur="5600">
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs><linearGradient id="n1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070605"/><stop offset=".7" stop-color="#1D1A16"/><stop offset="1" stop-color="#2B2621"/></linearGradient></defs>
+        <rect width="1600" height="900" fill="url(#n1)"/>
+        <g fill="#F6F3EE">
+          <circle class="tw" cx="120" cy="90" r="1.6"/><circle class="tw" cx="260" cy="180" r="1.2"/><circle class="tw" cx="380" cy="70" r="1.8"/><circle class="tw" cx="520" cy="150" r="1.1"/><circle class="tw" cx="640" cy="60" r="1.5"/><circle class="tw" cx="760" cy="200" r="1.2"/><circle class="tw" cx="880" cy="110" r="1.7"/><circle class="tw" cx="980" cy="40" r="1.1"/><circle class="tw" cx="1080" cy="170" r="1.4"/><circle class="tw" cx="1190" cy="80" r="1.2"/><circle class="tw" cx="1420" cy="210" r="1.6"/><circle class="tw" cx="1520" cy="100" r="1.2"/><circle class="tw" cx="60" cy="240" r="1.1"/><circle class="tw" cx="700" cy="290" r="1"/><circle class="tw" cx="1000" cy="300" r="1.2"/><circle class="tw" cx="330" cy="300" r="1"/>
+        </g>
+        <path d="M1290 120a52 52 0 1 0 40 92a44 44 0 1 1-40-92z" fill="#EBCB94" opacity=".85"/>
+        <path d="M0 610 Q300 520 620 590 T1220 560 T1600 600 V900 H0z" fill="#12100D"/>
+        <g fill="#0B0A08" stroke="rgba(235,203,148,.14)" stroke-width="2">
+          <path d="M200 640 l90-70 90 70 v120 h-180z"/><path d="M420 655 l70-55 70 55 v105 h-140z"/>
+          <path d="M640 630 l110-80 110 80 v130 h-220z"/><path d="M930 650 l80-60 80 60 v110 h-160z"/>
+          <path d="M1150 640 l95-70 95 70 v120 h-190z"/><path d="M1380 660 l70-52 70 52 v100 h-140z"/>
+        </g>
+        <g fill="#1F1B17"><rect x="250" y="680" width="34" height="30"/><rect x="460" y="690" width="28" height="26"/><rect x="700" y="670" width="36" height="32"/><rect x="770" y="670" width="36" height="32"/><rect x="990" y="690" width="30" height="28"/><rect x="1210" y="680" width="34" height="30"/><rect x="1430" y="700" width="26" height="24"/></g>
+        <rect y="760" width="1600" height="140" fill="#0E0C0A"/>
+      </svg>
+    </div>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">프로그램 5 · 기술 및 시제품 구현</span>
+      <h1 class="display"><span class="mask"><span>해가 지면,</span></span><span class="mask"><span>이 마을의 밤은 <em>어떨까요?</em></span></span></h1>
+      <p class="subline fadeup">적정기술 프로토타이핑과 태양광 업사이클링 제작 · 5차시</p>
+    </div></div>
+  </div>
+
+  <!-- 장면 2: 지붕 구멍 페트병에 모이는 빛줄기 -->
+  <div class="scene" data-dur="6600" data-flash>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="s2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B45A" stop-opacity=".55"/><stop offset="1" stop-color="#EBCB94" stop-opacity=".2"/></linearGradient>
+          <radialGradient id="s2c" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#FFE6B8" stop-opacity=".85"/><stop offset=".45" stop-color="#F2B45A" stop-opacity=".28"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
+          <radialGradient id="s2f" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F2B45A" stop-opacity=".45"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="1600" height="900" fill="#14110E"/>
+        <rect width="1600" height="250" fill="#2B2621"/>
+        <rect width="1600" height="250" fill="url(#s2sky)"/>
+        <g class="s2-ray" stroke="#FFE6B8" stroke-width="5" stroke-linecap="round" opacity=".9">
+          <line class="flowline" x1="420" y1="-40" x2="780" y2="240"/><line class="flowline" x1="520" y1="-60" x2="800" y2="236" style="animation-delay:.3s"/><line class="flowline" x1="620" y1="-60" x2="820" y2="240" style="animation-delay:.6s"/>
+        </g>
+        <g fill="#2B2621" stroke="rgba(235,203,148,.25)" stroke-width="2"><rect x="0" y="240" width="1600" height="54"/></g>
+        <g stroke="rgba(235,203,148,.18)" stroke-width="2"><path d="M0 255 H1600 M0 272 H1600"/></g>
+        <polygon class="s2-cone" points="770,470 830,470 1360,900 240,900" fill="url(#s2c)"/>
+        <ellipse class="s2-floor" cx="800" cy="860" rx="560" ry="90" fill="url(#s2f)"/>
+        <rect x="785" y="200" width="30" height="46" rx="6" fill="rgba(246,243,238,.35)" stroke="#EBCB94" stroke-width="2"/>
+        <rect x="755" y="294" width="90" height="176" rx="26" fill="rgba(255,230,184,.55)" stroke="#EBCB94" stroke-width="2.5"/>
+        <rect x="770" y="320" width="18" height="120" rx="9" fill="rgba(255,255,255,.55)"/>
+        <g fill="#0E0C0A"><rect x="80" y="610" width="230" height="290" rx="6"/><rect x="1280" y="560" width="180" height="340" rx="6"/></g>
+      </svg>
+    </div>
+    <!-- 저작권: 제3자 사진(잡지·유튜브 캡처)은 쓰지 않고 직접 그린 SVG만 씀. 원본 사진은 img/_orig/ (게시 참조 없음) -->
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">낮 — 페트병 전구</span>
+      <h2 class="display"><span class="mask"><span>지붕 구멍에 꽂은</span></span><span class="mask"><span><em>물 한 병</em>이 방을 밝혀요</span></span></h2>
+      <p class="subline fadeup">물이 햇빛을 퍼뜨려요. 전기도 기계도 없이, 버려지는 페트병으로.</p>
+    </div></div>
+  </div>
+
+  <!-- 장면 3: 낮(태양전지 → 축전지 충전) → 밤(축전지 → LED). 밤에는 빛 알갱이가 태양전지로 들어가지 않음 -->
+  <div class="scene" data-dur="8400" data-flash>
+    <div class="art" aria-hidden="true">
+      <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="s3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B0A08"/><stop offset="1" stop-color="#221E19"/></linearGradient>
+          <linearGradient id="s3day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A4529"/><stop offset="1" stop-color="#2B2621"/></linearGradient>
+          <radialGradient id="s3g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE6B8" stop-opacity=".95"/><stop offset=".35" stop-color="#F2B45A" stop-opacity=".45"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
+          <radialGradient id="s3p" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE6B8"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
+        </defs>
+        <rect width="1600" height="900" fill="url(#s3sky)"/>
+        <rect class="s3-dayon" width="1600" height="900" fill="url(#s3day)"/>
+        <g class="s3g">
+        <!-- 낮: 해와 빛 알갱이 -->
+        <g class="s3-dayon"><circle cx="560" cy="150" r="70" fill="url(#s3g)"/><circle cx="560" cy="150" r="30" fill="#F2B45A"/>
+          <text x="690" y="225" fill="#FFE6B8" font-size="17" font-family="Noto Sans KR,sans-serif" font-weight="700">낮 · 충전</text>
+          <g>
+            <circle class="s3-ph" cx="640" cy="232" r="8" fill="url(#s3p)"/><circle class="s3-ph" cx="690" cy="226" r="6" fill="url(#s3p)"/><circle class="s3-ph" cx="735" cy="232" r="9" fill="url(#s3p)"/><circle class="s3-ph" cx="665" cy="240" r="6" fill="url(#s3p)"/><circle class="s3-ph" cx="712" cy="244" r="7" fill="url(#s3p)"/><circle class="s3-ph" cx="625" cy="246" r="5" fill="url(#s3p)"/><circle class="s3-ph" cx="750" cy="246" r="5" fill="url(#s3p)"/><circle class="s3-ph" cx="700" cy="236" r="5" fill="url(#s3p)"/>
+          </g>
+        </g>
+        <!-- 밤: 달과 별 -->
+        <g class="s3-nighton"><path d="M1040 112a34 34 0 1 0 26 60a28 28 0 1 1-26-60z" fill="#EBCB94" opacity=".9"/>
+          <g fill="#F6F3EE"><circle class="tw" cx="640" cy="130" r="1.6"/><circle class="tw" cx="760" cy="90" r="1.3"/><circle class="tw" cx="880" cy="140" r="1.5"/><circle class="tw" cx="980" cy="80" r="1.2"/><circle class="tw" cx="1120" cy="230" r="1.4"/></g>
+          <text x="948" y="262" text-anchor="end" fill="#FFE6B8" font-size="17" font-family="Noto Sans KR,sans-serif" font-weight="700">밤 · 축전지 → LED</text>
+        </g>
+        <!-- 태양전지 -->
+        <polygon points="615,250 765,250 750,340 600,340" fill="#2B2621" stroke="#EBCB94" stroke-width="2.5"/>
+        <path d="M612 280 H760 M607 310 H755 M665 250 L652 340 M715 250 L702 340" stroke="rgba(235,203,148,.45)" stroke-width="1.5"/>
+        <polygon class="s3-nighton" points="615,250 765,250 750,340 600,340" fill="#0B0A08" opacity=".4"/>
+        <!-- 전선: 태양전지 → 축전지 → LED -->
+        <path d="M757 298 H800" fill="none" stroke="#4A4036" stroke-width="7" stroke-linecap="round"/>
+        <path d="M886 298 H960 V238" fill="none" stroke="#4A4036" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <path class="s3-dayon flowline" d="M757 298 H800" fill="none" stroke="#F2B45A" stroke-width="3" stroke-linecap="round"/>
+        <path class="s3-nighton flowline" d="M886 298 H960 V240" fill="none" stroke="#F2B45A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <!-- 축전지(게이지) -->
+        <rect x="800" y="280" width="80" height="36" rx="6" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><rect x="880" y="291" width="6" height="14" rx="2" fill="#EBCB94"/>
+        <rect class="s3-chg" x="805" y="285" width="70" height="26" rx="3" fill="#F2B45A" opacity=".85"/>
+        <text x="840" y="340" text-anchor="middle" fill="#EBCB94" font-size="15" font-family="Noto Sans KR,sans-serif" font-weight="700">축전지</text>
+        <!-- LED 전구 -->
+        <circle class="s3-nighton" cx="960" cy="205" r="170" fill="url(#s3g)"/>
+        <path class="s3-bulb" d="M940 205 a20 20 0 1 1 40 0 v20 h-40z" stroke="#EBCB94" stroke-width="2.5"/>
+        <rect x="945" y="225" width="30" height="12" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
+        </g>
+      </svg>
+    </div>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">낮에 모으고, 밤에 켜요 — 태양전지 조명</span>
+      <h2 class="display"><span class="mask"><span>빛 → 전기 → 축전지 →</span></span><span class="mask"><span><em>밤에 다시 빛</em></span></span></h2>
+      <p class="subline fadeup">낮에 모은 햇빛 전기를 축전지에 화학에너지로 담아 두었다가, 밤에 LED로 다시 빛을 내요.</p>
+    </div></div>
+  </div>
+
+  <!-- 장면 4: 우리 교실의 시제품 -->
+  <div class="scene" data-dur="6200" data-flash>
+    <img class="blurbg" src="img/proto-bottle.jpg" alt="">
+    <figure class="frame"><img src="img/proto-bottle.jpg" alt="페트병 구조물과 작은 태양전지를 연결한 학생 시제품"><figcaption>▲ 페트병과 태양전지를 활용한 시제품</figcaption></figure>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">우리 기술실에서는</span>
+      <h2 class="display"><span class="mask"><span>페트병 + 태양전지로</span></span><span class="mask"><span>누군가의 <em>불편</em>을 줄여요</span></span></h2>
+      <p class="subline fadeup">현지 사람이 직접 만들고 고칠 수 있는 시제품을 설계하고, 만들고, 실험해요.</p>
+    </div></div>
+  </div>
+
+  <!-- 장면 5: 해결책보다 불편을 먼저 -->
+  <div class="scene" data-dur="7000" data-flash>
+    <canvas class="motes" data-n="50"></canvas>
+    <div class="scrim full"></div>
+    <div class="cap center"><div class="wrap">
+      <span class="kicker">디자인 씽킹의 첫걸음</span>
+      <h2 class="display"><span class="mask"><span>해결책보다</span></span><span class="mask"><span><em>불편</em>을 먼저.</span></span></h2>
+      <div class="vs fadeup">
+        <p class="no"><b>×</b><span>라오스에 태양광 건조기가 필요하다.</span></p>
+        <p class="yes"><b>○</b>라오스 농민은 비가 잦아 농산물을 말리지 못해 오래 보관하기 어렵다.</p>
+      </div>
+    </div></div>
+  </div>
+
+  <!-- 장면 6: 디자인 씽킹 5단계 -->
+  <div class="scene" data-flash>
+    <canvas class="motes" data-n="70"></canvas>
+    <div class="scrim full"></div>
+    <div class="cap center"><div class="wrap">
+      <span class="kicker">5차시 여정 · 디자인 씽킹 5단계</span>
+      <h2 class="display" style="font-size:clamp(2rem,5vw,4rem)"><span class="mask"><span>누구의 어떤 불편을 해결할까?</span></span></h2>
+      <div class="dt">
+        <div><i>01</i><b>공감</b><small>사용자의 하루와 불편</small></div>
+        <div><i>02</i><b>정의</b><small>가장 큰 불편을 한 문장으로</small></div>
+        <div><i>03</i><b>아이디어</b><small>해결 방법 2가지 이상</small></div>
+        <div><i>04</i><b>시제품</b><small>구상도대로 직접 만들기</small></div>
+        <div><i>05</i><b>실험</b><small>사용 전후 비교, 개선</small></div>
+      </div>
+      <a class="btn fadeup" href="#goal">수업 시작 ↓</a>
+    </div></div>
+  </div>
+
+  <div class="flash"></div>
+  <div class="intro-ui">
+    <button class="tbtn" data-intro="prev" aria-label="이전 장면">◀</button>
+    <div class="dots"></div>
+    <button class="tbtn" data-intro="pause" aria-pressed="false">일시정지</button>
+    <button class="tbtn" data-intro="next" aria-label="다음 장면">▶</button>
+  </div>
+  <div class="scroll-hint"><i></i>아래로</div>
+</section>
+
+<!-- ══════════ 질문 · 목표 · 흐름 ══════════ -->
+<section class="sec ivory" id="goal">
+  <div class="wrap">
+    <p class="label reveal">이 수업의 질문</p>
+    <p class="quote reveal d1">누구의 <em>어떤 불편</em>을<br>해결할까?</p>
+    <p class="attr reveal d2">적정기술은 그 지역에 맞고, 부담 없이 사용할 수 있으며, 스스로 지속할 수 있어야 해요.</p>
+    <p class="reveal d2" style="margin-top:1rem"><span class="tag">에너지소양 주제 · 무탄소 에너지</span><span class="tag">에너지소양 주제 · 사회경제</span></p>
+    <p class="mini reveal d2" style="color:var(--ink-sub)">무탄소 에너지: 태양전지로 빛에너지를 전기에너지로 바꿔 씀 · 사회경제: 전기가 부족한 지역의 에너지 빈곤을 적정기술로 줄임</p>
+    <p class="mini reveal d2" style="color:var(--ink-sub)">적용: 기술·가정 5차시 수업 · 2026. 8. 18.(사전)·10. 20.(사후) 에너지 소양 검사 18명</p>
+    <!-- 확인 필요: 적용 학년(지도안 고1 / 보고서 Ⅱ장 중3). 학년은 화면에 쓰지 않음. 중학교 적용이면 성취기준을 [9기가] 코드로 바꿔야 함 — 편집장이 선생님께 질문 중 -->
+
+    <div class="grid g3 mt reveal" style="margin-top:2.4rem">
+      <div class="card"><span class="no">조건 1</span><h3>그 지역에 맞게</h3><p>현지의 기후·생활·문화에 맞아요.</p></div>
+      <div class="card"><span class="no">조건 2</span><h3>부담 없이</h3><p>사고 쓰는 비용이 알맞아요.</p></div>
+      <div class="card"><span class="no">조건 3</span><h3>스스로 지속할 수 있게</h3><p>현지 재료로 현지 사람이 직접 만들고 고칠 수 있어요.</p></div>
+    </div>
+
+    <h2 class="head reveal" style="margin-top:3.5rem">5차시 흐름</h2>
+    <div class="flow reveal">
+      <div class="st"><b>1차시 · 공감과 문제 정의</b><small>그 사람이 가장 먼저 해결하고 싶은 불편은 무엇일까? · 활동지 01·02(개인)</small></div>
+      <div class="st"><b>2차시 · 구상과 설계</b><small>그 지역 사람이 직접 만들고 고칠 수 있게 설계했을까? · 활동지 03(개인)·04(모둠)</small></div>
+      <div class="st"><b>3~4차시 · 시제품 제작</b><small>선정한 문제를 해결하는 시제품을 완성할 수 있을까? · 활동지 05(개인)·06(모둠)</small></div>
+      <div class="st"><b>5차시 · 실험과 개선</b><small>우리 시제품은 처음 정의한 불편을 줄였을까? · 활동지 06(모둠)·07(개인)</small></div>
+    </div>
+
+    <div class="cols2" style="margin-top:2.4rem">
+      <div class="reveal">
+        <h3>학습 목표</h3>
+        <ol style="padding-left:1.2rem;margin:0">
+          <li>공학적 문제해결 사례에서 창의성·팀워크·의사소통 같은 공학적 소양이 왜 필요한지 찾아요.</li>
+          <li>적정기술이 필요한 사용자의 가장 큰 불편을 한 문장으로 정의하고 아이디어를 두 가지 이상 구상해요.</li>
+          <li>태양전지의 에너지 전환을 활용해 치수와 회로가 보이는 구상도를 그리고, 시제품을 만들어요.</li>
+          <li>사용 전후를 비교하는 실험으로 효과를 확인하고, 피드백으로 개선점을 두 가지 이상 써요.</li>
+        </ol>
+      </div>
+      <div class="reveal d1">
+        <h3>성취기준</h3>
+        <p><span class="tag">[12기가04-04]</span> 공학적 문제해결 사례를 통해 창의성, 팀워크, 의사소통 역량과 같은 공학적 소양의 중요성과 필요성을 인식한다.</p>
+        <p><span class="tag">[12기가05-04]</span> 친환경 에너지의 종류와 원리, 활용 사례를 탐구하며, 에너지 전환과 관련된 공학적 문제를 해결하는 과정에서 창의적 자신감과 태도를 갖는다.</p>
+        <p class="mini" style="color:var(--ink-sub)">에듀테크: 디벗(1차시 개인별, 2~5차시 모둠당 1대) · 띵커벨(제작 사진·비교 실험 영상 공유와 동료 평가) · 재료: 태양전지, LED·모터·<b>능동형(발진 회로 내장) 피에조 부저</b> — 작동 전압 확인</p>
+      </div>
+    </div>
+    <div class="teacher">
+      <b>교사 메모</b> — 1차시는 과정 중심 관찰평가, 2차시부터 개인 학습지·모둠 시제품·실습 보고서를 산출물 평가(창의성 10, 문제 해결 조건 5, 보고서 5, 문제해결력 10 = 30점). 디벗 조사는 AI에게 답을 묻지 않고, 참고한 내용은 사실인지 확인하게 함. 평가가 끝난 시제품은 학생이 직접 분해해 분리배출. 차시마다 50분(도입 5 + 전개 40 + 정리 5, 3~4차시는 도입 5 + 제작 35 + 정리 10). <b>선택 활동</b>(1차시 페르소나 스무고개, 2차시 회로 오류 탐정, 5차시 그린 벤처 투자 게임)은 모두 정해진 단계의 시간 일부를 <b>대신</b>하는 활동이라 50분이 늘지 않음.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 수업 진행 ══════════ -->
+<section class="sec" id="lesson">
+  <div class="wrap">
+    <p class="label">수업 진행</p>
+    <h2 class="head">차시를 고르고, ← → 키로 넘겨요</h2>
+    <p class="lead">한 화면에 질문 하나. 교사 모드를 켜면 지도안의 발문·유의점이 보여요.</p>
+
+    <div class="tabs" role="tablist" data-key="ecg:p5:tab">
+      <button role="tab" id="t1" aria-controls="L1">1차시 · 공감과 문제 정의</button>
+      <button role="tab" id="t2" aria-controls="L2">2차시 · 구상과 설계</button>
+      <button role="tab" id="t3" aria-controls="L3">3~4차시 · 시제품 제작</button>
+      <button role="tab" id="t5" aria-controls="L5">5차시 · 실험과 개선</button>
+    </div>
+
+    <!-- 1차시 -->
+    <div class="tabpanel" id="L1" role="tabpanel" aria-labelledby="t1">
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+          <div class="step" data-phase="도입" data-time="5분 중 ①">
+            <p class="ask">적정기술, <em>누구를 위한</em> 기술일까?</p>
+            <p>아이들이 놀이기구를 돌리면 물이 퍼 올려지도록 만든 <b>놀이기구 물 펌프</b>가 있었어요. 실제로는 물을 얻으려면 쉬지 않고 돌려야 했고, 고장 나도 고칠 부품과 사람이 없어 멈춘 곳이 많았어요.</p>
+            <details class="reveal-ans"><summary>왜 멈췄을까요? 좋은 적정기술의 3가지 조건</summary><div>
+              <div class="chips"><div class="chip"><b>그 지역에 맞게</b><span>기후·생활·문화</span></div><div class="chip"><b>부담 없이</b><span>사고 쓰는 비용</span></div><div class="chip"><b>스스로 지속할 수 있게</b><span>현지 재료로 현지 사람이 만들고 고침</span></div></div>
+            </div></details>
+            <div class="teacher">디자인 씽킹 소개 영상을 보고, 개념 학습지의 ‘적정기술이 실패한 이유’를 다시 봄. 5단계 흐름과 평가 기준(30점) 안내. <!-- 확인 필요: 지도안의 '디자인 씽킹 소개 영상' 원본 주소(근거 자료에 없음 — 영상 넣지 않음) --></div>
+          </div>
+          <div class="step" data-phase="도입" data-time="5분 중 ②">
+            <h3>오늘의 질문</h3>
+            <p class="ask">그 사람이 <em>가장 먼저</em> 해결하고 싶은 불편은 무엇일까?</p>
+            <ol><li>공학적 문제해결 사례에서 공학적 소양(창의성·팀워크·의사소통)의 필요성을 찾을 수 있다.</li><li>적정기술이 필요한 사용자의 가장 큰 불편을 한 문장으로 정의하여 아이디어를 구상할 수 있다.</li></ol>
+            <p class="mini">오늘의 활동: 문제해결 사례 → 공감하기 → 문제 정의와 아이디어</p>
+          </div>
+          <div class="step" data-phase="전개 · 교사 시범" data-time="10분 중 ①">
+            <h3>페트병 전구가 태양전지 조명이 되기까지</h3>
+            <div class="pet">
+              <figure>
+                <svg viewBox="0 0 320 200" role="img" aria-label="낮: 양철 지붕 구멍에 꽂은 물 페트병이 햇빛을 받아 방 안으로 퍼뜨리는 그림">
+                  <rect width="320" height="200" fill="#14110E"/>
+                  <rect width="320" height="62" fill="#3A2E20"/>
+                  <circle cx="44" cy="24" r="14" fill="#F2B45A"/>
+                  <g stroke="#FFE6B8" stroke-width="2.5" stroke-linecap="round" opacity=".85"><path d="M70 14 L150 52"/><path d="M78 30 L152 58"/><path d="M60 40 L148 62"/></g>
+                  <rect y="62" width="320" height="12" fill="#2B2621" stroke="rgba(235,203,148,.35)"/>
+                  <path d="M160 70 L70 200 H250 Z" fill="#F2B45A" opacity=".22"/>
+                  <rect x="150" y="44" width="20" height="20" rx="4" fill="rgba(246,243,238,.35)" stroke="#EBCB94" stroke-width="1.5"/>
+                  <rect x="140" y="74" width="40" height="70" rx="12" fill="rgba(255,230,184,.6)" stroke="#EBCB94" stroke-width="1.5"/>
+                  <text x="190" y="104" fill="#EBCB94" font-size="12" font-family="Noto Sans KR,sans-serif">물 + 표백제 조금</text>
+                  <text x="12" y="188" fill="#B4AA9C" font-size="11" font-family="Noto Sans KR,sans-serif">전기 없음 · 낮에만</text>
+                </svg>
+                <figcaption>낮 — 물이 햇빛을 굴절·산란시켜 방 안으로 퍼뜨려요</figcaption>
+              </figure>
+              <figure>
+                <svg viewBox="0 0 320 200" role="img" aria-label="밤: 지붕 위 소형 태양전지가 낮에 축전지를 충전하고, 밤에 축전지가 페트병 안 LED를 켜는 그림">
+                  <rect width="320" height="200" fill="#0B0A08"/>
+                  <path d="M280 18a14 14 0 1 0 10 25a11 11 0 1 1-10-25z" fill="#EBCB94"/>
+                  <rect y="62" width="320" height="12" fill="#2B2621" stroke="rgba(235,203,148,.35)"/>
+                  <polygon points="186,40 236,40 232,58 182,58" fill="#2B2621" stroke="#EBCB94" stroke-width="1.5"/>
+                  <text x="190" y="34" fill="#B4AA9C" font-size="11" font-family="Noto Sans KR,sans-serif">소형 태양전지</text>
+                  <rect x="56" y="38" width="44" height="20" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="1.5"/>
+                  <rect x="60" y="42" width="28" height="12" rx="2" fill="#F2B45A" opacity=".8"/>
+                  <text x="10" y="74" fill="#B4AA9C" font-size="11" font-family="Noto Sans KR,sans-serif" dy="20">축전지·충전 회로</text>
+                  <path d="M182 49 H174 V24 H78 V38 M100 50 H150" fill="none" stroke="#6A5D4F" stroke-width="2.5"/>
+                  <circle cx="160" cy="112" r="64" fill="#F2B45A" opacity=".2"/>
+                  <rect x="150" y="44" width="20" height="20" rx="4" fill="rgba(246,243,238,.35)" stroke="#EBCB94" stroke-width="1.5"/>
+                  <rect x="140" y="74" width="40" height="70" rx="12" fill="rgba(255,230,184,.75)" stroke="#EBCB94" stroke-width="1.5"/>
+                  <circle cx="160" cy="80" r="5" fill="#FFF6E2"/>
+                  <text x="190" y="104" fill="#EBCB94" font-size="12" font-family="Noto Sans KR,sans-serif">병 속 LED</text>
+                  <text x="12" y="188" fill="#B4AA9C" font-size="11" font-family="Noto Sans KR,sans-serif">낮에 충전 → 밤에 LED</text>
+                </svg>
+                <figcaption>밤 — 소형 태양전지 + 축전지 + LED를 더해 밤에도 켜요</figcaption>
+              </figure>
+            </div>
+            <p class="mini">그림: 연구회가 수업 설명용으로 직접 그림(실제 제품의 구조를 단순화).</p>
+            <p class="ask" style="font-size:clamp(1.3rem,2.8vw,2rem)">이 문제를 해결하려면 무엇이 필요했을까?</p>
+            <div class="chips"><div class="chip"><b>창의성</b><span>버려지는 페트병과 햇빛을 조명으로 바꾼 생각은?</span></div><div class="chip"><b>팀워크</b><span>마을 전체로 퍼지려면 누가 함께했을까?</span></div><div class="chip"><b>의사소통</b><span>주민이 직접 만들고 고치려면 무엇을 알려줘야 할까?</span></div></div>
+            <a class="live" href="https://world-habitat.org/world-habitat-awards/winners-and-finalists/liter-of-light/" target="_blank" rel="noopener"><i></i>Liter of Light 사례 (World Habitat)</a>
+            <!-- 수업 PPT 8장의 페트병 전구 사진 2장(출처: lifeandsoulmagazine.com, No Comment Cambodia YouTube)은 제3자 저작물이라 웹에는 싣지 않고 직접 그린 SVG로 바꿈. 원본은 img/_orig/ -->
+            <!-- 보고서 참고문헌의 World Habitat(2016) Liter of Light 보고서 PDF 주소(…/A4-Liter-of-Lite-Report-Oct16-v12.pdf)는 2026-11-18 확인 시 404 → 같은 기관의 Liter of Light 소개 페이지로 연결 -->
+            <div class="teacher">사례에서 창의성·팀워크·의사소통이 문제 해결에 어떻게 쓰였는지 구체적인 장면을 들어 설명하게 함(관찰 기준 A). 페트병 전구는 이후 LED·소형 태양전지·축전지를 더해 밤에도 켜지는 조명으로 발전함(World Habitat Liter of Light 소개). <!-- 확인 필요: 「2012년부터」 연도 — 근거 PDF가 404라 화면에서 뺌. Liter of Light 공식 자료로 확인 후 넣을 것 --></div>
+          </div>
+          <div class="step" data-phase="전개 · 교사 시범" data-time="10분 중 ②">
+            <p class="ask">의뢰 7가지 — <em>하나</em>를 골라요</p>
+            <div class="chips">
+              <div class="chip"><b>①</b><span>라오스 농산물 건조</span></div><div class="chip"><b>②</b><span>몽골 스마트팜</span></div><div class="chip"><b>③</b><span>라오스 화덕</span></div><div class="chip"><b>④</b><span>우간다 빗물 집수</span></div><div class="chip"><b>⑤</b><span>인도 에너지 빌리지</span></div><div class="chip"><b>⑥</b><span>서울 건물·에너지</span></div><div class="chip"><b>⑦</b><span>서울 자원순환</span></div>
+            </div>
+            <p>①~⑤ 타국: 에너지와 생활 문제가 겹친 곳 · ⑥⑦ 서울: 내가 직접 겪는 탄소중립 문제</p>
+            <a class="btn ghost" href="#define">카드로 뽑아 보기 ↓</a>
+            <div class="teacher">예제마다 붙은 탐구 질문 4개로 대상의 생활을 떠올리게 함. 공감 단계를 어려워하면 ⑥⑦ 서울 예제처럼 직접 겪는 문제로 시작해 타국 예제로 넓힘(보고서 제언).</div>
+          </div>
+          <div class="step" data-phase="전개 · 교사 시범" data-time="10분 중 ③">
+            <h3>해결책 문장 vs 불편 문장</h3>
+            <div class="sent no">라오스에 태양광 건조기가 필요하다.<small>→ 해결책을 먼저 정한 문장</small></div>
+            <div class="sent yes">라오스 농민은 비가 잦아 농산물을 말리지 못해 오래 보관하기 어렵다.<small>→ 사용자가 겪는 불편</small></div>
+            <p class="ask" style="font-size:clamp(1.2rem,2.6vw,1.8rem)">농민에게 정말 필요한 건 건조기일까요, <em>비 오는 날에도 농산물을 말릴 방법</em>일까요?</p>
+            <a class="btn ghost" href="#define">문장 분류 연습 ↓</a>
+          </div>
+          <div class="step" data-phase="전개 · 놀이 활동(선택)" data-time="7분 · 공감하기 13분 중 7분 대신">
+            <h3>페르소나 스무고개</h3>
+            <ol><li>선생님이 의뢰 속 인물 카드 하나를 몰래 정해요. (예: 우간다 마을의 12살 첫째 딸)</li><li>모둠은 예/아니오 질문 20번으로 그 사람의 하루와 생활을 추리해요.</li><li>정답 공개 후, 그 사람의 가장 큰 불편을 한 문장으로 말한 모둠이 승리!</li></ol>
+            <div class="chips"><div class="chip"><span>해가 뜨기 전에 일어나나요?</span></div><div class="chip"><span>물을 직접 길어 오나요?</span></div><div class="chip"><span>집에 전기가 들어오나요?</span></div><div class="chip"><span>학교에 다니나요?</span></div></div>
+            <div class="timer" data-min="7"></div>
+            <div class="teacher"><b>대체 활동</b> — 이 놀이를 하면 다음 단계 ‘그 사람의 하루 상상하기’(13분)를 6분으로 줄여 50분을 지킴.</div>
+          </div>
+          <div class="step" data-phase="전개 · 개인 실습" data-time="13분">
+            <p class="ask">그 사람의 <em>하루</em>를 상상해요</p>
+            <p>의뢰 하나를 골라 특정 대상(예: 딸이 두 명 있는 40대 주부, 고아학교에서 밥을 짓는 조리사)을 정하고, 아침·점심·저녁의 불편을 써요.</p>
+            <div class="tblwrap"><table class="tbl sm"><tr><th colspan="2">예시 · 상상해서 쓴 사용자 — 라오스 농민 ‘분’(45세), 가족 5명, 고추와 바나나 재배</th></tr>
+              <tr><td>아침</td><td>수확한 고추를 마당에 넌다</td></tr><tr><td>점심</td><td>갑자기 비 → 급히 걷어 들인다</td></tr><tr><td>저녁</td><td>덜 마른 고추에 곰팡이 → 팔 수 없다</td></tr><tr><td>★</td><td>가장 먼저 해결하고 싶은 것: 비 오는 날에도 고추를 말릴 방법</td></tr></table></div>
+            <p class="mini">디벗 약속: AI에게 “답 알려줘” 하지 않기 · 참고했다면 사실인지 확인하고 출처 남기기 · 확인한 사실과 상상한 추측을 구분하기</p>
+            <div class="timer" data-min="13"></div>
+            <div class="teacher">해결하지 않으면 생길 일, 내가 그 사람이라면 가장 먼저 해결하고 싶은 것, 그 지역에서 구할 수 있는 재료를 쓰게 함. 관찰 A: 대상의 나이·가족·하루 일과를 정하고 불편을 구체적인 상황으로 씀.</div>
+          </div>
+          <div class="step" data-phase="전개 · 개인 실습" data-time="17분 중 ①">
+            <h3>문제를 한 문장으로 정의하기</h3>
+            <div class="formula"><span>[사용자]</span>는 <span>[상황]</span>에서 <span>[문제]</span> 때문에 <span>[불편]</span>을 겪고 있다.</div>
+            <div class="sent yes" style="margin-top:1rem">라오스 농민은 비가 잦아 농산물을 말리지 못해 오래 보관하기 어렵다.</div>
+            <p>제품 이름이나 해결책은 넣지 않고, <b>가장 큰 불편 하나</b>에 집중해요.</p>
+            <a class="btn ghost" href="#act">활동지 01에 바로 써 보기 ↓</a>
+            <div class="timer" data-min="17"></div>
+            <div class="teacher">문장에 해결책이 들어가면 사용자가 겪는 불편으로 바꾸어 쓰게 함. 관찰 C: ‘~가 필요하다’처럼 해결책을 문제로 쓰거나 여러 불편을 나열.</div>
+          </div>
+          <div class="step" data-phase="전개 · 개인 실습" data-time="17분 중 ②">
+            <p class="ask">“어떻게 하면 <em>~할 수 있을까?</em>”</p>
+            <p>같은 불편을 줄일 서로 다른 방법 <b>두 가지 이상</b>을 구상해요.</p>
+            <div class="chips"><div class="chip"><b>예시 1 · 태양광 환풍기</b><span>태양전지 → 모터: 태양전지로 모터를 돌려 실내를 환기한다.</span></div><div class="chip"><b>예시 2 · 햇빛 세기 알림 선풍기</b><span>태양전지 → 모터 + 피에조 부저: 햇빛이 강할수록 선풍기가 빨리 돌고 경고음이 커진다.</span></div></div>
+            <p class="mini">예시 2는 위험을 알리는 보조 장치예요. 열사병 위험은 햇빛보다 기온과 습도에 크게 좌우돼요.</p>
+            <a class="btn" href="#matrix">평가 행렬로 고르기 ↓</a>
+            <div class="teacher">현실성·경제성·적정성(현지생산) 각 10점. “마음에 드는 것부터 고르고 점수를 맞추면 안 돼요!”</div>
+          </div>
+          <div class="step" data-phase="정리" data-time="5분">
+            <h3>짝에게 30초 설명</h3>
+            <p>고른 아이디어와 그 이유 — 어떤 사용자의 어떤 불편을 줄이나요?</p>
+            <p class="ask">이 아이디어는 <em>사용자를 위한</em> 아이디어인가요, 내가 만들고 싶은 제품인가요?</p>
+            <p class="mini">다음 시간 준비: 구상도에 그릴 크기(치수), 필요한 재료 떠올려 오기</p>
+            <div class="timer" data-min="5"></div>
+          </div>
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+      </div>
+    </div>
+
+    <!-- 2차시 -->
+    <div class="tabpanel" id="L2" role="tabpanel" aria-labelledby="t2" hidden>
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+          <div class="step" data-phase="도입" data-time="5분 중 ①">
+            <p class="ask">내 아이디어, <em>그 마을에서</em> 만들 수 있을까?</p>
+            <p>1차시에 정의한 문제 문장을 다시 읽어 봅시다.</p>
+            <div class="chips"><div class="chip"><b>“이 재료를 그 지역에서 구할 수 있을까?”</b></div><div class="chip"><b>“고장 나면 누가 고칠까?”</b></div></div>
+            <p>적정기술은 현지 사람이 직접 만들고 고칠 수 있어야 해요.</p>
+            <div class="teacher">문제 문장과 아이디어가 이어지는지 확인.</div>
+          </div>
+          <div class="step" data-phase="도입" data-time="5분 중 ②">
+            <h3>오늘의 질문</h3>
+            <p class="ask">그 지역 사람이 <em>직접 만들고 고칠 수 있게</em> 설계했을까?</p>
+            <ol><li>친환경 에너지의 종류와 태양전지의 원리를 탐구할 수 있다.</li><li>에너지 전환을 활용한 아이디어를 치수와 회로가 드러나는 구상도로 표현할 수 있다.</li><li>현지 재료로 대체할 수 있는지 검토하여 모둠 계획서를 쓸 수 있다.</li></ol>
+          </div>
+          <div class="step" data-phase="전개" data-time="12분 중 ①">
+            <h3>친환경 에너지의 종류와 원리</h3>
+            <div class="grid g3">
+              <div class="card"><span class="no">태양광</span><p>태양전지가 빛에너지 → 전기에너지로 직접 바꿔요.<br><span class="mini">활용: 지붕 태양광, 태양광 가로등</span></p></div>
+              <div class="card"><span class="no">풍력</span><p>바람이 날개를 돌리고 발전기가 운동에너지 → 전기에너지로 바꿔요.<br><span class="mini">활용: 해상 풍력 단지</span></p></div>
+              <div class="card"><span class="no">수력</span><p>높은 곳 물의 위치에너지 → 떨어지며 운동에너지 → 발전기에서 전기에너지로 바꿔요.<br><span class="mini">활용: 댐, 소수력 발전</span></p></div>
+            </div>
+            <p class="mt">우리가 쓸 에너지는? → <b class="amber">태양광</b>. 햇빛이 충분한 곳이면 연료 없이 전기를 만들 수 있어요. 빛이 약하면(흐린 날·실내) 전기도 적게 나와요.</p>
+            <div class="timer" data-min="12"></div>
+          </div>
+          <div class="step" data-phase="전개" data-time="12분 중 ②">
+            <p class="ask">빛 → <em>전기</em> → 빛·운동·소리</p>
+            <p>빛을 받으면 태양전지의 +극과 −극 사이에 전압이 생기고, 회로를 이으면 전기가 흘러요. 전자부품이 전기를 다시 빛·운동·소리로 바꾸는데, 이때 일부는 <b>열</b>로 빠져나가요.</p>
+            <div class="chips"><div class="chip"><b>LED</b><span>전기 → 빛에너지</span></div><div class="chip"><b>모터</b><span>전기 → 운동에너지</span></div><div class="chip"><b>피에조 부저</b><span>전기 → 소리에너지</span></div></div>
+            <a class="btn" href="#energy">에너지 전환 회로 실험실 ↓</a>
+            <div class="teacher">태양전지는 전기를 저장하지 않음 → 밤에 쓰는 설계에는 충전지(니켈수소 AA 등)와 역류 방지 다이오드가 든 충전 모듈(예: 태양광 정원등 모듈)이 필요. 태양전지 출력 전압(V)·전류(mA)를 부품 작동 전압·전류와 비교. 실내 조명에서는 작동하지 않을 수 있으니 햇빛 아래에서 시험. <b>전압이 모자라면 태양전지를 직렬, 전류가 모자라면 병렬</b>로 연결. 실험실 ①의 에너지 손실 막대로 ‘효율’(사후 검사에서 정답률이 내려간 문항)을 함께 짚음.</div>
+          </div>
+          <div class="step" data-phase="전개" data-time="12분 중 ③">
+            <h3>전자부품의 극성 — +와 −를 지켜요</h3>
+            <div class="grid g3">
+              <div class="card"><span class="no">LED · 극성 있음</span><p>긴 다리가 +, 짧은 다리가 −. 반대로 꽂으면 안 켜져요.</p></div>
+              <div class="card"><span class="no">모터 · 어느 쪽으로 이어도 돌아요</span><p>반대로 연결하면 회전 방향만 바뀌어요.</p></div>
+              <div class="card"><span class="no">능동형 피에조 부저 · 극성 있음</span><p>발진 회로가 들어 있어 직류만 넣어도 삐— 울려요. +, − 표시를 확인해요. <span class="mini">수동형은 직류로는 ‘딸깍’ 소리만 나요.</span></p></div>
+            </div>
+            <div class="tblwrap mt"><table class="tbl sm"><tr><th>부품</th><th>작동 조건(대략, 제품마다 다름)</th><th>우리 태양전지와 비교</th></tr>
+              <tr><td>LED</td><td>빨강 약 1.8~2 V · 흰색·파랑 약 3 V, 수 mA~20 mA</td><td rowspan="3">태양전지 뒷면의 정격(V·mA)을 적고, 모자라면 직렬(전압)·병렬(전류)로 연결</td></tr>
+              <tr><td>소형 모터</td><td>약 1.5~3 V, 수십~수백 mA</td></tr>
+              <tr><td>능동형 피에조 부저</td><td>정격 전압 확인(3 V 이하 작동형 권장), 수~수십 mA</td></tr></table></div>
+            <div class="teacher">부저는 반드시 <b>능동형(액티브, 발진 회로 내장, 3 V 이하 작동형)</b>을 구입. 수동형은 직류로 계속 울리지 않아 시제품이 작동하지 않음. 능동형도 소형 태양전지 1장으로는 전압이 모자랄 수 있어 직렬로 연결.</div>
+          </div>
+          <div class="step" data-phase="전개 · 놀이 활동(선택)" data-time="6분 · 친환경 에너지와 회로 12분 중 6분 대신">
+            <h3>회로 오류 탐정 — 어느 회로가 작동할까?</h3>
+            <p>4개 중 3개는 작동하지 않아요. 모둠은 미니 화이트보드에 ‘작동 안 하는 회로 번호와 이유’를 쓰고, 하나 둘 셋에 동시 공개! 카드를 누르면 정답이 보여요.</p>
+            <div class="det" id="det">
+              <button type="button" data-a="끊어진 곳 — 선이 빠짐" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="16" y="30" width="50" height="60" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H105 M125 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle cx="160" cy="60" r="12" fill="#3A332B" stroke="#EBCB94" stroke-width="2"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>①</b><span class="ans"></span></button>
+              <button type="button" data-a="작동해요 ○"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="16" y="30" width="50" height="60" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle cx="160" cy="60" r="12" fill="#3A332B" stroke="#EBCB94" stroke-width="2"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>②</b><span class="ans"></span></button>
+              <button type="button" data-a="극성 반대 — +와 −가 거꾸로" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="16" y="30" width="50" height="60" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle cx="160" cy="60" r="12" fill="#3A332B" stroke="#EBCB94" stroke-width="2"/><text x="176" y="50">−</text><text x="176" y="80">+</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>③</b><span class="ans"></span></button>
+              <button type="button" data-a="단락(합선) — +와 −가 바로 닿음 · 전지라면 위험! 바로 떼요" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="16" y="30" width="50" height="60" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><path class="wl" d="M100 40 V80" style="stroke:#E08A5E"/><circle cx="160" cy="60" r="12" fill="#3A332B" stroke="#EBCB94" stroke-width="2"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>④</b><span class="ans"></span></button>
+            </div>
+            <p class="mini">힌트: 전기는 +에서 나와 부품을 거쳐 −로 돌아와야 해요. 이유까지 맞히면 2점!</p>
+            <div class="timer" data-min="6"></div>
+            <div class="teacher"><b>대체 활동</b> — 이 놀이를 하면 ‘친환경 에너지와 회로’(12분)의 극성 설명 6분을 대신함. 태양전지는 전류가 작아 단락돼도 ‘안 켜짐’으로 끝나지만, 건전지·충전지를 단락하면 뜨거워지고 불이 날 수 있음을 꼭 덧붙임. 웹용으로 다시 그린 회로도라 PPT 25장 회로도와 번호·모양이 다를 수 있음. 찾아야 할 오류: 극성 반대 / 끊어진 곳 / 단락(합선).</div>
+          </div>
+          <div class="step" data-phase="전개 · 개인 실습" data-time="15분">
+            <h3>치수와 회로가 보이는 구상도</h3>
+            <div class="cols2">
+              <figure class="fig"><img src="img/sketch.jpg" alt="치수와 재료를 적은 학생 구상도 예시"><figcaption>▲ 학생 구상도 예시</figcaption></figure>
+              <ul><li><b>모양·구조·재료</b> — 어떤 재료로 어떤 모양인가요?</li><li><b>대략적인 치수(mm)</b> — 가로·세로·높이를 숫자로</li><li><b>부품 탈착 방법</b> — 어떻게 떼고 붙이는지</li><li><b>회로와 +/− 표시</b> — 태양전지·부품·연결선</li></ul>
+            </div>
+            <p>구상도는 각자 그려요. 다른 사람이 보고 똑같이 만들 수 있을 만큼 자세히!</p>
+            <div class="timer" data-min="15"></div>
+            <div class="teacher">전자부품은 떼어 바꾸기 쉽게 설계하게 함. 모둠원과 같으면 창의성 점수 인정하지 않음.</div>
+          </div>
+          <div class="step" data-phase="전개 · 모둠 활동" data-time="13분 중 ①">
+            <h3>모둠 계획서 — 역할과 재료</h3>
+            <div class="chips"><div class="chip"><span>아이디어 구상</span></div><div class="chip"><span>제품 제작</span></div><div class="chip"><span>동영상 촬영</span></div><div class="chip"><span>회로 구성·연결</span></div></div>
+            <div class="tblwrap"><table class="tbl sm"><tr><th>시제품 재료</th><th>현지 대체 재료</th><th>출처·이유(예시)</th></tr>
+              <tr><td>우드락 판</td><td>대나무 살 · 나무판</td><td>마을 주변에서 흔히 자람</td></tr>
+              <tr><td>플라스틱 통</td><td>버려진 페트병 · 깡통</td><td>재활용품으로 구하기 쉬움</td></tr>
+              <tr><td>글루건 고정</td><td>끈 묶기 · 나무못</td><td>고장 날 때 풀고 다시 묶기 쉬움</td></tr></table></div>
+            <div class="timer" data-min="13"></div>
+            <div class="teacher">디벗 검색은 막힐 때만 모둠당 1대. 모둠 시제품 평가(5점): 사용자 고려 · 전원+전자부품 1개 이상 · 쉬운 유지보수(탈착).</div>
+          </div>
+          <div class="step" data-phase="전개 · 모둠 활동" data-time="13분 중 ②">
+            <p class="ask">무엇을 <em>비교</em>하면 불편이 줄었다고 말할 수 있을까?</p>
+            <div class="cols2">
+              <div class="card"><span class="no">A · 제품 없을 때</span><p>건조대 밖 · 같은 양의 얇게 썬 사과 · 3시간</p></div>
+              <div class="card"><span class="no">B · 제품 있을 때</span><p>태양열 건조대 안(태양전지 팬으로 환기) · 같은 양의 얇게 썬 사과 · 3시간</p></div>
+            </div>
+            <p class="mt">같게 할 조건: <b>빛 · 시간 · 재료의 양 · 측정 방법</b> / 바꾸는 것: <b class="amber">제품 1가지</b></p>
+            <p class="mini">비교 예시: 정수기 사용 전후의 물 / 배기구가 있을 때와 없을 때의 화덕 / 건조대 안과 밖<br>태양열 건조대: 투명 덮개 안에서 <b>태양열</b>로 데워진 공기가 재료를 말리고, 태양전지 팬은 습한 공기를 내보내는 역할을 해요. 통고추는 마르는 데 며칠이 걸리니, 수업 시간 안에 차이를 보려면 얇게 썬 과일이나 젖은 천을 써요.</p>
+          </div>
+          <div class="step" data-phase="정리" data-time="5분">
+            <h3>다음 시간 준비</h3>
+            <p class="ask">모둠 계획서를 함께 읽고 <em>재료 분담</em>을 확인해요.</p>
+            <p>준비물과 담당자를 계획서에 적어요. 다음 시간에는 기술실에서 제작해요.</p>
+            <div class="timer" data-min="5"></div>
+          </div>
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+      </div>
+    </div>
+
+    <!-- 3~4차시 -->
+    <div class="tabpanel" id="L3" role="tabpanel" aria-labelledby="t3" hidden>
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+          <div class="step" data-phase="도입 · 안전 약속 ①" data-time="차시마다 5분 · 3차시">
+            <p class="ask">공구 사용 <em>약속</em>부터</p>
+            <div class="grid g3 safe">
+              <div class="card"><span class="no">칼 · 페트병 · 깡통</span><p>평평한 재료는 커팅 매트 위에서 쇠자를 대고, 날은 몸 바깥 방향으로. <b>둥근 페트병·깡통은 칼로 작은 틈만 낸 뒤 가위로</b> 잘라요. 자른 단면과 깡통 가장자리는 <b>절연 테이프로 감싸요</b>.</p></div>
+              <div class="card"><span class="no">글루건</span><p>받침대에 세워 두기. 노즐과 녹은 접착제는 맨손으로 만지지 않기. 다 쓰면 전원 분리.</p></div>
+              <div class="card"><span class="no">순간접착제</span><p>보안경을 쓰고 환기되는 곳에서 소량만. 면장갑 등 흡수성 재료와 닿지 않게. 피부가 붙으면 억지로 떼지 말고 따뜻한 비눗물에 불린 뒤 선생님께 알려요.</p></div>
+            </div>
+            <p class="mt mini">금 간 태양전지는 쓰지 않아요(깨진 모서리에 베일 수 있어요). 햇빛 시험 때 해를 직접 보지 않아요. 연결은 납땜 없이 집게 전선·커넥터로 해요.</p>
+            <div class="timer" data-min="5"></div>
+            <div class="teacher"><b>3차시 도입 5분</b>: 안전 약속 ①·② 카드를 함께 읽고 공구를 확인. 칼·가위로 페트병 자르기와 전지 연결 시범은 ‘제작 1’(35분)의 처음 몇 분에 모둠별로 보여 줌(지도안대로 안전 교육은 제작 1 안에 포함 → 차시 합계 5+35+10=50분). <b>4차시 도입 5분</b>: 지난 제작 일기의 ‘문제가 발생한 부분’을 읽고 오늘 할 일을 정함.</div>
+          </div>
+          <div class="step" data-phase="도입 · 안전 약속 ②" data-time="↳ 도입 5분 안 · 3차시">
+            <p class="ask">전지와 회로 <em>약속</em></p>
+            <div class="grid g2 safe">
+              <div class="card"><span class="no">충전 금지</span><p>충전지가 아닌 <b>건전지·코인전지는 절대 충전하지 않아요</b>. 새거나 터질 수 있어요. 밤에 쓰는 설계는 충전지(예: 니켈수소 AA)와 충전 모듈로 만들어요.</p></div>
+              <div class="card"><span class="no">리튬 전지</span><p>리튬 전지는 수업에서 쓰지 않아요. 합선되거나 과충전되면 뜨거워지고 불이 날 수 있어요(쓰려면 보호 회로가 든 충전 모듈과 선생님 확인).</p></div>
+              <div class="card"><span class="no">합선 금지</span><p>전지의 +와 −를 전선으로 바로 잇지 않아요. 뜨거워지면 바로 떼고 선생님께 알려요.</p></div>
+              <div class="card"><span class="no">LED에는 저항</span><p>전지·충전지에 LED를 달 때는 <b>저항을 직렬로 함께</b> 연결해요. 저항 없이 연결하면 전류가 너무 커서 LED가 망가져요.</p></div>
+            </div>
+          </div>
+          <div class="step" data-phase="도입" data-time="↳ 도입 5분 안">
+            <h3>오늘의 질문</h3>
+            <p class="ask">선정한 문제를 해결하는 <em>시제품</em>을 완성할 수 있을까?</p>
+            <ol><li>모둠원과 역할을 나누어 협력하며 공구를 안전하게 사용해 태양전지 시제품을 만들 수 있다.</li><li>의도한 대로 에너지 전환이 일어나는지 확인하고, 제작 과정의 문제를 기록할 수 있다.</li></ol>
+          </div>
+          <div class="step" data-phase="전개" data-time="↳ 제작 35분 안">
+            <h3>마름질 → 가공 → 조립 → 검사</h3>
+            <div class="flow">
+              <div class="st"><b>마름질</b><small>구상도의 치수대로 재료 자르기</small></div>
+              <div class="st"><b>가공</b><small>구멍 뚫기, 접기, 모양 다듬기</small></div>
+              <div class="st"><b>조립</b><small>구조 만들고 부품은 떼어 바꿀 수 있게</small></div>
+              <div class="st"><b>검사</b><small>햇빛 아래에서 모든 부품 작동 확인</small></div>
+            </div>
+            <p class="mt">3차시 · 제작 1: 기본 구조 + 태양전지 연결해 첫 작동 / 4차시 · 제작 2: 완성 · 고정 · 작동 영상 촬영</p>
+          </div>
+          <div class="step" data-phase="전개 · 모둠 실습" data-time="35분 (3차시)">
+            <p class="ask">제작 1 — <em>기본 구조</em>와 첫 작동</p>
+            <p>구상도에 따라 재료를 마름질하고 가공해 기본 구조를 만들어요. 태양전지와 전자부품을 연결해 기본 작동을 확인하고, 만드는 과정을 디벗으로 찍어요.</p>
+            <div class="timer" data-min="35"></div>
+            <div class="teacher">개인 학습지의 구상도와 모둠 계획서를 보며 제작. 평가 후 직접 분리배출하므로 글루건은 필요한 곳에만.</div>
+          </div>
+          <div class="step" data-phase="전개" data-time="↳ 제작 35분 안">
+            <h3>선배들의 적정기술 시제품</h3>
+            <div class="figrow">
+              <figure class="fig"><img src="img/proto-bottle.jpg" alt="페트병과 태양전지를 연결한 시제품"><figcaption>▲ 페트병과 태양전지를 활용한 시제품</figcaption></figure>
+              <figure class="fig"><img src="img/proto-box.jpg" alt="주변 재료로 만든 선반형 구조물 시제품"><figcaption>▲ 주변 재료로 만든 구조물형 시제품</figcaption></figure>
+            </div>
+          </div>
+          <div class="step" data-phase="전개 · 모둠 실습" data-time="35분 (4차시)">
+            <p class="ask">제작 2 — <em>완성</em>하고 검사해요</p>
+            <p>구조를 완성하고 외관과 고정 상태를 다듬어요. 전자부품은 떼어 바꿀 수 있게 붙이고, 햇빛 아래에서 모든 부품이 작동하는지 검사해요. 완성하면 작동 영상을 찍어요.</p>
+            <div class="timer" data-min="35"></div>
+          </div>
+          <div class="step" data-phase="전개 · 작동 확인" data-time="↳ 제작 35분 안">
+            <h3>작동하지 않으면? — 차례대로 확인해요</h3>
+            <div class="ts" id="ts">
+              <div class="q"><b>1. 극성이 맞나요?</b><button class="tbtn" type="button" data-y>예</button><button class="tbtn" type="button" data-n>아니요</button><span class="fix">→ LED·부저의 +/−를 뒤집어 다시 연결해요.</span></div>
+              <div class="q"><b>2. 끊어진 곳은 없나요?</b><button class="tbtn" type="button" data-y>예</button><button class="tbtn" type="button" data-n>아니요</button><span class="fix">→ 빠진 선을 다시 연결하고 고정해요.</span></div>
+              <div class="q"><b>3. +와 −가 바로 닿지 않았나요?</b><button class="tbtn" type="button" data-y>예</button><button class="tbtn" type="button" data-n>아니요</button><span class="fix">→ 닿은 부분을 떼고 선이 겹치지 않게 해요.</span></div>
+              <p class="done">작동!</p>
+              <button class="tbtn" type="button" data-reset>처음부터</button>
+            </div>
+            <p class="mini mt">고친 내용은 제작 일기에: 증상 → 확인한 원인 → 시도한 해결 → 다음에 할 일</p>
+          </div>
+          <div class="step" data-phase="정리" data-time="차시마다 10분">
+            <h3>정리하고 제작 일기 쓰기</h3>
+            <div class="tblwrap"><table class="tbl sm"><tr><th colspan="2">예시 · 문제와 해결 쓰기</th></tr><tr><td>증상</td><td>햇빛 아래에서 LED가 안 켜짐</td></tr><tr><td>원인</td><td>LED 다리를 반대로 꽂음</td></tr><tr><td>해결</td><td>뒤집어 다시 연결 → 켜짐!</td></tr><tr><td>다음 할 일</td><td>집게 전선으로 바꿔 떼어 바꾸기 쉽게</td></tr></table></div>
+            <p class="mini">종료 확인: □ 글루건 전원 분리 □ 정리 완료 □ 사진·기록 저장 □ 자리 정리</p>
+            <a class="btn ghost" href="#act">활동지 05 제작 일기 ↓</a>
+            <div class="timer" data-min="10"></div>
+          </div>
+          <div class="step" data-phase="평가" data-time="모둠 5점 · 4차시 끝">
+            <h3>문제 해결 조건 — 세 가지를 모두 갖추면 A!</h3>
+            <div class="chips"><div class="chip"><b>사용자를 고려한 설계</b></div><div class="chip"><b>전원 + 전자부품 1개 이상</b></div><div class="chip"><b>쉬운 유지보수(탈착)</b></div></div>
+            <p class="mini">A 모두 충족(5점) · B 1~2가지 미충족(4~3점) · C 모두 미충족(2점) 또는 미완성(0점)</p>
+          </div>
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+      </div>
+    </div>
+
+    <!-- 5차시 -->
+    <div class="tabpanel" id="L5" role="tabpanel" aria-labelledby="t5" hidden>
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+          <div class="step" data-phase="도입" data-time="5분 중 ①">
+            <p class="ask">우리 시제품은 처음 정의한 불편을 <em>줄였을까?</em></p>
+            <p>1차시에 정의한 문제 문장을 다시 읽고, 그 불편이 줄었는지 알려면 무엇을 비교해야 할지 이야기해요.</p>
+            <p class="mini">비교 예시: 정수기 사용 전후의 물, 배기구가 있을 때와 없을 때의 화덕</p>
+          </div>
+          <div class="step" data-phase="도입" data-time="5분 중 ②">
+            <h3>오늘의 목표</h3>
+            <ol><li>시제품을 쓰기 전후를 비교하는 실험으로 작동과 효과를 확인할 수 있다.</li><li>동료의 피드백을 바탕으로 개선점을 두 가지 이상 제시할 수 있다.</li><li>문제 해결에 공학적 소양이 왜 필요한지 설명할 수 있다.</li></ol>
+          </div>
+          <div class="step" data-phase="전개 · 모둠 활동" data-time="12분 중 ①">
+            <h3>비교 실험 영상 찍기</h3>
+            <div class="chips"><div class="chip"><b>사용 전 vs 사용 후</b></div><div class="chip"><b>개선 전 vs 개선 후</b></div><div class="chip"><b>제품 없을 때 vs 제품 있을 때</b></div></div>
+            <ol><li>1차시 문제 문장 다시 읽기</li><li>조건 하나만 바꾸고 나머지는 같게</li><li>영상에 자막으로 설명 넣기</li><li>실패해도 괜찮아요 — 원인을 써요</li></ol>
+            <div class="figrow">
+              <figure class="fig"><img src="img/exp-method.jpg" alt="실험 방법을 자막으로 설명한 영상 화면"><figcaption>▲ 자막으로 실험 방법 설명</figcaption></figure>
+              <figure class="fig"><img src="img/exp-temp.jpg" alt="온도계로 종이컵과 페트병 냉장고의 물 온도를 재는 실험 영상 화면"><figcaption>▲ 시작 온도 측정 장면</figcaption></figure>
+            </div>
+            <div class="timer" data-min="12"></div>
+          </div>
+          <div class="step" data-phase="전개 · 모둠 활동" data-time="12분 중 ②">
+            <h3>비교 실험 결과와 해석</h3>
+            <div class="tblwrap"><table class="tbl sm"><tr><th>가상 예시 · 얇게 썬 사과 3시간 뒤 무게 (가상 수치)</th><th>A 건조대 밖 (g)</th><th>B 건조대 안 (g)</th></tr><tr><td>1회</td><td>100 → 82</td><td>100 → 64</td></tr><tr><td>2회</td><td>100 → 80</td><td>100 → 61</td></tr></table></div>
+            <p><b>해석</b> 건조대 안에서 수분이 더 많이 빠졌다 → <b class="amber">부분 성공</b></p>
+            <p class="ask" style="font-size:clamp(1.2rem,2.4vw,1.7rem)">결과는 단위와 함께, <em>있는 그대로</em> 정직하게!</p>
+            <p class="mini">판정: □ 성공 □ 부분 성공 □ 실패 □ 판단 보류</p>
+            <div class="teacher">가상 예시 수치임(실제 학생 결과 아님). PPT 원래 예시는 ‘고추’였으나 통고추는 마르는 데 며칠이 걸려 3시간 결과로는 비현실적이라 얇게 썬 사과로 바꿈. 성공과 실패를 모두 인정하고, 실패했다면 결과 해석에 원인을 함께 쓰게 함.</div>
+          </div>
+          <div class="step" data-phase="전개" data-time="15분">
+            <h3>띵커벨 동료 평가</h3>
+            <div class="cols2">
+              <ol><li>보고서와 사진·영상을 띵커벨에 올려요.</li><li>자기 모둠을 뺀 1·2·3등을 고르고 한 줄 코멘트!</li><li>모둠당 1명씩 다른 모둠 보고서에 댓글 1~2개</li></ol>
+              <figure class="fig"><img src="img/tkbell-masked.jpg" alt="띵커벨 보드에 모둠 보고서와 댓글이 게시된 화면(학번·반·작성 시각은 가림)"><figcaption>▲ 띵커벨 보고서 게시 예시 · 학번·반·작성 시각은 가렸어요</figcaption></figure>
+            </div>
+            <p>좋은 댓글 예: <b>“비 오는 날에는 어떻게 하나요?”</b> — 사용자 입장의 질문</p>
+            <a class="live" href="https://www.tkbell.co.kr" target="_blank" rel="noopener"><i></i>띵커벨 열기</a>
+            <div class="timer" data-min="15"></div>
+          </div>
+          <div class="step" data-phase="전개 · 선택 활동" data-time="15분 · 동료 평가 15분 대신">
+            <h3>그린 벤처 투자 게임</h3>
+            <p class="mini">선택 활동 — 하면 바로 앞 ‘띵커벨 동료 평가’(15분)를 <b>대신</b>해요. 개선점 쓰기 13분은 그대로.</p>
+            <ol><li>한 사람당 가상 그린 코인 100개를 받아요.</li><li>자기 모둠을 뺀 시제품 2~3곳에 코인을 나눠 투자하고, 포스트잇에 투자 이유를 한 줄씩 써요.</li><li>코인을 가장 많이 받은 모둠은 ‘올해의 그린 벤처’! 받은 투자 메모는 개선점 쓰기에 활용해요.</li></ol>
+            <div class="chips"><div class="chip"><span>사용자의 불편을 줄였나?</span></div><div class="chip"><span>현지 재료로 만들 수 있나?</span></div><div class="chip"><span>고장 나면 고치기 쉬운가?</span></div></div>
+            <p class="mini">투자 예시: A모둠 50 · B모둠 30 · C모둠 20 — “비 오는 날에도 쓸 수 있어서!”</p>
+            <div class="timer" data-min="15"></div>
+            <div class="teacher"><b>대체 활동</b> — 띵커벨 동료 평가 대신 할 때만(15분). 투자 메모가 동료 피드백 역할을 하므로 개선점 쓰기 13분은 유지. 원래 안내의 20분은 50분을 넘겨 15분으로 맞춤.</div>
+          </div>
+          <div class="step" data-phase="전개 · 개인 실습" data-time="13분">
+            <h3>피드백으로 개선점 쓰기</h3>
+            <div class="flow">
+              <div class="st"><b>받은 피드백</b><small>“비 오는 날에는 어떻게 하나요?”</small></div>
+              <div class="st"><b>문제점</b><small>비가 오면 태양전지가 젖는다</small></div>
+              <div class="st"><b>개선</b><small>투명 덮개를 비스듬히 붙여 빗물이 흘러내리게</small></div>
+            </div>
+            <p class="mt">개선안은 <b>2가지 이상</b>, 각자 써요. 모둠원과 같으면 인정되지 않아요!</p>
+            <a class="btn ghost" href="#act">활동지 07 ↓</a>
+            <div class="timer" data-min="13"></div>
+          </div>
+          <div class="step" data-phase="정리" data-time="5분">
+            <h3>나의 공학적 문제해결 돌아보기</h3>
+            <div class="grid g3">
+              <div class="card"><span class="no">창의성</span><p>사용자 문제를 해결하려고 내가 새롭게 시도한 것은?</p></div>
+              <div class="card"><span class="no">팀워크</span><p>역할을 나누고 어려움을 함께 해결한 실제 행동은?</p></div>
+              <div class="card"><span class="no">의사소통</span><p>어떤 의견을 듣고 내 생각이나 설계를 바꾸었나요?</p></div>
+            </div>
+            <p class="mt">모둠별로 한 가지씩 나누기 → 개인 활동지와 모둠 실험 보고서 제출 → 시제품은 <b>전자부품 먼저 분리 → 재료별로 나누기 → 분리배출</b></p>
+            <div class="teacher">동료 평가를 하지 않은 학생 확인.</div>
+          </div>
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ (a) 에너지 전환 회로 ══════════ -->
+<section class="sec panel" id="energy">
+  <div class="wrap">
+    <a class="backlink" href="#lesson">↑ 수업 진행으로 돌아가기</a>
+    <p class="label reveal">실험실 ① · 2차시</p>
+    <h2 class="head reveal">빛 → 전기 → <span class="amber">빛·운동·소리</span></h2>
+    <p class="lead reveal">부품을 바꾸고, 축전지를 연결하고, 밤으로 바꿔 보세요. 전기가 흐르는 길이 금빛으로 움직이고, 빠져나가는 열도 보여요.</p>
+
+    <div class="elab day l-led" id="elab">
+     <div class="lcol">
+      <div class="board">
+        <svg viewBox="0 0 900 460" role="img" aria-label="태양전지, 충전 모듈(역류 방지 다이오드), 병렬로 연결한 축전지, 스위치, 전자부품으로 이루어진 회로. 낮에는 태양전지의 전기가 부품과 축전지로 나뉘고, 밤에는 축전지에서 부품으로만 전기가 흐름">
+          <defs>
+            <radialGradient id="eg1" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE6B8" stop-opacity=".95"/><stop offset=".4" stop-color="#F2B45A" stop-opacity=".4"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
+          </defs>
+          <rect class="sky" width="900" height="460"/>
+          <g class="sun" data-act="day"><circle cx="90" cy="70" r="58" fill="url(#eg1)"/><circle cx="90" cy="70" r="28" fill="#F2B45A"/></g>
+          <g class="moon" data-act="day"><path d="M78 44a28 28 0 1 0 28 48a23 23 0 1 1-28-48z" fill="#EBCB94"/></g>
+          <g class="ray"><path class="fl go" d="M112 94 L150 186"/><path class="fl go" d="M122 86 L205 186" style="animation-delay:.2s"/><path class="fl go" d="M132 76 L262 186" style="animation-delay:.4s"/></g>
+          <text class="elbl e1" x="196" y="122">빛에너지</text>
+          <!-- 전선 -->
+          <path class="wire" d="M300 205 H350"/>
+          <path class="wire bypass" d="M350 205 H470"/>
+          <path class="wire" d="M470 205 H590 M640 205 H720 V262"/>
+          <path class="wire batw" d="M530 205 V240 M530 336 V400"/>
+          <path class="wire" d="M720 352 V400 H530"/>
+          <path class="wire" d="M530 400 H90 V250 H108"/>
+          <!-- 흐르는 전기(금빛) -->
+          <path class="fl fP" d="M300 205 H350"/>
+          <path class="fl fBy bypass" d="M350 205 H470"/>
+          <path class="fl fN" d="M470 205 H530"/>
+          <path class="fl fChg" d="M530 205 V240"/>
+          <path class="fl fBup" d="M530 240 V205"/>
+          <path class="fl fL" d="M530 205 H720 V262"/>
+          <path class="fl fR1" d="M720 352 V400 H530"/>
+          <path class="fl fBnD" d="M530 336 V400"/>
+          <path class="fl fBnN" d="M530 400 V336"/>
+          <path class="fl fR2" d="M530 400 H90 V250 H108"/>
+          <text class="elbl e2" x="560" y="186">전기에너지</text>
+          <!-- 태양전지 -->
+          <g data-act="panel" style="cursor:pointer">
+            <polygon points="120,190 300,190 285,262 105,262" fill="#2A241E" stroke="#EBCB94" stroke-width="2.5"/>
+            <path d="M115 214 H294 M110 238 H290 M165 190 L150 262 M210 190 L195 262 M255 190 L240 262" stroke="rgba(235,203,148,.4)" stroke-width="1.5"/>
+            <text class="term" x="304" y="196">+</text><text class="term" x="86" y="244">−</text>
+            <text class="lbl" x="150" y="292">태양전지</text>
+          </g>
+          <g class="heat hP"><path d="M262 318 q7 -8 0 -16 q-7 -8 0 -16"/><path d="M278 318 q7 -8 0 -16 q-7 -8 0 -16"/><text x="292" y="314">열</text></g>
+          <!-- 충전 모듈(역류 방지 다이오드) -->
+          <g class="modg">
+            <rect x="350" y="180" width="120" height="50" rx="8" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
+            <path d="M362 205 H392 M414 205 H458" stroke="#EBCB94" stroke-width="2.5"/>
+            <path d="M392 192 L392 218 L414 205 Z" fill="#EBCB94"/><path d="M416 191 V219" stroke="#EBCB94" stroke-width="3"/>
+            <text class="lbl" x="410" y="254" text-anchor="middle">충전 모듈</text>
+            <text class="sml" x="410" y="274" text-anchor="middle">역류 방지 다이오드</text>
+          </g>
+          <circle cx="530" cy="205" r="6" fill="#EBCB94"/><circle cx="530" cy="400" r="6" fill="#EBCB94"/>
+          <!-- 축전지(병렬 가지) -->
+          <g class="bat" data-act="bat">
+            <rect x="520" y="234" width="20" height="8" rx="2" fill="#EBCB94"/>
+            <rect x="495" y="242" width="70" height="94" rx="8" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
+            <rect class="charge" x="501" y="294" width="58" height="36" rx="4" fill="#F2B45A" opacity=".8"/>
+            <text class="term" x="547" y="262" style="font-size:17px">+</text><text class="term" x="547" y="330" style="font-size:17px">−</text>
+            <text class="lbl" x="576" y="290">축전지</text>
+            <text class="sml" x="576" y="312">전기 ⇄ 화학</text>
+          </g>
+          <!-- 스위치 -->
+          <g class="sw"><path d="M590 205 L640 205" stroke="#EBCB94" stroke-width="3"/><circle cx="590" cy="205" r="5"/><circle cx="640" cy="205" r="5"/><text class="sml" x="594" y="236">스위치</text></g>
+          <!-- 부품: LED -->
+          <g class="loadg g-led" data-act="load">
+            <circle class="ledglow" cx="720" cy="300" r="110" fill="url(#eg1)"/>
+            <path class="ledbulb" d="M694 300 a26 26 0 1 1 52 0 v22 h-52z" stroke="#EBCB94" stroke-width="2.5"/>
+            <rect x="700" y="322" width="40" height="10" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
+            <path d="M708 332 V352 M732 332 V346" stroke="#EBCB94" stroke-width="3"/>
+          </g>
+          <!-- 부품: 모터 -->
+          <g class="loadg g-motor" data-act="load">
+            <rect x="692" y="262" width="56" height="90" rx="10" fill="#2B2621" stroke="#EBCB94" stroke-width="2.5"/>
+            <g class="fan"><circle cx="720" cy="307" r="34" fill="none" stroke="rgba(235,203,148,.2)"/><path d="M720 307 L720 275 Q736 285 720 307 M720 307 L748 323 Q736 336 720 307 M720 307 L692 323 Q690 304 720 307" fill="#F2B45A" stroke="#F2B45A" stroke-width="2"/><circle cx="720" cy="307" r="5" fill="#1D1A16"/></g>
+          </g>
+          <!-- 부품: 능동형 피에조 부저 -->
+          <g class="loadg g-buzzer" data-act="load">
+            <circle cx="720" cy="307" r="34" fill="#2B2621" stroke="#EBCB94" stroke-width="2.5"/><circle cx="720" cy="307" r="10" fill="#EBCB94"/>
+            <path class="wave" d="M670 287 q-14 20 0 40" fill="none" stroke="#F2B45A" stroke-width="3"/><path class="wave" d="M654 275 q-22 32 0 64" fill="none" stroke="#F2B45A" stroke-width="3"/><path class="wave" d="M638 263 q-30 44 0 88" fill="none" stroke="#F2B45A" stroke-width="3"/>
+          </g>
+          <text class="term tp" x="732" y="258">+</text><text class="term tm" x="732" y="372">−</text>
+          <text class="lname" x="770" y="300">LED</text><text class="elbl e3" x="770" y="330">빛에너지</text>
+          <g class="heat hL"><path d="M780 392 q7 -8 0 -16 q-7 -8 0 -16"/><path d="M796 392 q7 -8 0 -16 q-7 -8 0 -16"/><text x="810" y="388">열</text></g>
+        </svg>
+      </div>
+      <div class="lossbox">
+        <h4>에너지는 사라졌을까요? 어디로 갔을까요?</h4>
+        <div class="loss">
+          <div class="lb" id="lossBar" role="img" aria-label="햇빛 100 가운데 약 80은 태양전지에서 열·반사로, 약 10은 부품에서 열로, 약 5~8만 빛이 됨"><i class="k1" style="flex:81"></i><i class="k2" style="flex:12"></i><i class="k3" style="flex:7"></i></div>
+          <div class="lg"><span><b class="k1"></b>태양전지에서 열·반사 약 80</span><span><b class="k2"></b>부품에서 열 약 10</span><span><b class="k3"></b><span id="lossOut">빛 약 5~8</span></span></div>
+          <p class="mini" id="lossTxt">햇빛 100 → 전기 약 15~20 → LED 빛 약 5~8, 나머지는 열</p>
+          <p class="mini">교육용 단순화: 상용 실리콘 태양전지 효율은 약 20% 안팎이고, 수업용 소형 태양전지는 더 낮아요. 축전지에 넣고 꺼낼 때도 일부가 열로 빠져요. 사라진 에너지는 없어요 — 모두 더하면 처음 햇빛의 양과 같아요.</p>
+        </div>
+      </div>
+     </div>
+      <div class="ctrl">
+        <h4>연결할 부품</h4>
+        <div class="seg" role="group" aria-label="연결할 부품">
+          <button type="button" data-load="led" aria-pressed="true">LED</button><button type="button" data-load="motor" aria-pressed="false">모터</button><button type="button" data-load="buzzer" aria-pressed="false">피에조 부저</button>
+        </div>
+        <h4>조건 바꾸기</h4>
+        <div class="seg">
+          <button type="button" id="tDay" aria-pressed="false">밤으로</button><button type="button" id="tBat" aria-pressed="false">축전지 연결</button><button type="button" id="tRev" aria-pressed="false">+/− 뒤집기</button>
+        </div>
+        <div id="gwrap" class="hide"><small class="muted">축전지에 화학에너지로 저장된 양</small><div class="gauge"><i id="gauge"></i></div></div>
+        <h4>에너지 전환</h4>
+        <div class="chain"><span id="c1">빛에너지</span><i>→</i><span id="c2">전기에너지</span><i class="cb">→</i><span id="cB" class="cb">화학에너지<small>축전지</small></span><i class="cb">→</i><span id="c2b" class="cb">전기에너지</span><i>→</i><span id="c3">빛에너지</span><span id="cH" class="hl">+ 열(손실)</span></div>
+        <p class="msg" id="emsg" aria-live="polite"></p>
+        <p class="mini">그림 속 해·축전지·부품을 눌러도 바뀌어요.</p>
+      </div>
+    </div>
+    <div class="teacher">2차시 [친환경 에너지와 회로 · 12분]에 함께 씀. 축전지는 태양전지와 한 줄(직렬)이 아니라 <b>병렬 가지</b>로 연결됨: ① 태양전지 + → 충전 모듈(역류 방지 다이오드) → 축전지 + / 축전지 − → 태양전지 − ② 축전지 + → 스위치 → 부품 → 축전지 −. 낮에는 충전 모듈을 지난 전기가 갈림점에서 부품과 축전지로 나뉘고, 밤에는 축전지 → 부품 고리만 흐름(다이오드가 어두운 태양전지 쪽 역류를 막음). 충전 모듈 내부(과충전 차단 등)는 생략한 교육용 단순화이고, 손실 막대 수치도 대략값(교육용 단순화). 수업용 추천: 태양광 정원등 충전 모듈 + 니켈수소 AA 충전지, 또는 슈퍼커패시터. 축전지에 LED를 달 때는 저항을 직렬로.</div>
+  </div>
+</section>
+
+<!-- ══════════ (c) 문제 정의: 문장 분류 + 의뢰 카드 ══════════ -->
+<section class="sec" id="define">
+  <div class="wrap">
+    <a class="backlink" href="#lesson">↑ 수업 진행으로 돌아가기</a>
+    <p class="label reveal">실험실 ② · 1차시</p>
+    <h2 class="head serif reveal">해결책 문장일까, 불편 문장일까?</h2>
+    <p class="lead reveal">제품 이름이나 “~가 필요하다”가 들어가면 해결책이에요. 사용자·상황·불편이 보이면 불편 문장이에요.</p>
+
+    <div class="sorter" id="sorter">
+      <div class="bin l"><h4>불편 문장 ○</h4><ol id="binL"></ol></div>
+      <div>
+        <div class="qcard" id="qcard">
+          <span class="qn" id="qn"></span>
+          <p class="qt" id="qt"></p>
+          <div class="qb"><button class="btn" type="button" data-pick="pain">← 불편 문장</button><button class="btn ghost" type="button" data-pick="sol">해결책 문장 →</button></div>
+        </div>
+        <p class="qfb" id="qfb" aria-live="polite"></p>
+        <p>점수 <span class="score" id="qs">0 / 0</span> <button class="tbtn" type="button" id="qreset">다시 하기</button></p>
+      </div>
+      <div class="bin r"><h4>해결책 문장 ×</h4><ol id="binR"></ol></div>
+    </div>
+    <div class="teacher">처음 두 문장은 지도안 그대로, 나머지는 의뢰 7종 주제로 만든 연습 문장(사실 사례 아님). ← → 키는 단계 진행기에 쓰이므로 이 퀴즈는 버튼으로 진행.</div>
+
+    <h2 class="head reveal" style="margin-top:4.5rem">의뢰 7가지 — 카드를 뒤집어 골라요</h2>
+    <div class="pickbar">
+      <button class="btn" type="button" id="draw">무작위로 뽑기</button>
+      <span class="now" id="pickNow">아직 고른 의뢰가 없어요.</span>
+    </div>
+    <div class="deck7" id="deck7"></div>
+    <p class="mini mt">각 의뢰에는 탐구 질문 4개가 붙어 있어요(활동지 원본 참고). 카드 뒷면의 질문은 활동지 01의 칸이에요.</p>
+  </div>
+</section>
+
+<!-- ══════════ (b) 평가 행렬 ══════════ -->
+<section class="sec panel" id="matrix">
+  <div class="wrap">
+    <a class="backlink" href="#lesson">↑ 수업 진행으로 돌아가기</a>
+    <p class="label reveal">실험실 ③ · 1차시 활동지 02</p>
+    <h2 class="head reveal">평가 행렬로 아이디어 고르기</h2>
+    <p class="lead reveal">현실성·경제성·적정성(현지생산)을 각 10점으로 매기면 합계와 순위가 바로 정렬돼요. 마음에 드는 것부터 고르고 점수를 맞추면 안 돼요!</p>
+    <div class="mx">
+      <div id="mrows"></div>
+      <div class="rank">
+        <h4>순위 (30점 만점)</h4>
+        <div class="rlist" id="rlist"></div>
+        <p class="mini" id="mtie" style="margin-top:.6rem"></p>
+        <div class="field"><label for="mwhy">선정한 아이디어와 이유 · LED·모터·피에조 부저 중 무엇을, 왜 쓰나요?</label><textarea class="pad" id="mwhy" data-key="ws02-why" placeholder="다른 안보다 나은 점 / 남은 약점도 함께 써요."></textarea></div>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap"><button class="tbtn" type="button" id="mex">예시 불러오기</button><button class="tbtn" type="button" id="mclr">모두 지우기</button></div>
+      </div>
+    </div>
+    <dl class="cols2 mt mini" style="margin-top:1.4rem">
+      <div><b class="champ">현실성</b> 만들고 작동시킬 수 있는가</div><div><b class="champ">경제성</b> 사고 유지하는 비용이 알맞은가</div><div><b class="champ">적정성(현지생산)</b> 현지 재료로 현지 사람이 만들고 고칠 수 있는가</div>
+    </dl>
+    <div class="teacher">PPT 예시: 태양광 환풍기 8·7·8=23, 햇빛 세기 알림 선풍기 9·8·8=25(선정), 태양광 자동 차양 6·5·6=17. 관찰 A: 점수를 매기고 선정한 이유를 씀 / C: 평가 기준 없이 마음에 드는 아이디어를 고름.</div>
+  </div>
+</section>
+
+<!-- ══════════ 활동지 ══════════ -->
+<section class="sec" id="act">
+  <div class="wrap">
+    <p class="label reveal">학생 활동</p>
+    <h2 class="head reveal">활동지를 웹에서 바로 써요</h2>
+    <p class="lead reveal">쓴 내용은 이 브라우저에만 저장돼요. 제출은 종이 활동지(수업 PPT·보고서 별첨 원본)로 해요.</p>
+    <a class="backlink" href="#lesson">↑ 수업 진행으로 돌아가기</a>
+    <div class="tabs" role="tablist" data-key="ecg:p5:ws">
+      <button role="tab" id="w1" aria-controls="W1">01 불편에서 문제 찾기</button>
+      <button role="tab" id="w3" aria-controls="W3">03 구상도</button>
+      <button role="tab" id="w4" aria-controls="W4">04 모둠 계획서</button>
+      <button role="tab" id="w5" aria-controls="W5">05 제작 일기</button>
+      <button role="tab" id="w6" aria-controls="W6">06 실험 결과</button>
+      <button role="tab" id="w7" aria-controls="W7">07 개선·돌아보기</button>
+    </div>
+    <div class="tabpanel" id="W1" role="tabpanel" aria-labelledby="w1">
+      <p class="mini">고른 의뢰: <b class="amber" id="wsPick">— (위 카드에서 고르세요)</b></p>
+      <div class="cols2">
+        <div class="field"><label for="a1">상황과 사용자 — 의뢰 번호·지역·기후 / 나이·직업·가족 / 주로 하는 일</label><textarea class="pad" id="a1" data-key="ws01-user"></textarea></div>
+        <div class="field"><label for="a2">하루 속 불편 — 아침·점심·저녁, 해결하지 못하면 어떤 일이 생기나요?</label><textarea class="pad" id="a2" data-key="ws01-day"></textarea></div>
+        <div class="field"><label for="a3">확인과 추측 — 확인한 사실과 출처 / 아직 확인하지 못한 추측</label><textarea class="pad" id="a3" data-key="ws01-fact"></textarea></div>
+        <div class="field"><label for="a4">현지 재료 — 그 지역에서 구하거나 고칠 수 있는 재료와 근거</label><textarea class="pad" id="a4" data-key="ws01-mat"></textarea></div>
+      </div>
+      <h3 class="mt">문제 정의 한 문장 만들기</h3>
+      <div class="builder">
+        <div class="field"><label for="b1">[사용자]</label><input class="pad bld" id="b1" data-key="ws01-b1" placeholder="라오스 농민"></div>
+        <div class="field"><label for="b2">[상황]</label><input class="pad bld" id="b2" data-key="ws01-b2" placeholder="비가 잦은 우기"></div>
+        <div class="field"><label for="b3">[문제]</label><input class="pad bld" id="b3" data-key="ws01-b3" placeholder="농산물을 말리지 못함"></div>
+        <div class="field"><label for="b4">[불편]</label><input class="pad bld" id="b4" data-key="ws01-b4" placeholder="오래 보관하기 어려움"></div>
+      </div>
+      <p class="preview" id="bprev"></p>
+      <p class="pwarn" id="bwarn" aria-live="polite"></p>
+    </div>
+    <div class="tabpanel" id="W3" role="tabpanel" aria-labelledby="w3" hidden>
+      <div class="cols2">
+        <div class="field"><label for="c1a">선정한 아이디어 이름</label><input class="pad" id="c1a" data-key="ws03-name"></div>
+        <div class="field"><label for="c2a">모양·구조·재료와 대략적인 치수(mm)</label><textarea class="pad" id="c2a" data-key="ws03-size"></textarea></div>
+        <div class="field"><label for="c3a">전자부품 탈착 방법</label><textarea class="pad" id="c3a" data-key="ws03-detach"></textarea></div>
+        <div class="field"><label for="c4a">회로 — 태양전지, 모든 전자부품, 연결선, +/− 표시 (그림은 종이에)</label><textarea class="pad" id="c4a" data-key="ws03-circuit"></textarea></div>
+      </div>
+      <div class="field"><label for="c5a">부품 작동 조건 비교 — 우리 태양전지 정격(V·mA) / 쓸 부품의 작동 전압·전류 / 모자라면 직렬·병렬 중 무엇으로?</label><textarea class="pad" id="c5a" data-key="ws03-rating"></textarea></div>
+      <p class="mini">태양전지는 전기를 저장하지 않아요. 밤에 쓰는 설계에는 충전지와 충전 모듈(역류 방지 다이오드 포함)이 필요해요. 건전지·코인전지는 충전하지 않고, 리튬 전지는 쓰지 않으며, 전지에 LED를 달 때는 저항을 함께 연결해요.</p>
+    </div>
+    <div class="tabpanel" id="W4" role="tabpanel" aria-labelledby="w4" hidden>
+      <div class="cols2">
+        <div class="field"><label for="d1">역할과 준비물 — 이름 / 맡을 일 / 가져올 준비물</label><textarea class="pad" id="d1" data-key="ws04-role"></textarea></div>
+        <div class="field"><label for="d2">작품명 / 필요한 이유 / 사용자의 가장 큰 불편을 어떻게 해결하는가</label><textarea class="pad" id="d2" data-key="ws04-why"></textarea></div>
+        <div class="field"><label for="d3">재료 대체 검토 — 시제품 재료 → 현지 대체 재료 (출처)</label><textarea class="pad" id="d3" data-key="ws04-sub"></textarea></div>
+        <div class="field"><label for="d4">비교 실험 계획 — A(사용 전·제품 없음) / B(사용 후·제품 있음) / 성공 기준</label><textarea class="pad" id="d4" data-key="ws04-plan"></textarea></div>
+      </div>
+    </div>
+    <div class="tabpanel" id="W5" role="tabpanel" aria-labelledby="w5" hidden>
+      <div class="cols2">
+        <div class="field"><label for="e1">제작 ① 3차시 — 내가 만든 부분 / 잘 된 점·협력</label><textarea class="pad" id="e1" data-key="ws05-1"></textarea></div>
+        <div class="field"><label for="e2">제작 ① 문제와 다음 행동 — 증상 → 원인 → 시도한 해결 → 다음 할 일</label><textarea class="pad" id="e2" data-key="ws05-1p"></textarea></div>
+        <div class="field"><label for="e3">제작 ② 4차시 — 내가 완성한 부분 / 검사한 빛 조건 / 협력</label><textarea class="pad" id="e3" data-key="ws05-2"></textarea></div>
+        <div class="field"><label for="e4">제작 ② 문제와 해결 — 증상 → 원인 → 바꾼 점 → 다시 확인한 결과</label><textarea class="pad" id="e4" data-key="ws05-2p"></textarea></div>
+      </div>
+    </div>
+    <div class="tabpanel" id="W6" role="tabpanel" aria-labelledby="w6" hidden>
+      <div class="cols2">
+        <div class="field"><label for="f1">작품 설명 — 언제·어떻게 작동? 어떤 불편을 줄이나? 고장 난 부품은 누가 어떻게 바꾸나?</label><textarea class="pad" id="f1" data-key="ws06-desc"></textarea></div>
+        <div class="field"><label for="f2">회차별 결과 — A 결과 · B 결과 (단위 포함, 2회)</label><textarea class="pad" id="f2" data-key="ws06-res"></textarea></div>
+        <div class="field"><label for="f3">결과 해석 — 성공 기준과 비교 / 처음 불편이 얼마나 줄었나 / 판정(성공·부분 성공·실패·판단 보류)</label><textarea class="pad" id="f3" data-key="ws06-int"></textarea></div>
+      </div>
+      <p class="mini">보고서 점검: □ 작동 영상 □ 비교로 문제 개선 확인 □ 작품 설명 □ 제품+전자부품 스케치</p>
+    </div>
+    <div class="tabpanel" id="W7" role="tabpanel" aria-labelledby="w7" hidden>
+      <div class="cols2">
+        <div class="field"><label for="g0">받은 피드백</label><textarea class="pad" id="g0" data-key="ws07-fb"></textarea></div>
+        <div class="field"><label for="g1">개선안 ① 문제점과 근거 → 바꿀 부분 → 기대하는 변화</label><textarea class="pad" id="g1" data-key="ws07-i1"></textarea></div>
+        <div class="field"><label for="g2">개선안 ② 문제점과 근거 → 바꿀 부분 → 기대하는 변화</label><textarea class="pad" id="g2" data-key="ws07-i2"></textarea></div>
+        <div class="field"><label for="g3">창의성 — 사용자 문제를 해결하려고 내가 새롭게 시도한 것은?</label><textarea class="pad" id="g3" data-key="ws07-cr"></textarea></div>
+        <div class="field"><label for="g4">팀워크 — 역할을 나누고 어려움을 함께 해결한 실제 행동은?</label><textarea class="pad" id="g4" data-key="ws07-tw"></textarea></div>
+        <div class="field"><label for="g5">의사소통 — 어떤 의견을 듣고 내 생각이나 설계를 바꾸었나요?</label><textarea class="pad" id="g5" data-key="ws07-cm"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 평가 ══════════ -->
+<section class="sec ivory" id="rubric">
+  <div class="wrap">
+    <p class="label reveal">평가</p>
+    <h2 class="head reveal">이렇게 평가해요 (30점)</h2>
+    <div class="pts reveal" aria-label="창의성 10점, 문제 해결 조건 5점, 실험 보고서 5점, 문제해결력 10점">
+      <div class="a">창의성 10<br>개인</div><div class="b">조건 5<br>모둠</div><div class="c">보고서 5<br>모둠</div><div class="d">문제해결력 10<br>개인</div>
+    </div>
+    <p class="lead" style="margin-top:.6rem">구상도와 개선점은 각자 써요. 모둠원과 똑같으면 점수를 받을 수 없어요!</p>
+    <p class="mini" style="color:var(--ink-sub)">A·B·C는 이 과제의 채점 수준이며, 학기 성취도는 학교 성취평가 기준에 따라 따로 산출합니다.</p>
+    <!-- 확인 필요: 미제출 처리 점수가 '문제 해결 조건'(0점)과 '실험 보고서'(1점)에서 다름 — 학교 평가 계획대로 둠 -->
+    <div class="tblwrap reveal">
+      <table class="tbl">
+        <thead><tr><th>영역(차시)</th><th>A</th><th>B</th><th>C</th></tr></thead>
+        <tbody>
+          <tr><td><b>창의성</b><br>개인 10점 · 2차시</td><td>아이디어를 두 가지 이상 구상해 선정하고, 치수·구조·재료와 회로(태양전지-전자부품 연결)가 드러나게 구상도로 표현한다. (10점)</td><td>한 가지를 구상해 구체적으로 표현했거나(8점), 두 가지 이상을 구상·선정했으나 구체적 표현이 부족하다(6점).</td><td>한 가지를 구상했으나 구체적으로 표현하지 못했거나(4점), 구상하지 못했다(2점).</td></tr>
+          <tr><td><b>문제 해결 조건</b><br>모둠 5점 · 3~4차시</td><td>사용자를 고려한 설계, 전원과 전자부품 1개 이상 활용, 쉬운 유지보수(탈착 가능)를 모두 충족한다. (5점)</td><td>세 조건 중 1~2가지를 충족하지 못했다. (4~3점)</td><td>세 조건을 모두 충족하지 못했거나(2점), 결과물을 완성하지 못했다(0점).</td></tr>
+          <tr><td><b>실험 보고서</b><br>모둠 5점 · 5차시</td><td>작동 영상, 문제 개선 확인, 작품 설명, 제품과 전자부품 스케치를 모두 갖춘다. (5점)</td><td>네 조건 중 1~2가지를 지키지 못했다. (4~3점)</td><td>세 가지 이상을 지키지 못했거나(2점), 실험 보고를 하지 않았다(1점).</td></tr>
+          <tr><td><b>문제해결력</b><br>개인 10점 · 5차시</td><td>피드백·실험 결과를 근거로 문제를 찾고, 바꿀 부분과 기대하는 변화를 갖춘 개선점을 두 가지 이상 쓴다. (10점)</td><td>근거·바꿀 부분·기대 변화를 갖춘 개선점을 한 가지 썼다. (8점)</td><td>문제를 찾았으나 개선점을 쓰지 못했거나(6점), 문제를 찾지 못했다(2점).</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <details class="reveal-ans" style="margin-top:1.6rem"><summary>1차시 과정 중심 관찰 기준 [12기가04-04]</summary><div class="tblwrap">
+      <table class="tbl sm">
+        <thead><tr><th>관찰 항목</th><th>A</th><th>B</th><th>C</th></tr></thead>
+        <tbody>
+          <tr><td>공감하기</td><td>대상의 나이, 가족, 하루 일과를 정하고 해결하지 않으면 생길 불편을 구체적인 상황으로 쓴다.</td><td>대상은 정했으나 하루 일과나 불편을 ‘힘들다’처럼 막연하게 쓴다.</td><td>대상을 정하지 못했거나, 불편을 하나도 쓰지 못한다.</td></tr>
+          <tr><td>문제 정의</td><td>가장 큰 불편 하나를 골라 사용자, 상황, 불편이 드러나는 한 문장으로 정의한다.</td><td>한 문장으로 정의했으나 상황이나 불편 중 일부가 빠져 있다.</td><td>‘~가 필요하다’처럼 해결책을 문제로 쓰거나 여러 불편을 나열한다.</td></tr>
+          <tr><td>공학적 소양</td><td>사례에서 창의성, 팀워크, 의사소통이 문제 해결에 어떻게 쓰였는지 구체적인 장면을 들어 설명한다.</td><td>공학적 소양의 요소 이름은 말하지만 사례의 어느 장면인지 들지 못한다.</td><td>창의성·팀워크·의사소통 가운데 어느 것도 말하지 못한다.</td></tr>
+          <tr><td>아이디어 구상</td><td>정의한 문제를 해결할 아이디어를 두 가지 이상 구상하고 무엇을, 어떻게 해결하는지 쓴다.</td><td>아이디어를 한 가지 구상했거나, 두 가지 중 하나가 문제와 이어지지 않는다.</td><td>아이디어를 쓰지 못했거나, 정의한 문제와 관계없는 제품 이름만 쓴다.</td></tr>
+          <tr><td>아이디어 선정</td><td>현실성, 경제성, 적정성(현지생산)을 점수로 매기고 선정한 이유를 쓴다.</td><td>평가 행렬은 채웠으나 선정한 이유가 분명하지 않다.</td><td>평가 기준을 적용하지 않고 마음에 드는 아이디어를 고른다.</td></tr>
+        </tbody>
+      </table></div></details>
+    <div class="teacher">5차시 [12기가04-04] 활동지 07 공학적 소양 성찰: 문제 해결 과정에서 창의성·팀워크·의사소통이 한 역할을 자신의 실제 행동을 들어 설명(보고서·학습지 평가, 관찰평가).</div>
+  </div>
+</section>
+
+<!-- ══════════ 결과 ══════════ -->
+<section class="sec" id="result">
+  <div class="wrap">
+    <p class="label reveal">수업 결과</p>
+    <h2 class="head reveal">교실에서 만든 것들</h2>
+    <div class="gallery reveal">
+      <figure><img src="img/define-1.jpg" alt="디자인 씽킹 단계에 따라 사용자의 불편을 적은 학생 활동지" loading="lazy"><figcaption>▲ 디자인 씽킹 5단계 안내</figcaption></figure>
+      <figure><img src="img/define-2.jpg" alt="가장 큰 불편을 한 문장으로 정의한 학생 활동지" loading="lazy"><figcaption>▲ 문제를 한 문장으로 정의하기</figcaption></figure>
+      <figure><img src="img/sketch.jpg" alt="치수를 넣은 학생 구상도" loading="lazy"><figcaption>▲ 치수를 넣은 구상도 그리기</figcaption></figure>
+      <!-- 학생 얼굴은 흐리게 처리한 사본(meeting-blur.jpg). 원본은 img/_orig/ (게시 참조 없음). 확인 필요: 학생·보호자 공개 동의 -->
+      <figure><img src="img/meeting-blur.jpg" alt="기술실에서 모둠별로 디벗을 보며 아이디어를 나누는 수업 장면(학생 얼굴은 흐리게 처리)" loading="lazy"><figcaption>▲ 시제품 제작을 위한 아이디어 회의 장면</figcaption></figure>
+      <figure><img src="img/proto-box.jpg" alt="주변 재료로 만든 구조물형 적정기술 시제품" loading="lazy"><figcaption>▲ 적정기술 발명품 산출물</figcaption></figure>
+      <figure><img src="img/exp-temp.jpg" alt="종이컵과 페트병 냉장고의 물 온도를 비교하는 실험 영상 화면" loading="lazy"><figcaption>▲ 사용 전후를 비교하는 실험 영상 일부</figcaption></figure>
+      <figure><img src="img/tkbell-masked.jpg" alt="띵커벨에 올린 모둠 보고서와 댓글(학번·반·작성 시각은 가림)" loading="lazy"><figcaption>▲ 보고서, 실험 영상 전시 및 상호 피드백</figcaption></figure>
+      <figure><img src="img/improve.jpg" alt="받은 피드백으로 개선점을 쓴 학생 활동지" loading="lazy"><figcaption>▲ 받은 피드백으로 개선점 쓰기</figcaption></figure>
+    </div>
+    <p class="privacy">학생 얼굴은 흐리게 처리했습니다. 띵커벨 화면의 학번·반·작성 시각은 가렸습니다.</p>
+
+    <h2 class="head reveal" style="margin-top:4.5rem">에너지 소양 검사, 사전 vs 사후</h2>
+    <p class="lead reveal">프로그램 운영 전(2026. 8. 18.)과 후(2026. 10. 20.)에 검사했어요. 두 번 모두 응답한 <b>18명</b>의 점수를 대응표본 t검정으로 비교했어요.</p>
+    <!-- 확인 필요: 검사 대상 학년(보고서: 중학교 3학년 1개 반 / Ⅴ장: 고등학교 1학년) -->
+    <div class="kpis reveal">
+      <div class="kpi"><div class="k">지식 (15문항, 15점)</div><div class="v"><span>9.67</span><span class="ar">→</span><span class="post">10.89</span></div><div class="p">+1.22 · t(17)=1.61, p=.127 · 유의하지 않음</div></div>
+      <div class="kpi"><div class="k">태도 (19문항, 5점 척도)</div><div class="v"><span>4.02</span><span class="ar">→</span><span class="post">3.97</span></div><div class="p">−0.05 · p=.663 · 유의하지 않음</div></div>
+      <div class="kpi"><div class="k">행동 (11문항, 5점 척도)</div><div class="v"><span>3.84</span><span class="ar">→</span><span class="post">3.84</span></div><div class="p">+0.01 · p=.972 · 유의하지 않음</div></div>
+    </div>
+    <p class="mini mt">사전 24명, 사후 20명 응답 · 표준편차: 지식 3.07→3.34, 태도 0.56→0.50, 행동 0.93→0.73 · 지식 점수는 18명 중 11명 오름, 4명 같음, 3명 내림</p>
+
+    <h3 style="margin-top:2.6rem">지식 문항별 정답률 (18명)</h3>
+    <div class="legend"><span><i style="background:#6E6458"></i>사전</span><span><i style="background:var(--amber)"></i>사후</span>
+      <span class="seg" style="margin:0" role="group" aria-label="문항 거르기"><button type="button" data-f="all" aria-pressed="true">15문항 전체</button><button type="button" data-f="up" aria-pressed="false">크게 오른 문항</button><button type="button" data-f="dn" aria-pressed="false">내려간 문항</button></span>
+    </div>
+    <div class="items reveal" id="items"></div>
+    <div class="axis"><span></span><div><span>0%</span><span>50%</span><span>100%</span></div><span></span></div>
+    <!-- 확인 필요: 검사지 15번 '에너지원별 발전량 순서'의 정답 기준 연도(2023년 이전 자료면 석탄 1위, 2024년 자료면 원자력 1위). 검사지 원문 확인 후 "(정답 기준: ○○년)"을 화면에 적을 것 -->
+    <!-- 문항별 수치: 본문에 적힌 6문항(9·6·3·15·4·10번)은 보고서 본문 그대로, 나머지 9문항은 보고서 그림 「지식 문항별 정답률 변화」에서 읽은 값(18명 기준 1명=5.6%p 단위로 확인) -->
+
+    <div class="caution reveal">
+      <h4>이렇게 읽어 주세요 — 해석 주의</h4>
+      <ul>
+        <li>에너지 보존(44.4%→77.8%), 손전등의 에너지 전환(27.8%→61.1%), kWh 단위(33.3%→55.6%), 에너지원별 발전량(27.8%→50.0%) 문항이 크게 올랐고, ‘전기 에너지양 = 전력×시간’은 사후에 18명 모두 맞혔어요.</li>
+        <li>태양전지로 빛에너지를 전기에너지로 바꾸고 LED·모터·피에조 부저를 작동시킨 활동과 관련이 있을 수 있지만, <b>응답자가 18명이고 비교 집단이 없어</b> 수업의 효과로 단정하기는 어려워요.</li>
+        <li>발전소 효율 문항은 77.8%→61.1%로 낮아졌어요. 효율 개념은 다시 짚을 필요가 있어요. 그래서 실험실 ①에 ‘에너지는 어디로 갔을까?’ 손실 막대를 더했어요.</li>
+        <li>15번 ‘에너지원별 발전량 순서’는 기준 연도에 따라 정답이 달라요. 한국은 <b>2024년에 원자력이 석탄·LNG를 제치고 발전량 1위</b>가 되었어요(원자력 31.7% · 석탄 28.1% · LNG 28.1%, 산업통상자원부 「2024년 에너지수급동향」, 2025. 5.). 이 문항은 정답 기준 연도를 확인하고 해석해야 해요.</li>
+        <li>태도·행동은 사전 평균이 이미 높았고(4.02, 3.84) 유의한 변화가 없었어요. 18명 중 4명은 사전이나 사후에 태도·행동 문항을 모두 5점으로 답해 <b>천장 효과</b>가 있었을 수 있어요.</li>
+        <li>사전 검사는 적정기술의 의미와 필요성을 다루는 도입 수업을 마친 뒤에 실시해, 도입 수업의 영향이 사전 점수에 일부 반영되었을 수 있어요.</li>
+      </ul>
+    </div>
+
+    <details class="reveal-ans" style="margin-top:1.4rem"><summary>점수가 오른 학생들은 어땠을까? (보고서 추가 분석)</summary><div>
+      <div class="tblwrap"><table class="tbl sm">
+        <thead><tr><th>점수가 오른 영역</th><th>학생 수</th><th>사전 평균</th><th>사후 평균</th><th>변화가 큰 문항</th></tr></thead>
+        <tbody>
+          <tr><td>지식 (15점)</td><td>11명</td><td>8.27</td><td>11.27</td><td>손전등의 에너지 전환, 에너지 보존, 에너지원별 발전량</td></tr>
+          <tr><td>태도 (5점)</td><td>6명</td><td>3.68</td><td>4.11</td><td>관심과 책임, 에너지 정책</td></tr>
+          <tr><td>행동 (5점)</td><td>7명</td><td>3.30</td><td>3.87</td><td>전기 사용량 확인, 가족에게 고효율 제품 권하기</td></tr>
+        </tbody></table></div>
+      <p class="mini">지식이 오른 11명 중 손전등 문항 정답자는 1명→8명(9.1%→72.7%). 다만 점수가 오른 학생만 골라 본 것이고 사전 점수가 낮았으므로(나머지 7명 평균 11.86점), 상승 폭에는 <b>평균으로 돌아가는 효과</b>가 섞여 있을 수 있어요.</p>
+    </div></details>
+
+    <div class="card" style="margin-top:2.4rem">
+      <span class="no">다른 프로그램으로 이어지는 질문</span>
+      <p style="margin-top:.4rem">“이 태양전지로 모터를 하루에 얼마나 돌릴 수 있을까?” → <a href="../p2-math/index.html">수학</a>에서 발전량과 사용 시간을 같은 단위로 맞춰 비교 · 분해한 시제품 재료를 다시 쓸 때와 버릴 때의 환경 부담 → <a href="../p4-science/index.html">과학</a>에서 전생애주기평가(LCA) 관점으로</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ PPT ══════════ -->
+<section class="sec panel" id="ppt">
+  <div class="wrap">
+    <p class="label reveal">수업 PPT</p>
+    <h2 class="head reveal">적정기술 프로토타이핑 · 49장</h2>
+    <div class="deck" data-dir="../slides/p5/" data-n="49" data-title="프로그램 5 기술 수업 PPT"></div>
+    <div class="grid g2 mt" style="margin-top:1.2rem">
+      <a class="dl" href="../materials/p5_기술_적정기술프로토타이핑_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>수업 PPT 내려받기</b><small>p5_기술_적정기술프로토타이핑_블랙골드.pptx</small></span></a>
+      <a class="dl" href="../materials/p5_기술_적정기술프로토타이핑_블랙골드.pdf" download><span class="ext">PDF</span><span><b>PDF로 내려받기</b><small>인쇄·배포용</small></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding:3.5rem 0">
+  <div class="wrap">
+    <div class="nextmod">
+      <a href="../p4-science/index.html"><small>← 이전 프로그램</small><b>04 과학 및 지능형 최적화</b></a>
+      <a href="../index.html" style="text-align:right"><small>전체 흐름으로 →</small><b>에너지참견시점 · 다섯 프로그램 한눈에</b></a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><b class="champ">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 그린 벤처(Green Venture) 프로젝트를 통한 에너지 믹스 최적화 및 기후 행동 역량 강화</p>
+    <p>프로그램 5 「기술 및 시제품 구현 — 적정기술 프로토타이핑과 태양광 업사이클링 제작」 · 김이현 선생님(사당중학교) · 한국에너지정보문화재단 지원</p>
+    <p>출처: 연구회 최종보고서(교수·학습 지도안, 에너지 소양 검사 결과) · 수업 PPT · 페트병 전구·회로 그림은 연구회가 직접 그림 · 발전량 순위: 산업통상자원부 「2024년 에너지수급동향」 · <a href="https://world-habitat.org/world-habitat-awards/winners-and-finalists/liter-of-light/" target="_blank" rel="noopener">World Habitat — Liter of Light</a> · <a href="https://www.tkbell.co.kr" target="_blank" rel="noopener">띵커벨</a></p>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function sget(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function sset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+
+/* ── (a) 에너지 전환 회로 ──
+   위상: 태양전지 + → 충전 모듈(역류 방지 다이오드) → 갈림점 ─┬→ 축전지(병렬 가지) → − 레일 → 태양전지 −
+                                                       └→ 스위치 → 부품 → − 레일
+   낮: 태양전지 전기가 갈림점에서 부품·축전지로 나뉨 / 밤: 축전지 → 부품 고리만(다이오드가 태양전지 쪽 역류를 막음) */
+(function(){
+  var L=$("#elab");if(!L)return;
+  var st={load:"led",day:true,bat:false,rev:false,charge:.5};
+  var OUT={led:"빛에너지",motor:"운동에너지",buzzer:"소리에너지"};
+  var NAME={led:"LED",motor:"모터",buzzer:"피에조 부저"},GA={led:"LED가",motor:"모터가",buzzer:"피에조 부저가"},REUL={led:"LED를",motor:"모터를",buzzer:"피에조 부저를"};
+  var LOSS={
+    led:["빛 약 5~8","햇빛 100 → 전기 약 15~20 → LED 빛 약 5~8, 나머지는 열",[81,12,7]],
+    motor:["운동 약 5~8","햇빛 100 → 전기 약 15~20 → 모터 운동 약 5~8, 나머지는 마찰열·소리",[81,12,7]],
+    buzzer:["소리 1보다 적음","햇빛 100 → 전기 약 15~20 → 부저 소리는 아주 조금, 나머지는 대부분 열",[81,18,1]]
+  };
+  var msg=$("#emsg"),c1=$("#c1"),c2=$("#c2"),cB=$("#cB"),c2b=$("#c2b"),c3=$("#c3"),cH=$("#cH"),gw=$("#gwrap"),gg=$("#gauge"),chg=$(".charge",L);
+  function gauge(){var h=Math.max(0,82*st.charge);gg.style.width=Math.round(st.charge*100)+"%";chg.setAttribute("height",h);chg.setAttribute("y",330-h)}
+  function render(){
+    var powered=st.day||(st.bat&&st.charge>0.01);
+    var conducts=!(st.rev&&st.load!=="motor");
+    var out=powered&&conducts;
+    var dayFlow=st.day&&(out||st.bat);
+    L.className="elab "+(st.day?"day":"night")+" l-"+st.load+(st.bat?" bat-on":"")+(st.rev?" rev":"")+(out?" out":"");
+    $$("[data-load]").forEach(function(b){b.setAttribute("aria-pressed",b.getAttribute("data-load")===st.load)});
+    $("#tDay").setAttribute("aria-pressed",!st.day);$("#tDay").textContent=st.day?"밤으로":"낮으로";
+    $("#tBat").setAttribute("aria-pressed",st.bat);$("#tBat").textContent=st.bat?"축전지 떼기":"축전지 연결";
+    $("#tRev").setAttribute("aria-pressed",st.rev);
+    $(".tp",L).textContent=st.rev?"−":"+";$(".tm",L).textContent=st.rev?"+":"−";
+    /* 흐름 */
+    function go(sel,on){$$(sel,L).forEach(function(p){p.classList.toggle("go",!!on)})}
+    go(".fP",dayFlow);go(".fN",dayFlow);go(".fR2",dayFlow);
+    go(".fBy",st.day&&!st.bat&&out);
+    go(".fChg",st.day&&st.bat);go(".fBnD",st.day&&st.bat);
+    go(".fBup",!st.day&&st.bat&&out);go(".fBnN",!st.day&&st.bat&&out);
+    go(".fL",out);go(".fR1",out);
+    $(".hP",L).classList.toggle("on",dayFlow);$(".hL",L).classList.toggle("on",out);
+    $(".e1",L).classList.toggle("dim",!st.day);
+    $(".e2",L).classList.toggle("dim",!(out||dayFlow));
+    var e3=$(".e3",L);e3.textContent=OUT[st.load];$(".lname",L).textContent=NAME[st.load];e3.classList.toggle("dim",!out);
+    /* 전환 사슬: 축전지가 있으면 빛 → 전기 → 화학(축전지) → 전기 → 빛·운동·소리 */
+    $$(".chain .cb").forEach(function(x){x.classList.toggle("hide",!st.bat)});
+    c1.classList.toggle("off",!st.day);
+    c2.classList.toggle("off",!dayFlow);
+    cB.classList.toggle("off",!(st.bat&&(st.day||st.charge>0.01)));
+    c2b.classList.toggle("off",!(st.bat&&out));
+    c3.textContent=OUT[st.load];c3.classList.toggle("off",!out);
+    cH.classList.toggle("off",!(out||dayFlow));
+    gw.classList.toggle("hide",!st.bat);gauge();
+    var lo=LOSS[st.load];$("#lossOut").textContent=lo[0];$("#lossTxt").textContent=lo[1];
+    $$("#lossBar i").forEach(function(x,k){x.style.flex=lo[2][k]});
+    $("#lossBar").setAttribute("aria-label","햇빛 100 가운데 약 80은 태양전지에서 열·반사로, 나머지 대부분은 부품에서 열로 빠지고, "+lo[0]+"만 "+OUT[st.load]+"가 됨");
+    var m="",warn=false;
+    if(!st.day&&!st.bat){m="밤에는 태양전지가 전기를 만들지 못하고, 전기를 저장하지도 않아요. 밤에 쓰려면 축전지와 충전 모듈이 필요해요. ‘축전지 연결’을 눌러 보세요.";warn=true}
+    else if(!powered){m="축전지에 저장해 둔 화학에너지를 다 썼어요. 낮 동안 다시 충전해야 해요.";warn=true}
+    else if(st.rev&&st.load==="led"){m="LED는 극성이 있어요. 긴 다리(+)를 + 쪽에 연결해야 켜져요."+(st.day&&st.bat?" (축전지 충전은 계속돼요)":"");warn=true}
+    else if(st.rev&&st.load==="buzzer"){m="능동형 피에조 부저도 극성이 있어요. +, − 표시를 확인하고 다시 연결해요."+(st.day&&st.bat?" (축전지 충전은 계속돼요)":"");warn=true}
+    else if(st.rev&&st.load==="motor"){m="모터는 어느 쪽으로 이어도 돌아요. 반대로 연결하면 회전 방향만 바뀌어요."}
+    else if(!st.day){m="밤에는 축전지가 저장해 둔 화학에너지를 다시 전기에너지로 바꿔 "+REUL[st.load]+" 작동시켜요. 충전 모듈의 다이오드가 막아서 전기가 어두운 태양전지 쪽으로 거꾸로 새지 않아요."}
+    else if(st.bat){m="낮에는 태양전지의 전기가 충전 모듈을 지나 둘로 나뉘어요. 한쪽은 "+REUL[st.load]+" 작동시키고, 다른 쪽은 축전지에 화학에너지로 저장돼요."}
+    else m="태양전지가 빛에너지를 전기에너지로 바꾸고, "+GA[st.load]+" 그 전기를 다시 "+OUT[st.load]+"로 바꿔요. 바뀌는 동안 일부는 열로 빠져나가요.";
+    msg.textContent=m;msg.classList.toggle("warn",warn);
+  }
+  $$("[data-load]").forEach(function(b){b.onclick=function(){st.load=b.getAttribute("data-load");render()}});
+  $("#tDay").onclick=function(){st.day=!st.day;render()};
+  $("#tBat").onclick=function(){st.bat=!st.bat;render()};
+  $("#tRev").onclick=function(){st.rev=!st.rev;render()};
+  $$("[data-act]",L).forEach(function(g){g.addEventListener("click",function(){
+    var a=g.getAttribute("data-act");
+    if(a==="day")st.day=!st.day;
+    else if(a==="bat")st.bat=!st.bat;
+    else if(a==="load"){var o=["led","motor","buzzer"];st.load=o[(o.indexOf(st.load)+1)%3]}
+    else if(a==="panel"){msg.textContent="태양전지: 빛을 받으면 +극과 −극 사이에 전압이 생기고, 회로를 이으면 전기가 흘러요. 전기를 저장하지는 않아요.";msg.classList.remove("warn");return}
+    render();
+  })});
+  setInterval(function(){
+    if(!st.bat)return;var before=st.charge;
+    if(st.day)st.charge=Math.min(1,st.charge+0.02);
+    else if(!(st.rev&&st.load!=="motor"))st.charge=Math.max(0,st.charge-0.012);
+    if(before!==st.charge){var was=before>0.01,now=st.charge>0.01;if(was!==now)render();else gauge()}
+  },250);
+  render();
+})();
+
+/* ── (c) 불편 vs 해결책 문장 분류 ── */
+(function(){
+  var Q=[
+    ["라오스에 태양광 건조기가 필요하다.","sol","제품 이름(건조기)과 ‘필요하다’가 들어 있어 해결책을 먼저 정한 문장이에요."],
+    ["라오스 농민은 비가 잦아 농산물을 말리지 못해 오래 보관하기 어렵다.","pain","사용자(농민)·상황(잦은 비)·불편(보관이 어려움)이 모두 보여요."],
+    ["몽골 농가에 스마트팜을 설치해야 한다.","sol","‘스마트팜을 설치’라는 방법이 먼저 나왔어요. 농가가 겪는 불편은 보이지 않아요."],
+    ["화덕으로 밥을 짓는 조리사는 연기 때문에 오래 일하기 어렵다.","pain","누가(조리사), 어떤 상황에서(화덕으로 밥 짓기), 무엇이 불편한지(연기) 드러나요."],
+    ["라오스 마을 화덕에 배기구를 달아야 한다.","sol","배기구는 해결 방법이에요. 화덕을 쓰는 사람의 불편으로 바꿔 써 보세요."],
+    ["우간다 마을의 첫째 딸은 물을 길어 오느라 학교에 갈 시간이 부족하다.","pain","사용자와 하루 속 불편이 구체적인 상황으로 쓰였어요."],
+    ["인도 마을에는 LED 가로등이 필요하다.","sol","‘LED 가로등’이라는 제품이 들어갔어요. 밤에 누가 무엇이 불편한지부터 써요."],
+    ["서울의 우리 반 학생들은 여름에 교실이 더워 수업에 집중하기 어렵다.","pain","내가 직접 겪는 불편이에요. 사용자·상황·불편이 다 있어요."]
+  ];
+  var i=0,ok=0,card=$("#qcard"),qt=$("#qt"),qn=$("#qn"),fb=$("#qfb"),sc=$("#qs"),bl=$("#binL"),br=$("#binR"),busy=false;
+  function show(){
+    if(i>=Q.length){qn.textContent="끝!";qt.textContent=ok===Q.length?"모두 맞혔어요. 이제 내 문장을 써 볼까요?":"다 했어요. 틀린 문장(주황색)을 다시 읽어 봐요.";$$(".qb button",card).forEach(function(b){b.disabled=true});return}
+    qn.textContent=(i+1)+" / "+Q.length;qt.textContent=Q[i][0];$$(".qb button",card).forEach(function(b){b.disabled=false});
+  }
+  function pick(p){
+    if(busy||i>=Q.length)return;busy=true;
+    var q=Q[i],right=p===q[1];if(right)ok++;
+    fb.textContent=(right?"맞아요! ":"다시 볼까요? ")+q[2];fb.classList.toggle("bad",!right);
+    var li=document.createElement("li");li.textContent=q[0];if(!right)li.className="wrong";
+    (q[1]==="pain"?bl:br).appendChild(li);
+    card.classList.add(p==="pain"?"fly-l":"fly-r");
+    i++;sc.textContent=ok+" / "+i;
+    setTimeout(function(){card.classList.remove("fly-l","fly-r");card.classList.add("enter");show();void card.offsetWidth;card.classList.remove("enter");busy=false},460);
+  }
+  $$("[data-pick]").forEach(function(b){b.onclick=function(){pick(b.getAttribute("data-pick"))}});
+  $("#qreset").onclick=function(){i=0;ok=0;bl.innerHTML="";br.innerHTML="";fb.textContent="";sc.textContent="0 / 0";show()};
+  show();
+})();
+
+/* ── (c) 의뢰 7종 카드 덱 ── */
+(function(){
+  var R=[
+    ["①","라오스","농산물 건조","타국","비교 예: 건조대 안과 밖에 같은 시간 둔 재료"],
+    ["②","몽골","스마트팜","타국",""],
+    ["③","라오스","화덕","타국","비교 예: 배기구가 있을 때와 없을 때의 화덕"],
+    ["④","우간다","빗물 집수","타국",""],
+    ["⑤","인도","에너지 빌리지","타국",""],
+    ["⑥","서울","건물·에너지","서울",""],
+    ["⑦","서울","자원순환","서울",""]
+  ];
+  var box=$("#deck7");if(!box)return;var KEY="ecg:p5:pick",cur=sget(KEY);
+  R.forEach(function(r,k){
+    var b=document.createElement("div");b.className="rq";b.setAttribute("role","button");b.tabIndex=0;b.setAttribute("aria-label","의뢰 "+r[0]+" "+r[1]+" "+r[2]+" 카드 뒤집기");
+    b.innerHTML='<div class="in"><div class="f"><span class="num">'+r[0]+'</span><span class="kind">'+(r[3]==="서울"?"내가 겪는 문제":"타국 사례")+'</span><span class="rg">'+r[1]+'</span><span class="tp">'+r[2]+'</span></div>'+
+      '<div class="b"><b>'+r[0]+' '+r[1]+' · '+r[2]+'</b><span>'+(r[3]==="서울"?"내가 직접 겪는 탄소중립 문제":"에너지와 생활 문제가 겹친 곳")+'</span><span>· 누구의 하루?<br>· 해결 못 하면?<br>· 현지 재료는?</span>'+(r[4]?'<span class="mini">'+r[4]+'</span>':'')+'<button class="btn use" type="button">이 의뢰 고르기</button></div></div>';
+    b.addEventListener("click",function(e){
+      if(e.target.closest(".use")){e.stopPropagation();choose(k);return}
+      b.classList.toggle("flip");
+    });
+    b.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();b.classList.toggle("flip")}});
+    box.appendChild(b);
+  });
+  var cards=$$(".rq",box);
+  function label(k){return R[k][0]+" "+R[k][1]+" "+R[k][2]}
+  function paint(){
+    var k=cur===null?-1:+cur;
+    cards.forEach(function(c,n){c.classList.toggle("pick",n===k)});
+    $("#pickNow").innerHTML=k<0?"아직 고른 의뢰가 없어요.":"내가 고른 의뢰: <b>"+label(k)+"</b>";
+    var w=$("#wsPick");if(w)w.textContent=k<0?"— (위 카드에서 고르세요)":label(k);
+  }
+  function choose(k){cur=String(k);sset(KEY,cur);paint()}
+  $("#draw").onclick=function(){
+    var btn=this;btn.disabled=true;cards.forEach(function(c){c.classList.remove("flip")});
+    var target=Math.floor(Math.random()*7),steps=14+target,n=0;
+    var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;if(RM)steps=0;
+    (function tick(){
+      cards.forEach(function(c){c.classList.remove("hl")});
+      if(n>=steps){cards[target].classList.add("hl");setTimeout(function(){cards[target].classList.remove("hl");cards[target].classList.add("flip")},500);choose(target);btn.disabled=false;return}
+      cards[n%7].classList.add("hl");n++;setTimeout(tick,60+n*9);
+    })();
+  };
+  paint();
+})();
+
+/* ── (b) 평가 행렬 계산기 ── */
+(function(){
+  var box=$("#mrows"),list=$("#rlist");if(!box)return;
+  var KEY="ecg:p5:matrix",H=78;
+  var C=[["a","현실성"],["b","경제성"],["c","적정성(현지생산)"]];
+  var rows;try{rows=JSON.parse(sget(KEY))}catch(e){rows=null}
+  if(!rows||rows.length!==3)rows=[{n:"",a:5,b:5,c:5},{n:"",a:5,b:5,c:5},{n:"",a:5,b:5,c:5}];
+  var items=[];
+  rows.forEach(function(r,k){
+    var d=document.createElement("div");d.className="mrow";
+    var h='<input class="nm" type="text" maxlength="40" aria-label="아이디어 '+(k+1)+' 이름" placeholder="아이디어 '+(k+1)+(k===2?' (선택)':'')+'">';
+    C.forEach(function(c){h+='<div class="sl"><label for="m'+k+c[0]+'">'+c[1]+'</label><input type="range" min="0" max="10" step="1" id="m'+k+c[0]+'" data-c="'+c[0]+'"><output></output></div>'});
+    d.innerHTML=h;box.appendChild(d);
+    var it=document.createElement("div");it.className="ritem";it.innerHTML='<div class="rin"><span class="rk"></span><div><div class="rn"></div><div class="rb"><i></i></div></div><span class="rt"></span></div>';
+    list.appendChild(it);items.push(it);
+    var nm=$(".nm",d);nm.value=r.n;nm.addEventListener("input",function(){r.n=nm.value;upd()});
+    $$("input[type=range]",d).forEach(function(s){var c=s.getAttribute("data-c");s.value=r[c];s.nextElementSibling.textContent=r[c];
+      s.addEventListener("input",function(){r[c]=+s.value;s.nextElementSibling.textContent=s.value;upd()})});
+  });
+  list.style.height=(H*3)+"px";
+  function upd(){
+    sset(KEY,JSON.stringify(rows));
+    var t=rows.map(function(r,k){return{k:k,t:r.a+r.b+r.c}});
+    var order=t.slice().sort(function(x,y){return y.t-x.t||x.k-y.k});
+    var top=order[0].t,ties=order.filter(function(o){return o.t===top}).length;
+    order.forEach(function(o,rank){
+      var it=items[o.k],r=rows[o.k];
+      it.style.top=(rank*H)+"px";
+      $(".rk",it).textContent=(rank+1);
+      $(".rn",it).innerHTML="";$(".rn",it).textContent=r.n||("아이디어 "+(o.k+1));
+      if(rank===0&&ties===1){var bd=document.createElement("span");bd.className="badge";bd.textContent="선정 후보";$(".rn",it).appendChild(bd)}
+      $(".rb i",it).style.width=(o.t/30*100)+"%";
+      $(".rt",it).innerHTML=o.t+"<small>/30</small>";
+      it.classList.toggle("win",rank===0&&ties===1);
+    });
+    $("#mtie").textContent=ties>1?"동점이에요! 점수만으로 정하지 말고, 사용자의 불편을 더 잘 줄이는 쪽을 이유와 함께 골라요.":"점수는 판단의 근거예요. 선정한 이유와 남은 약점도 꼭 써요.";
+  }
+  function setAll(arr){rows.forEach(function(r,k){var s=arr[k];r.n=s[0];r.a=s[1];r.b=s[2];r.c=s[3]});
+    $$(".mrow",box).forEach(function(d,k){$(".nm",d).value=rows[k].n;$$("input[type=range]",d).forEach(function(s){var c=s.getAttribute("data-c");s.value=rows[k][c];s.nextElementSibling.textContent=rows[k][c]})});upd()}
+  $("#mex").onclick=function(){setAll([["태양광 환풍기",8,7,8],["햇빛 세기 알림 선풍기",9,8,8],["태양광 자동 차양",6,5,6]])};
+  $("#mclr").onclick=function(){setAll([["",5,5,5],["",5,5,5],["",5,5,5]])};
+  upd();
+})();
+
+/* ── 문제 정의 문장 만들기 ── */
+(function(){
+  var f=$$(".bld"),out=$("#bprev"),w=$("#bwarn");if(!f.length)return;
+  var SOL=/필요|설치|만들어|만든다|개발|보급|건조기|정수기|발전기|가로등|태양광 ?패널|스마트팜|기계|장치|제품/;
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+  function upd(){
+    var v=f.map(function(x){return x.value.trim()});
+    var ph=["[사용자]","[상황]","[문제]","[불편]"];
+    function p(k){return v[k]?esc(v[k]):'<span class="ph">'+ph[k]+'</span>'}
+    out.innerHTML=p(0)+"는 "+p(1)+"에서 "+p(2)+" 때문에 "+p(3)+"을 겪고 있다.";
+    var all=v.join(" ");
+    w.textContent=SOL.test(all)?"해결책(제품 이름이나 ‘~이 필요하다’)이 들어간 것 같아요. 사용자가 겪는 불편으로 바꿔 써 볼까요?":"";
+  }
+  setTimeout(upd,0);f.forEach(function(x){x.addEventListener("input",upd)});
+})();
+
+/* ── 회로 오류 탐정 ── */
+$$("#det button").forEach(function(b){b.onclick=function(){b.classList.toggle("shown");$(".ans",b).textContent=b.classList.contains("shown")?b.getAttribute("data-a"):""}});
+
+/* ── 고장 점검 순서 ── */
+(function(){
+  var ts=$("#ts");if(!ts)return;var qs=$$(".q",ts);
+  function reset(){ts.classList.remove("fin");qs.forEach(function(q,k){q.className="q"+(k===0?" act":"")})}
+  qs.forEach(function(q,k){
+    $("[data-y]",q).onclick=function(){if(!q.classList.contains("act"))return;q.className="q ok";if(qs[k+1])qs[k+1].classList.add("act");else ts.classList.add("fin")};
+    $("[data-n]",q).onclick=function(){if(!q.classList.contains("act"))return;q.classList.add("no")};
+  });
+  $("[data-reset]",ts).onclick=reset;reset();
+})();
+
+/* ── (d) 문항별 정답률 막대 ── */
+(function(){
+  var D=[
+    [9,"에너지 보존(전환 전후 총량)",44.4,77.8],[6,"손전등의 에너지 전환",27.8,61.1],[3,"전기 에너지 단위(kWh)",33.3,55.6],[15,"에너지원별 발전량 순서",27.8,50.0],
+    [4,"전기 에너지양 = 전력×시간",83.3,100],[2,"에너지의 원천",66.7,77.8],[12,"전자기 유도",88.9,94.4],[8,"광합성으로 저장되는 에너지",66.7,72.2],
+    [14,"신재생에너지의 특징",50.0,55.6],[1,"에너지의 정의",100,100],[7,"전등에서 손실되는 에너지",88.9,88.9],[11,"에너지 효율 계산",88.9,83.3],
+    [13,"원자력 발전의 특징",61.1,55.6],[5,"1kWh당 전기요금",61.1,55.6],[10,"발전소 효율 30%의 의미",77.8,61.1]
+  ];
+  var box=$("#items");if(!box)return;
+  function f1(v){return v===100?"100":v.toFixed(1)}
+  D.forEach(function(d,k){
+    var diff=Math.round((d[3]-d[2])*10)/10,cls=diff>0.05?"up":diff<-0.05?"dn":"eq";
+    var r=document.createElement("div");r.className="it"+(diff>=16?" hi":"")+(diff<0?" down":"");
+    r.style.setProperty("--pre",d[2]+"%");r.style.setProperty("--post",d[3]+"%");
+    r.innerHTML='<div class="nm"><b>'+d[0]+'.</b>'+d[1]+'</div><div class="bars" role="img" aria-label="사전 '+d[2]+'%, 사후 '+d[3]+'%"><span class="pre"></span><span class="post"></span></div>'+
+      '<div class="dl2 '+cls+'">'+(cls==="eq"?"변화 없음":(diff>0?"+":"−")+Math.round(Math.abs(diff))+"%p")+'<span class="vals">'+f1(d[2])+'→'+f1(d[3])+'%</span></div>';
+    r.querySelector(".post").style.transitionDelay=(.25+k*.05)+"s";r.querySelector(".pre").style.transitionDelay=(k*.05)+"s";
+    box.appendChild(r);
+  });
+  $$("[data-f]").forEach(function(b){b.onclick=function(){
+    $$("[data-f]").forEach(function(x){x.setAttribute("aria-pressed",x===b)});
+    box.classList.remove("f-up","f-dn");var f=b.getAttribute("data-f");if(f!=="all")box.classList.add("f-"+f);
+  }});
+})();
+})();
+</script>
+</body>
+</html>

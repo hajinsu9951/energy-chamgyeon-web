@@ -1,0 +1,1431 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>4색 글로벌 그린 창업기 · 에너지참견시점 프로그램 3</title>
+<meta name="description" content="데이터와 에듀테크로 빚어낸 지속가능성: 4색(色) 글로벌 그린 창업기 — 한국–튀르키예 국제공동수업 6차시 수업 운영 페이지">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+/* ── 프로그램 3 전용 보충 스타일 ── */
+:root{--tA:#F2B45A;--tB:#EBCB94;--tC:#F6F3EE;--tD:#B8761F;--cFossil:#9A9086;--cNuc:#EBCB94;--cHydro:#B8761F;--cRen:#F2B45A;--cGeo:#F6F3EE;--cOther:#5A5249}
+/* 상아색 바탕 대비 보충(검토 T3-11·12) */
+.ivory .quote em{color:var(--amber-dark)} .ivory .attr{color:var(--ink-sub)} .ivory .flow .st small,.ivory .card small{color:var(--ink-sub)}
+.on .mixmini .bar i:nth-child(4){transition-delay:.75s}.on .mixmini .tr .bar i:nth-child(4){transition-delay:1.35s}
+.photo-note{color:var(--grey);font-size:.82rem;margin-top:.8rem}
+.back{display:inline-block;font-size:.85rem;color:var(--grey);text-decoration:none;border-bottom:1px dotted var(--line2);margin-bottom:.8rem}
+.ivory .back{color:var(--ink-sub)}
+/* 설비용량 vs 발전량 미니 활동 */
+.cg{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1.4rem 1.3rem;margin-top:1.4rem}
+.cg-tog{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1.1rem}
+.cg-tog button{appearance:none;border:1px solid var(--line2);background:transparent;color:var(--ink2);border-radius:999px;padding:.45rem 1rem;font:500 .95rem var(--sans);cursor:pointer}
+.cg-tog button[aria-pressed="true"]{background:var(--amber);color:var(--bg);border-color:var(--amber)}
+.cg-row{display:grid;grid-template-columns:7.2em 1fr;gap:.8rem;align-items:center;margin:.55rem 0}
+.cg-row .who{font-weight:700;font-size:.95rem;line-height:1.3}
+.cg-row .who small{display:block;color:var(--grey);font-weight:400;font-size:.78rem}
+.cg-bar{display:flex;height:34px;border-radius:8px;overflow:hidden;background:rgba(246,243,238,.06)}
+.cg-bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;color:var(--bg);font-size:.8rem;white-space:nowrap;overflow:hidden;width:var(--w);transition:width .9s var(--ease)}
+.cg-keys{display:flex;flex-wrap:wrap;gap:.3rem 1rem;color:var(--ink2);font-size:.85rem;margin:.6rem 0 0}
+.cg-q{margin-top:1.2rem}.cg-q.two{grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr))}
+@media (max-width:560px){.cg-row{grid-template-columns:1fr;gap:.25rem}.cg-bar i{font-size:.7rem}}
+.cmp{width:100%;border-collapse:collapse;font-size:.9rem;margin:.6rem 0}
+.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:.4rem .45rem;text-align:right;font-variant-numeric:tabular-nums}
+.cmp th:first-child,.cmp td:first-child{text-align:left}
+.cmp th{color:var(--champ);font-weight:500}
+.sub-en{display:block;font-family:var(--sans);font-weight:500;font-size:.9rem;letter-spacing:.08em;color:var(--grey);margin-top:.3rem}
+.small{font-size:.88rem}.note{color:var(--grey);font-size:.88rem;margin-top:.8rem}
+.ivory .note{color:var(--ink-sub)}
+
+/* 인트로 1: 두 도시의 창 */
+.intro .scene > img.bgl,.intro .scene > img.bgr{width:50%;filter:blur(26px) brightness(.5) saturate(1.1);transform:scale(1.15)}
+.intro .scene > img.bgr{left:50%}
+.twin{position:absolute;z-index:2;left:0;right:0;top:8%;display:flex;justify-content:center;align-items:center;gap:clamp(12px,2.4vw,34px);padding:0 16px}
+.twin figure{margin:0;width:min(38vw,500px);aspect-ratio:524/364;position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--line2);box-shadow:0 24px 70px rgba(0,0,0,.65);opacity:0;transform:translateX(-50px) scale(.96)}
+.twin figure.r{transform:translateX(50px) scale(.96)}
+.on .twin figure{opacity:1;transform:none;transition:opacity 1.1s var(--ease) .15s,transform 1.4s var(--ease) .15s}
+.on .twin figure.r{transition-delay:.55s}
+.twin figure img{width:100%;height:100%;object-fit:cover}
+.on .twin figure img{animation:kenburns 9s var(--ease) both}
+.twin figcaption{position:absolute;left:10px;bottom:10px;background:rgba(29,26,22,.78);color:var(--ink);border:1px solid var(--line2);border-radius:999px;padding:.15rem .7rem;font-size:clamp(.72rem,1.3vw,.92rem);font-weight:500}
+.twin figcaption b{color:var(--amber);font-weight:700;margin-right:.3rem}
+.twin .seam{width:2px;align-self:stretch;margin:4% 0;background:linear-gradient(180deg,transparent,var(--amber),transparent);transform:scaleY(0);box-shadow:0 0 14px var(--amber)}
+.on .twin .seam{transform:none;transition:transform 1.2s var(--ease) .9s}
+
+/* 인트로 3: 미니 에너지 믹스 막대 */
+.mixmini{position:absolute;z-index:2;left:50%;top:9%;transform:translateX(-50%);width:min(860px,calc(100% - 32px))}
+.mixmini .row{display:grid;grid-template-columns:5.2em 1fr;gap:.8rem;align-items:center;margin:.7rem 0}
+.mixmini .who{font-weight:700;color:var(--ink);font-size:clamp(.9rem,1.6vw,1.15rem)}
+.mixmini .bar{display:flex;height:clamp(30px,5vh,46px);border-radius:8px;overflow:hidden;background:rgba(246,243,238,.08)}
+.mixmini .bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;color:var(--bg);font-size:clamp(.72rem,1.3vw,.95rem);width:0;white-space:nowrap;overflow:hidden;transition:width 1.4s var(--ease)}
+.on .mixmini .bar i{width:var(--w)}
+.on .mixmini .bar i:nth-child(2){transition-delay:.25s}.on .mixmini .bar i:nth-child(3){transition-delay:.5s}
+.mixmini .tr .bar i{transition-delay:.6s}.on .mixmini .tr .bar i:nth-child(2){transition-delay:.85s}.on .mixmini .tr .bar i:nth-child(3){transition-delay:1.1s}
+.mixmini .keys{display:flex;flex-wrap:wrap;gap:.3rem 1rem;color:var(--ink2);font-size:clamp(.75rem,1.2vw,.9rem);margin-top:.6rem;padding-left:calc(5.2em + .8rem)}
+.mixmini .src{color:var(--grey);font-size:.78rem;margin-top:.3rem;padding-left:calc(5.2em + .8rem)}
+.key{display:inline-flex;align-items:center;gap:.35rem}.key::before{content:"";width:11px;height:11px;border-radius:3px;background:var(--c)}
+
+/* 인트로 4: 4색 타일 */
+.tiles4{position:absolute;z-index:2;left:50%;top:9%;transform:translateX(-50%);width:min(980px,calc(100% - 32px));display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(8px,1.4vw,16px)}
+.tiles4 div{background:rgba(29,26,22,.72);border:1px solid var(--line);border-top:4px solid var(--c);border-radius:14px;padding:clamp(.6rem,1.6vw,1.1rem);opacity:0;transform:translateY(30px)}
+.on .tiles4 div{opacity:1;transform:none;transition:opacity .8s var(--ease),transform .9s var(--ease)}
+.on .tiles4 div:nth-child(2){transition-delay:.2s}.on .tiles4 div:nth-child(3){transition-delay:.4s}.on .tiles4 div:nth-child(4){transition-delay:.6s}
+.tiles4 b{display:block;font-family:var(--serif);font-weight:800;color:var(--c);font-size:clamp(1.5rem,3.4vw,2.6rem);line-height:1}
+.tiles4 span{display:block;color:var(--ink);font-weight:500;font-size:clamp(.78rem,1.4vw,1.05rem);margin-top:.35rem;line-height:1.35}
+@media (max-width:640px){
+  .twin{top:3.5%;flex-direction:column;gap:12px}.twin figure{width:70vw}.twin figure:first-child{align-self:flex-start}.twin figure.r{align-self:flex-end}.twin .seam{display:none}
+  .tiles4{grid-template-columns:repeat(2,1fr)}
+  .mixmini .row{grid-template-columns:4.4em 1fr}.mixmini .keys,.mixmini .src{padding-left:0}
+}
+@media (max-width:640px) and (max-height:740px){.twin{flex-direction:row;top:3%}.twin figure{width:44vw}.twin figure:first-child,.twin figure.r{align-self:center}}
+.intro-ui .tbtn[aria-pressed="true"]{background:var(--amber);color:var(--bg)}
+@media (max-height:700px) and (min-width:641px){.twin figure{width:min(30vw,400px)}}
+.intro .startbtn{margin-top:1.2rem}
+
+/* 에너지 믹스 비교 */
+.mixgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.2rem}
+.donut{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:1.2rem;text-align:center;position:relative}
+.donut h3{margin:0 0 .2rem}
+.donut .tagline{color:var(--grey);font-size:.88rem;margin:0 0 .6rem}
+.donut svg{width:min(250px,70vw);height:auto;display:block;margin:0 auto}
+.donut circle.seg{fill:none;stroke-width:30;transition:opacity .35s,stroke-width .35s;cursor:pointer}
+.donut circle.base{fill:none;stroke:rgba(246,243,238,.07);stroke-width:30}
+.donut .ctr{font-family:var(--sans)}
+.donut .legend{display:flex;flex-wrap:wrap;justify-content:center;gap:.35rem .9rem;margin-top:.7rem;font-size:.9rem;color:var(--ink2)}
+.donut .legend b{color:var(--ink);font-variant-numeric:tabular-nums}
+.dim .seg:not(.hl){opacity:.18}
+.catbar{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.6rem 0 1rem}
+.catbar button{appearance:none;border:1px solid var(--line2);background:transparent;color:var(--ink2);border-radius:999px;padding:.5rem 1rem;font:500 .95rem var(--sans);cursor:pointer;display:inline-flex;align-items:center;gap:.45rem;transition:.2s}
+.catbar button::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c)}
+.catbar button[aria-pressed="true"]{border-color:var(--amber);color:var(--bg);background:var(--amber)}
+.catbar button[aria-pressed="true"]::before{background:var(--bg)}
+.catinfo{background:var(--champT);border:1px solid var(--line);border-radius:16px;padding:1rem 1.2rem;min-height:5.4em;transition:opacity .3s}
+.catinfo b{color:var(--amber)}
+.gbars{margin-top:2rem;display:grid;gap:1.1rem}
+.gb{display:grid;grid-template-columns:8.5em 1fr;gap:.4rem 1rem;align-items:center}
+.gb > span{font-weight:700;grid-row:span 2}
+.gb .l{display:grid;grid-template-columns:4.6em 1fr 3.6em;gap:.6rem;align-items:center;font-size:.9rem;color:var(--ink2)}
+.gb .t{height:16px;border-radius:5px;background:rgba(246,243,238,.07);overflow:hidden}
+.gb .t i{display:block;height:100%;width:0;border-radius:5px;background:var(--c);transition:width 1.4s var(--ease)}
+.in .gb .t i{width:var(--w)}
+.in .gb:nth-child(2) .t i{transition-delay:.2s}.in .gb:nth-child(3) .t i{transition-delay:.4s}
+.gb .v{font-weight:700;color:var(--ink);text-align:right;font-variant-numeric:tabular-nums}
+.gb .t.na-t{background:none;height:auto;color:var(--grey);font-size:.82rem;overflow:visible}
+@media (max-width:560px){.gb{grid-template-columns:1fr}.gb > span{grid-row:auto}}
+.src-line{color:var(--grey);font-size:.86rem;margin-top:1.4rem;border-top:1px solid var(--line);padding-top:.8rem}
+
+/* 단계 안 보조 요소 */
+.mini2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;max-width:760px}
+.mini2 figure{margin:0;border-radius:12px;overflow:hidden;border:1px solid var(--line);position:relative}
+.mini2 figure img{width:100%;aspect-ratio:524/364;object-fit:cover}
+.mini2 figcaption{position:absolute;left:8px;bottom:8px;background:rgba(29,26,22,.8);border-radius:999px;padding:.1rem .6rem;font-size:.82rem}
+.sbar{display:flex;height:34px;border-radius:8px;overflow:hidden;max-width:720px;margin:.6rem 0 1rem}
+.sbar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;color:var(--bg);font-size:.85rem;width:0;transition:width 1.2s var(--ease) .2s;white-space:nowrap;overflow:hidden}
+.step.on .sbar i{width:var(--w)}
+.pill-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.pill{border:1px solid var(--line2);border-radius:12px;padding:.55rem .85rem;background:var(--champT)}
+.pill b{color:var(--amber);display:block;font-size:.85rem}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:.8rem}
+.box{border:1px solid var(--line);border-radius:14px;padding:.9rem 1rem;background:rgba(246,243,238,.03)}
+.box h4{margin:0 0 .35rem;font-size:1.05rem;color:var(--champ)}
+.box p{margin:0;color:var(--ink2)}
+.gloss{width:100%;border-collapse:collapse;font-size:.92rem;max-width:720px}
+.gloss th,.gloss td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left}
+.gloss th{color:var(--champ);font-weight:500}
+.bigq{font-family:var(--serif);font-weight:800;font-size:clamp(1.25rem,2.6vw,1.9rem);line-height:1.45;color:var(--ink);border-left:3px solid var(--amber);padding-left:1rem;margin:.6rem 0 1rem}
+.bigq em{font-style:normal;color:var(--amber)}
+.jump{display:inline-flex;align-items:center;gap:.4rem;color:var(--amber);font-weight:700;text-decoration:none;border-bottom:1px solid var(--line2);margin-top:.4rem}
+.jump:hover{border-color:var(--amber)}
+
+/* 4색 트랙 선택기 */
+.picker{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}
+@media (max-width:860px){.picker{grid-template-columns:repeat(2,1fr)}}
+.pick{appearance:none;text-align:left;cursor:pointer;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1.1rem 1rem 1rem;color:var(--ink);font:inherit;position:relative;overflow:hidden;transition:transform .35s var(--ease),border-color .3s,background .3s}
+.pick::after{content:"";position:absolute;left:0;right:0;top:0;height:4px;background:var(--c);transform:scaleX(.25);transform-origin:left;transition:transform .5s var(--ease)}
+.pick:hover{transform:translateY(-3px);border-color:var(--line2)}
+.pick[aria-pressed="true"]{border-color:var(--c);background:linear-gradient(180deg,rgba(242,180,90,.10),var(--panel) 60%)}
+.pick[aria-pressed="true"]::after{transform:none}
+.pick .lt{font-family:var(--serif);font-weight:800;font-size:2.2rem;line-height:1;color:var(--c)}
+.pick .nm{display:block;font-weight:700;font-size:1.08rem;margin-top:.45rem}
+.pick .ds{display:block;color:var(--grey);font-size:.86rem;margin-top:.2rem;line-height:1.45}
+.trackpanel{margin-top:1.4rem;background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1.6rem 1.4rem;border-top:4px solid var(--c)}
+.trackpanel[hidden]{display:none}
+.trackpanel h3.tp{font-size:clamp(1.3rem,2.6vw,1.8rem);margin:0 0 .2rem}
+.trackpanel h3.tp b{color:var(--c);font-family:var(--serif)}
+.trackpanel h4{font-size:1.15rem;margin:1.8rem 0 .7rem;color:var(--champ);display:flex;align-items:center;gap:.6rem}
+.trackpanel h4::before{content:"";width:18px;height:1px;background:var(--champ)}
+.unf{opacity:0;transform:translateY(22px)}
+.trackpanel.open .unf{opacity:1;transform:none;transition:opacity .7s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * 70ms)}
+.pad.sm{min-height:72px}
+.g2f{display:grid;gap:0 1rem;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:640px){.g2f{grid-template-columns:1fr}}
+input.pad{min-height:0}
+.ckrow{display:flex;flex-wrap:wrap;gap:.4rem 1.2rem;margin:.2rem 0 .4rem}
+.ckrow label{display:inline-flex;align-items:center;gap:.45rem;cursor:pointer;color:var(--ink2)}
+.ckrow input{accent-color:var(--amber);width:18px;height:18px}
+/* A: 5단계 곡선 */
+.arc{position:relative;margin:.4rem 0 .4rem}
+.arc svg{width:100%;height:auto;display:block;overflow:visible}
+.arc path.curve{fill:none;stroke:var(--tA);stroke-width:3;stroke-dasharray:1000;stroke-dashoffset:1000}
+.trackpanel.open .arc path.curve{stroke-dashoffset:0;transition:stroke-dashoffset 1.8s var(--ease) .2s}
+.arc path.fillc{fill:url(#arcg);opacity:0}
+.trackpanel.open .arc path.fillc{opacity:1;transition:opacity 1.2s 1s}
+.arc .nd{cursor:pointer}
+.arc .nd circle{fill:var(--bg);stroke:var(--tA);stroke-width:3;transform-box:fill-box;transform-origin:center;transform:scale(0)}
+.trackpanel.open .arc .nd circle{transform:none;transition:transform .5s cubic-bezier(.3,1.6,.5,1);transition-delay:calc(.4s + var(--i) * .3s)}
+.arc .nd text{fill:var(--ink);font:700 15px var(--sans);text-anchor:middle;opacity:0}
+.trackpanel.open .arc .nd text{opacity:1;transition:opacity .5s;transition-delay:calc(.5s + var(--i) * .3s)}
+.arc .nd.on circle{fill:var(--tA)}
+.stages{display:grid;grid-template-columns:repeat(5,1fr);gap:.6rem}
+@media (max-width:900px){.stages{grid-template-columns:1fr}}
+.stage{border:1px solid var(--line);border-radius:14px;padding:.8rem;background:rgba(246,243,238,.03);transition:border-color .3s}
+.stage.on{border-color:var(--tA)}
+.stage b{color:var(--tA)} .stage small{display:block;color:var(--grey);margin:.15rem 0 .5rem;line-height:1.45}
+.scenes{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:.7rem}
+.scene-c{border:1px solid var(--line);border-radius:14px;padding:.75rem .8rem;background:rgba(246,243,238,.03)}
+.scene-c .n{font-weight:700;color:var(--tA);font-size:.9rem}
+.scene-c p{margin:.1rem 0 .45rem;color:var(--ink2);font-size:.9rem;line-height:1.45}
+.scene-c p i{color:var(--grey);font-style:normal;display:block;font-size:.8rem}
+.scene-c.ex{border-color:rgba(242,180,90,.5)}
+.scene-c .exl{font-size:.82rem;color:var(--champ);background:var(--amberT);border-radius:8px;padding:.35rem .55rem;margin-bottom:.45rem}
+/* B: 신문 + 포스터 */
+.paper{background:var(--ivory);color:var(--ink-dark);border-radius:14px;padding:1.2rem 1.2rem 1rem;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.paper .mast{font-family:var(--serif);font-weight:800;font-size:1.05rem;border-bottom:3px double rgba(29,26,22,.6);padding-bottom:.35rem;margin-bottom:.7rem;display:flex;justify-content:space-between;gap:.5rem;flex-wrap:wrap}
+.paper .mast small{font-family:var(--sans);font-weight:500;color:var(--ink-sub)}
+.paper .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem}
+@media (max-width:760px){.paper .cols{grid-template-columns:1fr}}
+.paper label{display:block;font-weight:700;font-size:.9rem;color:var(--amber-dark);margin-bottom:.3rem}
+.paper small.h{display:block;color:var(--ink-sub);font-size:.82rem;margin-bottom:.35rem}
+.paper .pad{background:#fff;color:var(--ink-dark);border-color:rgba(29,26,22,.2)}
+.paper .head-in{font-family:var(--serif);font-weight:800;font-size:1.3rem}
+.postwrap{display:grid;grid-template-columns:1fr minmax(240px,320px);gap:1.2rem;align-items:start}
+@media (max-width:760px){.postwrap{grid-template-columns:1fr}}
+.poster{aspect-ratio:3/4;border-radius:14px;background:radial-gradient(circle at 70% 18%,rgba(242,180,90,.55),transparent 45%),linear-gradient(170deg,#2B2621,#1D1A16 70%);border:1px solid var(--line2);padding:1.3rem 1.2rem;display:flex;flex-direction:column;position:relative;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.poster .sun{position:absolute;right:-30px;top:-30px;width:150px;height:150px;border-radius:50%;border:1px dashed rgba(242,180,90,.5);animation:spin 40s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.poster small{color:var(--amber);font-weight:700;letter-spacing:.12em;font-size:.72rem}
+.poster .slo{font-family:var(--serif);font-weight:800;font-size:clamp(1.3rem,2.4vw,1.75rem);line-height:1.3;margin:.6rem 0 auto;color:var(--ink);word-break:keep-all}
+.poster ol{margin:0;padding:0;list-style:none;counter-reset:pr}
+.poster li{counter-increment:pr;display:flex;gap:.5rem;align-items:flex-start;font-size:.9rem;margin:.4rem 0;color:var(--ink2)}
+.poster li::before{content:counter(pr);flex:0 0 22px;height:22px;border-radius:50%;background:var(--amber);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:.75rem}
+.poster .ph{color:var(--grey)}
+/* C: 필름 스트립 */
+.film{display:grid;grid-template-columns:repeat(auto-fill,minmax(290px,1fr));gap:.8rem}
+.frame{background:#14120F;border-radius:12px;padding:16px 12px;position:relative;border:1px solid var(--line)}
+.frame::before,.frame::after{content:"";position:absolute;left:10px;right:10px;height:6px;background:repeating-linear-gradient(90deg,rgba(246,243,238,.22) 0 10px,transparent 10px 20px);border-radius:2px}
+.frame::before{top:5px}.frame::after{bottom:5px}
+.trackpanel.open .film .frame{animation:filmin .8s var(--ease) both;animation-delay:calc(var(--i) * 110ms)}
+@keyframes filmin{from{opacity:0;transform:translateX(-40px)}to{opacity:1;transform:none}}
+.frame .sn{display:flex;justify-content:space-between;align-items:baseline;gap:.5rem}
+.frame .sn b{color:var(--tC);font-size:1rem}
+.frame .sn span{color:var(--amber);font-size:.82rem;font-weight:500}
+.frame dl{margin:.5rem 0;font-size:.84rem;line-height:1.45;color:var(--ink2)}
+.frame dt{color:var(--grey);font-size:.76rem;margin-top:.3rem}
+.frame dd{margin:0}
+/* D: 캔버스 */
+.canvas9{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem}
+@media (max-width:820px){.canvas9{grid-template-columns:1fr}}
+.cell{border:1px solid var(--line);border-radius:14px;padding:.8rem;background:rgba(246,243,238,.03);position:relative}
+.trackpanel.open .canvas9 .cell,.trackpanel.open .canvas2 .cell{animation:cellin .6s var(--ease) both;animation-delay:calc(var(--i) * 80ms)}
+@keyframes cellin{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:none}}
+.cell .cn{font-weight:700;color:var(--tD);font-size:.85rem}
+.cell h5{margin:.1rem 0 .1rem;font-size:1.02rem}
+.cell small{display:block;color:var(--grey);font-size:.82rem;line-height:1.4;margin-bottom:.45rem}
+.cell .ws{position:absolute;right:.7rem;top:.7rem;font-size:.72rem;color:var(--champ);border:1px solid var(--line2);border-radius:999px;padding:0 .45rem}
+.canvas2{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:.6rem;margin-top:.6rem}
+
+/* 데모데이 */
+.demo{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:1.4rem;align-items:start}
+@media (max-width:900px){.demo{grid-template-columns:1fr}}
+.pitch{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1.4rem;text-align:center}
+.ring{position:relative;width:min(240px,64vw);margin:.6rem auto}
+.ring svg{width:100%;height:auto;display:block;transform:rotate(-90deg)}
+.ring .rb{fill:none;stroke:rgba(246,243,238,.08);stroke-width:12}
+.ring .rf{fill:none;stroke:var(--amber);stroke-width:12;stroke-linecap:round;transition:stroke-dashoffset 1s linear,stroke .3s}
+.ring.qa .rf{stroke:var(--champ)}
+.ring.done .rf{stroke:var(--rust)}
+.ring .rt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring .rt b{font-size:clamp(2.2rem,6vw,3rem);font-variant-numeric:tabular-nums;line-height:1;color:var(--ink)}
+.ring .rt span{color:var(--amber);font-weight:700;margin-top:.3rem}
+.ring.done .rt b{color:var(--rust);animation:pulse 1s infinite}
+.phases{display:flex;justify-content:center;gap:.4rem;margin:.4rem 0 .9rem}
+.phases span{border:1px solid var(--line2);border-radius:999px;padding:.15rem .7rem;font-size:.85rem;color:var(--ink2)}
+.phases span.on{background:var(--amber);color:var(--bg);border-color:var(--amber)}
+.pitch .ctl{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap}
+.peer{background:var(--panel);border:1px solid var(--line);border-radius:22px;padding:1.4rem}
+.peer .sel{display:flex;flex-wrap:wrap;gap:.6rem;align-items:center;margin-bottom:.8rem}
+.peer select{background:var(--bg);color:var(--ink);border:1px solid var(--line2);border-radius:10px;padding:.45rem .7rem;font:500 1rem var(--sans)}
+.crit{display:grid;grid-template-columns:1fr auto;gap:.3rem 1rem;align-items:center;padding:.55rem 0;border-bottom:1px solid var(--line)}
+.crit small{grid-column:1/-1;color:var(--grey);font-size:.82rem;line-height:1.4}
+.stars{display:flex;gap:2px}
+.stars button{appearance:none;border:0;background:none;font-size:1.6rem;line-height:1;color:rgba(246,243,238,.2);cursor:pointer;padding:.1rem;transition:transform .15s,color .15s}
+.stars button.on{color:var(--amber)}
+.stars button:hover{transform:scale(1.15)}
+.board{margin-top:1rem}
+.board .tbl td,.board .tbl th{padding:.45rem .5rem;font-size:.9rem}
+.board tr.top1 td{color:var(--amber);font-weight:700}
+.awards{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:.8rem}
+.awards span{border:1px solid var(--line2);border-radius:999px;padding:.3rem .9rem;color:var(--champ)}
+
+/* 공동 선언문 */
+.decl{display:grid;grid-template-columns:1fr minmax(280px,460px);gap:1.4rem;align-items:start}
+@media (max-width:900px){.decl{grid-template-columns:1fr}}
+.charter{overflow:hidden;background:var(--ivory);color:var(--ink-dark);border-radius:6px;padding:1.8rem 1.6rem;position:relative;box-shadow:0 22px 50px rgba(0,0,0,.45);border:1px solid rgba(184,118,31,.4);outline:1px solid rgba(184,118,31,.35);outline-offset:-10px}
+.charter .ttl{text-align:center;font-family:var(--serif);font-weight:800;font-size:1.3rem;line-height:1.4}
+.charter .ttl small{display:block;font-family:var(--sans);font-weight:500;font-size:.78rem;color:var(--amber-dark);letter-spacing:.08em}
+.charter .pre{font-family:var(--serif);font-weight:800;font-size:1rem;line-height:1.7;margin:1rem 0 .3rem}
+.charter .pre-en{color:var(--ink-sub);font-size:.82rem;margin:0 0 .8rem}
+.charter ol{margin:0 0 1rem 1.2rem;padding:0}
+.charter li{margin:.35rem 0;line-height:1.55}
+.charter .ph{color:#B0A69A}
+.charter .sig{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.charter .sig div{border-top:1px solid rgba(29,26,22,.4);padding-top:.3rem;font-size:.8rem;color:var(--ink-sub)}
+.charter .sig b{display:block;font-family:var(--serif);font-weight:800;font-size:1.1rem;color:var(--ink-dark);min-height:1.5em}
+.stamp{position:absolute;right:16px;bottom:14px;width:84px;height:84px;border-radius:50%;border:3px solid var(--amber-dark);color:var(--amber-dark);display:grid;place-items:center;text-align:center;font-weight:700;font-size:.78rem;line-height:1.25;transform:rotate(-14deg) scale(2.2);opacity:0;pointer-events:none}
+.stamp.on{opacity:.9;transform:rotate(-14deg) scale(1);transition:transform .45s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+.decl .pad{min-height:0}
+@media (max-width:640px){.charter{padding-bottom:6.4rem}.stamp{width:76px;height:76px}}
+
+/* 기록 */
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem}
+.gallery figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden}
+.gallery img{width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top}
+.gallery figcaption{padding:.7rem .9rem;color:var(--ink2);font-size:.92rem}
+.voice{font-family:var(--serif);font-weight:800;font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.55;margin:0}
+.voice::before{content:"“";color:var(--amber);font-size:2.4em;line-height:0;vertical-align:-.4em;margin-right:.15em}
+.rubtbl{min-width:760px}
+@media (max-width:480px){.top .wrap{gap:.45rem}.tools{gap:.25rem}.tools .tbtn{padding:.3rem .5rem;font-size:.76rem}}
+.rubtbl td:first-child{font-weight:700;white-space:nowrap}
+.rubtbl td.g{color:var(--amber);font-weight:700;width:2em}
+</style>
+</head>
+<body>
+<!-- 프로그램 3 · 임은희(영훈고등학교) · 근거: 최종보고서 별첨 지도안·활동지, 보고서 본문, 수업 PPT 「한-튀르키예 글로벌 기후 행동 프로젝트」(46장) -->
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span>&nbsp;03 국제</a>
+    <nav aria-label="섹션">
+      <a href="#goal">질문</a><a href="#mix">에너지 믹스</a><a href="#lesson">수업 진행</a><a href="#tracks">4색 트랙</a><a href="#demo">데모데이</a><a href="#act">활동지</a><a href="#rubric">평가</a><a href="#record">기록</a><a href="#ppt">PPT</a>
+    </nav>
+    <div class="tools"><button class="tbtn" data-toggle="tmode">교사 모드</button><button class="tbtn" data-toggle="proj">크게 보기</button><button class="tbtn" data-toggle="fs">전체 화면</button></div>
+  </div>
+</header>
+
+<main>
+<!-- ═════════ 몰입형 인트로 ═════════ -->
+<section class="intro" id="intro" data-hold-last aria-label="도입 장면">
+  <!-- 1. 두 도시의 밤 — 수업 PPT 3장의 스톡 사진(istockphoto·europosters)은 재배포 라이선스가 없어 연구회가 직접 그린 SVG(img/seoul_night.svg, istanbul_night.svg)로 바꿈. 원본은 img/_orig/(게시 제외) -->
+  <div class="scene" data-dur="6400">
+    <img class="bgl" src="img/seoul_night.svg" alt="">
+    <img class="bgr" src="img/istanbul_night.svg" alt="">
+    <div class="scrim"></div>
+    <div class="twin">
+      <figure><img src="img/seoul_night.svg" alt="직접 그린 그림: 남산 위 서울타워와 한강 다리, 불 켜진 아파트가 있는 서울의 밤"><figcaption><b>KOR</b>대한민국 서울</figcaption></figure>
+      <span class="seam" aria-hidden="true"></span>
+      <figure class="r"><img src="img/istanbul_night.svg" alt="직접 그린 그림: 모스크의 돔과 첨탑, 갈라타 탑, 보스포루스 해협의 다리가 있는 이스탄불의 밤"><figcaption><b>TÜR</b>튀르키예 이스탄불</figcaption></figure>
+    </div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">한국–튀르키예 국제공동수업 · 6차시</span>
+      <h1 class="display"><span class="mask"><span>찬란한 <em>두 도시의 밤</em></span></span></h1>
+      <p class="subline fadeup">서울과 이스탄불, 두 도시가 같은 밤을 밝히고 있어요.</p>
+    </div></div>
+  </div>
+  <!-- 2. 빛의 근원 -->
+  <div class="scene" data-flash data-dur="5600">
+    <video muted playsinline preload="none" poster="../assets/video/M1_first.jpg" src="../assets/video/M1.mp4" aria-hidden="true"></video>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">질문 하나</span>
+      <h2 class="display"><span class="mask"><span>이 빛은 모두</span></span><span class="mask"><span><em>어디에서</em> 왔을까요?</span></span></h2>
+      <p class="subline fadeup">찬란한 두 도시의 밤, 우리는 어떤 에너지를 쓸까?</p>
+    </div></div>
+  </div>
+  <!-- 3. 두 나라의 에너지 믹스 -->
+  <div class="scene" data-flash data-dur="7000">
+    <video muted playsinline preload="none" poster="../assets/video/M0_first.jpg" src="../assets/video/M0.mp4" aria-hidden="true"></video>
+    <div class="scrim full"></div>
+    <div class="mixmini" role="img" aria-label="2024년 발전량 비중: 한국 화석연료 56%, 원자력 32%, 신재생 11%. 튀르키예 화석연료 54%, 수력 22%, 풍력·태양광 18%, 지열·바이오 6%, 원자력 0%.">
+      <div class="row"><span class="who">한국</span><div class="bar"><i style="--w:56.2%;background:var(--cFossil)">56%</i><i style="--w:31.7%;background:var(--cNuc)">32%</i><i style="--w:10.6%;background:var(--cRen)">11%</i><i style="--w:1.5%;background:var(--cOther)"></i></div></div>
+      <div class="row tr"><span class="who">튀르키예</span><div class="bar"><i style="--w:54.4%;background:var(--cFossil)">54%</i><i style="--w:21.9%;background:var(--cHydro)">22%</i><i style="--w:18.2%;background:var(--cRen)">18%</i><i style="--w:5.5%;background:var(--cGeo)"></i></div></div>
+      <div class="keys"><span class="key" style="--c:var(--cFossil)">화석연료</span><span class="key" style="--c:var(--cNuc)">원자력</span><span class="key" style="--c:var(--cHydro)">수력</span><span class="key" style="--c:var(--cRen)">신재생 · 풍력/태양광</span><span class="key" style="--c:var(--cGeo)">지열·바이오</span></div>
+      <p class="src">2024년 발전량 비중 · 한국: 산업통상자원부 · 튀르키예: Ember</p>
+    </div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">에너지 믹스 Energy Mix</span>
+      <h2 class="display"><span class="mask"><span>두 나라의 에너지 출처는</span></span><span class="mask"><span><em>어떻게 다를까?</em></span></span></h2>
+    </div></div>
+  </div>
+  <!-- 4. 4색 트랙 -->
+  <div class="scene" data-flash data-dur="6200">
+    <img class="kb" src="../assets/video/M1_last.jpg" alt="">
+    <div class="scrim full"></div>
+    <div class="tiles4" aria-hidden="true">
+      <div style="--c:var(--tA)"><b>A</b><span>에너지 SDGs 동화책</span></div>
+      <div style="--c:var(--tB)"><b>B</b><span>신문 칼럼 &amp; 비주얼 포스터</span></div>
+      <div style="--c:var(--tC)"><b>C</b><span>에너지 기업가 정신 홍보 영상</span></div>
+      <div style="--c:var(--tD)"><b>D</b><span>그린 벤처 사업계획서</span></div>
+    </div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">에너지 기업가 정신 Energy Entrepreneurship</span>
+      <h2 class="display"><span class="mask"><span>문제를 <em>기회</em>로,</span></span><span class="mask"><span>네 가지 색의 해답으로</span></span></h2>
+      <p class="subline fadeup">모둠마다 한 트랙을 골라 양국 친구들과 함께 만들어요.</p>
+    </div></div>
+  </div>
+  <!-- 5. 글로벌 데모데이 -->
+  <div class="scene" data-flash>
+    <video muted playsinline preload="none" poster="../assets/video/M2_first.jpg" src="../assets/video/M2.mp4" aria-hidden="true"></video>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">5~6차시 · 한-튀르키예 글로벌 데모데이</span>
+      <h2 class="display"><span class="mask"><span>국경을 넘어 함께 만드는</span></span><span class="mask"><span><em>깨끗한 내일</em></span></span></h2>
+      <p class="subline fadeup">우리는 글로벌 그린 아키텍트입니다.</p>
+      <a class="btn startbtn fadeup" href="#goal">수업 시작 ↓</a>
+    </div></div>
+  </div>
+  <canvas class="motes" data-n="55" aria-hidden="true"></canvas>
+  <div class="flash" aria-hidden="true"></div>
+  <div class="intro-ui">
+    <button class="tbtn" data-intro="prev" aria-label="이전 장면">◀</button>
+    <div class="dots"></div>
+    <button class="tbtn" data-intro="pause" aria-pressed="false">일시정지</button>
+    <button class="tbtn" data-intro="next" aria-label="다음 장면">▶</button>
+  </div>
+  <div class="scroll-hint"><i></i>스크롤</div>
+</section>
+
+<!-- ═════════ 질문 · 목표 · 흐름 ═════════ -->
+<section class="sec ivory" id="goal">
+  <div class="wrap">
+    <p class="label">이 수업의 질문</p>
+    <p class="quote reveal">에너지를 아끼는 데서 멈추지 않고,<br><em>가치를 만드는 기회</em>로 바꿀 수 있을까?</p>
+    <p class="attr reveal d1">프로그램 3 · 데이터와 에듀테크로 빚어낸 지속가능성: 4색(色) 글로벌 그린 창업기</p>
+    <p class="reveal d2" style="margin-top:1rem"><span class="muted" style="font-size:.85rem;margin-right:.5rem">에너지소양 주제</span><span class="tag">에너지믹스</span><span class="tag">사회경제</span><span class="tag">에너지안보</span><span class="tag">무탄소 에너지</span><br><small style="color:var(--ink-sub)">한국–튀르키예 발전량 비교(에너지믹스), 그린 벤처의 비용 절감·수익 모델(사회경제), 천연가스·석탄 수입 의존(에너지안보), 원자력과 재생에너지가 채우는 나머지 절반(무탄소 에너지)을 다뤄요.</small></p>
+    <!-- 확인 필요: 프로그램 3 적용 학교·학년·일시·인원(한국 영훈고 ○학년 ○명 / 튀르키예 파트너 학교 ○명), 운영 시간(교과·창체·동아리) — 근거 자료에 없어 화면에 넣지 않음 -->
+
+    <div class="grid g2" style="margin-top:3rem">
+      <div class="card reveal">
+        <div class="no">GOAL 1 · 데이터 기반 분석</div>
+        <h3>두 나라 에너지 믹스 비교</h3>
+        <p>공공데이터(IEA, 빅카인즈)로 한국과 튀르키예의 에너지 믹스를 비교하고, 에너지 전환의 기회와 위기를 찾아요.</p>
+      </div>
+      <div class="card reveal d1">
+        <div class="no">GOAL 2 · 솔루션과 연대</div>
+        <h3>에너지 기업가 정신 + 공동 선언문</h3>
+        <p>에너지 기업가 정신을 우리 말로 정의하고, SDGs 7·13과 연결해 양국 공동 선언문을 써요.</p>
+      </div>
+      <div class="card reveal d2">
+        <div class="no">GOAL 3 · 융합 산출물</div>
+        <h3>4색 트랙 중 하나를 완성</h3>
+        <p>동화책 · 칼럼과 포스터 · 홍보 영상 · 그린 벤처 사업계획서 가운데 하나를 골라 만들어요.</p>
+      </div>
+      <div class="card reveal d3">
+        <div class="no">GOAL 4 · 데모데이</div>
+        <h3>피칭하고, 평가하고, 성찰하기</h3>
+        <p>한-튀르키예 데모데이에서 피칭하고, Padlet·Mentimeter로 서로 평가한 뒤 성찰 일지를 써요.</p>
+      </div>
+    </div>
+
+    <h3 style="margin-top:3rem">6차시, 3개 블록 <span class="muted small">(고등학교 50분 × 2차시씩)</span></h3>
+    <div class="flow reveal">
+      <div class="st"><b>양국 에너지 현황 탐구 · 기업가 정신 발굴</b><small>1~2차시 · 발전량 데이터 비교, 설비용량 vs 발전량, SDGs 7·13, 공동 선언문, 트랙 선택</small></div>
+      <div class="st"><b>기후 행동 융합 산출물 창작</b><small>3~4차시 · 40분 + 35분 집중 창작, Padlet 상호 피드백</small></div>
+      <div class="st"><b>그린 벤처 글로벌 데모데이</b><small>5~6차시 · 실시간 피칭(시차 6시간), 동료 피드백, 성찰과 다짐</small></div>
+    </div>
+
+    <div style="margin-top:2.4rem">
+      <p class="label">성취기준 <span style="font-weight:400;text-transform:none;letter-spacing:0">· 2022 개정 교육과정</span></p>
+      <p style="margin:.4rem 0"><span class="tag">[10통과2-02-06]</span> 에너지 효율의 의미와 중요성을 이해하고, 지속가능한 발전과 지구 환경 문제 해결에 신재생 에너지 기술을 활용하는 방안을 탐색할 수 있다. <small style="color:var(--ink-sub)">→ 1~2차시 발전량 탐구 · 트랙 A·C 과학적 타당성</small></p>
+      <p style="margin:.4rem 0"><span class="tag">[10통과2-03-02]</span> 빅데이터를 과학기술사회에서 사용하고 있는 사례를 조사하고, 빅데이터 활용의 장점과 문제점을 추론할 수 있다. <small style="color:var(--ink-sub)">→ 1~2차시 공공데이터(Ember·IEA·빅카인즈) 활용</small></p>
+      <p style="margin:.4rem 0"><span class="tag">[12기가05-04]</span> 친환경 에너지의 종류와 원리, 활용 사례를 탐구하며, 에너지 전환과 관련된 공학적 문제를 해결하는 과정에서 창의적 자신감과 태도를 갖는다. <small style="color:var(--ink-sub)">→ 트랙 D 사업계획서 ‘과학·공학 원리’</small></p>
+      <p style="margin:.4rem 0"><span class="tag">[10공국2-03-02]</span> 논증 요소에 따른 분석을 바탕으로 효과적으로 내용을 조직하여 논증하는 글을 쓴다. <small style="color:var(--ink-sub)">→ 트랙 B 칼럼 · 트랙 D 사업계획서 · 데모데이 피칭</small></p>
+      <p style="margin:.4rem 0"><span class="tag">[12기지04-01]</span> 지속가능발전목표(SDGs)의 의미를 이해하고, 이의 실천과 관련한 지역 사례들을 조사하여 환경적, 경제적, 사회적 측면에서 통합적으로 분석한다. <small style="color:var(--ink-sub)">→ 1~2차시 SDGs·공동 선언문 · 트랙 A·C · 성찰</small></p>
+      <!-- [12기가05-04] 문구: 지도안 원문("지속가능한 개발을 고려하여 에너지 기술의 긍정적 및 부정적 영향을 분석하고…")은 2022 개정 고시와 달라 고시 문구(고교 「기술·가정」 (5) 미래를 여는 공학 혁신)로 바꿈(검토 T2-2). 교육부 고시 제2022-33호 [별책 10] 원문과 최종 대조 권장 -->
+      <p class="note">지도안의 연계 교과: 통합과학2 · 공통국어2 · 기술·가정 · 기후변화와 지속가능한 세계 — 모둠별 4색 트랙 선택형 한국-튀르키예 국제공동 프로젝트 학습(PBL). 모둠이 고른 트랙에 따라 평가에 쓰는 성취기준이 달라요(평가 표 참고).</p>
+      <!-- 확인 필요(검토 T2-16): 실제 운영한 주 교과·학년·시간(교과/창체/동아리)이 근거 자료에 없음 — 확인되면 이 줄에 한 줄로 밝힐 것 -->
+    </div>
+    <div class="teacher">
+      <b>평가 관점(지도안)</b> — 산출물의 외형적 완성도보다 ① 데이터 근거의 타당성 ② 양국 협력과 상호 피드백 반영 과정 ③ 가치 제안의 설득력을 중심으로 평가.<br>
+      <b>시간 배분</b> — 지도안 원안은 블록당 90·90·85분(45분×2 기준). 이 페이지는 고교 50분×2 = 100분으로 다시 나눔: 1~2차시 활동 1 35→40분(설비용량 vs 발전량 미니 활동 포함)·활동 3 15→20분 / 3~4차시 집중 창작 75분을 40+35분으로 나누고 4차시 정리(Padlet 피드백) 5→15분 / 5~6차시 피칭 60→65분·성찰 10→15분. 진행기에 ‘1차시 끝’ 경계 카드를 넣음. 블록 수업이 아니어도 차시 경계에서 끊어 쓰면 됨.<br>
+      <b>차시별 에듀테크</b> — 1~2차시: IEA Data Explorer(보조: Ember 데이터), BIG Kinds, Padlet, DeepL/Google Translate(실시간 다국어 패들렛 보드) · 3~4차시: Canva AI/Whiteboard, Storyboard Maker, Google Docs · 5~6차시: Canva Presentation, Mentimeter/Google Form, Zoom/Teams
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 에너지 믹스 비교 (고유 인터랙션 1) ═════════ -->
+<section class="sec" id="mix">
+  <div class="wrap">
+    <p class="label">데이터 탐구 · Energy Mix</p>
+    <h2 class="head">두 나라의 전력은<br>무엇으로 만들어질까요?</h2>
+    <p class="lead">2024년 한 해 동안 실제로 만든 전기(발전량)를 발전원별로 나눈 비율이에요. 스크롤하면 도넛이 자라고, 아래 버튼으로 발전원을 하나씩 골라 비교할 수 있어요.</p>
+
+    <div class="mixgrid inview" id="mixgrid">
+      <div class="donut" data-country="kr">
+        <h3>한국 <span class="muted small">Korea · 2024 발전량</span></h3>
+        <p class="tagline">원자력 1위, 가스·석탄이 뒤를 이어요</p>
+        <svg viewBox="0 0 200 200" role="img" aria-label="한국 2024년 발전량 비중 도넛 차트: 화석연료 56.2%(석탄 28.1, 가스 28.1), 원자력 31.7%, 신재생 10.6%, 기타 1.5%">
+          <circle class="base" cx="100" cy="100" r="72"/>
+          <g transform="rotate(-90 100 100)">
+            <circle class="seg" data-cat="fossil" data-v="56.2" data-o="0" cx="100" cy="100" r="72" pathLength="100" style="stroke:var(--cFossil)"/>
+            <circle class="seg" data-cat="nuclear" data-v="31.7" data-o="56.2" cx="100" cy="100" r="72" pathLength="100" style="stroke:var(--cNuc)"/>
+            <circle class="seg" data-cat="renew" data-v="10.6" data-o="87.9" cx="100" cy="100" r="72" pathLength="100" style="stroke:var(--cRen)"/>
+            <circle class="seg" data-cat="other" data-v="1.5" data-o="98.5" cx="100" cy="100" r="72" pathLength="100" style="stroke:var(--cOther)"/>
+          </g>
+          <text class="ctr" x="100" y="96" text-anchor="middle" fill="#F2B45A" font-size="34" font-weight="700" data-ctr>56%</text>
+          <text class="ctr" x="100" y="122" text-anchor="middle" fill="#DCD5CA" font-size="13" data-ctrl>화석연료</text>
+        </svg>
+        <div class="legend"><span class="key" style="--c:var(--cFossil)">화석연료(석탄 28.1·가스 28.1) <b>56.2%</b></span><span class="key" style="--c:var(--cNuc)">원자력 <b>31.7%</b></span><span class="key" style="--c:var(--cRen)">신재생* <b>10.6%</b></span><span class="key" style="--c:var(--cOther)">기타 <b>약 1.5%</b></span></div>
+      </div>
+      <div class="donut" data-country="tr">
+        <h3>튀르키예 <span class="muted small">Türkiye · 2024 발전량</span></h3>
+        <p class="tagline">석탄이 1위, 재생에너지가 절반 가까이</p>
+        <svg viewBox="0 0 200 200" role="img" aria-label="튀르키예 2024년 발전량 비중 도넛 차트: 화석연료 54.4%(석탄 35.6, 가스 18.5), 수력 21.9%, 풍력·태양광 18.2%, 지열·바이오 5.5%, 원자력 0%">
+          <circle class="base" cx="100" cy="100" r="72"/>
+          <g transform="rotate(-90 100 100)">
+            <circle class="seg" data-cat="fossil" data-v="54.4" data-o="0" cx="100" cy="100" r="72" pathLength="100" style="stroke:var(--cFossil)"/>
+            <circle class="seg" data-cat="renew" data-sub="hydro" data-v="21.9" data-o="54.4" cx="100" cy="100" r="72" pathLength="100" style="stroke:var(--cHydro)"/>
+            <circle class="seg" data-cat="renew" data-v="18.2" data-o="76.3" cx="100" cy="100" r="72" pathLength="100" style="stroke:var(--cRen)"/>
+            <circle class="seg" data-cat="renew" data-sub="geo" data-v="5.5" data-o="94.5" cx="100" cy="100" r="72" pathLength="100" style="stroke:var(--cGeo)"/>
+          </g>
+          <text class="ctr" x="100" y="96" text-anchor="middle" fill="#F2B45A" font-size="34" font-weight="700" data-ctr>54%</text>
+          <text class="ctr" x="100" y="122" text-anchor="middle" fill="#DCD5CA" font-size="13" data-ctrl>화석연료</text>
+        </svg>
+        <div class="legend"><span class="key" style="--c:var(--cFossil)">화석연료(석탄 35.6·가스 18.5 등) <b>54.4%</b></span><span class="key" style="--c:var(--cHydro)">수력 <b>21.9%</b></span><span class="key" style="--c:var(--cRen)">풍력·태양광 <b>18.2%</b></span><span class="key" style="--c:var(--cGeo)">지열·바이오 <b>5.5%</b></span><span class="key" style="--c:var(--cNuc)">원자력 <b>0%</b></span></div>
+      </div>
+    </div>
+
+    <div class="catbar" role="group" aria-label="발전원 고르기">
+      <button type="button" data-cat="all" aria-pressed="true" style="--c:var(--champ)">전체 보기</button>
+      <button type="button" data-cat="fossil" aria-pressed="false" style="--c:var(--cFossil)">화석연료</button>
+      <button type="button" data-cat="nuclear" aria-pressed="false" style="--c:var(--cNuc)">원자력</button>
+      <button type="button" data-cat="renew" aria-pressed="false" style="--c:var(--cRen)">재생에너지</button>
+    </div>
+    <div class="catinfo" id="catinfo" aria-live="polite"></div>
+
+    <div class="gbars inview" aria-label="발전원별 나란히 비교(2024년 발전량)">
+      <div class="gb"><span>화석연료</span>
+        <div class="l">한국<div class="t"><i style="--w:56.2%;--c:var(--cFossil)"></i></div><b class="v">56.2%</b></div>
+        <div class="l">튀르키예<div class="t"><i style="--w:54.4%;--c:var(--cFossil)"></i></div><b class="v">54.4%</b></div>
+      </div>
+      <div class="gb"><span>원자력</span>
+        <div class="l">한국<div class="t"><i style="--w:31.7%;--c:var(--cNuc)"></i></div><b class="v">31.7%</b></div>
+        <div class="l">튀르키예<div class="t na-t">아직 가동 원전 없음 · 아쿠유 1호기 시운전 중</div><b class="v">0%</b></div>
+      </div>
+      <div class="gb"><span>재생에너지<br><small class="muted">수력·풍력·태양광 등</small></span>
+        <div class="l">한국<div class="t"><i style="--w:10.6%;--c:var(--cRen)"></i></div><b class="v">10.6%*</b></div>
+        <div class="l">튀르키예<div class="t"><i style="--w:45.6%;--c:var(--cRen)"></i></div><b class="v">45.6%</b></div>
+      </div>
+    </div>
+
+    <div class="two" style="margin-top:2rem">
+      <details class="reveal-ans"><summary>화석연료 비중은 몇 %p 차이일까요?</summary><div>56.2% − 54.4% = <b>1.8%p</b>. 두 나라 모두 전기의 절반 넘게를 화석연료로 만들어요. 차이는 거의 없어요!</div></details>
+      <details class="reveal-ans"><summary>재생에너지 비중은 몇 배 차이일까요?</summary><div>튀르키예: 수력 21.9 + 풍력·태양광 18.2 + 지열·바이오 5.5 = <b>45.6%</b>. 한국 신재생 10.6%. 45.6 ÷ 10.6 ≈ <b>4.3배(약 4배)</b>예요. 한국 ‘신재생’에는 연료전지 같은 신에너지도 들어 있어서, 재생에너지만 따지면 차이는 조금 더 커져요.</div></details>
+      <details class="reveal-ans"><summary>화석 비중이 비슷한데, 무엇이 다를까요?</summary><div>남은 절반 가까이를 채우는 방법이 달라요. 한국은 <b>원자력(31.7%)</b>, 튀르키예는 <b>재생에너지(45.6%)</b>. 그런데 탄소를 내지 않는 전원(원자력+재생)을 합치면 한국 약 42%, 튀르키예 약 46%로 꽤 비슷해요.</div></details>
+      <details class="reveal-ans"><summary>왜 이렇게 다를까요?</summary><div>한국: 큰 강과 높은 산이 적어 수력 자원이 작고, 원전 기술력이 있어 원자력이 기저 전력을 맡아요. 제조업이 많아 전기 수요가 커요.<br>튀르키예: 산악 지형의 수력, 에게해·마르마라 연안의 바람, 남부·중부 아나톨리아의 햇빛, 지열을 살려요. 하지만 천연가스는 거의 전량, 석탄 화력 연료도 상당 부분(수입 유연탄)을 들여와요 → <b>에너지안보</b> 과제예요. 한국도 석탄·가스를 대부분 수입하니 같은 고민이 있어요.</div></details>
+      <details class="reveal-ans"><summary>더 생각해 보기 · 수력은 해마다 같을까요?</summary><div>튀르키예 수력 비중은 2019년 29.5% → 2024년 21.9% → 2025년 16.2%로 크게 달라졌어요(Ember). 비가 많이 온 해와 가문 해의 차이예요. 그래서 데이터를 볼 때는 <b>기준 연도</b>를 꼭 적어야 해요.</div></details>
+    </div>
+
+    <p class="src-line">출처 · 2024년 <b>발전량</b> 기준 · 한국: <a href="https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/170507/view" target="_blank" rel="noopener">산업통상자원부 보도자료 「2024년 에너지수급동향」(2025. 5.)</a> — 총 595.6TWh, 원자력 31.7%, 가스 28.1%, 석탄 28.1%, 신재생 10.6%(잠정치). ‘기타 약 1.5%’는 네 값을 100%에서 뺀 값이에요. · 튀르키예: <a href="https://ember-energy.org/latest-insights/turkiye-electricity-review-2025/" target="_blank" rel="noopener">Ember 「Türkiye Electricity Review 2025」</a>·Ember 연간 전력 데이터 — 총 341.2TWh, 석탄 35.6%, 가스 18.5%, 기타 화석 0.3%, 수력 21.9%, 풍력 10.7%, 태양광 7.5%, 지열 등 3.0%, 바이오 2.5%, 원자력 0%. 원자력: 튀르키예 첫 원전 아쿠유 1호기는 2026년 현재 시운전 단계(상업운전 전)예요. 수업 때 다시 확인해 봅시다.<br>* 한국 ‘신재생’은 법률상 신에너지(연료전지 등)를 포함해 국제 통계의 ‘재생에너지(Renewables)’보다 조금 넓어요.</p>
+    <div style="margin-top:1rem">
+      <a class="live" href="https://ember-energy.org/countries-and-regions/turkiye/" target="_blank" rel="noopener"><i></i>Ember · 튀르키예 전력 데이터</a>
+      <a class="live" href="https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser" target="_blank" rel="noopener"><i></i>IEA Energy Statistics Data Browser</a>
+      <a class="live" href="https://www.bigkinds.or.kr" target="_blank" rel="noopener"><i></i>빅카인즈 BIG Kinds</a>
+    </div>
+    <div class="teacher">
+      <b>수업 PPT 수치와 다른 이유</b> — PPT 「데이터 탐구 1·2」는 한국 화석 60·원자력 30·신재생 10%, 튀르키예 화석 45·수력 30·풍력/태양광 25%이며 기준 연도·지표가 없음. 튀르키예 값은 2024년 11월 말 <b>설비용량</b> 구성(수력 28·가스 21.4·석탄 18.9·태양광 16.7·풍력 10.8%)과 거의 같아, 한국은 발전량·튀르키예는 설비용량이 섞인 것으로 보임 → 그 결과 PPT의 정답(화석 15%p 차이, 재생 5.5배)이 실제(1.8%p, 약 4배)와 달라짐. 이 페이지는 두 나라 모두 2024년 발전량으로 통일했고, 차이 자체를 아래 미니 활동 「설비용량 vs 발전량」의 소재로 씀.<br>
+      <b>한 나라 한 출처</b> — 같은 해·같은 나라도 출처마다 값이 다름(예: Ember의 한국 2024년 값은 자가발전까지 넣어 총 627.8TWh·화석 59.5%·원자력 30.1%). 한국은 정부 통계(산업부), 튀르키예는 Ember로 고정. 학생이 IEA에서 찾은 값이 조금 달라도 ‘지표·연도·출처’를 적었으면 정답으로 인정.<br>
+      IEA 데이터 브라우저: 국가(Korea / Türkiye) → Electricity generation by source. 활동지 1의 ‘기준 연도·출처·지표(발전량)’ 칸을 반드시 채우게 하기. 양국의 지리적·환경적 차이를 존중하도록 안내(지도안 유의점).
+    </div>
+
+    <!-- ═════════ 미니 활동: 설비용량 vs 발전량 (고유 인터랙션) ═════════ -->
+    <div class="cg" id="capgen">
+      <p class="label" style="margin-bottom:.3rem">미니 활동 · 10분 · 숫자 탐정</p>
+      <h3 style="margin:.2rem 0 .4rem">같은 나라, 왜 숫자가 두 가지일까요?</h3>
+      <p class="muted" style="margin:0">수업 PPT의 튀르키예 수치(화석 45 · 수력 30 · 풍력/태양광 25)는 위 발전량과 달라요. 버튼을 바꿔 가며 어느 쪽과 닮았는지 찾아봅시다.</p>
+      <div class="cg-tog" role="group" aria-label="지표 고르기">
+        <button type="button" data-cg="ppt" aria-pressed="true">수업 PPT 원래 값</button>
+        <button type="button" data-cg="cap" aria-pressed="false">설비용량(GW) 비율</button>
+        <button type="button" data-cg="gen" aria-pressed="false">발전량(TWh) 비율</button>
+      </div>
+      <div id="cg-bars" aria-live="polite"></div>
+      <div class="cg-keys"><span class="key" style="--c:var(--cFossil)">화석연료</span><span class="key" style="--c:var(--cNuc)">원자력</span><span class="key" style="--c:var(--cHydro)">수력</span><span class="key" style="--c:var(--cRen)">신재생 · 풍력/태양광</span><span class="key" style="--c:var(--cGeo)">지열·바이오·기타</span><span class="key" style="--c:var(--cOther)">기타</span></div>
+      <p class="muted small" id="cg-src" style="margin-top:.6rem"></p>
+
+      <div class="cg-q two">
+        <details class="reveal-ans"><summary>① PPT의 튀르키예 45 · 30 · 25는 어느 쪽과 닮았나요?</summary><div><b>설비용량</b>(화석 약 40 · 수력 28 · 풍력/태양광 약 28)과 닮았어요. 발전량(54 · 22 · 18)과는 많이 달라요. 설비용량은 “발전소를 얼마나 크게 지어 두었나(GW)”, 발전량은 “1년 동안 실제로 전기를 얼마나 만들었나(TWh)”예요.</div></details>
+        <details class="reveal-ans"><summary>② 원자력·석탄은 설비 비중보다 발전 비중이 커요. 왜일까요?</summary><div>밤낮없이 거의 쉬지 않고 돌리는 발전소라서 같은 1GW로도 1년에 전기를 많이 만들어요. 태양광은 해가 있을 때만, 풍력은 바람이 불 때만 돌아서 설비에 비해 발전량이 작아요.
+          <table class="cmp"><tr><th>발전원</th><th>설비 비중</th><th>발전 비중</th><th>발전 ÷ 설비</th></tr>
+          <tr><td>한국 원자력</td><td>17.0%</td><td>31.7%</td><td>약 1.9</td></tr>
+          <tr><td>튀르키예 석탄</td><td>18.9%</td><td>35.6%</td><td>약 1.9</td></tr>
+          <tr><td>한국 신재생</td><td>22.7%</td><td>10.6%</td><td>약 0.47</td></tr>
+          <tr><td>튀르키예 태양광</td><td>16.7%</td><td>7.5%</td><td>약 0.45</td></tr></table></div></details>
+        <details class="reveal-ans"><summary>③ 계산해 봅시다 · 1GW 발전소는 1년에 전기를 얼마나 만들까요?</summary><div>1년 = 8,760시간. <b>설비이용률</b> = 실제 발전량 ÷ (설비용량 × 8,760시간).<br>원자력(이용률 약 85%): 1GW × 8,760h × 0.85 ≈ <b>7.4TWh</b><br>태양광(이용률 약 15%): 1GW × 8,760h × 0.15 ≈ <b>1.3TWh</b> → 약 5.7배 차이!<br><span class="muted small">이용률 85%·15%는 계산을 위한 어림값이에요(교육용 단순화). 실제 값은 해마다·지역마다 달라요.</span></div></details>
+        <details class="reveal-ans"><summary>④ 데이터를 읽을 때 꼭 확인할 세 가지는?</summary><div>① <b>무엇을 셌나</b>(설비용량 GW인가, 발전량 TWh인가) ② <b>기준 연도</b> ③ <b>출처와 분류</b>(한국 ‘신재생’은 신에너지 포함). 활동지 1에 세 가지를 모두 적어요.</div></details>
+      </div>
+      <div class="teacher">
+        <b>진행(10분, 활동 1 안)</b> — ① PPT 수치를 띄우고 “이 숫자는 무엇을 센 걸까?” (1분) ② 버튼으로 설비용량 ↔ 발전량 비교, 모둠별로 ①번 답 말하기 (3분) ③ ②번 표의 ‘발전 ÷ 설비’ 계산, 원자력·석탄 vs 태양광 차이의 이유 토의 (4분) ④ ④번 세 가지를 활동지 1에 적고 마무리 (2분). 시간이 남으면 ③번 계산.<br>
+        <b>예상 오개념</b> — “설비가 많으면 전기도 그만큼 많이 만든다”, “재생에너지 설비가 22%면 전기의 22%가 재생에너지다”. 정리 발문: “태양광을 늘리는 것만큼, 언제 만든 전기를 언제 쓰게 할지(저장·계통)도 중요하겠지?”(→ PPT의 튀르키예 과제 ‘계통망 안정화’와 연결)<br>
+        <b>수치 출처</b> — 한국 설비용량(2024년 말, 총 153.1GW): 가스 30.3·석탄 26.3·신재생 22.7·원자력 17.0%, 기타 3.7%는 100%에서 뺀 값 — 산업통상자원부 「2024년 에너지수급동향」(2025. 5.). 튀르키예 설비용량(2024년 11월 말, 약 115GW): 수력 28·가스 21.4·석탄 18.9·태양광 16.7·풍력 10.8·지열 1.5·기타 2.7% — 유럽환경청(EEA) 「Europe’s environment 2025」 튀르키예 국가 페이지(해당 문장의 원자료는 표기되지 않음 — 수업 전 튀르키예 에너지천연자원부·TEİAŞ 자료로 대조 권장). 발전량은 위 출처와 같음.<br>
+        <b>먼저 끝난 모둠</b> — 한국 2024년 신재생 63.2TWh를 설비 34.7GW로 나눠 이용률 어림하기(63.2 ÷ (34.7 × 8.76) ≈ 21%).
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 수업 진행 ═════════ -->
+<section class="sec panel" id="lesson">
+  <div class="wrap">
+    <p class="label">수업 진행</p>
+    <h2 class="head">차시별로 한 장면씩</h2>
+    <p class="lead">← → 키나 아래 버튼으로 넘겨요. 교사 모드를 켜면 발문·유의점이 보여요. 시간은 고등학교 50분 수업 기준이고, 차시가 끝나는 곳에 ‘○차시 끝’ 카드가 있어요.</p>
+    <div class="tabs" role="tablist" data-key="p3-lesson">
+      <button role="tab" id="tab-l1" aria-controls="l1">1~2차시 · 현황 탐구</button>
+      <button role="tab" id="tab-l2" aria-controls="l2">3~4차시 · 산출물 창작</button>
+      <button role="tab" id="tab-l3" aria-controls="l3">5~6차시 · 데모데이</button>
+    </div>
+
+    <!-- 1~2차시 -->
+    <div class="tabpanel" id="l1" role="tabpanel" aria-labelledby="tab-l1">
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+          <div class="step" data-phase="1차시 · 도입 · 동기유발" data-time="10분 중 ① (5분)">
+            <p class="ask">찬란한 두 도시의 밤,<br><em>우리는 어떤 에너지를 쓸까?</em></p>
+            <div class="mini2">
+              <figure><img src="img/seoul_night.svg" alt="직접 그린 서울의 밤 풍경 그림: 남산 서울타워와 한강"><figcaption>대한민국 서울</figcaption></figure>
+              <figure><img src="img/istanbul_night.svg" alt="직접 그린 이스탄불의 밤 풍경 그림: 모스크와 갈라타 탑, 보스포루스 해협"><figcaption>튀르키예 이스탄불</figcaption></figure>
+            </div>
+            <div class="teacher">양국 대표 도시 야경(연구회가 그린 그림)과 전력 소비 비교 제시. 양국의 지리적·환경적 차이를 존중하도록 가이드.</div>
+          </div>
+          <div class="step" data-phase="1차시 · 도입 · 목표 확인" data-time="10분 중 ② (5분)">
+            <p class="ask">두 나라의 에너지 출처<br>(<em>에너지 믹스</em>)는 어떻게 다를까?</p>
+            <p>오늘의 목표: 한-튀르키예 전력 데이터를 <b>기준 연도·지표와 함께</b> 비교하고, 다음 시간에 <b>공동 선언문</b>을 함께 써요.</p>
+            <div class="flow">
+              <div class="st"><b>활동 1</b><small>1차시 · 발전량 데이터 탐구 + 설비 vs 발전</small></div>
+              <div class="st"><b>활동 2</b><small>2차시 · 기업가 정신 정의 + SDGs</small></div>
+              <div class="st"><b>활동 3</b><small>2차시 · 공동 선언문 + 트랙 선택</small></div>
+            </div>
+          </div>
+          <div class="step" data-phase="1차시 · 전개 · 활동 1 데이터 탐구" data-time="40분 중 ① (시범 4분)">
+            <h3>데이터 탐구 1 · 한국의 전력 <span class="muted small">(2024년 발전량)</span></h3>
+            <div class="sbar" role="img" aria-label="한국 2024년 발전량: 화석연료 56.2%, 원자력 31.7%, 신재생 10.6%, 기타 1.5%"><i style="--w:56.2%;background:var(--cFossil)">화석 56.2%</i><i style="--w:31.7%;background:var(--cNuc)">원자력 31.7%</i><i style="--w:10.6%;background:var(--cRen)">10.6%</i><i style="--w:1.5%;background:var(--cOther)"></i></div>
+            <div class="pill-row">
+              <div class="pill"><b>원자력 31.7%</b>18년 만에 1위 · 기저 전력</div>
+              <div class="pill"><b>가스 28.1% · 석탄 28.1%</b>화석연료 합계 56.2%</div>
+              <div class="pill"><b>신재생 10.6%</b>처음으로 10% 넘음</div>
+            </div>
+            <p>원자력이 가장 많고, 가스와 석탄이 비슷하게 뒤를 잇고 있어요.</p>
+            <p class="muted small">출처: 산업통상자원부 「2024년 에너지수급동향」(2025. 5.) · 총 발전량 595.6TWh</p>
+          </div>
+          <div class="step" data-phase="1차시 · 전개 · 활동 1 데이터 탐구" data-time="40분 중 ② (시범 3분)">
+            <h3>데이터 탐구 2 · 튀르키예의 전력 <span class="muted small">(2024년 발전량)</span></h3>
+            <div class="sbar" role="img" aria-label="튀르키예 2024년 발전량: 화석연료 54.4%, 수력 21.9%, 풍력·태양광 18.2%, 지열·바이오 5.5%"><i style="--w:54.4%;background:var(--cFossil)">화석 54.4%</i><i style="--w:21.9%;background:var(--cHydro)">수력 21.9%</i><i style="--w:18.2%;background:var(--cRen)">풍력·태양광 18.2%</i><i style="--w:5.5%;background:var(--cGeo)"></i></div>
+            <div class="pill-row">
+              <div class="pill"><b>석탄 35.6%</b>가장 큰 발전원</div>
+              <div class="pill"><b>수력 21.9%</b>산악 지형의 강점</div>
+              <div class="pill"><b>풍력 10.7% · 태양광 7.5%</b>빠르게 늘어나는 중</div>
+              <div class="pill"><b>천연가스 18.5%</b>거의 전량 수입 → 에너지안보</div>
+            </div>
+            <p>원자력은 아직 0%예요(첫 원전 아쿠유 1호기 시운전 중).</p>
+            <p class="muted small">출처: Ember 「Türkiye Electricity Review 2025」·연간 전력 데이터 · 총 발전량 341.2TWh</p>
+            <a class="jump" href="#mix">두 나라 겹쳐 비교하기 →</a>
+          </div>
+          <div class="step" data-phase="1차시 · 전개 · 활동 1 미니 활동" data-time="40분 중 ③ (10분)">
+            <p class="ask">수업 PPT의 튀르키예 숫자 <em>45 · 30 · 25</em>,<br>무엇을 센 걸까요?</p>
+            <p>발전소를 <b>지어 둔 크기(설비용량, GW)</b>와 1년 동안 <b>실제로 만든 전기(발전량, TWh)</b>는 비율이 달라요. 버튼을 바꿔 가며 비교해 봅시다.</p>
+            <a class="jump" href="#capgen">설비용량 vs 발전량 미니 활동 열기 →</a>
+            <div style="margin:.8rem 0"><div class="timer" data-min="10"></div></div>
+            <div class="teacher">PPT 원래 수치는 설비용량에 가까움(튀르키예 2024년 11월 말 설비: 수력 28·가스 21.4·석탄 18.9·태양광 16.7·풍력 10.8%). 진행 순서·예상 오개념·수치 출처는 「에너지 믹스」 아래 미니 활동의 교사 메모 참고. 핵심 정리: “설비 비중 ≠ 발전 비중. 원자력·석탄은 이용률이 높고, 태양광·풍력은 낮다.”</div>
+          </div>
+          <div class="step" data-phase="1차시 · 전개 · 활동 1 직접 조사" data-time="40분 중 ④ (15분)">
+            <h3>직접 찾아봅시다: 공공데이터</h3>
+            <p>Ember·IEA에서 <b>발전원별 발전량</b>을, 빅카인즈에서 두 나라 <b>에너지 기사</b>를 찾아 활동지 1에 적어요. <b>지표(발전량)·기준 연도·출처</b> 세 가지를 꼭!</p>
+            <a class="live" href="https://ember-energy.org/countries-and-regions/turkiye/" target="_blank" rel="noopener"><i></i>Ember 튀르키예</a>
+            <a class="live" href="https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser" target="_blank" rel="noopener"><i></i>IEA 데이터 브라우저</a>
+            <a class="live" href="https://www.bigkinds.or.kr" target="_blank" rel="noopener"><i></i>빅카인즈</a>
+            <a class="live" href="https://padlet.com" target="_blank" rel="noopener"><i></i>Padlet</a>
+            <a class="live" href="https://www.deepl.com/translator" target="_blank" rel="noopener"><i></i>DeepL</a>
+            <p class="muted small" style="margin:.8rem 0 .2rem">Ember·IEA·빅카인즈 조사 15분</p>
+            <div style="margin:0 0 .8rem"><div class="timer" data-min="15"></div></div>
+            <details class="reveal-ans"><summary>3개 언어 용어 카드 (한국어 · English · Türkçe)</summary><div>
+              <table class="gloss">
+                <tr><th>한국어</th><th>English</th><th>Türkçe</th></tr>
+                <tr><td>석탄</td><td>Coal</td><td>Kömür</td></tr>
+                <tr><td>천연가스</td><td>Natural gas</td><td>Doğal gaz</td></tr>
+                <tr><td>원자력</td><td>Nuclear power</td><td>Nükleer enerji</td></tr>
+                <tr><td>수력</td><td>Hydropower</td><td>Hidroelektrik</td></tr>
+                <tr><td>풍력 / 태양광</td><td>Wind / Solar</td><td>Rüzgâr / Güneş enerjisi</td></tr>
+                <tr><td>지열</td><td>Geothermal</td><td>Jeotermal</td></tr>
+                <tr><td>재생에너지</td><td>Renewable energy</td><td>Yenilenebilir enerji</td></tr>
+                <tr><td>발전량 / 설비용량</td><td>Generation / Installed capacity</td><td>Üretim / Kurulu güç</td></tr>
+                <tr><td>기후 행동</td><td>Climate action</td><td>İklim eylemi</td></tr>
+              </table>
+            </div></details>
+            <div class="teacher">전문 용어는 영어/한국어/튀르키예어로 병기 안내(지도안). 튀르키예어 표기는 파트너 교사와 한 번 더 확인. 양국 언어 장벽 극복을 위해 실시간 다국어 패들렛 보드 운영. 검색이 막히는 모둠에는 이 페이지 「에너지 믹스」 도넛 수치를 ‘기준값’으로 주고 기사 찾기에 집중시킴.</div>
+          </div>
+          <div class="step" data-phase="1차시 · 전개 · 활동 1 기회와 과제" data-time="40분 중 ⑤ (Padlet 공유 8분)">
+            <p class="ask">각 나라의 <em>기회</em>와 <em>과제</em>는 무엇일까요?</p>
+            <div class="two">
+              <div class="box"><h4>한국 · 위기를 기회로</h4><p>장점: 안정적인 대규모 전력 공급망, 원전 기술력.<br>과제: 화석연료 56% → 탄소 감축 시급, 신재생 비율 확대, 석탄·가스 수입 의존.</p></div>
+              <div class="box"><h4>튀르키예 · 자원을 혁신으로</h4><p>장점: 수자원·바람·햇빛·지열, 재생에너지 46%.<br>과제: 천연가스·석탄 수입 의존(에너지안보), 날씨에 따라 출렁이는 수력·풍력·태양광의 계통 안정화.</p></div>
+            </div>
+            <details class="reveal-ans"><summary>PPT의 분석 더 보기</summary><div>한국은 배터리·ESS·스마트 그리드 같은 하드웨어 제조 기술로 전환 인프라를 만들 수 있어요. 튀르키예는 날씨에 따라 변동성이 큰 재생에너지의 계통 안정화 기술이 부족한 점이 과제예요.</div></details>
+            <div class="teacher">관찰 기준(1차시): 데이터 분석 결과를 근거로 양국의 에너지 전환 기회·위기 요인을 구체적으로 도출하는가. 먼저 끝난 모둠: 다른 모둠 Padlet 게시물에 ‘기준 연도·지표가 적혀 있는지’ 확인 댓글 2개.</div>
+          </div>
+          <div class="step" data-phase="1차시 끝 · 쉬는 시간" data-time="↳ 50분 지점">
+            <p class="ask"><em>1차시</em> 끝!</p>
+            <p>활동지 1을 저장하고, 조사한 수치(지표·연도·출처)를 Padlet에 올려 두세요. 다음 시간에는 이 데이터로 <b>에너지 기업가 정신</b>을 찾아요.</p>
+            <div class="teacher">블록 수업이 아니면 여기서 끊음. 기기가 바뀌는 학교는 바닥글 위 「내 기록 모두 복사」로 모둠 공유 문서에 붙여 두게 하기.</div>
+          </div>
+          <div class="step" data-phase="2차시 · 전개 · 활동 2 개념 탐구" data-time="25분 중 ①">
+            <h3>에너지 기업가 정신이란?</h3>
+            <p class="bigq">에너지를 수동적으로 절약하는 데 그치지 않고, 기술과 혁신을 통해 <em>경제적·사회적 가치 창출의 기회</em>로 전환하는 것</p>
+            <p class="muted small">Energy Entrepreneurship — 이번 프로젝트 전체를 꿰는 핵심 가치예요.</p>
+          </div>
+          <div class="step" data-phase="2차시 · 전개 · 활동 2 개념 탐구" data-time="25분 중 ②">
+            <h3>그린 스타트업 &amp; 적정기술 벤치마킹</h3>
+            <div class="two">
+              <div class="box"><h4>휴대용 태양광 램프</h4><p>전력망이 닿지 않는 오지 마을에 빛을 제공해 교육과 안전 문제를 함께 해결.</p></div>
+              <div class="box"><h4>폐기물 바이오가스</h4><p>농업 부산물을 가스로 바꿔 지역 주민의 청정 조리 연료로 공급.</p></div>
+              <div class="box"><h4>P2P 전력 거래 앱</h4><p>남는 태양광 전력을 이웃과 스마트폰으로 직거래하는 소규모 스마트그리드.</p></div>
+            </div>
+            <p style="margin-top:1rem">이 사례들은 어떤 문제를 <b>기회</b>로 바꾸었나요?</p>
+            <div class="teacher">자료: 해외 적정기술 및 그린 스타트업 사례집.</div>
+          </div>
+          <div class="step" data-phase="2차시 · 전개 · 활동 2 개념 탐구" data-time="25분 중 ③ (작성 10분)">
+            <h3>우리가 해결할 SDGs</h3>
+            <div class="two">
+              <div class="box"><h4>07 · 모두를 위한 적정가격의 깨끗한 에너지</h4><p>Affordable and Clean Energy — 저렴하고 신뢰할 수 있으며 지속가능한 현대적 에너지에 대한 접근 보장.</p></div>
+              <div class="box"><h4>13 · 기후변화 대응</h4><p>Climate Action — 기후변화와 그 영향을 방지하기 위한 긴급한 행동 실시.</p></div>
+            </div>
+            <p style="margin-top:1rem"><b>활동 2</b>: 우리 모둠의 ① 에너지 기업가 정신 정의 ② 핵심 해결 과제 ③ 해결 대상과 필요성을 적어요.</p>
+            <a class="live" href="https://sdgs.un.org/goals/goal7" target="_blank" rel="noopener"><i></i>UN SDG 7</a>
+            <a class="live" href="https://sdgs.un.org/goals/goal13" target="_blank" rel="noopener"><i></i>UN SDG 13</a>
+            <p class="muted small" style="margin:.6rem 0 .2rem">활동지 2 작성 10분</p>
+            <div style="margin:0 0 .6rem"><div class="timer" data-min="10"></div></div>
+            <a class="jump" href="#act">활동지 2로 →</a>
+          </div>
+          <div class="step" data-phase="2차시 · 전개 · 활동 3 공동 선언문" data-time="20분">
+            <p class="ask">국경을 넘어 무엇을 <em>약속</em>할까요?</p>
+            <p>“우리 모둠은 글로벌 에너지 문제 해결을 위해 국경을 넘어 다음과 같이 실천하고 협력할 것을 다짐합니다.” 뒤에 이어질 핵심 약속 3~4문장을 써요. 한국 팀원과 튀르키예 팀원이 함께 서명해요.</p>
+            <p class="muted small" style="margin:.6rem 0 .2rem">선언문 작성 15분 (나머지 5분은 양국 서명·Padlet 공유)</p>
+            <div style="margin:0 0 .6rem"><div class="timer" data-min="15"></div></div>
+            <a class="jump" href="#declare">공동 선언문 쓰러 가기 →</a>
+            <div class="teacher">자료: 에코액션랩 선언문 양식. 관찰 기준: 양국 학생이 글로벌 에너지 문제를 함께 해결할 동반자임을 인식하고 구체적인 실천 다짐을 담았는가. 먼저 끝난 모둠: 선언문을 영어·튀르키예어로 옮겨 Padlet에 올리기.</div>
+          </div>
+          <div class="step" data-phase="2차시 · 정리 · 차시 예고" data-time="5분">
+            <h3>우리 모둠의 트랙을 골라요</h3>
+            <div class="pill-row">
+              <div class="pill" style="border-color:var(--tA)"><b style="color:var(--tA)">Track A</b>에너지 SDGs 동화책</div>
+              <div class="pill" style="border-color:var(--tB)"><b style="color:var(--tB)">Track B</b>신문 칼럼 &amp; 비주얼 포스터</div>
+              <div class="pill" style="border-color:var(--tC)"><b style="color:var(--tC)">Track C</b>기업가 정신 홍보 영상</div>
+              <div class="pill" style="border-color:var(--tD)"><b style="color:var(--tD)">Track D</b>그린 벤처 사업계획서</div>
+            </div>
+            <p>역할 나누기: 시나리오 기획 · 데이터 조사 · 시각 디자인 · 다국어 번역(한국어/영어/튀르키예어) — 각자의 강점에 맞게!</p>
+            <a class="jump" href="#tracks">4색 트랙 미리 보기 →</a>
+            <div class="teacher">자료: 트랙 선택 조사지. 다음 차시 집중 창작(40분 + 35분) 예고.</div>
+          </div>
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">◀ 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 ▶</button></div>
+      </div>
+    </div>
+
+    <!-- 3~4차시 -->
+    <div class="tabpanel" id="l2" role="tabpanel" aria-labelledby="tab-l2" hidden>
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+          <div class="step" data-phase="3차시 · 도입 · 학습 문제" data-time="10분 중 ① (4분)">
+            <p class="ask">우리 작품은<br><em>누구에게</em> 닿아야 할까요?</p>
+            <p>프로젝트 기획 의도와 타깃 독자 분석이 왜 필요한지 생각해 봐요. 대상이 분명해야 메시지가 힘을 가져요.</p>
+            <div class="teacher">자료: 작성 가이드라인 및 예시. 트랙 A~D의 주요 구성 요소 확인 → 모둠별 세부 제작 절차·유의점 안내.</div>
+          </div>
+          <div class="step" data-phase="3차시 · 도입 · 활동 안내" data-time="10분 중 ② (6분)">
+            <h3>산출물 제작 핵심 가이드라인</h3>
+            <div class="two">
+              <div class="box"><h4>타깃 독자 맞춤</h4><p>감정적 호소를 넘어 대상을 명확히.</p></div>
+              <div class="box"><h4>과학적 타당성</h4><p>데이터(지표·연도·출처)와 공학적 원리에 기반.</p></div>
+              <div class="box"><h4>다국어 지원</h4><p>한국어, 영어, 튀르키예어 병기.</p></div>
+              <div class="box"><h4>에듀테크 활용</h4><p>Canva, CapCut 등 협업 툴 적극 사용.</p></div>
+            </div>
+          </div>
+          <div class="step" data-phase="3차시 · 집중 창작 ① · 트랙 A 안내" data-time="40분 중 · 트랙별 안내">
+            <h3><span style="color:var(--tA)">Track A</span> · 에너지 SDGs 동화책</h3>
+            <p>[A-1] 주인공(한국 &amp; 튀르키예 페르소나, 상징 동물)과 <b>5단계 이야기</b> 구성 → [A-2] <b>15장면 스토리보드</b>(그림 스케치 + 한/영 대사)</p>
+            <div class="flow"><div class="st"><b>발단</b></div><div class="st"><b>전개</b></div><div class="st"><b>위기</b></div><div class="st"><b>절정</b></div><div class="st"><b>결말</b></div></div>
+            <p class="muted small" style="margin-top:.8rem">PPT 예시 S#11 — “드디어 우리 마을이 밝아졌어.” / “Finally, our village is bright.”</p>
+            <div class="teacher">유의점: 교훈 전달에 치우치지 않고 과학적 타당성 확보.</div>
+          </div>
+          <div class="step" data-phase="3차시 · 집중 창작 ① · 트랙 B 안내" data-time="40분 중 · 트랙별 안내">
+            <h3><span style="color:var(--tB)">Track B</span> · 신문 칼럼 &amp; 비주얼 포스터</h3>
+            <p>[B-1] 양국 언론의 에너지 기사 <b>프레이밍</b>을 비교하고 비판적 논평 칼럼 쓰기 → [B-2] 강렬한 캐치프레이즈 + 이미지로 <b>Canva 포스터</b> 완성</p>
+            <a class="live" href="https://www.bigkinds.or.kr" target="_blank" rel="noopener"><i></i>빅카인즈</a>
+            <a class="live" href="https://www.canva.com" target="_blank" rel="noopener"><i></i>Canva</a>
+            <div class="teacher">유의점: 무료 오픈 소스 이미지 활용.</div>
+          </div>
+          <div class="step" data-phase="3차시 · 집중 창작 ① · 트랙 C 안내" data-time="40분 중 · 트랙별 안내">
+            <h3><span style="color:var(--tC)">Track C</span> · 에너지 기업가 정신 홍보 영상</h3>
+            <p>[C-1] 타깃 시청자 설정 → 핵심 메시지 도출 → 내레이션 대본 → [C-2] <b>6장면 콘티</b>(앵글, 자막, BGM) → CapCut/Canva로 편집하고 한/영/튀 자막 입히기</p>
+            <p class="muted small">영상 유형: 숏폼(60~90초) 또는 캠페인 영상(2~3분)</p>
+            <a class="live" href="https://www.capcut.com" target="_blank" rel="noopener"><i></i>CapCut</a>
+            <a class="live" href="https://www.canva.com" target="_blank" rel="noopener"><i></i>Canva Video</a>
+            <a class="live" href="https://www.veed.io" target="_blank" rel="noopener"><i></i>Veed.io</a>
+            <div class="teacher">유의점: 초상권 주의, 저작권 무료 음원 및 템플릿 활용. 자료: 영상 콘티 워크시트.</div>
+          </div>
+          <div class="step" data-phase="3차시 · 집중 창작 ① · 트랙 D 안내" data-time="40분 중 · 트랙별 안내">
+            <h3><span style="color:var(--tD)">Track D</span> · 그린 벤처 사업계획서</h3>
+            <p>[D-1] 비즈니스 모델 캔버스 작성: 고객의 고통점(Pains) · 창업 솔루션 · 핵심 자원 · 경제적/사회적 가치 제안 · 탄소 감축 기여도</p>
+            <div class="flow"><div class="st"><b>고통점</b><small>누가 무엇이 불편?</small></div><div class="st"><b>솔루션</b><small>제품·서비스</small></div><div class="st"><b>원리</b><small>적정기술·IoT</small></div><div class="st"><b>가치 제안</b><small>예상 비용 절감·탄소 감축</small></div><div class="st"><b>지속가능성</b><small>조달·유지보수·수익</small></div></div>
+            <p class="muted small" style="margin-top:.8rem">예상 탄소 감축량 = 줄어드는 전기 사용량(kWh) × 배출계수(kgCO₂/kWh) — 배출계수의 출처와 연도를 함께 적어요.</p>
+            <div class="teacher">자료: 그린 벤처 사업계획서 워크시트. ‘과학·공학 원리’ 칸은 [12기가05-04]와 연결. 감축량은 ‘예상(추정)’임을 밝히고, 실제로 확인하려면 무엇을 측정해야 하는지(예: 설치 전후 전력량계 값)를 함께 쓰게 하기.</div>
+          </div>
+          <div class="step" data-phase="3차시 · 집중 창작 ①" data-time="40분">
+            <p class="ask"><em>40분</em> 집중 창작</p>
+            <p>트랙별 작업 칸에서 바로 써도 돼요(이 브라우저에만 저장돼요).</p>
+            <div style="margin:.6rem 0 1rem"><div class="timer" data-min="40"></div></div>
+            <a class="jump" href="#tracks">4색 트랙 작업 칸 열기 →</a>
+            <div class="teacher">다국어 및 강점 기반 역할 분담형 상호 교수(Peer Teaching). 관찰 평가 및 산출물(스토리보드, 포스터, 콘티 등) 평가. 먼저 끝난 모둠: 다른 트랙 초안에 Padlet 질문 2개 남기기.</div>
+          </div>
+          <div class="step" data-phase="3차시 끝 · 쉬는 시간" data-time="↳ 50분 지점">
+            <p class="ask"><em>3차시</em> 끝 · 중간 저장!</p>
+            <p>지금까지 만든 초안을 <b>Padlet</b>에 올려 두세요. 쉬는 시간 동안 튀르키예 친구들이 먼저 보고 피드백을 남길 수 있어요.</p>
+            <div class="teacher">블록 수업이 아니면 여기서 끊음. 작업 칸 내용은 「내 기록 모두 복사」로 모둠 문서에 붙여 두기.</div>
+          </div>
+          <div class="step" data-phase="4차시 · 집중 창작 ②" data-time="35분">
+            <p class="ask">받은 피드백을<br><em>하나 이상</em> 반영해 완성해요</p>
+            <p>Padlet 댓글 가운데 반영할 것을 고르고, 무엇을 어떻게 바꿨는지 한 줄로 남겨요.</p>
+            <div style="margin:.6rem 0 1rem"><div class="timer" data-min="35"></div></div>
+            <a class="jump" href="#tracks">4색 트랙 작업 칸 열기 →</a>
+          </div>
+          <div class="step" data-phase="4차시 · 정리 · 중간 공유" data-time="15분">
+            <h3>중간 공유 &amp; 패들렛 피드백</h3>
+            <p>완성된 초안(스토리보드, 포스터, 영상 콘티 등)을 <b>Padlet</b>에 올리고, 평가 루브릭 기준에 맞춰 동료 피드백을 주고받아요. 다음 차시 데모데이를 위한 보완점을 찾아요.</p>
+            <a class="live" href="https://padlet.com" target="_blank" rel="noopener"><i></i>Padlet</a>
+            <div style="margin:.6rem 0"><div class="timer" data-min="15"></div></div>
+            <div class="teacher">자료: 피드백 루브릭. 상호 피드백을 산출물에 반영하도록 안내.</div>
+          </div>
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">◀ 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 ▶</button></div>
+      </div>
+    </div>
+
+    <!-- 5~6차시 -->
+    <div class="tabpanel" id="l3" role="tabpanel" aria-labelledby="tab-l3" hidden>
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+          <div class="step" data-phase="5차시 · 도입 · 학습 문제" data-time="10분 중 ① (3분)">
+            <p class="ask">한-튀르키예 그린 벤처<br><em>글로벌 데모데이</em></p>
+            <p>데모데이는 우리가 만든 아이디어의 기능과 환경적·사회적 가치를 세상에 제안하는 자리예요.</p>
+            <div class="teacher">자료: 데모데이 안내 슬라이드.</div>
+          </div>
+          <div class="step" data-phase="5차시 · 도입 · 목표 확인" data-time="10분 중 ② (4분)">
+            <h3>심사 기준 · 데모데이 평가 루브릭</h3>
+            <div class="two">
+              <div class="box"><h4>1. 가치 제안 설득력</h4><p>솔루션이 만드는 환경적·사회적 가치와 <b>예상</b> 효과가 구체적인가? 예상치(추정)와 실제로 측정할 값을 구분했는가?</p></div>
+              <div class="box"><h4>2. 논증의 논리성</h4><p>문제 정의부터 해결책까지의 서사가 논리적이고 과학적 근거에 기반하는가?</p></div>
+              <div class="box"><h4>3. Q&amp;A 대응력</h4><p>청중의 질문과 반론에 타당한 근거로 유연하게 답하는가?</p></div>
+            </div>
+          </div>
+          <div class="step" data-phase="5차시 · 도입 · 활동 안내" data-time="10분 중 ③ (3분)">
+            <h3>피칭 방법 · 참여 시스템</h3>
+            <div class="pill-row">
+              <div class="pill"><b>피칭</b>팀당 3분 발표</div>
+              <div class="pill"><b>Q&amp;A</b>2분</div>
+              <div class="pill"><b>시차</b>튀르키예가 6시간 늦어요</div>
+            </div>
+            <ul>
+              <li>화상 플랫폼: Zoom/Teams로 한국–튀르키예 연결</li>
+              <li>시간 맞추기: 한국 15:00 = 튀르키예 09:00 (한국 오전 9시는 튀르키예 새벽 3시!)</li>
+              <li>실시간 번역: 다국어 라이브 자막 기능 활성화</li>
+              <li>실시간 투표: Mentimeter / Padlet 평가 시트 접속</li>
+              <li>경청 매너: 다른 모둠 발표 때 리액션과 질문 준비</li>
+            </ul>
+            <a class="live" href="https://www.mentimeter.com" target="_blank" rel="noopener"><i></i>Mentimeter</a>
+            <a class="live" href="https://padlet.com" target="_blank" rel="noopener"><i></i>Padlet</a>
+            <div class="teacher"><b>시차 6시간</b> — 한국 UTC+9, 튀르키예 UTC+3(2016년부터 연중 고정, 서머타임 없음). 한국 6~7교시(약 14:00~16:00) = 튀르키예 08:00~10:00 → 실시간 데모데이는 한국 오후 차시에 잡기. 파트너 교사와 날짜·시각을 ‘두 나라 시각’으로 함께 적어 공유. 연결이 안 되거나 시간이 맞지 않으면 튀르키예 팀 피칭은 사전 녹화 영상 + Padlet 비동기 Q&amp;A(24시간)로 대체.</div>
+            <!-- 확인 필요: PPT 32장 「실시간 피칭 타임테이블」은 '10분 팀별 핵심 피칭 / 2분 Q&A', 지도안·루브릭은 '팀당 3분 발표 + 2분 Q&A' — 화면은 지도안 기준 -->
+          </div>
+          <div class="step" data-phase="5차시 · 전개 · 데모데이 피칭 ①" data-time="40분 중 ①">
+            <h3><span style="color:var(--tA)">세션 1</span> · Track A 동화책 시연</h3>
+            <p class="bigq">에너지 불평등을 해결하는 <em>스토리북</em></p>
+            <p>아이들의 시선에서 풀어낸 양국의 에너지 우정과 적정기술 이야기를 낭독하고, 15장면 일러스트를 시연해요.</p>
+            <a class="jump" href="#demo">피칭 타이머 열기 →</a>
+          </div>
+          <div class="step" data-phase="5차시 · 전개 · 데모데이 피칭 ①" data-time="40분 중 ②">
+            <h3><span style="color:var(--tB)">세션 2·3</span> · Track B 칼럼 &amp; 포스터</h3>
+            <div class="two">
+              <div class="box"><h4>언론이 놓친 기후 위기의 본질</h4><p>미디어 프레이밍 비판적 분석 결과를 브리핑하고, 논리적 대안을 담은 오피니언 칼럼을 발표해요.</p></div>
+              <div class="box"><h4>직관적인 기후 행동 메시지</h4><p>Canva로 디자인한 슬로건과 일상 속 3대 실천 수칙을 시각화해 브리핑해요.</p></div>
+            </div>
+          </div>
+          <div class="step" data-phase="5차시 끝 · 쉬는 시간" data-time="↳ 50분 지점">
+            <p class="ask"><em>5차시</em> 끝!</p>
+            <p>동료 평가 시트를 저장하고, 다음 시간 발표 팀은 화면 공유를 미리 확인해요.</p>
+            <div class="teacher">화상 연결은 끊지 않고 유지(재접속 지연 방지). 블록 수업이 아니면 6차시 첫 발표 팀부터 이어 감.</div>
+          </div>
+          <div class="step" data-phase="6차시 · 전개 · 데모데이 피칭 ②" data-time="25분 중 ①">
+            <h3><span style="color:var(--tC)">세션 4</span> · Track C 홍보 영상 상영</h3>
+            <p class="bigq">역동적인 컷 전환과 <em>다국어 메시지</em></p>
+            <p>6장면 콘티로 완성한 영상을 상영해요. 대중의 에너지 기업가 정신을 깨우는 캠페인!</p>
+          </div>
+          <div class="step" data-phase="6차시 · 전개 · 데모데이 피칭 ②" data-time="25분 중 ②">
+            <h3><span style="color:var(--tD)">세션 5</span> · Track D 그린 벤처 사업 피칭</h3>
+            <p>지역사회의 에너지 고통점을 해결할 혁신 기술 솔루션과 지속가능한 수익 모델을 제시해요.</p>
+            <div class="box"><h4>가치 제안(Value Proposition)</h4><p>솔루션을 적용했을 때의 <b>예상</b> 탄소 감축량을 계산식(사용량 × 배출계수, 계수 출처 표기)과 함께 제시하고, 실제로 확인하려면 무엇을 측정해야 하는지도 밝혀요. 비용 절감액도 같은 방식으로!</p></div>
+          </div>
+          <div class="step" data-phase="6차시 · 전개 · 교차 Q&amp;A" data-time="25분 중 ③">
+            <h3>양국 교차 Q&amp;A + 동료 피드백</h3>
+            <div class="two">
+              <div class="box"><h4>청중 (양국 학생)</h4><p>발표의 논리적 허점이나 궁금한 점을 실시간으로 질문</p></div>
+              <div class="box"><h4>발표팀</h4><p>데이터와 과학적 근거로 유연하게 반론하고 답변</p></div>
+            </div>
+            <p style="margin-top:1rem">팀마다 <b>가장 인상 깊은 점</b>과 <b>근거·데이터를 짚은 개선 질문</b>을 남겨요.</p>
+            <a class="jump" href="#demo">동료 평가 시트 열기 →</a>
+            <div class="teacher">실시간 다국어 자막 및 패들렛 투표 시스템 운영. 동료 피드백 관찰: 발표의 근거·데이터를 짚어 개선 질문을 남기는가(참여 여부는 체크리스트로 따로).</div>
+          </div>
+          <div class="step" data-phase="6차시 · 성찰 및 평가" data-time="15분">
+            <h3>시상 &amp; 성찰 일지</h3>
+            <div class="awards"><span>공감상</span><span>혁신상</span><span>지속가능상</span></div>
+            <ol style="margin-top:1rem">
+              <li>에너지 문제와 ‘에너지 기업가 정신’에 대해 새롭게 배우거나 깨달은 점은?</li>
+              <li>국적과 언어가 다른 친구들과 협력하며 가장 보람 있었던 순간은?</li>
+              <li>내가 일상과 미래에 실천하고 싶은 ‘그린 가치’는?</li>
+            </ol>
+            <a class="jump" href="#reflect">성찰 일지 쓰기 →</a>
+            <div class="teacher">자료: 성찰 워크시트. 국제 교류 소감 공유.</div>
+          </div>
+          <div class="step" data-phase="6차시 · 정리 · 마무리" data-time="10분">
+            <p class="ask">여러분 모두 진정한<br><em>글로벌 그린 아키텍트</em>입니다.</p>
+            <p>Mentimeter·Padlet 투표 결과를 함께 보고, 양국이 서로 마무리 인사를 나눠요. 수고했어요!</p>
+            <div class="teacher">자료: 피드백 루브릭. 투표 결과 공유 → 우수 팀 시상 → 양국 마무리 인사.</div>
+          </div>
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">◀ 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 ▶</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 4색 트랙 선택기 (고유 인터랙션 2) ═════════ -->
+<section class="sec" id="tracks">
+  <div class="wrap">
+    <a class="back" href="#lesson">↑ 수업 진행으로 돌아가기</a>
+    <p class="label">3~4차시 · 4 Tracks</p>
+    <h2 class="head">우리 모둠의 색을 고르세요</h2>
+    <p class="lead">카드를 고르면 그 트랙의 설계도가 펼쳐져요. 칸에 쓴 내용은 이 브라우저에만 저장돼요.</p>
+
+    <div class="picker" role="group" aria-label="트랙 고르기">
+      <button class="pick" type="button" data-track="A" aria-pressed="false" aria-controls="tp-A" style="--c:var(--tA)"><span class="lt">A</span><span class="nm">에너지 SDGs 동화책</span><span class="ds">5단계 이야기 · 15장면 스토리보드</span></button>
+      <button class="pick" type="button" data-track="B" aria-pressed="false" aria-controls="tp-B" style="--c:var(--tB)"><span class="lt">B</span><span class="nm">신문 칼럼 &amp; 포스터</span><span class="ds">프레이밍 분석 칼럼 · Canva 포스터</span></button>
+      <button class="pick" type="button" data-track="C" aria-pressed="false" aria-controls="tp-C" style="--c:var(--tC)"><span class="lt">C</span><span class="nm">기업가 정신 홍보 영상</span><span class="ds">영상 기획 · 6장면 콘티</span></button>
+      <button class="pick" type="button" data-track="D" aria-pressed="false" aria-controls="tp-D" style="--c:var(--tD)"><span class="lt">D</span><span class="nm">그린 벤처 사업계획서</span><span class="ds">캔버스 9요소 · 사업계획서</span></button>
+    </div>
+
+    <!-- Track A -->
+    <div class="trackpanel" id="tp-A" hidden style="--c:var(--tA)">
+      <h3 class="tp unf"><b>Track A</b> · 에너지 SDGs 동화책 만들기</h3>
+      <p class="muted unf" style="--i:1">어린이·청소년 독자를 위한 에너지 지속가능성 동화를 5단계 이야기 구조와 15장면 스토리보드로 설계해요.</p>
+      <h4 class="unf" style="--i:2">1. 동화책 기본 정보</h4>
+      <div class="g2f unf" style="--i:3">
+        <div class="field"><label for="a-title">동화책 제목 (Title)</label><input class="pad" id="a-title" data-key="a-title" placeholder="예: 빛을 나눈 두 마을"></div>
+        <div class="field"><label for="a-reader">대상 독자 (Target Audience)</label><input class="pad" id="a-reader" data-key="a-reader" placeholder="예: 7세 유아, 초등 저학년, 청소년"></div>
+      </div>
+      <div class="field unf" style="--i:4"><label>핵심 SDGs 목표</label>
+        <div class="ckrow"><label><input type="checkbox" data-ck="a-sdg7"> SDG 7 모두를 위한 적정가격의 깨끗한 에너지</label><label><input type="checkbox" data-ck="a-sdg13"> SDG 13 기후변화 대응</label><label><input type="checkbox" data-ck="a-sdgx"> 기타</label></div>
+      </div>
+      <div class="field unf" style="--i:5"><label for="a-char">주인공 캐릭터 설정</label><textarea class="pad sm" id="a-char" data-key="a-char" placeholder="이름(한국/튀르키예 페르소나) · 성격 및 특징(상징 동물 활용 등) · 해결할 문제(직면한 에너지 결핍 등)"></textarea></div>
+
+      <h4 class="unf" style="--i:6">2. 5단계 이야기 구조</h4>
+      <div class="arc unf" style="--i:7">
+        <svg viewBox="0 0 1000 200" aria-hidden="true">
+          <defs><linearGradient id="arcg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B45A" stop-opacity=".35"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></linearGradient></defs>
+          <path class="fillc" d="M60 170 C 200 165, 260 140, 300 125 S 450 75, 500 60 S 660 18, 700 22 S 860 110, 940 160 L940 200 L60 200 Z"/>
+          <path class="curve" pathLength="1000" d="M60 170 C 200 165, 260 140, 300 125 S 450 75, 500 60 S 660 18, 700 22 S 860 110, 940 160"/>
+          <g class="nd" data-st="0" style="--i:0"><circle cx="60" cy="170" r="13"/><text x="60" y="148">발단</text></g>
+          <g class="nd" data-st="1" style="--i:1"><circle cx="300" cy="125" r="13"/><text x="300" y="103">전개</text></g>
+          <g class="nd" data-st="2" style="--i:2"><circle cx="500" cy="60" r="13"/><text x="500" y="38">위기</text></g>
+          <g class="nd" data-st="3" style="--i:3"><circle cx="700" cy="22" r="13"/><text x="700" y="58" dy="2">절정</text></g>
+          <g class="nd" data-st="4" style="--i:4"><circle cx="940" cy="160" r="13"/><text x="940" y="138">결말</text></g>
+        </svg>
+      </div>
+      <div class="stages unf" style="--i:8">
+        <div class="stage"><b>발단</b> <span class="muted small">Exposition</span><small>주인공과 배경(한국/튀르키예 마을) 소개</small><textarea class="pad sm" data-key="a-s1" aria-label="발단 쓰기"></textarea></div>
+        <div class="stage"><b>전개</b> <span class="muted small">Development</span><small>에너지 결핍 및 기후 변화로 인한 문제 상황 발생</small><textarea class="pad sm" data-key="a-s2" aria-label="전개 쓰기"></textarea></div>
+        <div class="stage"><b>위기</b> <span class="muted small">Crisis</span><small>에너지 불평등이나 기술 부족으로 어려움 직면</small><textarea class="pad sm" data-key="a-s3" aria-label="위기 쓰기"></textarea></div>
+        <div class="stage"><b>절정</b> <span class="muted small">Climax</span><small>에너지 기업가 정신과 적정기술 아이디어로 해결하는 결정적 순간</small><textarea class="pad sm" data-key="a-s4" aria-label="절정 쓰기"></textarea></div>
+        <div class="stage"><b>결말</b> <span class="muted small">Resolution</span><small>지속가능한 에너지 마을 완성 및 최종 메시지</small><textarea class="pad sm" data-key="a-s5" aria-label="결말 쓰기"></textarea></div>
+      </div>
+
+      <h4 class="unf" style="--i:9">3. 15장면 스토리보드 <span class="muted small">(내용 및 대사 Kor/Eng)</span></h4>
+      <div class="scenes unf" style="--i:10" id="scenesA">
+        <div class="scene-c"><span class="n">S# 1</span><p>마을의 평화로운 모습과 주인공 등장<i>Peaceful view of the village and introduction of the main character</i></p><textarea class="pad sm" data-key="a-sc1" aria-label="장면 1"></textarea></div>
+        <div class="scene-c"><span class="n">S# 2</span><p>에너지 문제가 찾아오는 장면<i>The scene where the energy problem occurs</i></p><textarea class="pad sm" data-key="a-sc2" aria-label="장면 2"></textarea></div>
+        <div class="scene-c"><span class="n">S# 3</span><p>주인공이 불편함을 겪는 모습<i>The main character experiencing inconvenience</i></p><textarea class="pad sm" data-key="a-sc3" aria-label="장면 3"></textarea></div>
+        <div class="scene-c"><span class="n">S# 4</span><p>한국과 튀르키예 친구들의 만남<i>The meeting of Korean and Turkish friends</i></p><textarea class="pad sm" data-key="a-sc4" aria-label="장면 4"></textarea></div>
+        <div class="scene-c"><span class="n">S# 5</span><p>아이디어 회의 장면<i>Idea meeting scene</i></p><textarea class="pad sm" data-key="a-sc5" aria-label="장면 5"></textarea></div>
+        <div class="scene-c"><span class="n">S# 6</span><p>첫 번째 시도의 실패<i>Failure of the first attempt</i></p><textarea class="pad sm" data-key="a-sc6" aria-label="장면 6"></textarea></div>
+        <div class="scene-c ex"><span class="n">S# 7</span><p>적정기술 원리 발견<i>Discovery of appropriate technology principles</i></p><div class="exl">PPT 예시: 버려진 페트병과 소형 패널로 원리를 발견 — “이걸로 빛을 만들 수 있어!” / “We can make light with this!”</div><textarea class="pad sm" data-key="a-sc7" aria-label="장면 7"></textarea></div>
+        <div class="scene-c"><span class="n">S# 8</span><p>새로운 솔루션 제작<i>Creation of a new solution</i></p><textarea class="pad sm" data-key="a-sc8" aria-label="장면 8"></textarea></div>
+        <div class="scene-c"><span class="n">S# 9</span><p>마을 사람들과의 협력<i>Collaboration with the villagers</i></p><textarea class="pad sm" data-key="a-sc9" aria-label="장면 9"></textarea></div>
+        <div class="scene-c"><span class="n">S# 10</span><p>위기 극복 과정<i>The process of overcoming the crisis</i></p><textarea class="pad sm" data-key="a-sc10" aria-label="장면 10"></textarea></div>
+        <div class="scene-c ex"><span class="n">S# 11</span><p>솔루션 작동 성공 및 빛이 들어오는 장면<i>Successful operation of the solution and the lights come on</i></p><div class="exl">PPT 예시: “드디어 우리 마을이 밝아졌어.” / “Finally, our village is bright.”</div><textarea class="pad sm" data-key="a-sc11" aria-label="장면 11"></textarea></div>
+        <div class="scene-c"><span class="n">S# 12</span><p>에너지 믹스의 완성<i>Completion of the energy mix</i></p><textarea class="pad sm" data-key="a-sc12" aria-label="장면 12"></textarea></div>
+        <div class="scene-c"><span class="n">S# 13</span><p>모두가 기뻐하는 축제<i>A festival where everyone rejoices</i></p><textarea class="pad sm" data-key="a-sc13" aria-label="장면 13"></textarea></div>
+        <div class="scene-c"><span class="n">S# 14</span><p>주인공들의 깨달음<i>The main characters' realization</i></p><textarea class="pad sm" data-key="a-sc14" aria-label="장면 14"></textarea></div>
+        <div class="scene-c ex"><span class="n">S# 15</span><p>독자에게 전하는 메시지 및 마침<i>Message to the readers and the end</i></p><div class="exl">PPT 예시: “다음 기후 영웅은 바로 당신입니다.” / “You are the next climate hero.”</div><textarea class="pad sm" data-key="a-sc15" aria-label="장면 15"></textarea></div>
+      </div>
+      <p class="note">유의점: 교훈 전달에 치우치지 말고 과학적 타당성을 확보해요.</p>
+    </div>
+
+    <!-- Track B -->
+    <div class="trackpanel" id="tp-B" hidden style="--c:var(--tB)">
+      <h3 class="tp unf"><b>Track B</b> · 신문 칼럼 &amp; 비주얼 포스터</h3>
+      <p class="muted unf" style="--i:1">양국 언론의 에너지 기사 프레이밍을 비판적으로 비교해 칼럼을 쓰고, Canva로 기후 행동 포스터를 만들어요.</p>
+      <h4 class="unf" style="--i:2">1. 비판적 논평 칼럼 집필 기획서</h4>
+      <div class="paper unf" style="--i:3">
+        <div class="mast"><span>에너지 오피니언</span><small>Korea · Türkiye Energy Column</small></div>
+        <div class="field"><label for="b-title">칼럼 제목</label><small class="h">독자의 시선을 끄는 제목</small><input class="pad head-in" id="b-title" data-key="b-title" placeholder="제목을 써 보세요"></div>
+        <div class="cols">
+          <div><label for="b-frame">비판적 분석</label><small class="h">언론 프레이밍의 한계와 논리적 틈(Gap) 지적</small><textarea class="pad" id="b-frame" data-key="b-frame"></textarea></div>
+          <div><label for="b-claim">주장 및 근거</label><small class="h">에너지 전환의 진정한 가치와 뒷받침하는 데이터</small><textarea class="pad" id="b-claim" data-key="b-claim"></textarea></div>
+          <div><label for="b-act">사회적 제언</label><small class="h">시민, 기업, 정부가 해야 할 구체적 행동</small><textarea class="pad" id="b-act" data-key="b-act"></textarea></div>
+        </div>
+      </div>
+      <div class="unf" style="--i:4;margin-top:.8rem"><a class="live" href="https://www.bigkinds.or.kr" target="_blank" rel="noopener"><i></i>빅카인즈에서 기사 찾기</a></div>
+      <h4 class="unf" style="--i:5">2. Canva 기후 포스터 디자인 기획</h4>
+      <div class="postwrap unf" style="--i:6">
+        <div>
+          <div class="field"><label for="b-slogan">캠페인 슬로건</label><input class="pad" id="b-slogan" data-key="b-slogan" data-mirror="pv-slogan" placeholder="강렬한 캐치프레이즈"></div>
+          <div class="field"><label for="b-tone">톤앤매너 · 메인 그래픽</label><textarea class="pad sm" id="b-tone" data-key="b-tone" placeholder="주제에 맞는 메인 컬러와 그래픽(Canva 템플릿 활용)"></textarea></div>
+          <div class="field"><label for="b-r1">실천 행동 수칙 1</label><input class="pad" id="b-r1" data-key="b-r1" data-mirror="pv-r1"></div>
+          <div class="field"><label for="b-r2">실천 행동 수칙 2</label><input class="pad" id="b-r2" data-key="b-r2" data-mirror="pv-r2"></div>
+          <div class="field"><label for="b-r3">실천 행동 수칙 3</label><input class="pad" id="b-r3" data-key="b-r3" data-mirror="pv-r3"></div>
+          <a class="live" href="https://www.canva.com" target="_blank" rel="noopener"><i></i>Canva에서 만들기</a>
+        </div>
+        <div class="poster" aria-label="포스터 미리보기">
+          <span class="sun" aria-hidden="true"></span>
+          <small>CLIMATE ACTION · 미리보기</small>
+          <p class="slo" id="pv-slogan" data-ph="슬로건이 여기에 나타나요"></p>
+          <ol><li id="pv-r1" data-ph="실천 수칙 1"></li><li id="pv-r2" data-ph="실천 수칙 2"></li><li id="pv-r3" data-ph="실천 수칙 3"></li></ol>
+        </div>
+      </div>
+      <p class="note">유의점: 무료 오픈 소스 이미지를 써요. 일상에서 실천할 수 있는 직관적인 행동 지침으로!</p>
+    </div>
+
+    <!-- Track C -->
+    <div class="trackpanel" id="tp-C" hidden style="--c:var(--tC)">
+      <h3 class="tp unf"><b>Track C</b> · 에너지 기업가 정신 홍보 영상</h3>
+      <p class="muted unf" style="--i:1">에너지 기업가 정신과 기후 행동의 필요성을 대중과 청소년에게 전할 영상을 기획하고 콘티를 써요.</p>
+      <h4 class="unf" style="--i:2">1. 홍보 영상 기본 기획</h4>
+      <div class="g2f unf" style="--i:3">
+        <div class="field"><label for="c-title">영상 제목</label><input class="pad" id="c-title" data-key="c-title"></div>
+        <div class="field"><label>영상 유형</label><div class="ckrow"><label><input type="radio" name="c-type" data-ck="c-short"> 숏폼 릴스/쇼츠 (60~90초)</label><label><input type="radio" name="c-type" data-ck="c-long"> 캠페인 홍보 영상 (2~3분)</label></div></div>
+        <div class="field"><label for="c-target">타깃 시청자</label><input class="pad" id="c-target" data-key="c-target" placeholder="예: 한국·튀르키예 또래 청소년, 지역 주민, SNS 대중"></div>
+        <div class="field"><label for="c-bgm">BGM 및 무드</label><input class="pad" id="c-bgm" data-key="c-bgm" placeholder="예: 초반 긴박한 무드 → 후반 희망찬 팝"></div>
+      </div>
+      <div class="field unf" style="--i:4"><label for="c-msg">핵심 메시지 — 에너지 기업가 정신이란 무엇이며, 왜 지금 기후 행동에 나서야 할까?</label><textarea class="pad sm" id="c-msg" data-key="c-msg"></textarea></div>
+      <h4 class="unf" style="--i:5">2. 6장면 콘티 (Shot List) <span class="muted small">— 예시를 참고해 우리 모둠 버전을 써요</span></h4>
+      <div class="film">
+        <div class="frame" style="--i:0"><div class="sn"><b>S# 1</b><span>도입 / 문제 제기</span></div><dl><dt>화면 · 구도</dt><dd>어두운 도시 야경 &amp; 낭비되는 에너지(빠른 컷 전환) · 클로즈업</dd><dt>내레이션</dt><dd>“매일 쓰는 전기, 우리가 지나친 기후의 경고 신호는 없을까요?”</dd><dt>자막</dt><dd>우리가 몰랐던 에너지의 경고 / The Unnoticed Warning of Energy</dd></dl><textarea class="pad sm" data-key="c-s1" aria-label="S#1 우리 콘티"></textarea></div>
+        <div class="frame" style="--i:1"><div class="sn"><b>S# 2</b><span>현황 비교</span></div><dl><dt>화면 · 구도</dt><dd>한국과 튀르키예의 에너지 믹스 비교 인포그래픽 · 분할 화면</dd><dt>내레이션</dt><dd>“한국과 튀르키예, 서로 다른 바람과 태양 아래 우리는 같은 고민을 합니다.”</dd><dt>자막</dt><dd>양국의 에너지 믹스를 비교하다 / Comparing Energy Mix of Two Nations</dd></dl><textarea class="pad sm" data-key="c-s2" aria-label="S#2 우리 콘티"></textarea></div>
+        <div class="frame" style="--i:2"><div class="sn"><b>S# 3</b><span>개념 제시</span></div><dl><dt>화면 · 구도</dt><dd>‘에너지 기업가 정신’ 타이포그래피 등장 · 미디엄 샷</dd><dt>내레이션</dt><dd>“단순한 절약을 넘어, 에너지를 변화의 기회로 만드는 힘! 바로 ‘에너지 기업가 정신’입니다.”</dd><dt>자막</dt><dd>에너지를 변화의 기회로! / Turning Energy into Opportunity!</dd></dl><textarea class="pad sm" data-key="c-s3" aria-label="S#3 우리 콘티"></textarea></div>
+        <div class="frame" style="--i:3"><div class="sn"><b>S# 4</b><span>솔루션 제안</span></div><dl><dt>화면 · 구도</dt><dd>모둠별 그린 벤처 적정기술 아이디어 시연/모델링 · 오버헤드 샷 &amp; 줌인</dd><dt>내레이션</dt><dd>“태양광 모듈과 적정기술로 완성하는 지속 가능한 그린 벤처!”</dd><dt>자막</dt><dd>지속 가능한 그린 벤처의 시작 / Starting Sustainable Green Ventures</dd></dl><textarea class="pad sm" data-key="c-s4" aria-label="S#4 우리 콘티"></textarea></div>
+        <div class="frame" style="--i:4"><div class="sn"><b>S# 5</b><span>협력 모습</span></div><dl><dt>화면 · 구도</dt><dd>한국과 튀르키예 학생들이 온라인으로 웃으며 발표하는 캡처 · 풀 샷</dd><dt>내레이션</dt><dd>“국경을 넘어 함께 만드는 깨끗한 내일, 우리는 글로벌 그린 아키텍트입니다.”</dd><dt>자막</dt><dd>국경을 넘어 만드는 깨끗한 내일 / Clean Tomorrow Beyond Borders</dd></dl><textarea class="pad sm" data-key="c-s5" aria-label="S#5 우리 콘티"></textarea></div>
+        <div class="frame" style="--i:5"><div class="sn"><b>S# 6</b><span>행동 촉구</span></div><dl><dt>화면 · 구도</dt><dd>모둠 로고 &amp; 캐치프레이즈, 쿠키 영상 · 페이드 아웃</dd><dt>내레이션</dt><dd>“지금 당신의 에너지 기업가 정신을 깨우세요! Together for SDGs!”</dd><dt>자막</dt><dd>지금, 에너지 기업가 정신을 깨우세요! / Awaken Your Energy Entrepreneurship!</dd></dl><textarea class="pad sm" data-key="c-s6" aria-label="S#6 우리 콘티"></textarea></div>
+      </div>
+      <div class="unf" style="--i:6;margin-top:1rem">
+        <a class="live" href="https://www.capcut.com" target="_blank" rel="noopener"><i></i>CapCut</a>
+        <a class="live" href="https://www.canva.com" target="_blank" rel="noopener"><i></i>Canva Video</a>
+        <a class="live" href="https://www.veed.io" target="_blank" rel="noopener"><i></i>Veed.io</a>
+      </div>
+      <p class="note">한국어·영어·튀르키예어 자막을 함께 넣어요. 저작권 무료 이미지·음원(BGM)을 쓰고, 초상권 동의는 필수예요.</p>
+    </div>
+
+    <!-- Track D -->
+    <div class="trackpanel" id="tp-D" hidden style="--c:var(--tD)">
+      <h3 class="tp unf"><b>Track D</b> · 그린 벤처 창업 사업계획서</h3>
+      <p class="muted unf" style="--i:1">비즈니스 모델 캔버스로 고객의 고통점, 솔루션, 경제적·사회적 가치 제안을 구체화해요.</p>
+      <div class="g2f unf" style="--i:2;margin-top:1rem">
+        <div class="field"><label for="d-name">벤처명</label><input class="pad" id="d-name" data-key="d-name"></div>
+        <div class="field"><label for="d-pitch">한 줄 소개 (Elevator Pitch)</label><input class="pad" id="d-pitch" data-key="d-pitch" placeholder="[벤처명]: [서비스 한 줄 요약]"></div>
+      </div>
+      <h4 class="unf" style="--i:3">1. 캔버스 9요소 <span class="muted small">— 3~4차시 에너지 기업가정신 강의 자료 기준</span></h4>
+      <div class="canvas9">
+        <div class="cell" style="--i:0"><span class="ws">활동지 1</span><span class="cn">01</span><h5>고객 페르소나</h5><small>고객 집단을 대표하는 한 사람의 구체적인 사용자</small><textarea class="pad sm" data-key="d-c1" aria-label="고객 페르소나"></textarea></div>
+        <div class="cell" style="--i:1"><span class="ws">활동지 1</span><span class="cn">02</span><h5>문제 (Pains)</h5><small>고객이 원하는(필요한) 바를 이루기 어려운 상황</small><textarea class="pad sm" data-key="d-c2" aria-label="문제"></textarea></div>
+        <div class="cell" style="--i:2"><span class="ws">활동지 2</span><span class="cn">03</span><h5>해결방안 (Solution)</h5><small>고객의 문제를 해결하는 제품/서비스의 기능과 특징</small><textarea class="pad sm" data-key="d-c3" aria-label="해결방안"></textarea></div>
+        <div class="cell" style="--i:3"><span class="cn">04</span><h5>고유 장점</h5><small>Unfair Advantages · 고객이 경험하게 될 특별하고 차별적인 강점</small><textarea class="pad sm" data-key="d-c4" aria-label="고유 장점"></textarea></div>
+        <div class="cell" style="--i:4"><span class="cn">05</span><h5>채널</h5><small>고객에게 연결될 수 있는 커뮤니케이션 방법들</small><textarea class="pad sm" data-key="d-c5" aria-label="채널"></textarea></div>
+        <div class="cell" style="--i:5"><span class="ws">활동지 5</span><span class="cn">06</span><h5>수익흐름</h5><small>연결된 고객으로부터 창출할 수 있는 수익 방법과 목표</small><textarea class="pad sm" data-key="d-c6" aria-label="수익흐름"></textarea></div>
+        <div class="cell" style="--i:6"><span class="cn">07</span><h5>비용구조</h5><small>프로젝트 진행 시 필요한 예산 사용 내역</small><textarea class="pad sm" data-key="d-c7" aria-label="비용구조"></textarea></div>
+        <div class="cell" style="--i:7"><span class="ws">활동지 4</span><span class="cn">08</span><h5>경제적 가치 (KPI)</h5><small>성과 중 수치로 측정할 수 있는 핵심 지표 — 예: 사용자 비용 절감액</small><textarea class="pad sm" data-key="d-c8" aria-label="경제적 가치"></textarea></div>
+        <div class="cell" style="--i:8"><span class="ws">활동지 4</span><span class="cn">09</span><h5>사회적 가치 (SVI)</h5><small>성과 중 공공의 이익에 기여하는 지표 — 예: 예상 온실가스 감축량(계산식·배출계수 출처 함께)</small><textarea class="pad sm" data-key="d-c9" aria-label="사회적 가치"></textarea></div>
+      </div>
+      <h4 class="unf" style="--i:4">2. 사업계획서에 더할 두 칸</h4>
+      <div class="canvas2">
+        <div class="cell" style="--i:9"><span class="ws">활동지 3</span><span class="cn">+</span><h5>과학적·공학적 원리</h5><small>적정기술, 신재생 에너지 변환 기술, AI/IoT 센서 등 작동 원리</small><textarea class="pad sm" data-key="d-sci" aria-label="과학적 공학적 원리"></textarea></div>
+        <div class="cell" style="--i:10"><span class="ws">활동지 5</span><span class="cn">+</span><h5>지속가능성 및 운영 계획</h5><small>현지 재료 조달, 기기 유지보수 체계, 수익 창출 및 사업 지속 방안</small><textarea class="pad sm" data-key="d-ops" aria-label="지속가능성 및 운영 계획"></textarea></div>
+      </div>
+      <p class="note">‘활동지 n’ 표시는 사업계획서 활동지의 5문항(① 고객과 고통점 ② 솔루션 ③ 과학·공학 원리 ④ 가치 제안 ⑤ 지속가능성·운영)과 이어지는 칸이에요. 데모데이에서는 <b>예상</b> 탄소 감축량과 비용 절감액을 계산식(예: 줄어드는 전기 사용량 kWh × 배출계수 kgCO₂/kWh, 계수 출처·연도 표기)과 함께 보여 주고, 실제로 확인하려면 무엇을 측정해야 하는지도 적어요.</p>
+      <!-- 9요소 출처: 최종보고서 사진 「3-4차시 에너지 기업가정신 강의」 화면의 커리큘럼 표(9번 설명 일부 가려짐 — 확인 필요) -->
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 데모데이 (고유 인터랙션 3) ═════════ -->
+<section class="sec panel" id="demo">
+  <div class="wrap">
+    <a class="back" href="#lesson">↑ 수업 진행으로 돌아가기</a>
+    <p class="label">5~6차시 · Demo Day</p>
+    <h2 class="head">피칭 타이머 &amp; 동료 평가</h2>
+    <p class="lead">팀당 3분 피칭 뒤 2분 Q&amp;A. 별점과 피드백은 이 브라우저에만 저장되는 연습용이에요 — 공식 투표는 Mentimeter·Padlet에서!</p>
+    <div class="demo">
+      <div class="pitch">
+        <label class="small muted" for="pt-team">발표 팀</label>
+        <select id="pt-team" class="pt-team" style="display:block;margin:.3rem auto .4rem;background:var(--bg);color:var(--ink);border:1px solid var(--line2);border-radius:10px;padding:.4rem .7rem;font:500 1rem var(--sans)"></select>
+        <div class="phases"><span data-ph="0" class="on">피칭 3분</span><span data-ph="1">Q&amp;A 2분</span></div>
+        <div class="ring" id="ring">
+          <svg viewBox="0 0 200 200" aria-hidden="true"><circle class="rb" cx="100" cy="100" r="88"/><circle class="rf" id="ringf" cx="100" cy="100" r="88" pathLength="100" stroke-dasharray="100" stroke-dashoffset="0"/></svg>
+          <div class="rt"><b id="ringt">3:00</b><span id="ringl">피칭</span></div>
+        </div>
+        <div class="ctl">
+          <button class="btn" type="button" id="pt-go">시작</button>
+          <button class="btn ghost" type="button" id="pt-skip">Q&amp;A로 ▶</button>
+          <button class="btn ghost" type="button" id="pt-reset" aria-label="처음으로">↺</button>
+        </div>
+      </div>
+      <div class="peer">
+        <div class="sel">
+          <label for="pr-team"><b>평가할 팀</b></label>
+          <select id="pr-team"></select>
+          <label for="pr-track" class="muted small">트랙</label>
+          <select id="pr-track"><option value="">선택</option><option>Track A / 동화책</option><option>Track B / 칼럼·포스터</option><option>Track C / 홍보 영상</option><option>Track D / 사업계획서</option></select>
+        </div>
+        <div class="crit"><b>1. 가치 제안 설득력</b><div class="stars" data-c="0"></div><small>환경적·사회적 가치와 예상 효과가 구체적인가? 예상치(계산식·출처)와 실제로 측정할 값을 구분했는가?</small></div>
+        <div class="crit"><b>2. 논증의 논리성</b><div class="stars" data-c="1"></div><small>문제 정의부터 해결책까지 논리적이고 과학적 근거에 기반하는가?</small></div>
+        <div class="crit"><b>3. Q&amp;A 대응력</b><div class="stars" data-c="2"></div><small>질문과 반론에 타당한 근거로 유연하게 답하는가?</small></div>
+        <div class="grid g2" style="margin-top:.8rem">
+          <div class="field"><label for="pr-good">가장 인상 깊은 점 (강점)</label><textarea class="pad sm" id="pr-good" placeholder="예: 캐릭터 설정이 기발함…"></textarea></div>
+          <div class="field"><label for="pr-more">더 발전시킬 점 / 근거를 짚은 질문</label><textarea class="pad sm" id="pr-more" placeholder="예: 감축량 계산에 쓴 배출계수는 어디서 가져왔나요?"></textarea></div>
+        </div>
+        <div class="board">
+          <p class="label" style="margin-top:.6rem">우리 모둠의 평가 요약</p>
+          <div class="tblwrap"><table class="tbl" id="pr-board"><thead><tr><th>팀</th><th>트랙</th><th>설득력</th><th>논리성</th><th>Q&amp;A</th><th>합계</th></tr></thead><tbody></tbody></table></div>
+          <button class="btn ghost" type="button" id="pr-clear" style="margin-top:.6rem">평가 기록 지우기</button>
+        </div>
+        <div class="awards" aria-label="시상 부문"><span>공감상</span><span>혁신상</span><span>지속가능상</span></div>
+      </div>
+    </div>
+    <div style="margin-top:1.4rem">
+      <a class="live" href="https://www.mentimeter.com" target="_blank" rel="noopener"><i></i>Mentimeter</a>
+      <a class="live" href="https://padlet.com" target="_blank" rel="noopener"><i></i>Padlet</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 활동지 ═════════ -->
+<section class="sec ivory" id="act">
+  <div class="wrap">
+    <a class="back" href="#lesson">↑ 수업 진행으로 돌아가기</a>
+    <p class="label">학생 활동지</p>
+    <h2 class="head">쓰면서 생각해요</h2>
+    <p class="lead">쓴 내용은 이 브라우저에만 임시 저장돼요. 활동지 원본은 수업 PPT와 최종보고서 별첨에 있어요.</p>
+
+    <h3>활동 1 · 공공데이터 기반 양국 에너지 믹스 탐구</h3>
+    <p class="note">Ember·IEA 통계(발전원별 발전량)와 국가 전력 통계로 두 나라의 전력 생산 비율을 비교하고, 에너지 전환의 기회와 위기 요인을 분석해 봅시다.</p>
+    <div class="grid g3">
+      <div class="field"><label for="w1-year">지표 · 기준 연도 · 출처</label><input class="pad" id="w1-year" data-key="w1-year" placeholder="예: 발전량 / ____년 / Ember"></div>
+      <div class="field"><label for="w1-kr">한국 (원자력 %, 석탄 %, 가스 %, 신재생 %, 기타 %)</label><textarea class="pad sm" id="w1-kr" data-key="w1-kr"></textarea></div>
+      <div class="field"><label for="w1-tr">튀르키예 (석탄 %, 천연가스 %, 수력 %, 풍력/태양광 %, 지열·바이오·기타 %)</label><textarea class="pad sm" id="w1-tr" data-key="w1-tr"></textarea></div>
+    </div>
+    <div class="field"><label for="w1-cap">설비용량 vs 발전량 — 수업 PPT의 튀르키예 45·30·25는 어느 쪽과 닮았고, 왜 두 값이 다를까?</label><textarea class="pad sm" id="w1-cap" data-key="w1-cap" placeholder="____ 쪽과 닮았다. 왜냐하면 ____는 밤낮없이 돌고, ____는 ____ 때만 전기를 만들기 때문이다."></textarea></div>
+    <div class="field"><label for="w1-op">에너지 전환의 기회와 위기 요인</label><textarea class="pad" id="w1-op" data-key="w1-op"></textarea></div>
+
+    <h3 style="margin-top:2.6rem">활동 2 · 에너지 기업가 정신과 SDGs 연계</h3>
+    <div class="grid g3">
+      <div class="field"><label for="w2-def">우리가 정의하는 ‘에너지 기업가 정신’</label><textarea class="pad" id="w2-def" data-key="w2-def" placeholder="에너지를 소비하는 것을 넘어, 우리 모둠이 발휘할 수 있는 기업가 정신은?"></textarea></div>
+      <div class="field"><label for="w2-task">핵심 해결 과제 (SDGs 7·13 연계)</label><textarea class="pad" id="w2-task" data-key="w2-task" placeholder="양국 상황 중 가장 해결하고 싶은 구체적 문제"></textarea></div>
+      <div class="field"><label for="w2-who">해결 대상과 필요성</label><textarea class="pad" id="w2-who" data-key="w2-who" placeholder="누가, 어떤 어려움을 겪고, 왜 시급한가?"></textarea></div>
+    </div>
+
+    <h3 style="margin-top:2.6rem" id="declare">활동 3 · 한-튀르키예 공동 선언문</h3>
+    <p class="note">핵심 약속을 쓰면 오른쪽 선언문에 바로 새겨져요. 두 나라 팀원이 모두 서명하면 도장이 찍혀요.</p>
+    <div class="decl">
+      <div>
+        <div class="field"><label for="dc-group">모둠 이름</label><input class="pad" id="dc-group" data-key="dc-group" data-mirror="cv-group"></div>
+        <div class="field"><label for="dc-1">약속 1</label><input class="pad" id="dc-1" data-key="dc-1" data-mirror="cv-1"></div>
+        <div class="field"><label for="dc-2">약속 2</label><input class="pad" id="dc-2" data-key="dc-2" data-mirror="cv-2"></div>
+        <div class="field"><label for="dc-3">약속 3</label><input class="pad" id="dc-3" data-key="dc-3" data-mirror="cv-3"></div>
+        <div class="field"><label for="dc-4">약속 4 (선택)</label><input class="pad" id="dc-4" data-key="dc-4" data-mirror="cv-4"></div>
+        <div class="grid g2">
+          <div class="field"><label for="dc-kr">한국 팀원 서명</label><input class="pad" id="dc-kr" data-key="dc-kr" data-mirror="cv-kr"></div>
+          <div class="field"><label for="dc-tr">튀르키예 팀원 서명</label><input class="pad" id="dc-tr" data-key="dc-tr" data-mirror="cv-tr"></div>
+        </div>
+      </div>
+      <div class="charter" aria-label="공동 선언문 미리보기">
+        <p class="ttl"><small>CO-AUTHOR &amp; GREEN ENTREPRENEUR DECLARATION</small>글로벌 기후 행동 공동 저자 및<br>그린 창업가 선언문</p>
+        <p class="pre">“<span id="cv-group" data-ph="우리 모둠">우리 모둠</span>은 글로벌 에너지 문제 해결을 위해 국경을 넘어 다음과 같이 실천하고 협력할 것을 다짐합니다.”</p>
+        <p class="pre-en">Our group pledges to practice and cooperate as follows to solve global energy problems.</p>
+        <ol><li id="cv-1" data-ph="첫 번째 약속"></li><li id="cv-2" data-ph="두 번째 약속"></li><li id="cv-3" data-ph="세 번째 약속"></li><li id="cv-4" data-ph="(네 번째 약속)"></li></ol>
+        <div class="sig"><div><b id="cv-kr" data-ph=""></b>한국 팀원 서명</div><div><b id="cv-tr" data-ph=""></b>튀르키예 팀원 서명</div></div>
+        <div class="stamp" id="stamp" aria-hidden="true">KOR · TÜR<br>공동 선언</div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:2rem">
+      <div class="field"><label for="w3-track">우리 모둠의 트랙</label><input class="pad" id="w3-track" data-key="w3-track" placeholder="A 동화책 / B 칼럼·포스터 / C 홍보 영상 / D 사업계획서"></div>
+      <div class="field"><label for="w3-role">모둠 역할 분담</label><textarea class="pad sm" id="w3-role" data-key="w3-role" placeholder="시나리오 기획, 데이터 조사, 시각 디자인, 다국어 번역(한/영/튀)"></textarea></div>
+    </div>
+
+    <h3 style="margin-top:2.6rem" id="reflect">5~6차시 · 프로젝트 최종 성찰 일지</h3>
+    <div class="field"><label for="r-1">1. 이번 국제공동수업으로 에너지 문제와 ‘에너지 기업가 정신’에 대해 새롭게 배우거나 깨달은 점은?</label><textarea class="pad" id="r-1" data-key="r-1"></textarea></div>
+    <div class="field"><label for="r-2">2. 국적과 언어가 다른 친구들과 협력해 산출물을 완성하며 가장 보람 있었던 순간은?</label><textarea class="pad" id="r-2" data-key="r-2"></textarea></div>
+    <div class="field"><label for="r-3">3. 지속가능한 지구를 위해 내가 일상과 미래에 실천하고 싶은 ‘그린 가치’는?</label><textarea class="pad" id="r-3" data-key="r-3"></textarea></div>
+  </div>
+</section>
+
+<!-- ═════════ 평가 ═════════ -->
+<section class="sec" id="rubric">
+  <div class="wrap">
+    <p class="label">평가</p>
+    <h2 class="head">과정 중심 관찰 평가</h2>
+    <p class="lead">외형보다 데이터 근거, 양국 협력과 피드백 반영, 가치 제안의 설득력을 봐요. B·C 칸은 눈으로 확인할 수 있는 모습으로 적었어요.</p>
+    <p class="muted small">A·B·C는 이 과제의 채점 수준이에요. 학기 성취도(A~E)는 학교 성취평가 기준에 따라 따로 산출해요.</p>
+    <div class="tabs" role="tablist" data-key="p3-rubric">
+      <button role="tab" id="tab-r1" aria-controls="r1">1~2차시</button>
+      <button role="tab" id="tab-r2" aria-controls="r2">3~4차시</button>
+      <button role="tab" id="tab-r3" aria-controls="r3">5~6차시</button>
+    </div>
+    <div class="tabpanel" id="r1" role="tabpanel" aria-labelledby="tab-r1">
+      <p class="muted small">[10통과2-02-06] [10통과2-03-02] [12기지04-01] · 관찰 평가, 활동지 1·2, 공동 선언문 작성 기록</p>
+      <div class="tblwrap"><table class="tbl rubtbl">
+        <thead><tr><th>기준</th><th>A</th><th>B</th><th>C</th></tr></thead>
+        <tbody>
+          <tr><td>데이터 기반 에너지 믹스 탐구<br><small class="muted">10통과2-03-02</small></td><td>공공데이터(Ember·IEA 등)에서 두 나라의 발전원별 비중을 찾아 지표(발전량)·기준 연도·출처를 모두 적고, 화석·원자력·재생에너지 비중 차이를 수치로 비교한다.</td><td>두 나라 수치를 적었지만 지표·기준 연도·출처 가운데 하나 이상이 빠졌거나, 비교 문장에 수치(%p·배)가 없다.</td><td>한 나라 수치만 적었거나, 출처 없이 수업 화면의 값을 그대로 옮겼다.</td></tr>
+          <tr><td>설비용량과 발전량 구분<br><small class="muted">10통과2-02-06</small></td><td>수업 PPT 수치가 설비용량에 가깝다는 것을 찾아내고, 원자력·석탄과 태양광의 ‘발전 ÷ 설비’ 차이를 이용률(가동 시간)로 설명한다.</td><td>어느 쪽(설비/발전)과 닮았는지는 맞혔지만, 두 값이 다른 이유를 쓰지 못했다.</td><td>설비용량과 발전량을 같은 것으로 보고 비교했다.</td></tr>
+          <tr><td>에너지 전환 기회와 위기 도출<br><small class="muted">12기지04-01</small></td><td>나라마다 기회와 위기를 1개 이상씩 쓰고, 각각에 근거 수치나 기사 1건을 붙인다(예: 가스 수입 의존 → 에너지안보).</td><td>기회·위기를 썼지만 근거 수치·기사가 붙은 항목이 하나뿐이다.</td><td>기회나 위기 가운데 한쪽만 썼거나, 근거가 하나도 없다.</td></tr>
+          <tr><td>기업가 정신 및 SDGs 연계<br><small class="muted">12기지04-01</small></td><td>모둠의 ‘에너지 기업가 정신’ 정의에 해결할 문제·대상·만들 가치(경제적·사회적)가 모두 들어 있고, SDG 7 또는 13의 세부 내용과 연결한다.</td><td>정의는 썼지만 문제·대상·가치 가운데 하나가 빠졌거나, SDG 번호만 적고 연결 이유가 없다.</td><td>‘에너지 절약’ 수준의 정의에 머물고 SDGs 연결이 없다.</td></tr>
+          <tr><td>공동 선언문 작성<br><small class="muted">12기지04-01</small></td><td>누가·무엇을·언제 할지 드러난 실천 약속을 3개 이상 쓰고, 양국 팀원이 모두 서명한다.</td><td>약속이 3개 미만이거나, ‘노력한다’처럼 실천 행동이 드러나지 않는 문장이 섞여 있다.</td><td>약속이 1개 이하이거나 한 나라 팀원만 참여했다.</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="tabpanel" id="r2" role="tabpanel" aria-labelledby="tab-r2" hidden>
+      <p class="muted small">트랙별 대응 성취기준 — A 동화책·C 영상: [12기지04-01] [10통과2-02-06] · B 칼럼: [10공국2-03-02] · D 사업계획서: [10공국2-03-02] [12기가05-04] · 관찰 평가 및 산출물(스토리보드, 포스터, 콘티, 사업계획서) 평가</p>
+      <div class="tblwrap"><table class="tbl rubtbl">
+        <thead><tr><th>기준</th><th>A</th><th>B</th><th>C</th></tr></thead>
+        <tbody>
+          <tr><td>[A] 동화책 기획·스토리보드<br><small class="muted">12기지04-01 · 10통과2-02-06</small></td><td>에너지 불평등 문제와 해결 원리가 과학적으로 맞게 이야기 전개(위기→절정)에 드러나고, 대상 독자 수준에 맞는 다국어 대사로 전한다. (조건: 5단계·15장면)</td><td>이야기는 완성했지만 해결 원리가 과학적으로 틀리거나 설명 없이 ‘마법처럼’ 해결된다. 또는 대사가 한 언어뿐이다.</td><td>5단계 가운데 위기·절정이 비어 있거나, 에너지 문제가 이야기에 드러나지 않는다.</td></tr>
+          <tr><td>[B] 칼럼 집필·포스터 제작<br><small class="muted">10공국2-03-02</small></td><td>양국 기사를 2편 이상 비교해 프레이밍 차이를 짚고, 주장–근거(데이터)–반론 고려가 이어진 칼럼을 쓴다. 포스터에는 슬로건과 실천 수칙 3개가 들어간다.</td><td>기사 1편만 분석했거나, 칼럼의 주장과 근거 데이터가 연결되지 않는다.</td><td>기사 분석 없이 의견만 쓰거나, 포스터에 실천 수칙이 없다.</td></tr>
+          <tr><td>[C] 영상 기획·콘티 제작<br><small class="muted">12기지04-01 · 10통과2-02-06</small></td><td>타깃 시청자와 핵심 메시지를 한 문장으로 정하고, 6장면 모두에 화면·내레이션·자막을 채우며, 데이터 장면(S#2)에 출처를 적는다.</td><td>6장면 중 1~2장면이 비어 있거나, 데이터 장면에 출처가 없다.</td><td>타깃 시청자나 핵심 메시지가 정해지지 않았고, 3장면 이상이 비어 있다.</td></tr>
+          <tr><td>[D] 사업계획서·피드백 반영<br><small class="muted">10공국2-03-02 · 12기가05-04</small></td><td>캔버스 9요소와 ‘과학·공학 원리’ 칸을 채우고, 가치 제안(KPI·SVI)에 예상 수치와 계산식·출처를 적으며, 받은 Padlet 피드백 2개 이상을 반영한 흔적을 남긴다.</td><td>가치 제안(KPI·SVI)을 수치 없이 적었거나, 받은 피드백을 1개 이하만 반영했다.</td><td>고통점과 솔루션이 서로 연결되지 않거나, 9요소 중 4개 이상이 비어 있다.</td></tr>
+        </tbody></table></div>
+    </div>
+    <div class="tabpanel" id="r3" role="tabpanel" aria-labelledby="tab-r3" hidden>
+      <p class="muted small">[10공국2-03-02] [12기지04-01] · 피칭(발표) 평가, 동료 피드백(Padlet), 개인 성찰 일지</p>
+      <div class="tblwrap"><table class="tbl rubtbl">
+        <thead><tr><th>기준</th><th>A</th><th>B</th><th>C</th></tr></thead>
+        <tbody>
+          <tr><td>산출물 및 피칭<br><small class="muted">10공국2-03-02</small></td><td>3분 안에 문제–해결–예상 효과(계산 근거 포함)를 순서대로 말하고, 예상치와 실제로 측정할 값을 구분한다. Q&amp;A 질문에 데이터나 원리를 들어 답한다.</td><td>피칭은 시간 안에 했지만 예상 효과에 근거(수치·계산)가 없거나, Q&amp;A에서 근거 없이 답한다.</td><td>3분 안에 문제–해결을 다 말하지 못했거나, Q&amp;A에 답하지 못했다.</td></tr>
+          <tr><td>동료 피드백의 질<br><small class="muted">10공국2-03-02</small></td><td>다른 팀 발표의 근거·데이터를 짚어 개선 질문을 2팀 이상에 남긴다(예: “배출계수 출처는?”).</td><td>인상 평(“좋았다”, “재밌다”)만 남긴다.</td><td>피드백을 남기지 못했다.</td></tr>
+          <tr><td>최종 성찰<br><small class="muted">12기지04-01</small></td><td>성찰 3문항에 모두 답하고, 수업 중 바뀐 생각 1가지와 앞으로의 실천 1가지를 구체적 장면·행동으로 쓴다.</td><td>3문항에 답했지만 바뀐 생각이나 실천이 ‘열심히 하겠다’ 수준이다.</td><td>성찰 문항 가운데 2개 이상이 비어 있다.</td></tr>
+        </tbody></table></div>
+      <p class="note">참여 여부(투표·평가 시트 제출)는 성취 수준이 아니라 체크리스트로 따로 기록해요.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 수업 기록 ═════════ -->
+<section class="sec panel" id="record">
+  <div class="wrap">
+    <p class="label">수업 기록</p>
+    <h2 class="head">실제로 이렇게 만났어요</h2>
+    <p class="lead">최종보고서 ‘연구 개발 결과’에 실린 장면들이에요.</p>
+    <!-- 사진 출처: 최종보고서(11.18) BinData. 공개 동의가 확인되지 않아 학생 얼굴(화상 참여자 썸네일)과 학생 이름(Padlet 작성자·화면 공유 배너)을 흐리게 처리한 사본(*_b.jpg)을 씀. 원본은 img/_orig/(게시 제외, 참조하지 않음). rec_lecture.jpg에는 학생 얼굴·이름 없음(배너의 이름은 연구회 교사). 확인 필요: 사진 공개 동의 -->
+    <div class="gallery">
+      <figure class="reveal"><img src="img/rec_intro_session_b.jpg" alt="화상 수업에서 튀르키예 학생들이 자기 지역 볼루의 예디괼레르 호수를 소개하는 슬라이드(참여자 화면은 흐리게 처리)" loading="lazy"><figcaption>1~2차시 양국 소개 시간</figcaption></figure>
+      <figure class="reveal d1"><img src="img/rec_lecture.jpg" alt="화상 강의 화면: 기업가적 시선 커리큘럼 표와 '기후변화와 환경생태 에코프로너스' 표지" loading="lazy"><figcaption>3~4차시 에너지 기업가정신 강의</figcaption></figure>
+      <figure class="reveal d2"><img src="img/rec_storybook_b.jpg" alt="화상 수업에서 공유한 영어 동화책 펼침면: 두 아이 캐릭터와 마을 지도 그림(상단 이름 표시는 흐리게 처리)" loading="lazy"><figcaption>동화책 발표회</figcaption></figure>
+      <figure class="reveal d3"><img src="img/rec_padlet_b.jpg" alt="국제공동수업 패들렛 보드: SDGs 목표별 열에 학생 게시물이 모여 있는 화면(학생 이름이 보이지 않게 게시물은 흐리게 처리)" loading="lazy"><figcaption>수업 활동 Padlet</figcaption></figure>
+    </div>
+    <p class="photo-note">학생 얼굴과 이름은 흐리게 처리했습니다.</p>
+
+    <div class="grid g2" style="margin-top:2.6rem">
+      <div class="card reveal"><p class="voice">국적과 언어가 다른 튀르키예 친구들과 하나의 목표를 가지고 동화책과 사업계획서를 완성해 나가는 과정에서 글로벌 협력의 시너지를 깨달을 수 있었다.</p><p class="attr small">학생 반응 · 최종보고서</p></div>
+      <div class="card reveal d1"><p class="voice">에너지를 아끼자는 막연한 구호를 넘어, 실질적인 비즈니스 모델과 적정기술을 고민하는 ‘그린 벤처’를 기획해 봄으로써 문제 해결에 대한 시야를 크게 넓힐 수 있었다.</p><p class="attr small">학생 반응 · 최종보고서</p></div>
+    </div>
+    <div class="grid g2" style="margin-top:1rem">
+      <div class="card reveal"><div class="no">성과 공유</div><h3>3개 언어 그림책 eBook</h3><p>한국어·영어·튀르키예어로 만든 ‘에너지 SDGs 학생 그림책’과 캠페인 자료를 eBook으로 제작·배포했어요.</p></div>
+      <div class="card reveal d1"><div class="no">네트워크</div><h3>실시간 데모데이</h3><p>양국 학생이 참여한 실시간 데모데이로 두 나라 교사·학생의 기후 행동 네트워크를 만들었어요.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 수업 PPT ═════════ -->
+<section class="sec" id="ppt">
+  <div class="wrap">
+    <p class="label">수업 PPT</p>
+    <h2 class="head">한-튀르키예 글로벌 기후 행동 프로젝트</h2>
+    <p class="lead">수업에 쓴 46장 슬라이드예요. ← → 키로 넘기고, 전체 화면으로 띄울 수 있어요.</p>
+    <div class="deck" data-dir="../slides/p3/" data-n="46" data-title="한-튀르키예 글로벌 기후 행동 프로젝트"></div>
+    <div class="grid g2" style="margin-top:1rem">
+      <a class="dl" href="../materials/p3_글로벌_그린창업기_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>수업 PPT 내려받기</b><small>p3_글로벌_그린창업기_블랙골드.pptx</small></span></a>
+      <a class="dl" href="../materials/p3_글로벌_그린창업기_블랙골드.pdf" download><span class="ext">PDF</span><span><b>PDF로 내려받기</b><small>p3_글로벌_그린창업기_블랙골드.pdf</small></span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="nextmod">
+      <a href="../p2-math/"><small>← 이전 프로그램 2</small><b>수학 및 데이터 모델링</b></a>
+      <a href="../p4-science/" style="text-align:right"><small>다음 프로그램 4 →</small><b>과학 및 지능형 최적화</b></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p>2026 에너지소양교육 교사연구회 「에너지참견시점」 · 프로그램 3 · 임은희(영훈고등학교) · 한국에너지정보문화재단 지원</p>
+    <p>자료: 최종보고서 별첨 교수·학습 지도안 및 활동지, 수업 PPT 「한-튀르키예 글로벌 기후 행동 프로젝트」 · 데이터 도구: <a href="https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser" target="_blank" rel="noopener">IEA Energy Statistics Data Browser</a> · <a href="https://www.bigkinds.or.kr" target="_blank" rel="noopener">빅카인즈(한국언론진흥재단)</a></p>
+    <p>서울·이스탄불 밤 풍경: 연구회가 직접 그린 그림(SVG). 도입 영상(M0·M1·M2)은 생성형 AI로 만든 장면입니다(실제 촬영 아님). 발전량 데이터: <a href="https://www.motir.go.kr/kor/article/ATCL3f49a5a8c/170507/view" target="_blank" rel="noopener">산업통상자원부 2024년 에너지수급동향</a> · <a href="https://ember-energy.org/latest-insights/turkiye-electricity-review-2025/" target="_blank" rel="noopener">Ember Türkiye Electricity Review 2025</a></p>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function get(k){try{return localStorage.getItem(k)}catch(e){return null}}
+function put(k,v){try{localStorage.setItem(k,v)}catch(e){}}
+var NS="ecg:p3:";
+
+/* ── 에너지 믹스 도넛 ── */
+var segs=$$("#mixgrid circle.seg");
+function drawDonut(p){segs.forEach(function(c){var v=+c.dataset.v,o=+c.dataset.o;c.setAttribute("stroke-dasharray",(v*p)+" "+(100-v*p));c.setAttribute("stroke-dashoffset",String(-o*p))})}
+drawDonut(RM?1:0);
+var mixStarted=false;
+function startMix(){if(mixStarted)return;mixStarted=true;if(RM){drawDonut(1);return}var t0=null;function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/1600),e=1-Math.pow(1-p,3);drawDonut(e);if(p<1)requestAnimationFrame(f)}requestAnimationFrame(f)}
+if("IntersectionObserver" in window){new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting){startMix();o.disconnect()}})},{threshold:.3}).observe($("#mixgrid"))}else startMix();
+
+var INFO={
+  all:"<b>전체 보기 · 2024년 발전량</b> — 한국은 화석연료 56.2%·원자력 31.7%·신재생 10.6%, 튀르키예는 화석연료 54.4%·수력 21.9%·풍력/태양광 18.2%·지열·바이오 5.5%예요. 발전원 버튼을 눌러 하나씩 비교해 봅시다.",
+  fossil:"<b>화석연료</b> — 한국 56.2%(석탄 28.1·가스 28.1) · 튀르키예 54.4%(석탄 35.6·가스 18.5 등). 차이는 1.8%p로 거의 같아요. 두 나라 모두 석탄·가스를 대부분 수입해요(에너지안보).",
+  nuclear:"<b>원자력</b> — 한국 31.7%: 2024년 처음으로 최대 발전원이 되었어요. 튀르키예 0%: 첫 원전인 아쿠유 1호기가 시운전 중이라 아직 상업운전 전이에요.",
+  renew:"<b>재생에너지</b> — 한국 신재생 10.6%(신에너지 포함) · 튀르키예 45.6%(수력 21.9 + 풍력·태양광 18.2 + 지열·바이오 5.5). 약 4배 차이예요. 튀르키예는 날씨와 강수량에 따라 발전량이 크게 흔들려 계통 안정화가 과제예요."
+};
+var LBL={kr:{fossil:["56%","화석연료"],nuclear:["32%","원자력"],renew:["11%","신재생"],all:["56%","화석연료"]},tr:{fossil:["54%","화석연료"],nuclear:["0%","원자력(시운전 중)"],renew:["46%","재생에너지"],all:["54%","화석연료"]}};
+var info=$("#catinfo");
+function pickCat(cat){
+  $$(".catbar button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.cat===cat)});
+  $$(".donut").forEach(function(d){
+    var svg=$("svg",d);svg.classList.toggle("dim",cat!=="all");
+    $$("circle.seg",d).forEach(function(c){c.classList.toggle("hl",c.dataset.cat===cat)});
+    var l=LBL[d.dataset.country][cat];$("[data-ctr]",d).textContent=l[0];$("[data-ctrl]",d).textContent=l[1];
+  });
+  info.innerHTML=INFO[cat];
+}
+$$(".catbar button").forEach(function(b){b.onclick=function(){pickCat(b.dataset.cat)}});
+segs.forEach(function(c){c.addEventListener("click",function(){if(INFO[c.dataset.cat])pickCat(c.dataset.cat)})});
+pickCat("all");
+
+/* ── 미니 활동: 설비용량 vs 발전량 ── */
+var CG={
+  ppt:{src:"수업 PPT 「데이터 탐구 1·2」 원래 값 — 기준 연도·지표가 적혀 있지 않아요.",
+    kr:[["화석",60,"cFossil"],["원자력",30,"cNuc"],["신재생",10,"cRen"]],
+    tr:[["화석",45,"cFossil"],["수력",30,"cHydro"],["풍력·태양광",25,"cRen"]]},
+  cap:{src:"설비용량 비율 · 한국: 2024년 말 153.1GW(산업통상자원부, 기타는 100%에서 뺀 값) · 튀르키예: 2024년 11월 말 약 115GW(EEA 「Europe's environment 2025」 튀르키예 국가 페이지, 원자료 미표기)",
+    kr:[["화석",56.6,"cFossil"],["원자력",17.0,"cNuc"],["신재생",22.7,"cRen"],["기타",3.7,"cOther"]],
+    tr:[["화석",40.3,"cFossil"],["수력",28.0,"cHydro"],["풍력·태양광",27.5,"cRen"],["지열·기타",4.2,"cGeo"]]},
+  gen:{src:"발전량 비율 · 2024년 · 한국: 산업통상자원부(595.6TWh) · 튀르키예: Ember(341.2TWh)",
+    kr:[["화석",56.2,"cFossil"],["원자력",31.7,"cNuc"],["신재생",10.6,"cRen"],["기타",1.5,"cOther"]],
+    tr:[["화석",54.4,"cFossil"],["수력",21.9,"cHydro"],["풍력·태양광",18.2,"cRen"],["지열·바이오",5.5,"cGeo"]]}
+};
+var cgBox=$("#cg-bars"),cgSrc=$("#cg-src");
+if(cgBox){
+  cgBox.innerHTML=[["kr","한국"],["tr","튀르키예"]].map(function(c){return '<div class="cg-row"><span class="who">'+c[1]+'<small></small></span><div class="cg-bar" data-c="'+c[0]+'" role="img"><i></i><i></i><i></i><i></i></div></div>'}).join("");
+  var cgShow=function(k){
+    var d=CG[k];
+    $$(".cg-tog button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.cg===k)});
+    $$(".cg-bar",cgBox).forEach(function(bar){
+      var rows=d[bar.dataset.c];
+      $$("i",bar).forEach(function(el,i){var r=rows[i];if(r){el.style.setProperty("--w",r[1]+"%");el.style.background="var(--"+r[2]+")";var nar=innerWidth<600;el.textContent=r[1]>=(nar?30:8)?(r[0]+" "+r[1]+"%"):(r[1]>=(nar?9:99)?(Math.round(r[1])+"%"):"");el.title=r[0]+" "+r[1]+"%"}else{el.style.setProperty("--w","0%");el.textContent="";el.title=""}});
+      bar.setAttribute("aria-label",(bar.dataset.c==="kr"?"한국 ":"튀르키예 ")+rows.map(function(r){return r[0]+" "+r[1]+"%"}).join(", "));
+      bar.parentNode.querySelector(".who small").textContent=k==="ppt"?"PPT 원래 값":(k==="cap"?"설비용량":"발전량");
+    });
+    cgSrc.textContent=d.src;
+  };
+  $$(".cg-tog button").forEach(function(b){b.onclick=function(){cgShow(b.dataset.cg)}});
+  cgShow("ppt");
+}
+
+/* ── 미러(입력 → 미리보기) ── */
+function mirror(inp){var el=document.getElementById(inp.dataset.mirror);if(!el)return;var v=inp.value.trim();if(v){el.textContent=v;el.classList.remove("ph")}else{el.textContent=el.dataset.ph||"";el.classList.add("ph")}}
+$$("[data-mirror]").forEach(function(i){mirror(i);i.addEventListener("input",function(){mirror(i);stampCheck()})});
+var stamp=$("#stamp");
+function stampCheck(){var on=$("#dc-kr").value.trim()&&$("#dc-tr").value.trim();stamp.classList.toggle("on",!!on)}
+stampCheck();
+
+/* ── 체크박스/라디오 저장 ── */
+$$("input[data-ck]").forEach(function(c){var k=NS+"ck:"+c.dataset.ck;if(get(k)==="1")c.checked=true;
+  c.addEventListener("change",function(){if(c.type==="radio"){$$('input[name="'+c.name+'"]').forEach(function(r){put(NS+"ck:"+r.dataset.ck,r.checked?"1":"0")})}else put(k,c.checked?"1":"0")})});
+
+/* ── 4색 트랙 선택기 ── */
+var picks=$$(".pick");
+function openTrack(t,scroll){
+  picks.forEach(function(p){var on=p.dataset.track===t;p.setAttribute("aria-pressed",on);var pn=document.getElementById("tp-"+p.dataset.track);
+    if(on){pn.hidden=false;pn.classList.remove("open");void pn.offsetWidth;requestAnimationFrame(function(){pn.classList.add("open")})}else{pn.hidden=true;pn.classList.remove("open")}});
+  put(NS+"track",t);
+  if(scroll){var pn=document.getElementById("tp-"+t);setTimeout(function(){var y=pn.getBoundingClientRect().top+scrollY-80;scrollTo({top:y,behavior:RM?"auto":"smooth"})},60)}
+}
+picks.forEach(function(p){p.onclick=function(){openTrack(p.dataset.track,true)}});
+openTrack(get(NS+"track")||"A",false);
+
+/* A: 5단계 노드 ↔ 칸 */
+var stages=$$("#tp-A .stage"),nodes=$$("#tp-A .nd");
+function hiStage(i){stages.forEach(function(s,n){s.classList.toggle("on",n===i)});nodes.forEach(function(g,n){g.classList.toggle("on",n===i)})}
+nodes.forEach(function(g,i){g.addEventListener("click",function(){hiStage(i);var ta=$("textarea",stages[i]);if(ta)ta.focus({preventScroll:false})})});
+stages.forEach(function(s,i){$("textarea",s).addEventListener("focus",function(){hiStage(i)})});
+
+/* ── 피칭 타이머 (3분 + 2분) ── */
+var PH=[{l:"피칭",s:180},{l:"Q&A",s:120}],ph=0,left=PH[0].s,tid=null;
+var ring=$("#ring"),rf=$("#ringf"),rt=$("#ringt"),rl=$("#ringl"),go=$("#pt-go");
+function fmt(s){return Math.floor(s/60)+":"+(s%60<10?"0":"")+(s%60)}
+function paint(){rt.textContent=fmt(left);rl.textContent=ph<2?PH[ph].l:"끝";rf.setAttribute("stroke-dashoffset",String(100-(ph<2?left/PH[ph].s*100:0)));
+  ring.classList.toggle("qa",ph===1);ring.classList.toggle("done",ph===2);
+  $$(".phases span").forEach(function(s){s.classList.toggle("on",+s.dataset.ph===ph)})}
+function stop(){clearInterval(tid);tid=null;go.textContent=ph===2?"다시":"계속"}
+function tick(){left--;if(left<=0){if(ph===0){ph=1;left=PH[1].s}else{ph=2;left=0;paint();stop();return}}paint()}
+go.onclick=function(){if(tid){stop();return}if(ph===2){ph=0;left=PH[0].s}go.textContent="멈춤";tid=setInterval(tick,1000);paint()};
+$("#pt-skip").onclick=function(){if(ph===0){ph=1;left=PH[1].s;paint()}};
+$("#pt-reset").onclick=function(){clearInterval(tid);tid=null;ph=0;left=PH[0].s;go.textContent="시작";paint()};
+paint();
+
+/* ── 동료 평가 (브라우저 저장) ── */
+var data={};try{data=JSON.parse(get(NS+"peer")||"{}")||{}}catch(e){data={}}
+function save(){put(NS+"peer",JSON.stringify(data))}
+var selT=$("#pr-team"),selTr=$("#pr-track"),good=$("#pr-good"),more=$("#pr-more"),ptTeam=$("#pt-team");
+for(var t=1;t<=8;t++){var o=document.createElement("option");o.value=t;o.textContent="Team "+t;selT.appendChild(o);ptTeam.appendChild(o.cloneNode(true))}
+function cur(){var k=selT.value;if(!data[k])data[k]={tr:"",s:[0,0,0],g:"",m:""};return data[k]}
+$$(".stars").forEach(function(st){var c=+st.dataset.c;for(var i=1;i<=5;i++){(function(i){var b=document.createElement("button");b.type="button";b.textContent="★";b.setAttribute("aria-label",i+"점");b.onclick=function(){var d=cur();d.s[c]=d.s[c]===i?0:i;save();load();board()};st.appendChild(b)})(i)}});
+function load(){var d=cur();selTr.value=d.tr;good.value=d.g;more.value=d.m;$$(".stars").forEach(function(st){var c=+st.dataset.c;$$("button",st).forEach(function(b,n){b.classList.toggle("on",n<d.s[c]);b.setAttribute("aria-pressed",n<d.s[c])})})}
+function board(){var tb=$("#pr-board tbody");tb.innerHTML="";var rows=Object.keys(data).filter(function(k){var d=data[k];return d.s.some(Boolean)||d.g||d.m||d.tr}).sort(function(a,b){return a-b});
+  var best=-1;rows.forEach(function(k){var s=data[k].s.reduce(function(a,b){return a+b},0);if(s>best)best=s});
+  if(!rows.length){tb.innerHTML='<tr><td colspan="6" class="muted">아직 평가한 팀이 없어요.</td></tr>';return}
+  rows.forEach(function(k){var d=data[k],s=d.s.reduce(function(a,b){return a+b},0),tr=document.createElement("tr");if(s===best&&s>0)tr.className="top1";
+    [ "Team "+k,d.tr||"–",d.s[0]||"–",d.s[1]||"–",d.s[2]||"–",s+" / 15"].forEach(function(v){var td=document.createElement("td");td.textContent=v;tr.appendChild(td)});tb.appendChild(tr)})}
+selT.onchange=load;
+selTr.onchange=function(){cur().tr=selTr.value;save();board()};
+good.oninput=function(){cur().g=good.value;save();board()};
+more.oninput=function(){cur().m=more.value;save();board()};
+ptTeam.onchange=function(){selT.value=ptTeam.value;load()};
+$("#pr-clear").onclick=function(){if(confirm("이 브라우저에 저장된 동료 평가 기록을 모두 지울까요?")){data={};save();load();board()}};
+load();board();
+})();
+</script>
+</body>
+</html>

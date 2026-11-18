@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>에너지참견시점 수업실</title>
+<meta name="description" content="2026 에너지소양교육 교사연구회 「에너지참견시점」 — 그린 벤처 프로젝트 5개 프로그램(국어·수학·국제공동수업·과학·기술)을 수업 시간에 바로 운영하는 교육용 웹페이지">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/site.css">
+<style>
+/* 허브 전용 */
+.journey{position:relative;display:grid;gap:1.1rem}
+.journey .line{position:absolute;left:31px;top:20px;bottom:20px;width:2px;background:rgba(235,203,148,.18);overflow:hidden}
+.journey .line i{position:absolute;left:0;top:0;width:100%;height:0;background:linear-gradient(var(--champ),var(--amber));box-shadow:0 0 12px var(--amber);transition:height .2s linear}
+.prog{position:relative;display:grid;grid-template-columns:64px 1fr;gap:1.2rem;align-items:start;text-decoration:none;color:var(--ink)}
+.prog .dot{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--line2);background:var(--bg);display:grid;place-items:center;font-weight:700;color:var(--champ);font-size:1.15rem;position:relative;z-index:1;transition:.4s}
+.prog.in .dot{border-color:var(--amber);color:var(--amber);box-shadow:0 0 0 6px rgba(242,180,90,.08)}
+.prog .body{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr;transition:border-color .3s,transform .4s var(--ease)}
+@media (min-width:860px){.prog .body{grid-template-columns:1.25fr 1fr}}
+.prog:hover .body{border-color:var(--amber);transform:translateX(4px)}
+.prog .txt{padding:1.5rem 1.6rem}
+.prog .txt .sub{color:var(--amber);font-weight:500;font-size:.95rem}
+.prog .txt h3{font-size:clamp(1.35rem,2.6vw,1.8rem);margin:.25rem 0 .55rem}
+.prog .txt p{color:var(--ink2);margin:0 0 .8rem}
+.prog .txt .go{color:var(--amber);font-weight:700}
+.prog .vis{position:relative;min-height:190px;background:#000;overflow:hidden}
+.prog .vis svg{position:absolute;inset:0;width:100%;height:100%}
+.who{color:var(--grey);font-size:.9rem}
+/* 각 프로그램 미니 모션 */
+@keyframes rise{from{transform:translateY(100%)}to{transform:none}}
+@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
+@keyframes dash{to{stroke-dashoffset:0}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.vis .bar{transform-box:fill-box;transform-origin:bottom;animation:rise 1.4s var(--ease) both}
+.prog.in .vis .bar{animation-play-state:running}
+.vis .blink{animation:blink 2.4s infinite}
+.vis .flowline{stroke-dasharray:420;stroke-dashoffset:420;animation:dash 2.6s var(--ease) infinite alternate}
+.vis .orbit{transform-origin:center;transform-box:fill-box;animation:spin 14s linear infinite}
+.vis .bob{animation:bob 2.6s ease-in-out infinite}
+.stat{border-top:1px solid var(--line2);padding-top:1rem}
+.stat .big{font-size:clamp(3rem,8vw,5.5rem)}
+.how li{margin:.4rem 0}
+.themes td:not(:first-child),.themes th:not(:first-child){text-align:center}
+.themes td:not(:first-child){color:var(--amber);font-size:1.1rem}
+kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:500 .85rem var(--sans);color:var(--champ)}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#intro"><i></i><span>에너지참견시점 수업실</span></a>
+    <nav aria-label="섹션">
+      <a href="#why">왜</a><a href="#programs">프로그램</a><a href="#results">결과</a><a href="#materials">자료</a><a href="#how">사용법</a>
+    </nav>
+    <div class="tools">
+      <button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button>
+      <button class="tbtn" type="button" data-toggle="fs">전체 화면</button>
+    </div>
+  </div>
+</header>
+
+<!-- ① 몰입형 인트로: 석탄 발전소 → 태양광·풍력 단지(M0) → 도시 불빛 격자(M1) → 연기가 금빛 입자로(M2) -->
+<section class="intro" id="intro" aria-label="도입 영상" data-hold-last>
+  <div class="scene" data-dur="4300">
+    <video src="assets/video/M0.mp4" poster="assets/video/M0_first.jpg" muted playsinline preload="auto"></video>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker fadeup">2026 에너지소양교육 교사연구회</span>
+      <h1 class="display"><span class="mask"><span>에너지는</span></span><span class="mask"><span>어디에서 <em>올까요?</em></span></span></h1>
+    </div></div>
+  </div>
+  <div class="scene" data-dur="4300" data-flash>
+    <video src="assets/video/M1.mp4" poster="assets/video/M1_first.jpg" muted playsinline preload="none"></video>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker fadeup">읽고 · 계산하고 · 함께 만들고</span>
+      <h1 class="display"><span class="mask"><span>도시의 불빛 하나하나가</span></span><span class="mask"><span><em>선택</em>의 결과라면</span></span></h1>
+    </div></div>
+  </div>
+  <div class="scene" data-dur="4300" data-flash>
+    <video src="assets/video/M2.mp4" poster="assets/video/M2_first.jpg" muted playsinline preload="none"></video>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker fadeup">문제를 기회로</span>
+      <h1 class="display"><span class="mask"><span>연기는</span></span><span class="mask"><span><em>가치</em>가 됩니다</span></span></h1>
+    </div></div>
+  </div>
+  <div class="scene" data-flash>
+    <img class="kb" src="assets/video/M2_last.jpg" alt="">
+    <div class="scrim full"></div>
+    <canvas class="motes" data-n="90"></canvas>
+    <div class="cap center"><div class="wrap">
+      <span class="kicker fadeup">에너지참견시점 · Green Venture Project</span>
+      <h1 class="display"><span class="mask"><span>그린 벤처로 여는</span></span><span class="mask"><span>에너지 <em>수업실</em></span></span></h1>
+      <p class="subline fadeup">국어 · 수학 · 국제공동수업 · 과학 · 기술 — 다섯 개의 프로그램</p>
+      <p class="fadeup" style="margin-top:1.6rem"><a class="btn" href="#programs">수업 고르기 ↓</a></p>
+    </div></div>
+  </div>
+  <div class="flash"></div>
+  <div class="intro-ui">
+    <button class="tbtn" type="button" data-intro="prev" aria-label="이전 장면">◀</button>
+    <div class="dots"></div>
+    <button class="tbtn" type="button" data-intro="pause" aria-pressed="false">일시정지</button>
+    <button class="tbtn" type="button" data-intro="next" aria-label="다음 장면">▶</button>
+  </div>
+  <div class="scroll-hint">아래로 <i></i></div>
+</section>
+
+<!-- ② 왜 이 수업인가 -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <p class="label reveal">연구 주제</p>
+    <h2 class="head serif reveal d1">아끼자는 구호를 넘어,<br><span class="amber">가치를 만드는</span> 에너지 교육</h2>
+    <p class="lead reveal d2">그린 벤처(Green Venture) 프로젝트를 통한 에너지 믹스 최적화 및 기후 행동 역량 강화</p>
+    <div class="grid g4">
+      <div class="card reveal d1"><span class="no">01</span><h3>에너지 기업가 정신</h3><p>에너지 문제를 가치 창출의 기회로 다시 읽고, 실효성 있는 해법을 제안합니다.</p></div>
+      <div class="card reveal d2"><span class="no">02</span><h3>교과 융합</h3><p>국어의 비판적 문해력, 수학의 행렬 모델링, 과학의 AI 최적화, 기술의 적정기술 설계를 잇습니다.</p></div>
+      <div class="card reveal d3"><span class="no">03</span><h3>데이터 기반 탐구</h3><p>기사의 프레이밍을 원자료와 대조하고, 근거에 기반한 가치 제안서를 씁니다.</p></div>
+      <div class="card reveal d4"><span class="no">04</span><h3>행동하는 세계시민</h3><p>한국과 튀르키예 학생이 함께 기후 행동 산출물을 만들고, 적정기술 시제품을 직접 만듭니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ③ 다섯 프로그램 여정 -->
+<section class="sec panel" id="programs">
+  <div class="wrap">
+    <p class="label reveal">다섯 개의 프로그램</p>
+    <h2 class="head reveal d1">읽고, 계산하고, 함께 나누고,<br>설계하고, 만들어 봅니다</h2>
+    <p class="lead reveal d2">카드를 누르면 그 프로그램의 수업 화면으로 갑니다. 화면마다 도입 영상, 단계별 수업 진행, 활동, 평가 기준, 수업 PPT가 들어 있어요.</p>
+
+    <div class="journey" id="journey">
+      <div class="line" aria-hidden="true"><i></i></div>
+
+      <a class="prog reveal" href="p1-korean/">
+        <span class="dot">01</span>
+        <div class="body">
+          <div class="txt">
+            <span class="sub">국어 · 가치 발견 · 4차시</span>
+            <h3>기사를 의심하고, 그린 벤처를 제안하다</h3>
+            <p>빅카인즈에서 에너지 기사를 찾아 제목과 본문을 비교하고, 인용된 원자료를 확인한 뒤 모둠 공동 보고서로 가치 제안서를 씁니다.</p>
+            <span class="go">수업 열기 →</span> <span class="who">· 미림마이스터고 이대형</span>
+          </div>
+          <div class="vis" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#1D1A16"/>
+              <rect x="40" y="38" width="240" height="22" rx="4" fill="#F2B45A"/>
+              <rect x="40" y="76" width="300" height="8" rx="4" fill="#9A9086" opacity=".6"/>
+              <rect x="40" y="94" width="270" height="8" rx="4" fill="#9A9086" opacity=".6"/>
+              <rect x="40" y="112" width="290" height="8" rx="4" fill="#9A9086" opacity=".6"/>
+              <rect x="40" y="130" width="200" height="8" rx="4" fill="#9A9086" opacity=".6"/>
+              <g class="bob"><circle cx="300" cy="150" r="34" fill="none" stroke="#EBCB94" stroke-width="5"/><line x1="324" y1="174" x2="356" y2="206" stroke="#EBCB94" stroke-width="8" stroke-linecap="round"/><text x="300" y="162" text-anchor="middle" font-size="34" font-weight="700" fill="#F2B45A" font-family="Noto Sans KR">?</text></g>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="prog reveal" href="p2-math/">
+        <span class="dot">02</span>
+        <div class="body">
+          <div class="txt">
+            <span class="sub">수학 · 데이터 모델링 · 2차시</span>
+            <h3>행렬의 곱으로 탄소의 값을 매기다</h3>
+            <p>국가·기업별 발전량을 행렬로 담고, 배출계수와 곱해 탄소 배출량과 배출권 거래 손익을 계산합니다. 「행렬 × 탄소 실험실」에서 직접 바꿔 봐요.</p>
+            <span class="go">수업 열기 →</span> <span class="who">· 대전대신고 하진수</span>
+          </div>
+          <div class="vis" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#1D1A16"/>
+              <path d="M70 50 h-12 v120 h12 M250 50 h12 v120 h-12" fill="none" stroke="#EBCB94" stroke-width="4"/>
+              <g font-family="Noto Sans KR" font-weight="700" font-size="26" fill="#F6F3EE" text-anchor="middle">
+                <text x="100" y="92">120</text><text x="160" y="92" class="blink">80</text><text x="220" y="92">50</text>
+                <text x="100" y="150">100</text><text x="160" y="150">120</text><text x="220" y="150" class="blink" fill="#F2B45A">250</text>
+              </g>
+              <rect x="64" y="66" width="192" height="36" rx="6" fill="none" stroke="#F2B45A" stroke-width="2" class="blink"/>
+              <text x="320" y="120" font-family="Noto Sans KR" font-weight="700" font-size="34" fill="#F2B45A" text-anchor="middle">× E</text>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="prog reveal" href="p3-global/">
+        <span class="dot">03</span>
+        <div class="body">
+          <div class="txt">
+            <span class="sub">국제공동수업 · 한국–튀르키예 · 6차시</span>
+            <h3>4색 글로벌 그린 창업기</h3>
+            <p>두 나라의 에너지 믹스를 데이터로 비교하고, 동화책·칼럼과 포스터·홍보 영상·사업계획서 중 하나를 만들어 글로벌 데모데이에서 피칭합니다.</p>
+            <span class="go">수업 열기 →</span> <span class="who">· 영훈고 임은희</span>
+          </div>
+          <div class="vis" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#1D1A16"/>
+              <g class="orbit"><circle cx="200" cy="110" r="70" fill="none" stroke="#EBCB94" stroke-width="1.5" stroke-dasharray="4 8"/><circle cx="270" cy="110" r="8" fill="#F2B45A"/></g>
+              <circle cx="130" cy="110" r="38" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
+              <circle cx="270" cy="110" r="38" fill="#2B2621" stroke="#F2B45A" stroke-width="2"/>
+              <text x="130" y="119" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="24" fill="#F6F3EE">KR</text>
+              <text x="270" y="119" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="24" fill="#F6F3EE">TR</text>
+              <path class="flowline" d="M168 110 C 200 70, 200 70, 232 110" fill="none" stroke="#F2B45A" stroke-width="3"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="prog reveal" href="p4-science/">
+        <span class="dot">04</span>
+        <div class="body">
+          <div class="txt">
+            <span class="sub">과학 · 지능형 최적화 · 2차시</span>
+            <h3>AI와 바이브 코딩으로 기후 문제를 풀다</h3>
+            <p>폭염과 전력 수요, 도시 열섬 같은 문제를 데이터로 정의하고, 생성형 AI 프롬프트로 디지털 시제품을 만들고 고쳐 갑니다.</p>
+            <span class="go">수업 열기 →</span> <span class="who">· 서울미술고 황호연</span>
+          </div>
+          <div class="vis" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#1D1A16"/>
+              <rect x="40" y="40" width="320" height="140" rx="12" fill="#2B2621" stroke="#EBCB94" stroke-width="1.5"/>
+              <circle cx="62" cy="60" r="5" fill="#B4532A"/><circle cx="80" cy="60" r="5" fill="#F2B45A"/><circle cx="98" cy="60" r="5" fill="#EBCB94"/>
+              <g font-family="Noto Sans KR" font-size="17" fill="#F6F3EE">
+                <text x="62" y="100"><tspan fill="#F2B45A">&gt;</tspan> 열섬 지도를 만들어 줘</text>
+                <text x="62" y="130" fill="#9A9086">  수정: 녹지율 변수를 추가해</text>
+              </g>
+              <rect x="62" y="146" width="12" height="20" fill="#F2B45A" class="blink"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+
+      <a class="prog reveal" href="p5-tech/">
+        <span class="dot">05</span>
+        <div class="body">
+          <div class="txt">
+            <span class="sub">기술 · 시제품 구현 · 5차시</span>
+            <h3>불편에서 출발하는 태양광 적정기술</h3>
+            <p>디자인 씽킹 5단계로 사용자의 불편을 한 문장으로 정의하고, 태양전지와 주변 재료로 시제품을 만들어 사용 전후를 비교 실험합니다.</p>
+            <span class="go">수업 열기 →</span> <span class="who">· 사당중 김이현</span>
+          </div>
+          <div class="vis" aria-hidden="true">
+            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="220" fill="#1D1A16"/>
+              <circle cx="80" cy="60" r="24" fill="#F2B45A"/>
+              <g stroke="#F2B45A" stroke-width="3" class="blink"><line x1="80" y1="22" x2="80" y2="12"/><line x1="118" y1="60" x2="128" y2="60"/><line x1="107" y1="33" x2="114" y2="26"/></g>
+              <rect x="60" y="130" width="110" height="56" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
+              <g stroke="#EBCB94" stroke-width="1"><line x1="96" y1="130" x2="96" y2="186"/><line x1="132" y1="130" x2="132" y2="186"/><line x1="60" y1="158" x2="170" y2="158"/></g>
+              <path class="flowline" d="M170 158 H 260 V 110" fill="none" stroke="#F2B45A" stroke-width="3"/>
+              <circle cx="290" cy="96" r="26" fill="#F2B45A" class="blink"/>
+              <rect x="280" y="120" width="20" height="18" fill="#EBCB94"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 결과 -->
+<section class="sec" id="results">
+  <div class="wrap">
+    <p class="label reveal">무엇을 다루나</p>
+    <h2 class="head reveal d1">다섯 교과, 이어 갈 수 있는 흐름</h2>
+    <p class="lead reveal d2">다섯 학교의 교사가 각자 개발한 프로그램입니다. 한 학교에서 이어서 운영한다면 앞 프로그램의 결과가 다음 프로그램의 질문이 됩니다.</p>
+    <div class="flow reveal d2" style="margin:1.4rem 0 1.6rem">
+      <div class="st"><b>현상 읽기</b><small>국어 · 기사와 원자료</small></div>
+      <div class="st"><b>비용 계산</b><small>수학 · 행렬과 탄소 가격</small></div>
+      <div class="st"><b>함께 행동</b><small>국제공동수업 · 데모데이</small></div>
+      <div class="st"><b>디지털 설계</b><small>과학 · AI와 바이브 코딩</small></div>
+      <div class="st"><b>시제품 검증</b><small>기술 · 적정기술 실험</small></div>
+    </div>
+    <div class="card reveal" style="margin-bottom:3rem">
+      <span class="no">이어 가는 질문 · 최종보고서 Ⅵ 확장성</span>
+      <p style="margin-top:.4rem">국어에서 쓴 학교 태양광 제안서의 “학교가 낮에 만든 전기를 얼마나 쓸 수 있을까?”는 수학에서 <b class="amber">발전량과 사용량 비교</b>로, 과학에서 <b class="amber">환경 효과와 필요한 데이터 검토</b>로 이어질 수 있습니다.</p>
+    </div>
+
+    <p class="label reveal">에너지소양 4대 주제</p>
+    <h3 class="reveal d1" style="font-size:clamp(1.3rem,2.6vw,1.8rem);margin-bottom:1rem">재단의 네 가지 주제를 다섯 프로그램이 나눠 맡습니다</h3>
+    <div class="tblwrap reveal d2" style="margin-bottom:.6rem">
+      <table class="tbl themes">
+        <thead><tr><th>프로그램</th><th>에너지안보</th><th>에너지믹스</th><th>무탄소 에너지</th><th>사회경제</th></tr></thead>
+        <tbody>
+          <tr><td>1 국어 · 대정전과 학교 태양광 기사</td><td>●</td><td>○</td><td>●</td><td>○</td></tr>
+          <tr><td>2 수학 · 행렬과 탄소 경제</td><td></td><td>●</td><td>○</td><td>●</td></tr>
+          <tr><td>3 국제공동 · 한국–튀르키예 비교</td><td>○</td><td>●</td><td>○</td><td>●</td></tr>
+          <tr><td>4 과학 · 폭염과 전력 수요, AI</td><td>●</td><td></td><td>○</td><td>○</td></tr>
+          <tr><td>5 기술 · 태양광 적정기술</td><td>○</td><td></td><td>●</td><td>●</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted" style="font-size:.9rem;margin-bottom:3rem">● 핵심으로 다룸 · ○ 함께 다룸 — 연구회가 각 프로그램의 수업 내용을 기준으로 정리한 표입니다.</p>
+    <div class="grid g3">
+      <div class="stat reveal"><div class="big" data-count-to="19">0</div><div class="numlab">차시 · 5개 프로그램(4 + 2 + 6 + 2 + 5)</div></div>
+      <div class="stat reveal d1"><div class="big" data-count-to="5">0</div><div class="numlab">개 학교 교사 공동 개발</div></div>
+      <div class="stat reveal d2"><div class="big" data-count-to="2">0</div><div class="numlab">개 나라 학생이 함께한 데모데이 · 한국 · 튀르키예</div></div>
+    </div>
+    <div class="grid g2" style="margin-top:2.4rem">
+      <div class="card reveal"><span class="no">현장 적용 · 수학</span><h3 style="margin-top:.3rem">2026. 11. 3.~4. 100여 명</h3><p>대전대신고 2학년 「인공지능 수학」 수강 학생에게 2차시를 적용했습니다.</p></div>
+      <div class="card reveal d1"><span class="no">사전·사후 검사 · 기술</span><h3 style="margin-top:.3rem">지식 9.67 → 10.89점 (15점 만점)</h3><p>두 번 모두 응답한 18명 기준이며 통계적으로 유의하지 않았습니다(p=.127). 자세한 해석은 프로그램 5 화면에 있습니다.</p></div>
+    </div>
+    <!-- 확인 필요: 프로그램 1·3·4의 적용 학교·학년·일시·인원 (최종보고서에 없음) -->
+    <div class="grid g2" style="margin-top:3rem">
+      <figure class="card reveal" style="margin:0">
+        <p class="quote" style="font-size:clamp(1.15rem,2.2vw,1.6rem)">“에너지를 아끼자는 막연한 구호를 넘어, 실질적인 비즈니스 모델과 적정기술을 고민하는 <em>‘그린 벤처’</em>를 기획해 봄으로써 문제 해결에 대한 시야를 크게 넓힐 수 있었다.”</p>
+        <figcaption class="attr">프로그램 3 학생 반응 · 최종보고서 Ⅱ장</figcaption>
+      </figure>
+      <figure class="card reveal d1" style="margin:0">
+        <p class="quote" style="font-size:clamp(1.3rem,2.6vw,1.9rem)">무조건 설치를 권하기보다 <em>사용량과 예상 발전량</em>을 비교해 판단하게 하는 제안</p>
+        <figcaption class="attr">결론 · 데이터 기반의 비판적 사고와 가치 제안</figcaption>
+      </figure>
+    </div>
+    <div class="teacher">
+      수치 근거: 최종보고서(2026.11.18판) 과제 개요·Ⅰ장. 19차시 = 프로그램 1(4)·2(2)·3(6)·4(2)·5(5). 참여 학교 5곳 = 영훈고(책임 임은희)·사당중 김이현·미림마이스터고 이대형·대전대신고 하진수·서울미술고 황호연. 수학 프로그램은 2026.11.3.~11.4. 대전대신고 2학년 「인공지능 수학」 수강생 100여 명에게 적용. 기술 프로그램의 사전·사후 에너지 소양 검사(18명)는 프로그램 5 화면 참고.
+    </div>
+  </div>
+</section>
+
+<!-- ⑤ 자료실 -->
+<section class="sec panel" id="materials">
+  <div class="wrap">
+    <p class="label reveal">수업 자료</p>
+    <h2 class="head reveal d1">수업 PPT 다섯 개, 한 가지 옷</h2>
+    <p class="lead reveal d2">다섯 선생님의 수업 PPT를 같은 블랙골드 양식으로 맞췄습니다. 내용과 배치는 그대로예요. 각 프로그램 화면의 ‘수업 PPT’에서 넘겨 보거나 내려받을 수 있습니다.</p>
+    <div class="grid g2">
+      <a class="dl reveal" href="materials/p1_국어_가치발견_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>프로그램 1 · 국어 및 가치 발견</b><small>47장 · 이대형</small></span></a>
+      <a class="dl reveal d1" href="materials/p2_수학_행렬과탄소경제_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>프로그램 2 · 행렬 모델링과 탄소 경제</b><small>59장 · 하진수</small></span></a>
+      <a class="dl reveal d2" href="materials/p3_글로벌_그린창업기_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>프로그램 3 · 4색 글로벌 그린 창업기</b><small>46장 · 임은희</small></span></a>
+      <a class="dl reveal d3" href="materials/p4_과학_지능형최적화_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>프로그램 4 · 과학 및 지능형 최적화</b><small>41장 · 황호연</small></span></a>
+      <a class="dl reveal d4" href="materials/p5_기술_적정기술프로토타이핑_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>프로그램 5 · 적정기술 프로토타이핑</b><small>49장 · 김이현</small></span></a>
+      <a class="dl reveal d4" href="p2-math/lab/"><span class="ext">LAB</span><span><b>행렬 × 탄소 실험실</b><small>행렬 만들기 · 덧셈·실수배 · P×E · 거래 손익 · 전환점</small></span></a>
+      <a class="dl reveal d4" href="materials/p2_탄소배출권_시뮬레이터.xlsx" download><span class="ext">XLSX</span><span><b>탄소배출권 시뮬레이터 (오프라인)</b><small>프로그램 2 · MMULT로 배출량·손익 자동 계산</small></span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ⑥ 사용법 -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <p class="label reveal">이렇게 쓰세요</p>
+    <h2 class="head reveal d1">교실 화면에 띄우고, 한 단계씩</h2>
+    <div class="grid g3">
+      <div class="card reveal"><span class="no">학생</span><h3>각자 열어 따라 하기</h3><p>노트북으로 같은 주소를 열고, 활동 칸에 생각을 적어요. 적은 내용은 이 기기 브라우저에만 남습니다.</p></div>
+      <div class="card reveal d1"><span class="no">교사</span><h3>교사 모드</h3><p>오른쪽 위 ‘교사 모드’를 켜면 발문, 예상 답, 유의점이 단계마다 나타납니다. 끄면 학생 화면이 됩니다.</p></div>
+      <div class="card reveal d2"><span class="no">진행</span><h3>키보드로 넘기기</h3><p>수업 진행 상자에서 <kbd>←</kbd> <kbd>→</kbd>로 단계를 넘기고, 타이머로 활동 시간을 잽니다. ‘크게 보기’는 전자칠판용입니다.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><b class="champ">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 영훈고 임은희(책임) · 사당중 김이현 · 미림마이스터고 이대형 · 대전대신고 하진수 · 서울미술고 황호연</p>
+    <p>이 자료는 2026년도 한국에너지정보문화재단의 지원을 받아 수행된 성과물입니다. 도입 영상은 AI로 생성한 장면입니다.</p>
+  </div>
+</footer>
+
+<script src="assets/site.js"></script>
+<script>
+/* 여정 선: 스크롤에 맞춰 금빛 선이 자람 */
+(function(){
+  var j=document.getElementById("journey");if(!j)return;var bar=j.querySelector(".line i");
+  function f(){var r=j.getBoundingClientRect(),h=r.height,p=Math.min(1,Math.max(0,(innerHeight*.6-r.top)/h));bar.style.height=(p*100)+"%"}
+  addEventListener("scroll",f,{passive:true});f();
+})();
+</script>
+</body>
+</html>

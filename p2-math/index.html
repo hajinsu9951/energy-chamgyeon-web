@@ -1,0 +1,1487 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>데이터로 그리는 미래 에너지 · 행렬 모델링과 탄소 경제 — 에너지참견시점</title>
+<meta name="description" content="프로그램 2 · 고1 공통수학1 행렬 2차시 — 발전량 데이터를 행렬로 담고, 행렬의 곱으로 탄소 배출량과 배출권 거래 손익을 계산합니다.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/site.css">
+<style>
+/* ── 모듈 보충 스타일 (프로그램 2 · 수학) ── */
+.intro .cap .display.q{font-size:clamp(1.9rem,5.4vw,4.6rem)}
+.intro .cta{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.4rem;justify-content:center}
+.intro .btn{font-size:1.05rem;padding:.75rem 1.5rem}
+.intro .btn.ghost{background:rgba(29,26,22,.5)}
+.intro-ui .tbtn[aria-pressed="true"]{background:var(--amber);color:var(--bg)}
+@media (max-width:480px){.intro-ui{gap:.45rem;padding:0 8px}.intro .dots{gap:.3rem}.intro .dots button{width:14px}.intro .dots button.on{width:24px}.intro-ui .tbtn{padding:.35rem .55rem}}
+/* ── 인트로 고유 모션 ── */
+.intro .sr,.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.intro .skip{position:absolute;z-index:6;right:16px;top:12px;background:rgba(29,26,22,.66);border:1px solid var(--amber);color:var(--ink);font-weight:500;transition:opacity .4s}
+.intro .skip:hover,.intro .skip:focus-visible{background:var(--amber);color:var(--bg)}
+.intro.at-last .skip{opacity:0;pointer-events:none}
+/* 숫자 층 */
+.fly{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .8s var(--ease),visibility 0s .8s;--mfs:clamp(1.5rem,4.2vw,3.2rem)}
+.fly.vis{opacity:1;visibility:visible;transition:opacity .8s var(--ease)}
+.fly .n{position:absolute;left:0;top:0;opacity:0;transform:translate3d(var(--x,50vw),var(--y,30vh),0) translate(-50%,-50%) scale(var(--s,1));transition:transform 1s cubic-bezier(.62,0,.24,1) var(--d,0s),opacity 1s var(--ease) var(--d0,0s)}
+.fly.vis .n{opacity:var(--o,.92)}
+.fly .n > i{display:block;position:relative;font-style:normal;font-weight:700;font-size:var(--mfs);line-height:1.25;color:var(--champ);font-variant-numeric:tabular-nums;white-space:nowrap;text-shadow:0 0 22px rgba(242,180,90,.65),0 2px 10px rgba(0,0,0,.6);transition:color .6s,transform .6s var(--ease),text-shadow .6s}
+.fly.vis:not(.inmx) .n > i{animation:drift 5.5s ease-in-out infinite alternate}
+.fly .n small{position:absolute;left:50%;top:100%;transform:translateX(-50%);font-size:max(.8rem,.3em);font-weight:500;color:var(--ink2);letter-spacing:.04em;white-space:nowrap;transition:opacity .4s}
+@keyframes drift{from{transform:translate3d(0,0,0)}to{transform:translate3d(10px,-14px,0)}}
+.fly.inmx .n{--o:1}
+.fly.inmx .n > i{color:var(--ink);text-shadow:0 0 14px rgba(242,180,90,.5)}
+.fly.inmx .n small{opacity:0}
+.fly.inmx .n.dec{opacity:0}
+/* 행렬 틀 */
+.fmx{position:absolute;left:50%;top:11%;transform:translateX(-50%);width:max-content;white-space:nowrap;display:grid;grid-template-columns:auto .38em repeat(3,auto) .38em auto;grid-template-rows:auto auto auto auto;column-gap:.5em;row-gap:.05em;align-items:center;font-size:var(--mfs);font-weight:700;line-height:1.25;padding:.3em .55em .35em;border-radius:16px;background:rgba(29,26,22,0);transition:background .8s .5s}
+.fly.inmx .fmx{background:rgba(29,26,22,.58)}
+.fmx .slot{visibility:hidden;text-align:center;padding:0 .15em;font-variant-numeric:tabular-nums}
+.fmx .pn{grid-column:1;grid-row:2/4;font-family:var(--serif);color:var(--amber);text-shadow:0 0 20px rgba(242,180,90,.6);opacity:0;transform:translateX(-.5em);transition:opacity .7s .8s,transform .7s var(--ease) .8s}
+.fmx .bk{grid-row:2/4;align-self:stretch;border:.08em solid var(--champ);clip-path:inset(50% 0 50% 0);transition:clip-path .8s var(--ease) .8s}
+.fmx .bl{grid-column:2;border-right:0}.fmx .br{grid-column:6;border-left:0}
+.fmx .ch{grid-row:1;text-align:center;font-size:max(.8rem,.3em);font-weight:500;color:var(--champ);letter-spacing:.03em;opacity:0;transform:translateY(-1.2em);transition:opacity .6s var(--d),transform .6s var(--ease) var(--d)}
+.fmx .rh{grid-column:7;font-size:max(.8rem,.32em);font-weight:500;color:var(--champ);opacity:0;transform:translateX(-1.6em);transition:opacity .6s var(--d),transform .6s var(--ease) var(--d)}
+.fmx .flab{grid-column:1/-1;grid-row:4;text-align:center;font-size:max(.75rem,.24em);font-weight:500;color:var(--ink2);margin-top:.35em;opacity:0;transition:opacity .6s 1.4s}
+.fly.inmx .pn,.fly.inmx .ch,.fly.inmx .rh,.fly.inmx .flab{opacity:1;transform:none}
+.fly.inmx .bk{clip-path:inset(0 0 0 0)}
+/* 2행 · 3열 훑기 */
+.fmx .rowband,.fmx .colband{align-self:stretch;border-radius:.2em;pointer-events:none}
+.fmx .rowband{grid-column:2/7;grid-row:3;background:rgba(242,180,90,.2);box-shadow:inset 0 0 0 2px rgba(242,180,90,.7);transform:scaleX(0);transform-origin:left;transition:transform .7s var(--ease) .4s}
+.fmx .colband{grid-column:5;grid-row:1/4;margin:0 -.1em;background:rgba(235,203,148,.16);box-shadow:inset 0 0 0 2px rgba(235,203,148,.65);transform:scaleY(0);transform-origin:top;transition:transform .7s var(--ease) 1.15s}
+.fly.sw .rowband{transform:none}.fly.sw .colband{transform:none}
+.fmx .ptg{grid-column:5;grid-row:3;justify-self:end;align-self:start;font-size:max(.85rem,.32em);font-weight:700;color:var(--bg);background:var(--amber);border-radius:999px;padding:.05em .5em;transform:translate(60%,-75%) scale(.4);opacity:0;transition:opacity .4s 1.9s,transform .5s var(--ease) 1.9s;z-index:2}
+.fly.sw .ptg{opacity:1;transform:translate(60%,-75%)}
+.fly.sw .n.p23 > i{color:var(--amber);transform:scale(1.32);text-shadow:0 0 26px rgba(242,180,90,.9);transition-delay:1.75s}
+/* '행 → 열' 와이프 */
+.wipe{position:absolute;inset:0;z-index:3;pointer-events:none;visibility:hidden}
+.wipe.go{visibility:visible}
+.wipe i{position:absolute;display:block;background:linear-gradient(135deg,#2B2621,#1D1A16);visibility:hidden}
+.wipe .r1{left:0;right:0;top:0;height:50.5%;box-shadow:inset 0 -2px 0 var(--amber)}
+.wipe .r2{left:0;right:0;top:50%;bottom:0}
+.wipe .c{top:0;bottom:0}
+.wipe .c1{left:0;width:33.6%;box-shadow:inset -2px 0 0 var(--amber)}
+.wipe .c2{left:33.33%;width:33.6%;box-shadow:inset -2px 0 0 var(--amber)}
+.wipe .c3{left:66.66%;right:0}
+.wipe .hl{position:absolute;left:0;right:0;top:calc(50% - 1px);height:2px;background:var(--amber);box-shadow:0 0 12px var(--amber);opacity:0}
+/* 연기 → 가격표 */
+.intro canvas.smoke{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.ptag{position:absolute;z-index:3;left:50%;top:9%;transform:translateX(-50%);width:min(92%,760px);text-align:center;pointer-events:none}
+.ptag .tg{display:inline-block;font-family:var(--sans);font-weight:700;letter-spacing:-.01em;font-size:clamp(2rem,6vw,4.4rem);line-height:1.15;color:var(--amber);text-shadow:0 0 28px rgba(242,180,90,.7),0 2px 12px rgba(0,0,0,.7);white-space:nowrap;opacity:0;transform:scale(.94);transition:opacity .6s,transform .8s var(--ease)}
+.ptag .tl{font-weight:700;font-size:clamp(.95rem,1.9vw,1.35rem);line-height:1.5;color:var(--ink);background:rgba(29,26,22,.66);border-radius:12px;padding:.25em .8em;margin:.45rem auto 0;width:max-content;max-width:100%;font-variant-numeric:tabular-nums;opacity:0;transform:translateY(12px);transition:opacity .6s var(--ease),transform .6s var(--ease),color .5s}
+.ptag .tl b{color:var(--amber)}
+.ptag .l3{font-size:clamp(1.15rem,2.6vw,1.9rem)}
+.ptag .l3 .res{color:#E07A4F}
+.ptag .tnote{font-size:.8rem;color:var(--ink2);margin-top:.4rem;opacity:0;transition:opacity .6s}
+.ptag.s1 .tg{opacity:1;transform:none}
+.ptag.s2 .l1,.ptag.s3 .l2,.ptag.s4 .l3,.ptag.s4 .tnote{opacity:1;transform:none}
+.ptag.s4 .l1{color:var(--ink2)}
+@media (max-width:640px){
+  .intro .skip{right:10px;top:10px;font-size:.82rem;padding:.3rem .65rem}
+  .fmx{top:9%}
+  .ptag{top:8%}
+}
+
+/* ── 공통: 행렬 표기 ── */
+.mx{display:inline-grid;position:relative;padding:.22em .72em;column-gap:1em;row-gap:.15em;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;vertical-align:middle;line-height:1.35}
+.mx::before,.mx::after{content:"";position:absolute;top:.04em;bottom:.04em;width:.36em;border:.11em solid var(--champ)}
+.mx::before{left:0;border-right:none}.mx::after{right:0;border-left:none}
+.ivory .mx::before,.ivory .mx::after{border-color:var(--amber-dark)}
+.mx > span,.mx > b{white-space:nowrap;overflow-wrap:normal}
+.mx.c1{grid-template-columns:auto}.mx.c2{grid-template-columns:repeat(2,auto)}.mx.c3{grid-template-columns:repeat(3,auto)}
+.mx .hl{color:var(--amber)} .mx .rs{color:#E07A4F}
+.eq{display:flex;flex-wrap:wrap;align-items:center;gap:.5em .7em;font-size:clamp(1.1rem,2.5vw,1.55rem);margin:.6rem 0 1.1rem}
+.eq .op{color:var(--champ);font-weight:500}
+.eq .nm{font-family:var(--serif);font-weight:800;color:var(--champ)}
+.eq .q{color:var(--amber);font-weight:700}
+.eq.sm{font-size:clamp(1rem,2vw,1.25rem)}
+.mxcap{display:inline-flex;flex-direction:column;align-items:center;gap:.25rem}
+.mxcap small{font-size:max(.8rem,.62em);color:var(--grey);font-weight:500;white-space:nowrap}
+.formula{font-weight:700;letter-spacing:.02em;color:var(--amber);font-size:clamp(1.15rem,2.8vw,1.7rem);background:var(--bg);border:1px solid var(--line2);border-radius:12px;padding:.6rem 1rem;display:inline-block;overflow-wrap:anywhere}
+.calc{font-variant-numeric:tabular-nums;font-size:clamp(1.05rem,2.2vw,1.35rem);line-height:1.8}
+.calc b{color:var(--amber)}
+.mini-cards{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:.8rem 0 1rem}
+.mini-cards > div{background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:.85rem 1rem}
+.mini-cards b{display:block;color:var(--amber);font-size:1.25rem}
+.mini-cards span{color:var(--ink2);font-size:.95rem}
+.mini-cards .em{border-color:var(--amber);background:var(--amberT)}
+.qlist{list-style:none;margin:.4rem 0 1rem!important;padding:0!important;display:grid;gap:.55rem}
+.qlist li{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.7rem 1rem;margin:0!important}
+.qlist li b{color:var(--amber);margin-right:.4rem}
+.two{display:grid;gap:1.4rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));align-items:start}
+.note{color:var(--grey);font-size:.9rem}
+.vframe.sm{max-width:640px}
+.arrow{color:var(--amber);font-size:1.6em;line-height:1}
+.dt{border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:1.05rem}
+.dt th,.dt td{border:1px solid var(--line);padding:.4rem .75rem;text-align:right}
+.dt th{color:var(--champ);font-weight:500;text-align:center}
+.reveal-ans .mx{font-size:1.05em}
+
+/* ── 스크롤 이야기 (sticky scrollytelling) ── */
+.story{position:relative;background:radial-gradient(ellipse at 70% 40%,#2B2621 0%,#1D1A16 65%)}
+.story-track{height:720vh;position:relative}
+.story-stick{position:sticky;top:var(--toph,60px);height:calc(100vh - var(--toph,60px));height:calc(100svh - var(--toph,60px));display:flex;align-items:center;overflow:hidden}
+.story-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:2.4rem;align-items:center;width:100%}
+.story-text{position:relative;min-height:19rem}
+.story-text .sc{position:absolute;inset:0 0 auto 0;opacity:0;transform:translateY(22px);transition:opacity .6s var(--ease),transform .6s var(--ease);pointer-events:none}
+.story-text .sc.on{opacity:1;transform:none;pointer-events:auto}
+.story-text .no{color:var(--amber);font-weight:700;font-size:.92rem;letter-spacing:.08em}
+.story-text h3{font-family:var(--serif);font-weight:800;font-size:clamp(1.55rem,3.4vw,2.7rem);line-height:1.3;margin:.35rem 0 .7rem}
+.story-text h3 em{font-style:normal;color:var(--amber)}
+.story-text p{color:var(--ink2);font-size:clamp(.98rem,1.5vw,1.12rem);margin:0 0 .6rem}
+.story-text .btn{font-size:1.1rem;padding:.8rem 1.6rem;margin-top:.4rem}
+.story-rail{position:absolute;right:4px;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:2px;z-index:3}
+.story-rail button{position:relative;width:24px;height:26px;border:0;background:none;padding:0;cursor:pointer}
+.story-rail button::before{content:"";position:absolute;left:10px;width:4px;top:2px;bottom:2px;border-radius:2px;background:rgba(246,243,238,.22);transition:.3s}
+.story-rail button.on::before{background:var(--amber);top:-6px;bottom:-6px}
+.story-rail button.past::before{background:var(--champ)}
+.story-rail button:focus-visible{outline:2px solid var(--amber)}
+.story-bar{position:absolute;left:0;bottom:0;height:2px;background:var(--amber);width:0;box-shadow:0 0 8px var(--amber)}
+.story-hint{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);color:var(--grey);font-size:.85rem;transition:opacity .4s}
+.story[data-s="5"] .story-hint{opacity:0}
+.viz{position:relative;height:min(64vh,540px);border:1px solid var(--line);border-radius:22px;background:rgba(29,26,22,.55);overflow:hidden}
+.viz .layer{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity .7s var(--ease),visibility 0s .7s}
+.viz .layer.on{opacity:1;visibility:visible;transition:opacity .7s var(--ease)}
+.viz .vtitle{position:absolute;left:0;right:0;top:5%;text-align:center;color:var(--champ);font-weight:500;font-size:clamp(.82rem,1.4vw,1rem);letter-spacing:.04em}
+/* 층 A: 흩어진 숫자 → 2×3 행렬 */
+.chip{position:absolute;left:var(--sx);top:var(--sy);transform:translate(-50%,-50%) rotate(var(--r));transition:left 1.1s var(--ease) var(--d),top 1.1s var(--ease) var(--d),transform 1.1s var(--ease) var(--d);text-align:center;z-index:2}
+.chip b{display:block;font-weight:700;font-size:clamp(1.5rem,3.3vw,2.6rem);line-height:1.1;font-variant-numeric:tabular-nums;color:var(--ink);transition:color .4s,text-shadow .4s}
+.chip small{display:block;font-size:clamp(.8rem,1.1vw,.9rem);color:var(--grey);white-space:nowrap;transition:opacity .4s;margin-top:.15rem}
+.g1 .chip{left:var(--gx);top:var(--gy);transform:translate(-50%,-50%) rotate(0)}
+.g1 .chip small{opacity:0}
+.layA .hd{position:absolute;transform:translate(-50%,-50%);color:var(--champ);font-weight:500;font-size:clamp(.8rem,1.25vw,.95rem);opacity:0;transition:opacity .6s .5s;white-space:nowrap}
+.g1 .layA .hd{opacity:1}
+.layA .brk{position:absolute;top:35%;height:37%;width:3.5%;border:3px solid var(--champ);opacity:0;transform:scaleY(.2);transition:opacity .6s .6s,transform .8s var(--ease) .6s}
+.layA .brk.l{left:29%;border-right:0}.layA .brk.r{left:79.5%;border-left:0}
+.g1 .layA .brk{opacity:1;transform:none}
+.layA .pnm{position:absolute;left:21%;top:53.5%;transform:translate(-50%,-50%);font-family:var(--serif);font-weight:800;font-size:clamp(1.5rem,3vw,2.4rem);color:var(--amber);opacity:0;transition:opacity .6s .7s}
+.g1 .layA .pnm{opacity:1}
+.layA .rowlab .hd{left:9%}
+.band{position:absolute;opacity:0;transition:opacity .5s,transform .6s var(--ease);border-radius:10px}
+.band.row{left:30.5%;width:50.5%;top:55%;height:15%;background:rgba(242,180,90,.18);border:1px solid rgba(242,180,90,.6);transform:scaleX(.3);transform-origin:left}
+.band.col{left:66.5%;width:13%;top:33%;height:39%;background:rgba(235,203,148,.14);border:1px solid rgba(235,203,148,.55);transform:scaleY(.3);transform-origin:top}
+.is2 .band{opacity:1;transform:none}
+.is2 .chip.p23 b{color:var(--amber);text-shadow:0 0 22px rgba(242,180,90,.8)}
+.layA .ann{position:absolute;left:50%;bottom:7%;transform:translate(-50%,10px);opacity:0;transition:opacity .5s .3s,transform .5s .3s;white-space:nowrap;font-weight:700;font-size:clamp(1rem,2vw,1.4rem)}
+.layA .ann em{font-style:normal;color:var(--amber)}
+.is2 .layA .ann{opacity:1;transform:translate(-50%,0)}
+.layA .ann2{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);color:var(--ink2);font-size:clamp(.85rem,1.5vw,1.05rem);opacity:0;transition:opacity .5s .9s;white-space:nowrap}
+.is1 .layA .ann2{opacity:1}
+/* 층 B: P × E 행·열 훑기 */
+.layB .pe{position:absolute;left:0;right:0;top:15%;display:flex;justify-content:center;align-items:flex-start;gap:clamp(.3rem,1.1vw,.8rem);font-size:clamp(1rem,2vw,1.55rem)}
+.pe .mx{row-gap:.3em;column-gap:.8em}
+.pe .mx > span{position:relative;padding:.05em .12em;border-radius:6px;transition:color .35s,background .35s,box-shadow .35s}
+.pe .lbl{display:grid;row-gap:.3em;padding:.22em 0;color:var(--grey);font-weight:500;text-align:right;line-height:1.35;align-self:flex-start}
+.pe .lbl span{padding:.05em 0}
+.pe .opx{color:var(--champ);align-self:flex-start;margin-top:2.05em}
+.pe .cn{font-size:max(.8rem,.5em);line-height:1.4;color:var(--grey);text-align:center;margin-top:.35rem;white-space:nowrap}
+.pe .blk{display:flex;flex-direction:column;align-items:center}
+.u0 .pe [data-r="1"]{color:var(--amber)}
+.u0 .pe .ecol > span{color:var(--champ)}
+.pe .hot{background:rgba(242,180,90,.25);box-shadow:0 0 0 2px var(--amber),0 0 18px rgba(242,180,90,.55);color:var(--ink)!important}
+.pe .res > span{opacity:.18}
+.pe .res > span.show{opacity:1;color:var(--amber)}
+.pe .res > span.flash{animation:cellpop .7s var(--ease)}
+@keyframes cellpop{0%{transform:scale(1.5);text-shadow:0 0 24px var(--amber)}100%{transform:none}}
+.layB .terms{position:absolute;left:4%;right:4%;bottom:10%;text-align:center;font-variant-numeric:tabular-nums;font-size:clamp(.95rem,2vw,1.45rem);font-weight:700;line-height:1.7}
+.terms .t{opacity:.15;transition:opacity .4s,color .4s;white-space:nowrap}
+.terms .t.on{opacity:1}
+.terms .t.now{color:var(--amber)}
+.terms .tot{color:var(--amber);font-size:1.25em}
+.layB .bc{position:absolute;left:0;right:0;bottom:2.5%;text-align:center;color:var(--grey);font-size:clamp(.8rem,1.3vw,.95rem);opacity:0;transition:opacity .5s}
+.u5 .layB .bc{opacity:1}
+/* 층 C: 할당량 막대 */
+.bars{position:absolute;left:12%;right:6%;top:17%;bottom:20%;display:flex;justify-content:space-around;align-items:flex-end;border-bottom:1px solid var(--line2)}
+.bars .bcol{position:relative;width:18%;height:100%;display:flex;align-items:flex-end}
+.bars .bar{position:relative;width:100%;height:0;background:linear-gradient(180deg,var(--amber),#c98d3c);border-radius:8px 8px 0 0;transition:height 1.2s var(--ease) var(--d)}
+.bars .bar .ex{position:absolute;left:0;right:0;top:0;background:var(--rust);border-radius:8px 8px 0 0;height:0;transition:height .8s var(--ease) 1.2s}
+.bars .val{position:absolute;left:50%;transform:translateX(-50%);bottom:calc(var(--h) - 1.9em);color:var(--bg);font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:clamp(.85rem,1.8vw,1.25rem);opacity:0;transition:opacity .5s calc(var(--d) + .9s),bottom 1.2s var(--ease) var(--d)}
+.bars .nm{position:absolute;left:50%;top:100%;transform:translateX(-50%);margin-top:.4rem;text-align:center;white-space:nowrap;font-weight:700;font-size:clamp(.85rem,1.6vw,1.1rem)}
+.bars .nm small{display:block;font-weight:700;font-size:.9em;opacity:0;transition:opacity .5s 1.6s}
+.g4 .bars .bar{height:var(--h)}
+.g4 .bars .bar .ex{height:var(--e,0)}
+.g4 .bars .val,.g4 .bars .nm small{opacity:1}
+.capline{position:absolute;left:-3%;right:-1%;bottom:66.667%;border-top:2px dashed var(--ink);opacity:0;transition:opacity .6s .9s;z-index:2}
+.capline span{position:absolute;right:0;top:-1.7rem;font-size:clamp(.8rem,1.3vw,.9rem);font-weight:700;background:rgba(29,26,22,.85);padding:0 .4rem;border-radius:6px;white-space:nowrap}
+.g4 .capline{opacity:1}
+.rs{color:#E07A4F}
+/* 층 D: 손익 */
+.pl{position:absolute;left:6%;right:6%;top:15%;display:grid;gap:clamp(.6rem,2vh,1.1rem)}
+.pl .r{display:grid;grid-template-columns:3.8em 1fr 5.2em;align-items:center;gap:.6rem;font-weight:700;font-size:clamp(.9rem,1.7vw,1.1rem)}
+.pl .track{position:relative;height:clamp(34px,6vh,48px)}
+.pl .track::before{content:"";position:absolute;left:50%;top:-6px;bottom:-6px;border-left:2px solid var(--line2)}
+.pl .fill{position:absolute;top:0;bottom:0;border-radius:6px;width:0;transition:width 1.3s var(--ease) var(--d)}
+.pl .fill.neg{right:50%;background:var(--rust)}
+.pl .fill.pos{left:50%;background:linear-gradient(90deg,#c98d3c,var(--amber))}
+.g5 .pl .fill{width:var(--w)}
+.pl .num{text-align:right;font-size:clamp(1.1rem,2.4vw,1.8rem);font-variant-numeric:tabular-nums;white-space:nowrap}
+.pl .axis{display:grid;grid-template-columns:3.8em 1fr 1fr 5.2em;gap:.6rem;color:var(--grey);font-size:.8rem}
+.pl .axis span:nth-child(3){text-align:right}
+.layD .form{position:absolute;left:0;right:0;bottom:7%;text-align:center;font-weight:700;font-size:clamp(.95rem,1.9vw,1.3rem)}
+.layD .form em{font-style:normal;color:var(--amber)}
+
+/* 실험실 띠 */
+.labband{background:linear-gradient(135deg,#2B2621 0%,#1D1A16 70%);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+.labband .bigcta{display:inline-flex;align-items:center;gap:.8rem;font-size:clamp(1.2rem,2.6vw,1.6rem);padding:1rem 2rem;box-shadow:0 0 0 0 rgba(242,180,90,.6);animation:ctaPulse 2.4s infinite}
+@keyframes ctaPulse{0%{box-shadow:0 0 0 0 rgba(242,180,90,.55)}70%{box-shadow:0 0 0 18px rgba(242,180,90,0)}100%{box-shadow:0 0 0 0 rgba(242,180,90,0)}}
+.labgrid{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));margin-top:2rem}
+.labgrid a{display:block;text-decoration:none;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;transition:.25s}
+.labgrid a:hover{border-color:var(--amber);transform:translateY(-3px)}
+.labgrid b{display:block;color:var(--amber);font-size:.85rem;letter-spacing:.08em}
+.labgrid span{display:block;font-weight:700;font-size:1.1rem;margin:.15rem 0}
+.labgrid small{color:var(--grey);font-size:.85rem}
+
+/* 인터랙션: a23 찾기 */
+.agrid{display:inline-grid;grid-template-columns:auto repeat(3,64px);grid-template-rows:auto repeat(3,52px);gap:6px;align-items:center;justify-items:center;margin:.4rem 0 .6rem}
+.agrid .h{color:var(--grey);font-size:.85rem}
+.agrid button{width:100%;height:100%;border:1px solid var(--line2);background:var(--bg);color:var(--ink);border-radius:8px;cursor:pointer;font:700 1.05rem var(--sans);transition:.2s}
+.agrid button:hover{border-color:var(--amber)}
+.agrid button.ok{background:var(--amber);color:var(--bg);border-color:var(--amber)}
+.agrid button.no{border-color:var(--rust);color:#E07A4F}
+.fb{min-height:1.6em;font-weight:500;color:var(--champ)}
+/* 크기 조건 판별기 */
+.szc{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .6rem;font-size:1.25rem;font-weight:700;margin:.4rem 0 .4rem}
+.szc select{appearance:none;background:var(--bg);color:var(--ink);border:1px solid var(--line2);border-radius:10px;padding:.3rem .7rem;font:700 1.2rem var(--sans);cursor:pointer}
+.szc select.mid{border-color:var(--amber);color:var(--amber)}
+.szout{font-weight:700;font-size:1.15rem;padding:.6rem 1rem;border-radius:12px;background:var(--bg);border:1px solid var(--line2);display:inline-block}
+.szout.ok{border-color:var(--amber);color:var(--amber)} .szout.no{border-color:var(--rust);color:#E07A4F}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0}
+/* 전환점 그래프 */
+.turn{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center}
+.turn svg{width:100%;height:auto;display:block}
+.turn input[type=range]{width:100%;accent-color:var(--amber)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.25rem .9rem;font-variant-numeric:tabular-nums;margin-top:.6rem}
+.kv dt{color:var(--grey)} .kv dd{margin:0;font-weight:700}
+.kv dd.big2{font-size:1.5rem;color:var(--amber)} .kv dd.big2.neg{color:#E07A4F}
+/* 믹스 막대 */
+.mix{display:grid;gap:.6rem;margin:.6rem 0 1rem}
+.mix .r{display:grid;grid-template-columns:3.6em 1fr 3.6em;align-items:center;gap:.6rem;font-weight:500}
+.mix .st{display:flex;height:30px;border-radius:6px;overflow:hidden;background:var(--bg)}
+.mix .st i{display:block;height:100%;transform-origin:left;animation:grow 1s var(--ease) both}
+@keyframes grow{from{transform:scaleX(0)}}
+.mix .tot{color:var(--grey);font-size:.85rem;text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.88rem;color:var(--ink2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:.35rem;vertical-align:-1px}
+.c-coal{background:var(--rust)}.c-gas{background:var(--amber)}.c-nuc{background:var(--champ)}.c-ren{background:var(--ivory)}
+/* 활동 · 전략 계산기 */
+.calcbox{background:var(--panel);border:1px solid var(--line2);border-radius:20px;padding:1.4rem}
+.sl{margin:.7rem 0}
+.sl label{display:flex;justify-content:space-between;font-weight:500;color:var(--champ)}
+.sl output{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.sl input{width:100%;accent-color:var(--amber)}
+.sres{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,128px),1fr));margin-top:1rem}
+.sres > div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.7rem .9rem}
+.sres small{display:block;color:var(--grey);font-size:.82rem}
+.sres b{font-size:1.35rem;font-variant-numeric:tabular-nums}
+.sres b.neg{color:#E07A4F} .sres b.pos{color:var(--amber)}
+.speech{font-family:var(--serif);font-weight:800;font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.6;border-left:3px solid var(--amber);padding:.4rem 0 .4rem 1rem;margin:1rem 0}
+.speech u{text-decoration:none;color:var(--amber)}
+.warn{color:#E07A4F;font-weight:500}
+.actcard{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:1.4rem}
+.actcard h3 small{display:block;color:var(--amber);font-size:.85rem;font-weight:500;letter-spacing:.06em}
+/* 사진 */
+.photos{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));margin-top:1.6rem}
+.photos figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);background:var(--panel)}
+.photos img{width:100%;aspect-ratio:16/10;object-fit:cover}
+.photos figcaption{padding:.55rem .9rem;color:var(--ink2);font-size:.88rem}
+.rubric td:first-child{font-weight:700;white-space:nowrap;color:var(--champ)}
+.ivory .rubric td:first-child{color:var(--amber-dark)}
+.rubric td{min-width:11em}
+.why .big{font-size:clamp(3rem,8vw,6rem)}
+.ivory .attr{color:var(--ink-sub)}
+.ivory .flow .st small,.ivory .card small{color:var(--ink-sub)}
+.std{margin:.2rem 0 .5rem;padding:0;list-style:none;display:grid;gap:.35rem}
+.std li{border-left:3px solid var(--amber-dark);padding:.15rem 0 .15rem .7rem;color:var(--ink-dark)}
+.std b{color:var(--amber-dark)}
+.xnote{margin-top:1rem;background:#fff;border:1px solid rgba(140,90,18,.35);border-radius:14px;padding:.8rem 1rem;color:var(--ink-dark);font-size:.95rem}
+.xnote b{color:var(--amber-dark)}
+.why .card small{display:block;margin-top:.4rem;font-size:.8rem}
+.photos-note{color:var(--ink-sub);font-size:.85rem;margin:.6rem 0 0}
+.ctable{width:100%;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.95rem}
+.ctable th,.ctable td{border:1px solid var(--line);padding:.3rem .4rem;text-align:center}
+.ctable th{color:var(--champ);font-weight:500}
+.ctable input{width:100%;min-width:4.2em;background:var(--bg);color:var(--ink);border:1px solid var(--line2);border-radius:8px;padding:.3rem .4rem;font:500 .95rem var(--sans);text-align:right}
+.ctable input:focus{outline:2px solid var(--amber);border-color:var(--amber)}
+.calcf{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.calcf label{display:block;font-size:.9rem;color:var(--champ);margin-bottom:.2rem}
+.calcf input{width:100%;background:var(--bg);color:var(--ink);border:1px solid var(--line2);border-radius:10px;padding:.45rem .6rem;font:500 1rem var(--sans)}
+.calcf input:focus{outline:2px solid var(--amber);border-color:var(--amber)}
+.back{display:inline-block;font-size:.9rem;color:var(--champ);margin-bottom:.6rem}
+.scaf{font-family:var(--serif);font-weight:800;font-size:clamp(1.05rem,2vw,1.35rem);line-height:1.9;border-left:3px solid var(--amber);padding:.4rem 0 .4rem 1rem;margin:1rem 0}
+.scaf u{text-decoration:none;color:var(--amber);border-bottom:1px solid var(--amber);padding:0 .2em}
+.scaf .blank{display:inline-block;min-width:6em;border-bottom:1px dashed var(--grey);color:var(--grey);font-family:var(--sans);font-weight:500;font-size:.85em;text-align:center}
+.tblnote{font-size:.9rem;color:var(--ink-sub);margin:.2rem 0 .8rem}
+.ctable input.pad,.calcf input.pad{min-height:0;resize:none;line-height:1.4}
+.ctable input.pad{padding:.35rem .45rem}
+.calcf input.pad{padding:.5rem .7rem}
+.ctable th{white-space:nowrap}
+.ctable{min-width:460px}
+.ivory .quote em{color:var(--amber-dark)}
+
+@media (max-width:820px){
+  .story-track{height:640vh}
+  .story-stick{align-items:flex-start;padding-top:12px}
+  .story-grid{grid-template-columns:1fr;gap:.9rem}
+  .viz{order:-1;height:min(50svh,420px);height:min(50vh,420px)}
+  .story-text{min-height:14rem}
+  .story-text h3{font-size:1.45rem;margin:.2rem 0 .4rem}
+  .story-text p{font-size:.95rem;margin-bottom:.4rem}
+  .story-rail{right:0}
+  .story-hint{display:none}
+  .step{padding:1.5rem 1rem 1.2rem}
+  .timer .bar{width:48px}
+  .agrid{grid-template-columns:auto repeat(3,54px);grid-template-rows:auto repeat(3,46px)}
+}
+@media (max-width:420px){
+  .layA .hd{font-size:.8rem}
+  .pe{gap:.25rem!important;font-size:.92rem!important}
+  .pe .mx{column-gap:.5em;padding:.22em .55em}
+  .layB .terms{font-size:.82rem}
+  .dt{font-size:.9rem}.dt th,.dt td{padding:.3rem .45rem}
+  .eq{font-size:1.02rem;gap:.4em .5em}
+}
+@media (prefers-reduced-motion:reduce){
+  .chip,.bars .bar,.pl .fill{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span> · 02 수학</a>
+    <nav aria-label="이 페이지 차례">
+      <a href="#story">행렬로 보기</a>
+      <a href="#lab">실험실</a>
+      <a href="#goal">목표</a>
+      <a href="#lesson">수업 진행</a>
+      <a href="#act">활동</a>
+      <a href="#rubric">평가</a>
+      <a href="#ppt">PPT</a>
+    </nav>
+    <div class="tools">
+      <button class="tbtn" data-toggle="tmode">교사 모드</button><button class="tbtn" data-toggle="proj">크게 보기</button><button class="tbtn" data-toggle="fs">전체 화면</button>
+    </div>
+  </div>
+</header>
+
+<!-- ═════════ 1. 몰입형 인트로 (M0 → M1 → M2, 끝 장면 = 다음 장면 배경)
+     프로그램 2 고유 모션: 흩어진 숫자가 끊김 없이 행렬 칸으로 날아 들어감(.fly 층은 장면 밖에 있어 장면이 바뀌어도 이어짐),
+     '행 → 열' 와이프 전환(.wipe), p23 행·열 훑기, 연기 입자 → 가격표(.ptag) ═════════ -->
+<section class="intro" id="intro" data-hold-last aria-label="인트로: 발전소의 밤에서 탄소의 값까지">
+  <!-- 장면 1 · 제목 (M0 첫 장면 = 영상 포스터와 같아 이음매가 없음) -->
+  <div class="scene" data-dur="5200">
+    <img class="kb" src="../assets/video/M0_first.jpg" alt="해 질 녘 석탄 화력 발전소의 굴뚝 두 개">
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">프로그램 2 · 고1 공통수학1 · 행렬 · 2차시</span>
+      <h1 class="display"><span class="mask"><span>데이터로 그리는</span></span><span class="mask"><span>미래 <em>에너지</em></span></span></h1>
+      <p class="subline fadeup">행렬 모델링과 탄소 경제 · 하진수 · 대전대신고등학교</p>
+    </div></div>
+  </div>
+  <!-- 장면 2 · M0 영상: 석탄 발전소 → 태양광·풍력 단지 -->
+  <div class="scene" data-dur="4300">
+    <video muted playsinline preload="none" poster="../assets/video/M0_first.jpg" src="../assets/video/M0.mp4" aria-label="석탄 발전소가 태양광·풍력 단지로 바뀌는 영상"></video>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">발전소의 밤이 지나면</span>
+      <h2 class="display"><span class="mask"><span>석탄에서</span></span><span class="mask"><span><em>햇빛과 바람</em>으로</span></span></h2>
+      <p class="subline fadeup">나라마다, 기업마다 에너지 믹스가 바뀌고 있어요.</p>
+    </div></div>
+  </div>
+  <!-- 장면 3 · M0 끝 장면 + 흩어진 숫자(숫자는 아래 .fly 층) -->
+  <div class="scene" data-dur="5600">
+    <img class="kb" src="../assets/video/M0_last.jpg" alt="넓은 태양광 패널 단지와 풍력 발전기">
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">흩어진 숫자</span>
+      <h2 class="display"><span class="mask"><span>숫자는 쏟아지는데</span></span><span class="mask"><span>한눈에 <em>보이지 않아요</em></span></span></h2>
+      <p class="subline fadeup">어느 나라가 신재생 전기를 더 많이 만들까요?</p>
+    </div></div>
+  </div>
+  <!-- 장면 4 · M1 영상: 흩어진 도시 불빛 → 금빛 격자 (들어올 때 '행 → 열' 와이프, 숫자가 칸으로 날아 들어감) -->
+  <div class="scene" data-dur="5200">
+    <video muted playsinline preload="none" poster="../assets/video/M1_first.jpg" src="../assets/video/M1.mp4" aria-label="흩어진 도시 불빛이 금빛 격자로 정렬되는 영상"></video>
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">가로는 나라, 세로는 에너지원</span>
+      <h2 class="display"><span class="mask"><span>숫자마다</span></span><span class="mask"><span><em>제자리</em>를 찾아 주면</span></span></h2>
+      <p class="subline fadeup">가로줄은 행, 세로줄은 열 — 여섯 숫자가 두 줄 세 칸에 들어가요.</p>
+    </div></div>
+  </div>
+  <!-- 장면 5 · M1 끝 장면 + 행렬 P, 2행·3열 훑기 -->
+  <div class="scene" data-dur="6800">
+    <img class="kb" src="../assets/video/M1_last.jpg" alt="금빛 격자처럼 정렬된 밤의 도시">
+    <div class="scrim"></div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">행렬 P</span>
+      <h2 class="display"><span class="mask"><span>자리가 곧</span></span><span class="mask"><span><em>의미</em>가 돼요</span></span></h2>
+      <p class="subline fadeup">2행(독일)과 3열(신재생)이 만나는 칸 p<sub>23</sub> = 250. 행이 먼저, 열이 나중.</p>
+    </div></div>
+  </div>
+  <!-- 장면 6 · M2 영상: 굴뚝 연기 → 금빛 입자 → 가격표 -->
+  <div class="scene" data-flash data-dur="8600">
+    <video muted playsinline preload="none" poster="../assets/video/M2_first.jpg" src="../assets/video/M2.mp4" aria-label="굴뚝 연기가 금빛 입자로 바뀌는 영상"></video>
+    <div class="scrim"></div>
+    <canvas class="smoke" aria-hidden="true"></canvas>
+    <div class="ptag" aria-hidden="true">
+      <div class="tg">₩30,000 / tCO₂</div>
+      <div class="tl l1">A기업 배출량 58,000 tCO₂ × 30,000원 = <b><span class="c1">0</span>억 원</b></div>
+      <div class="tl l2">할당량 40,000 tCO₂ × 30,000원 = 12억 원은 이미 받은 몫</div>
+      <div class="tl l3">A기업 손익 <b class="res">−<span class="c2">0</span>억 원</b></div>
+      <div class="tnote">배출량·가격·할당량은 교육용 가정값</div>
+    </div>
+    <div class="cap"><div class="wrap">
+      <span class="kicker">탄소의 값</span>
+      <h2 class="display"><span class="mask"><span>이제 연기에도</span></span><span class="mask"><span><em>가격</em>이 붙습니다</span></span></h2>
+      <p class="subline fadeup">한국 배출권거래제(K-ETS), 2015년 시작 — 할당량보다 많이 내보내면 배출권을 사야 해요.</p>
+      <p class="sr">톤당 30,000원일 때 A기업 배출량 58,000톤은 17.4억 원어치이고, 할당량 40,000톤(12억 원어치)을 빼면 A기업 손익은 −5.4억 원이에요.</p>
+    </div></div>
+  </div>
+  <!-- 장면 7 · M2 끝 장면 + 질문 (멈춤) -->
+  <div class="scene">
+    <img class="kb" src="../assets/video/M2_last.jpg" alt="굴뚝 위로 흩어지는 금빛 입자">
+    <div class="scrim full"></div>
+    <div class="cap center"><div class="wrap">
+      <span class="kicker">이 수업의 질문</span>
+      <h2 class="display q"><span class="mask"><span>a<sub>ij</sub>라는 작은 기호가</span></span><span class="mask"><span>기업의 <em>운명</em>을 가른다면?</span></span></h2>
+      <p class="subline fadeup">국가·기업은 매일 발전량·배출량 데이터를 행렬로 다룹니다.</p>
+      <div class="cta fadeup"><a class="btn" href="#story">스크롤로 시작 ↓</a><a class="btn ghost" href="#lesson">수업 진행으로 ↓</a><a class="btn ghost" href="lab/index.html" target="_blank" rel="noopener">실험실 바로 열기</a></div>
+    </div></div>
+  </div>
+  <canvas class="motes" data-n="60" aria-hidden="true"></canvas>
+  <!-- '행 → 열' 와이프: 가로 띠 2개가 덮고, 세로 띠 3개가 걷히며 2 × 3 격자를 그림 -->
+  <div class="wipe" aria-hidden="true"><i class="r r1"></i><i class="r r2"></i><i class="c c1"></i><i class="c c2"></i><i class="c c3"></i><b class="hl"></b></div>
+  <!-- 장면 3~5를 잇는 숫자 층: 흩어진 자리 → 행렬 칸 -->
+  <div class="fly" aria-hidden="true">
+    <div class="fmx">
+      <span class="rowband"></span><span class="colband"></span>
+      <span class="pn">P =</span><span class="bk bl"></span><span class="bk br"></span>
+      <span class="ch" style="grid-column:3;--d:1s">석탄</span><span class="ch" style="grid-column:4;--d:1.1s">천연가스</span><span class="ch" style="grid-column:5;--d:1.2s">신재생</span>
+      <span class="rh" style="grid-row:2;--d:1s">한국</span><span class="rh" style="grid-row:3;--d:1.15s">독일</span>
+      <span class="slot" style="grid-column:3;grid-row:2">120</span><span class="slot" style="grid-column:4;grid-row:2">80</span><span class="slot" style="grid-column:5;grid-row:2">50</span>
+      <span class="slot" style="grid-column:3;grid-row:3">100</span><span class="slot" style="grid-column:4;grid-row:3">120</span><span class="slot" style="grid-column:5;grid-row:3">250</span>
+      <span class="ptg">p<sub>23</sub></span>
+      <span class="flab">단위 TWh · 교육용 가상 수치(원자력 등 생략)</span>
+    </div>
+    <span class="n" data-p="12,17,1"><i>120<small>한국 · 석탄</small></i></span>
+    <span class="n" data-p="40,27,.8,.75"><i>80<small>한국 · 천연가스</small></i></span>
+    <span class="n" data-p="17,41,.8,.7"><i>50<small>한국 · 신재생</small></i></span>
+    <span class="n" data-p="84,36,.95"><i>100<small>독일 · 석탄</small></i></span>
+    <span class="n" data-p="58,45,1"><i>120<small>독일 · 천연가스</small></i></span>
+    <span class="n p23" data-p="72,15,1.15"><i>250<small>독일 · 신재생</small></i></span>
+    <span class="n dec" data-p="30,11,.55,.55"><i>TWh</i></span>
+    <span class="n dec" data-p="90,24,.55,.5"><i>tCO₂</i></span>
+  </div>
+  <div class="flash"></div>
+  <button class="tbtn skip" type="button" data-skip>질문으로 건너뛰기 →</button>
+  <div class="intro-ui">
+    <button class="tbtn" data-intro="prev" aria-label="이전 장면">◀</button>
+    <div class="dots"></div>
+    <button class="tbtn" data-intro="pause" aria-pressed="false">일시정지</button>
+    <button class="tbtn" data-intro="next" aria-label="다음 장면">▶</button>
+  </div>
+  <div class="scroll-hint">아래로<i></i></div>
+</section>
+
+<!-- ═════════ 2. 스크롤 이야기: 흩어진 숫자 → 행렬 → P×E → 할당량 → 손익 ═════════ -->
+<section class="story" id="story" data-s="0" aria-label="스크롤로 보는 행렬과 탄소 경제">
+  <div class="story-track">
+    <div class="story-stick">
+      <div class="wrap story-grid">
+        <div class="story-text">
+          <div class="sc on" data-s="0">
+            <span class="no">01 · 흩어진 숫자</span>
+            <h3>숫자가 흩어져 있으면<br><em>비교할 수 없어요</em></h3>
+            <p>한국과 독일의 발전량(TWh) 여섯 개. 어느 나라가 신재생을 더 많이 쓸까요? 한눈에 보이나요?</p>
+            <p class="note">교육용 가상 수치예요. 3열로 단순하게 하려고 원자력은 뺐어요.</p>
+            <p class="note">천천히 스크롤해 보세요 ↓</p>
+          </div>
+          <div class="sc" data-s="1">
+            <span class="no">02 · 줄과 칸</span>
+            <h3>행 = 국가<br>열 = 에너지원<br>→ <em>2 × 3 행렬 P</em></h3>
+            <p>먼저 “행은 무엇, 열은 무엇, 단위는 무엇”을 약속해요. 행이 2개, 열이 3개라서 2×3 행렬이에요.</p>
+          </div>
+          <div class="sc" data-s="2">
+            <span class="no">03 · 성분 읽기</span>
+            <h3>위치가 곧 의미<br><em>p<sub>23</sub> = 250</em></h3>
+            <p>2행(독일)과 3열(신재생)이 만나는 칸. 아래첨자는 <b>행이 먼저, 열이 나중</b>이에요.</p>
+          </div>
+          <div class="sc" data-s="3">
+            <span class="no">04 · 행 × 열</span>
+            <h3>A기업의 행<br>× 배출계수의 열<br>= <em>58,000 tCO<sub>2</sub></em></h3>
+            <p>대응하는 성분끼리 곱해 모두 더하면 행렬 곱의 한 칸이 돼요. 발전량 × 배출계수의 합 = 그 기업의 배출량.</p>
+          </div>
+          <div class="sc" data-s="4">
+            <span class="no">05 · 할당량</span>
+            <h3>40,000을 넘으면<br><em>배출권을 산다</em></h3>
+            <p>PE − Q = (+18,000, −4,000, −19,500). 부호가 곧 기업의 운명을 가릅니다.</p>
+          </div>
+          <div class="sc" data-s="5">
+            <span class="no">06 · 거래 손익 · 톤당 30,000원</span>
+            <h3>같은 전기, <em>다른 손익</em></h3>
+            <p>신재생 비중이 큰 C기업은 +5.85억 원, 석탄 비중이 큰 A기업은 −5.4억 원. 이제 직접 숫자를 바꿔 볼 차례예요.</p>
+            <a class="btn" href="lab/index.html#trade" target="_blank" rel="noopener">실험실 열기 →</a>
+          </div>
+        </div>
+
+        <div class="viz" id="viz" aria-hidden="true">
+          <!-- 층 A -->
+          <div class="layer layA on">
+            <div class="vtitle">한국 · 독일 발전량 (TWh · 교육용 가상 수치 · 원자력 등 생략)</div>
+            <div class="band row"></div><div class="band col"></div>
+            <span class="brk l"></span><span class="brk r"></span>
+            <span class="pnm">P =</span>
+            <span class="hd" style="left:40%;top:28%">석탄</span>
+            <span class="hd" style="left:56.5%;top:28%">천연가스</span>
+            <span class="hd" style="left:73%;top:28%">신재생</span>
+            <span class="hd" style="left:91%;top:45%">한국</span>
+            <span class="hd" style="left:91%;top:62.5%">독일</span>
+            <div class="chip" style="--sx:14%;--sy:20%;--r:-8deg;--gx:40%;--gy:45%;--d:0s"><b>120</b><small>한국 · 석탄</small></div>
+            <div class="chip" style="--sx:52%;--sy:17%;--r:6deg;--gx:56.5%;--gy:45%;--d:.08s"><b>80</b><small>한국 · 천연가스</small></div>
+            <div class="chip" style="--sx:20%;--sy:76%;--r:9deg;--gx:73%;--gy:45%;--d:.16s"><b>50</b><small>한국 · 신재생</small></div>
+            <div class="chip" style="--sx:84%;--sy:24%;--r:-5deg;--gx:40%;--gy:62.5%;--d:.24s"><b>100</b><small>독일 · 석탄</small></div>
+            <div class="chip" style="--sx:48%;--sy:56%;--r:-10deg;--gx:56.5%;--gy:62.5%;--d:.32s"><b>120</b><small>독일 · 천연가스</small></div>
+            <div class="chip p23" style="--sx:80%;--sy:74%;--r:7deg;--gx:73%;--gy:62.5%;--d:.4s"><b>250</b><small>독일 · 신재생</small></div>
+            <div class="ann">p<sub>23</sub> = <em>250</em> · 2행 독일, 3열 신재생</div>
+            <div class="ann2">행 2개 × 열 3개 = 2 × 3 행렬</div>
+          </div>
+          <!-- 층 B -->
+          <div class="layer layB">
+            <div class="vtitle">발전량 P × 배출계수 E = 배출량 PE</div>
+            <div class="pe">
+              <div class="lbl"><span>A</span><span>B</span><span>C</span></div>
+              <div class="blk">
+                <div class="mx c3 pm">
+                  <span data-r="1" data-k="1">50</span><span data-r="1" data-k="2">30</span><span data-r="1" data-k="3">20</span>
+                  <span>20</span><span>40</span><span>40</span>
+                  <span>10</span><span>20</span><span>70</span>
+                </div>
+                <div class="cn">석탄 · 가스 · 신재생<br>P (GWh)</div>
+              </div>
+              <span class="opx">×</span>
+              <div class="blk">
+                <div class="mx c1 ecol"><span data-k="1">900</span><span data-k="2">400</span><span data-k="3">50</span></div>
+                <div class="cn">E<br>(tCO₂/GWh)</div>
+              </div>
+              <span class="opx">=</span>
+              <div class="blk">
+                <div class="mx c1 res"><span id="r1">58,000</span><span id="r2">36,000</span><span id="r3">20,500</span></div>
+                <div class="cn">PE<br>(tCO₂)</div>
+              </div>
+            </div>
+            <div class="terms">
+              <span class="t" data-t="1">50×900</span> <span class="t" data-t="2">+ 30×400</span> <span class="t" data-t="3">+ 20×50</span><br>
+              <span class="t" data-t="1">= 45,000</span> <span class="t" data-t="2">+ 12,000</span> <span class="t" data-t="3">+ 1,000</span> <span class="t tot" data-t="4">= 58,000</span>
+            </div>
+            <div class="bc">B기업 36,000 · C기업 20,500 — 같은 방법으로 한 번에</div>
+          </div>
+          <!-- 층 C -->
+          <div class="layer layC">
+            <div class="vtitle">배출량 PE와 할당량 Q (tCO₂)</div>
+            <div class="bars">
+              <div class="capline"><span>할당량 Q = 40,000</span></div>
+              <div class="bcol"><div class="bar" style="--h:96.667%;--e:31.03%;--d:0s"><i class="ex"></i></div><span class="val" style="--h:96.667%;--d:0s;color:var(--ink)">58,000</span><span class="nm">A기업<small class="rs">+18,000</small></span></div>
+              <div class="bcol"><div class="bar" style="--h:60%;--d:.15s"></div><span class="val" style="--h:60%;--d:.15s">36,000</span><span class="nm">B기업<small>−4,000</small></span></div>
+              <div class="bcol"><div class="bar" style="--h:34.167%;--d:.3s"></div><span class="val" style="--h:34.167%;--d:.3s">20,500</span><span class="nm">C기업<small class="amber">−19,500</small></span></div>
+            </div>
+          </div>
+          <!-- 층 D -->
+          <div class="layer layD">
+            <div class="vtitle">거래 손익 = −30,000 × (PE − Q) (원)</div>
+            <div class="pl">
+              <div class="r"><span>A기업</span><div class="track"><i class="fill neg" style="--w:38.57%;--d:0s"></i></div><span class="num rs"><span data-cnt="-5.4">0</span>억</span></div>
+              <div class="r"><span>B기업</span><div class="track"><i class="fill pos" style="--w:8.57%;--d:.15s"></i></div><span class="num"><span data-cnt="1.2">0</span>억</span></div>
+              <div class="r"><span>C기업</span><div class="track"><i class="fill pos" style="--w:41.79%;--d:.3s"></i></div><span class="num amber"><span data-cnt="5.85">0</span>억</span></div>
+              <div class="axis"><span></span><span>← 손해</span><span>이익 →</span><span></span></div>
+            </div>
+            <div class="form">A 18,000톤 구매 · B 4,000톤 판매 · C <em>19,500톤 판매</em></div>
+          </div>
+        </div>
+      </div>
+      <div class="story-rail" role="group" aria-label="이야기 단계"></div>
+      <div class="story-hint">스크롤 ↓</div>
+      <div class="story-bar"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 3. 실험실 ═════════ -->
+<section class="sec labband" id="lab">
+  <div class="wrap">
+    <p class="label reveal">직접 해 보기</p>
+    <h2 class="head serif reveal">행렬 × 탄소 실험실</h2>
+    <p class="lead reveal d1">숫자를 바꾸면 행렬이 움직이고, 배출량과 손익이 바로 다시 계산돼요. 수업 중 단계마다 해당 실험실로 들어갑니다.</p>
+    <a class="btn bigcta reveal d2" href="lab/index.html" target="_blank" rel="noopener">실험실 열기 <span aria-hidden="true">→</span></a>
+    <div class="labgrid">
+      <a class="reveal" href="lab/index.html#make" target="_blank" rel="noopener"><b>실험실 ① · 1차시</b><span>행렬 만들기</span><small>표 → 행렬 P, 성분 읽기, 전치</small></a>
+      <a class="reveal d1" href="lab/index.html#add" target="_blank" rel="noopener"><b>실험실 ② · 1차시</b><span>덧셈·실수배</span><small>상반기 + 하반기, × 0.9</small></a>
+      <a class="reveal d2" href="lab/index.html#mult" target="_blank" rel="noopener"><b>실험실 ③ · 2차시</b><span>행렬 곱 P × E</span><small>행과 열을 한 단계씩</small></a>
+      <a class="reveal d3" href="lab/index.html#trade" target="_blank" rel="noopener"><b>실험실 ④ · 2차시</b><span>배출권 거래 손익</span><small>할당량·가격 바꾸기</small></a>
+      <a class="reveal d4" href="lab/index.html#turn" target="_blank" rel="noopener"><b>실험실 ⑤ · 2차시</b><span>전환점 찾기</span><small>손익이 0이 되는 x</small></a>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 4. 질문 · 목표 · 흐름 ═════════ -->
+<section class="sec ivory" id="goal">
+  <div class="wrap">
+    <p class="label reveal">이 수업의 질문</p>
+    <p class="quote reveal">추상적인 기호 <em>a<sub>ij</sub></em>가 어떻게<br>국가·기업의 의사결정을 움직일까?</p>
+    <p class="attr reveal d1">고1 「공통수학1」 행렬 · 2차시(블록 90분 또는 45분×2, 자기·동료 평가는 과제 제출 뒤 다음 수업 도입 10분) · 모델링 중심 모둠 탐구</p>
+    <div class="reveal d1" style="margin-top:.8rem"><span class="tag">에너지소양 · 에너지믹스</span><span class="tag">에너지소양 · 무탄소 에너지</span><span class="tag">에너지소양 · 사회경제</span></div>
+
+    <div class="grid g2" style="margin-top:2.6rem">
+      <div class="card reveal"><span class="no">1차시 · 구조화</span><h3>세상을 행렬로 담다</h3><p>실생활 에너지 데이터를 행렬로 나타내고, 행렬의 덧셈·실수배를 수행하여 그 사회적 의미를 설명할 수 있다.</p></div>
+      <div class="card reveal d1"><span class="no">2차시 · 모델링</span><h3>행렬의 곱, 탄소의 값을 매기다</h3><p>행렬의 곱셈을 수행하여 탄소 배출량을 정량적으로 예측하고, 그 결과를 탄소배출권 거래제(ETS)의 경제 맥락에서 해석할 수 있다.</p></div>
+    </div>
+
+    <h3 style="margin-top:2.6rem" class="reveal">수학적 모델링 3단계</h3>
+    <div class="flow reveal d1">
+      <div class="st"><b>구조화</b><small>현실 데이터를 행렬로 (1차시)</small></div>
+      <div class="st"><b>연산</b><small>덧셈·실수배·곱셈 (1~2차시)</small></div>
+      <div class="st"><b>해석</b><small>거래 손익과 정책 제안 (2차시)</small></div>
+    </div>
+    <div style="margin-top:1.2rem" class="reveal d2">
+      <!-- 성취기준 문구: 2022 개정 수학과 교육과정(교육부 고시 제2022-33호 [별책 8]) 공통수학1 — 공신력 있는 전재본으로 대조함. 고시문 PDF 원문으로 마지막 확인 권장.
+           확인 필요: 실제 적용 과목 「인공지능 수학」의 연계 성취기준([12인수03-…]) 코드·문구는 원문 미확인이라 화면에 넣지 않음 -->
+      <ul class="std">
+        <li><b>[10공수1-04-01]</b> 행렬의 뜻을 알고, 실생활 상황을 행렬로 표현할 수 있다. <small>→ 1차시 활동 1·2, 활동지 ①, 1차시 관찰 기준</small></li>
+        <li><b>[10공수1-04-02]</b> 행렬의 연산을 수행하고, 관련된 문제를 해결할 수 있다. <small>→ 1차시 활동 3·4, 2차시 활동 1~4, 활동지 ②, 정책 제안 루브릭</small></li>
+      </ul>
+      <p class="tblnote">융합 요소(성취기준 아님): 데이터 구조화(정보) · 탄소 가격 메커니즘(경제)</p>
+    </div>
+    <div class="xnote reveal d2"><b>※ 교육과정 범위를 넘는 확장 활동</b> — 공통수학1 성취기준 해설은 행렬의 곱셈을 “행과 열의 수가 각각 2를 넘지 않는 범위”에서 다루게 합니다. 이 수업의 3×3 · 3×1 행렬 곱(P×E)은 그 범위를 넘는 확장 활동이에요. 곱의 원리는 분식집·성적 예시로 먼저 익히고, 3×3 계산은 손 계산 한 줄(A기업)과 스프레드시트 MMULT로 합니다. 실제 적용은 행렬을 이미 배운 2학년 「인공지능 수학」 수강생이었어요.<br><b>고1 공통수학1에 그대로 쓸 때</b> — 기업 2곳(A·C) × 발전원 2종(석탄·신재생)의 2×2 행렬과 2×1 배출계수(900·50)로 줄여 같은 흐름으로 진행할 수 있어요(행·열 2 이하).</div>
+
+    <h3 style="margin-top:3rem" class="reveal">왜 지금, 탄소를 계산할까요?</h3>
+    <div class="grid g3 why">
+      <div class="card reveal"><div class="big" style="color:var(--amber-dark)">2015</div><p><b>한국 배출권거래제(K-ETS) 시작</b> — 발전·철강·시멘트 등 다배출 기업이 의무 참여하고, 할당량을 넘기면 배출권을 사요. 배출권은 대부분 무상으로 받지만 일부는 경매로 사야 해요(발전 부문 유상 비율 2026년 15% → 2030년 50%).<small>환경부 「제4차 배출권거래제 기본계획」(2024. 12.)·제4차 계획기간 할당계획(2025)</small></p></div>
+      <div class="card reveal d1"><div class="big" style="color:var(--amber-dark)">2026</div><p><b>EU 탄소국경조정제도(CBAM) 본격 시행</b> — 철강·알루미늄·시멘트·비료·수소·전력 6개 품목을 EU에 수출하면 제품에 담긴 배출량만큼 CBAM 인증서를 사야 해요(2026년 수입분부터 적용, 인증서 구매·제출은 2027년부터). 수출국에서 이미 낸 탄소 가격은 공제받을 수 있어, 탄소 계산이 곧 수출 경쟁력이에요.<small>EU 규정 2023/956 및 2025년 간소화 개정 기준</small></p></div>
+      <div class="card reveal d2"><div class="big" style="color:var(--amber-dark);font-size:clamp(2.4rem,6vw,4.4rem)">RE100</div><p><b>사용 전력 100% 재생에너지 약속</b> — 기업이 쓰는 <b>전력</b>을 늦어도 2050년까지 100% 재생에너지 전기로 채우겠다는 국제 캠페인(중간 목표 2030년 60%·2040년 90%). 애플·구글·삼성전자 등이 참여하고, 이런 기업에 납품하는 협력사도 재생에너지 사용을 요구받아요.<small>The Climate Group, RE100 FAQ·가입 기준(2025)</small></p></div>
+    </div>
+
+    <h3 style="margin-top:3rem" class="reveal">수업 적용</h3>
+    <p class="reveal" style="color:var(--ink-sub)">2026. 11. 3.~11. 4. 대전대신고등학교 2학년 「인공지능 수학」 수강 학생 100여 명에게 2차시 수업을 적용했어요. 행렬을 배운 학생들이 행렬 연산을 에너지 데이터와 탄소배출권 손익 계산에 다시 적용했습니다.</p>
+    <!-- 사진: 2026 수업 장면 · 보고서 수록본. 학생 공개 동의 미확인 → 학생 얼굴을 흐리게 처리한 사본(*_blur.jpg)만 게시. 원본은 img/_orig/(HTML에서 참조하지 않음). 확인 필요: 동의서가 있으면 선생님이 원본 사용 여부 결정 -->
+    <div class="photos">
+      <figure class="reveal"><img src="img/class_wide_blur.jpg" alt="노트북을 펴고 앉은 학생들로 가득한 넓은 교실, 앞쪽 화면에 수업 자료" loading="lazy"><figcaption>2학년 「인공지능 수학」 수업 전경</figcaption></figure>
+      <figure class="reveal d1"><img src="img/laptop_blur.jpg" alt="학생이 노트북으로 웹 수업 자료를 조작하는 손" loading="lazy"><figcaption>노트북으로 웹 자료를 직접 조작</figcaption></figure>
+      <figure class="reveal d2"><img src="img/teacher_blur.jpg" alt="교사가 학생 옆에서 노트북 화면을 보며 설명하는 모습" loading="lazy"><figcaption>모둠별 계산 과정 피드백</figcaption></figure>
+    </div>
+    <p class="photos-note">학생 얼굴은 흐리게 처리했습니다.</p>
+  </div>
+</section>
+
+<!-- ═════════ 5. 수업 진행 ═════════ -->
+<section class="sec" id="lesson">
+  <div class="wrap">
+    <p class="label">수업 진행</p>
+    <h2 class="head">차시별 단계 진행</h2>
+    <p class="lead">← → 키나 아래 버튼으로 한 단계씩 넘겨요. 정답은 펼치기, 교사 발문·유의점은 <b>교사 모드</b>에서 보여요.</p>
+
+    <div class="tabs" data-key="p2:tab" role="tablist" aria-label="차시">
+      <button role="tab" id="t1" aria-controls="tp1">1차시 · 세상을 행렬로 담다</button>
+      <button role="tab" id="t2" aria-controls="tp2">2차시 · 행렬의 곱, 탄소의 값을 매기다</button>
+    </div>
+
+    <!-- ───── 1차시 ───── -->
+    <div class="tabpanel" id="tp1" role="tabpanel" aria-labelledby="t1">
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+
+          <div class="step" data-phase="도입 · 학습 문제" data-time="도입 10분 중 ①">
+            <p class="ask">이 수많은 숫자를<br><em>어떻게 한눈에</em> 정리할 수 있을까?</p>
+            <p>영상을 보고, 칠판에 흩어진 발전량 숫자를 살펴봐요.</p>
+            <div class="vframe sm" data-yt="jBPWUAOveoc" data-title="영상① 3분 안에 알아보는 온실가스 배출권 거래제"></div>
+            <p style="margin-top:.8rem"><a class="live" href="https://ourworldindata.org/electricity-mix" target="_blank" rel="noopener"><i></i>Our World in Data · 국가별 전력 에너지 믹스</a></p>
+            <div class="teacher">
+              · 국가별 발전량·탄소 배출 통계 화면과 영상①을 보여 준 뒤 발문<br>
+              · 한 국가의 에너지원별 발전량을 칠판에 흩뜨려 적어 정리의 필요성을 느끼게 함<br>
+              · 숫자의 ‘무질서’를 일부러 보여 주어 구조화의 필요를 끌어냄<br>
+              · 시간: 지도안은 45분(도입 10 · 전개 30 · 정리 5) 기준. 50분 수업이면 남는 5분을 모둠 활동(활동지 ①)에 더함
+            </div>
+          </div>
+
+          <div class="step" data-phase="도입 · 왜 지금?" data-time="도입 10분 중 ②">
+            <h3>탄소를 계산해야 하는 이유</h3>
+            <div class="mini-cards">
+              <div><b>2015</b><span>한국 배출권거래제(K-ETS) — 할당량을 넘기면 배출권을 산다</span></div>
+              <div><b>2026</b><span>EU CBAM 본격 시행 — 철강·알루미늄·시멘트·비료·수소·전력 수출에 탄소 비용(인증서 구매·제출은 2027년부터)</span></div>
+              <div><b>RE100</b><span>쓰는 전력을 늦어도 2050년까지 100% 재생에너지로 — 애플·구글·삼성전자 등 참여, 협력사도 요구받음</span></div>
+            </div>
+            <p>배출권 1톤의 가격은 시기마다 크게 달라져요. 오늘 시세를 같이 확인해 볼까요?</p>
+            <a class="live" href="https://ets.krx.co.kr" target="_blank" rel="noopener"><i></i>배출권시장 정보플랫폼 · 오늘의 시세</a>
+            <div class="teacher">· “국가·기업은 매일 발전량·배출량 데이터를 행렬로 다룬다”로 연결<br>· 시세 화면은 수업 시점에 실시간으로 조회</div>
+          </div>
+
+          <div class="step" data-phase="도입 · 목표 확인" data-time="도입 10분 중 ③">
+            <h3>오늘의 목표</h3>
+            <p class="ask" style="font-size:clamp(1.25rem,2.6vw,1.9rem)">실생활 에너지 데이터를 <em>행렬</em>로 나타내고, 행렬의 덧셈·실수배를 수행하여 그 사회적 의미를 설명해요.</p>
+            <div class="flow">
+              <div class="st"><b>행렬의 뜻</b><small>행·열·성분</small></div>
+              <div class="st"><b>발전량 행렬</b><small>2 × 3 행렬 P</small></div>
+              <div class="st"><b>덧셈</b><small>시계열 통합</small></div>
+              <div class="st"><b>실수배</b><small>수요 절감·감축 목표</small></div>
+            </div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 1 · 행렬의 뜻" data-time="전개 30분 중 8분">
+            <p class="ask">3×3 격자에서 <em>a<sub>23</sub></em>은 어디에 있을까?</p>
+            <div class="two">
+              <div>
+                <div class="agrid" data-agrid>
+                  <span></span><span class="h">1열</span><span class="h">2열</span><span class="h">3열</span>
+                  <span class="h">1행</span><button data-i="1" data-j="1" aria-label="1행 1열"></button><button data-i="1" data-j="2" aria-label="1행 2열"></button><button data-i="1" data-j="3" aria-label="1행 3열"></button>
+                  <span class="h">2행</span><button data-i="2" data-j="1" aria-label="2행 1열"></button><button data-i="2" data-j="2" aria-label="2행 2열"></button><button data-i="2" data-j="3" aria-label="2행 3열"></button>
+                  <span class="h">3행</span><button data-i="3" data-j="1" aria-label="3행 1열"></button><button data-i="3" data-j="2" aria-label="3행 2열"></button><button data-i="3" data-j="3" aria-label="3행 3열"></button>
+                </div>
+                <p class="fb" aria-live="polite">칸을 눌러 보세요.</p>
+              </div>
+              <ul>
+                <li><b>행렬</b>: 여러 수를 직사각형 모양으로 배열해 괄호로 묶은 것</li>
+                <li><b>행</b> = 가로줄, <b>열</b> = 세로줄</li>
+                <li><b>성분 a<sub>ij</sub></b> = i행 j열의 수 (행이 먼저, 열이 나중)</li>
+                <li>행이 m개, 열이 n개 → <b>m × n 행렬</b></li>
+              </ul>
+            </div>
+            <div class="timer" data-min="8"></div>
+            <div class="teacher">· 학생이 손으로 짚어 위치를 말하게 함<br>· ‘i행 j열 → a<sub>ij</sub>’ 표기를 반드시 쓰게 함</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 2 · 데이터 구조화" data-time="전개 30분 중 8분 ①">
+            <h3>표를 행렬로 옮기면</h3>
+            <p>약속: <b>행 = 국가, 열 = 에너지원, 성분 = 발전량(TWh)</b></p>
+            <div class="eq">
+              <table class="dt" aria-label="국가별 에너지원 발전량 표(TWh)">
+                <tr><th></th><th>석탄</th><th>천연가스</th><th>신재생</th></tr>
+                <tr><th>한국</th><td>120</td><td>80</td><td>50</td></tr>
+                <tr><th>독일</th><td>100</td><td>120</td><td>250</td></tr>
+              </table>
+              <span class="arrow" aria-hidden="true">→</span>
+              <span class="nm">P =</span>
+              <span class="mx c3"><span>120</span><span>80</span><span>50</span><span>100</span><span>120</span><span class="hl">250</span></span>
+            </div>
+            <ol class="qlist">
+              <li><b>Q</b>P는 몇 × 몇 행렬인가요? p<sub>11</sub>과 p<sub>23</sub>은 무엇을 뜻하나요?</li>
+              <li><b>Q</b>행과 열을 서로 바꾸면 무엇이 달라질까요?</li>
+            </ol>
+            <p class="note">표의 값은 교육용 가상 수치예요(실제와 달라요). 3열로 단순하게 하려고 <b>원자력은 뺐어요</b> — 실제 한국은 원자력이 가장 큰 발전원(2024년 31.7%)이고, 독일은 2023년 4월 원전을 모두 멈췄어요. 원자력 열을 더하면 P는 몇 × 몇 행렬이 될까요?</p>
+            <details class="reveal-ans"><summary>정답 보기</summary><div>
+              P는 <b>2 × 3</b> 행렬. p<sub>11</sub> = 120 → 한국의 석탄 발전량, p<sub>23</sub> = 250 → 독일의 신재생 발전량, 독일 천연가스 = p<sub>22</sub> = 120.<br>
+              행·열을 바꾸면 <b>3 × 2</b> 행렬이 되고, 원래 p<sub>23</sub> = 250은 새 행렬의 (3, 2) 성분이 돼요.
+            </div></details>
+            <a class="live" href="lab/index.html#make" target="_blank" rel="noopener"><i></i>실험실 ① 행렬 만들기 열기</a>
+            <div class="teacher">· 독일의 신재생 성분이 큰 까닭을 재생에너지 확대 정책과 연결해 질문<br>· 값은 교육용 가상 수치(원자력 등 생략). 실제 2024년 한국: 원자력 31.7% · 석탄 28.1% · LNG 28.1% · 신재생 10.6%(산업통상자원부 「2024년 에너지수급동향」, 잠정) / 독일: 공공 순발전량 중 재생 62.7%, 석탄 약 22%(갈탄 71.1·무연탄 24.2 TWh), 가스 약 11%(Fraunhofer ISE, 2025. 1.) — 가스 대소는 수업 값과 실제가 반대이니 Our World in Data에서 직접 비교하게 함<br>· 심화: “원자력 열을 추가하면 E와 PE는 어떻게 바뀔까?”(무탄소 전원)<br>· 단위(TWh)를 반드시 쓰게 함</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 2 · 에너지 믹스" data-time="↳ 같은 8분 ②">
+            <p class="ask">믹스가 다르면 <em>탄소도 다르다</em></p>
+            <div class="mix" id="mix">
+              <div class="r"><span>한국</span><div class="st"><i class="c-coal" style="width:30%"></i><i class="c-gas" style="width:20%"></i><i class="c-nuc" style="width:37.5%"></i><i class="c-ren" style="width:12.5%"></i></div><span class="tot">400 TWh</span></div>
+              <div class="r"><span>독일</span><div class="st"><i class="c-coal" style="width:21.28%"></i><i class="c-gas" style="width:25.53%"></i><i class="c-ren" style="width:53.19%"></i></div><span class="tot">470 TWh</span></div>
+              <div class="r"><span>프랑스</span><div class="st"><i class="c-coal" style="width:3.92%"></i><i class="c-gas" style="width:7.84%"></i><i class="c-nuc" style="width:70.59%"></i><i class="c-ren" style="width:17.65%"></i></div><span class="tot">510 TWh</span></div>
+            </div>
+            <div class="legend"><span><i class="c-coal"></i>석탄</span><span><i class="c-gas"></i>천연가스</span><span><i class="c-nuc"></i>원자력</span><span><i class="c-ren"></i>신재생</span><span class="note">(비중, 교육용 단순화 값)</span></div>
+            <details class="reveal-ans"><summary>값과 읽는 법</summary><div>
+              한국 석탄 120 · 천연가스 80 · 원자력 150 · 신재생 50 / 독일 100 · 120 · 0 · 250 / 프랑스 20 · 40 · 360 · 90 (TWh).<br>
+              프랑스는 원자력 중심 → 저탄소, 독일은 신재생 비중이 가장 크고, 한국은 석탄·가스 등 화석 비중이 커요. 믹스의 차이가 탄소 배출의 차이로 이어져요.
+            </div></details>
+            <div class="teacher">· 프랑스를 3번째 행으로 추가하면? → 행렬의 크기 변화, 원자력 열을 새로 만들어야 함(활동지 ① ④)</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 3 · 행렬의 덧셈" data-time="전개 30분 중 7분">
+            <p class="ask">같은 자리끼리 <em>더한다</em></p>
+            <p class="note">행 = 한국·독일, 열 = 석탄·신재생, 단위 TWh</p>
+            <div class="eq">
+              <span class="mxcap"><span class="mx c2"><span class="hl">60</span><span>20</span><span>50</span><span>120</span></span><small>상반기 A</small></span>
+              <span class="op">+</span>
+              <span class="mxcap"><span class="mx c2"><span class="hl">60</span><span>30</span><span>50</span><span>130</span></span><small>하반기 B</small></span>
+              <span class="op">=</span>
+              <span class="mxcap"><span class="mx c2"><span class="hl">120</span><span>50</span><span>100</span><span>250</span></span><small>연간 A + B</small></span>
+            </div>
+            <p>1행 1열끼리: 60 + 60 = <b class="amber">120</b> → 연간 한국 석탄 발전량 120 TWh</p>
+            <details class="reveal-ans"><summary>2×2 행렬 + 2×3 행렬은 더할 수 있을까?</summary><div>
+              더할 수 없어요. 크기가 다르면 같은 위치의 짝이 맞지 않아요. 원자력 열을 상반기 자료에도 만들어 두 행렬의 크기를 맞추면 더할 수 있어요.
+            </div></details>
+            <a class="live" href="lab/index.html#add" target="_blank" rel="noopener"><i></i>실험실 ② 덧셈·실수배 열기</a>
+            <div class="timer" data-min="7"></div>
+            <div class="teacher">· 반례(2×2 + 2×3)를 보여 주며 크기가 다르면 더할 수 없음을 강조<br>· 짝과 답을 비교하게 함</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 4 · 실수배" data-time="전개 30분 중 7분">
+            <p class="ask">곱하는 수가 곧 <em>정책</em></p>
+            <div class="eq">
+              <span class="q">0.9</span><span class="op">×</span>
+              <span class="mx c2"><span>120</span><span>50</span><span>100</span><span>250</span></span>
+              <span class="op">=</span>
+              <span class="mx c2"><span class="hl">108</span><span class="hl">45</span><span class="hl">90</span><span class="hl">225</span></span>
+            </div>
+            <div class="mini-cards">
+              <div class="em"><b>× 0.9</b><span>전력 수요 10% 절감</span></div>
+              <div><b>× 0.8</b><span>발전량 20% 감축 목표</span></div>
+              <div><b>× 1.1</b><span>발전량 10% 증설 시나리오</span></div>
+            </div>
+            <p class="note">모든 발전원이 같은 비율로 변한다는 단순 가정이에요.</p>
+            <details class="reveal-ans"><summary>모든 발전량을 30% 줄이려면 몇을 곱할까?</summary><div>
+              <b>0.7</b>을 곱해요(남는 비율 70%). 분식집 전 메뉴 10% 할인이 단가 × 0.9인 것과 같은 구조예요.
+            </div></details>
+            <div class="timer" data-min="7"></div>
+            <div class="teacher">· “10% 줄인다” = 남는 비율 90% = 0.9를 곱함<br>· 일부 성분에만 곱하는 오류 점검</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 모둠 활동 (활동지 ①)" data-time="↳ 활동 1~4와 함께">
+            <h3>데이터를 행렬로 담기 — 모둠 활동</h3>
+            <ol class="qlist">
+              <li><b>Q1</b>발전량 행렬 만들기 — 2×3 데이터를 행렬 P로, 성분의 의미 쓰기</li>
+              <li><b>Q2</b>행렬의 덧셈 — 상반기 + 하반기 → 연간</li>
+              <li><b>Q3</b>실수배 — 수요 10% 절감(× 0.9) 후 계산·해석</li>
+              <li><b>Q4</b>생각 넓히기 — 행·열을 바꾸면? 모든 발전량 30% 감축은 몇을 곱할까?</li>
+            </ol>
+            <details class="reveal-ans"><summary>정답 (교사용)</summary><div>
+              <b>1-2</b> P = (120 80 50 / 100 120 250), 2×3 행렬<br>
+              <b>1-3</b> p<sub>11</sub> = 120 → 한국의 석탄 발전량, p<sub>23</sub> = 250 → 독일의 신재생 발전량, 독일 천연가스 = p<sub>22</sub> = 120<br>
+              <b>1-4</b> 행·열을 바꾸면 3×2 행렬, 원래 p<sub>23</sub> = 250은 새 행렬의 (3, 2) 성분 · 한국 신재생 50 &lt; 독일 신재생 250 → 독일의 화석 비중이 상대적으로 낮다<br>
+              <b>2-1</b> A + B = (120 50 / 100 250) → 연간 한국 석탄 120 TWh<br>
+              <b>2-3</b> 0.9 × (A + B) = (108 45 / 90 225) → 한국 석탄 108 TWh<br>
+              <b>2-4</b> 모든 발전량 30% 감축 → × 0.7 · 0.8 × 0.8 = 0.64 → 64% 남음<br>
+              <b>2-5</b> 메뉴 10% 할인 → 단가 × 0.9, 수량 2배 → 수량 × 2
+            </div></details>
+            <div class="teacher">· 평가[지식·기능]: 행렬 표현과 덧셈·실수배 연산의 정확성 — 관찰 기준은 아래 평가 표<br>· 색상 스티커·태블릿(선택)</div>
+          </div>
+
+          <div class="step" data-phase="정리 · 형성평가" data-time="정리 5분 중 ①">
+            <h3>세 문제로 확인해요</h3>
+            <ol class="qlist">
+              <li><b>Q1</b>한국 석탄 130·신재생 60 / 독일 석탄 90·신재생 270을 2×2 행렬로 나타내 보세요.</li>
+              <li><b>Q2</b>2×2 행렬과 2×3 행렬을 더할 수 있을까요? 이유는?</li>
+              <li><b>Q3</b>(120 50 / 100 250)에 0.8을 곱하면?</li>
+            </ol>
+            <details class="reveal-ans"><summary>정답 보기</summary><div>
+              <div class="eq sm"><b>Q1</b><span class="mx c2"><span>130</span><span>60</span><span>90</span><span>270</span></span>
+              <b style="margin-left:1rem">Q3</b><span class="mx c2"><span>96</span><span>40</span><span>80</span><span>200</span></span></div>
+              <b>Q2</b> 크기가 달라 같은 위치의 짝이 맞지 않으므로 더할 수 없어요.
+            </div></details>
+            <div class="teacher">· 성분 위치를 혼동하는 오개념은 바로 고쳐 줌</div>
+          </div>
+
+          <div class="step" data-phase="정리 · 예고" data-time="정리 5분 중 ②">
+            <p class="ask">담고, 더하고,<br><em>비율을 곱한다</em></p>
+            <div class="mini-cards">
+              <div><b>행렬</b><span>데이터를 담는 그릇</span></div>
+              <div><b>덧셈</b><span>통합</span></div>
+              <div><b>실수배</b><span>비율 적용</span></div>
+            </div>
+            <p style="font-size:1.2rem">다음 시간: <b class="amber">행렬의 곱으로 탄소의 값을 매긴다</b></p>
+          </div>
+
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+      </div>
+    </div>
+
+    <!-- ───── 2차시 ───── -->
+    <div class="tabpanel" id="tp2" role="tabpanel" aria-labelledby="t2" hidden>
+      <div class="runner">
+        <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+        <div class="steps">
+
+          <div class="step" data-phase="도입 · 복습" data-time="도입 8분 중 ①">
+            <p class="ask">지난 시간, <em>기억나나요?</em></p>
+            <div class="eq">
+              <span class="mx c2"><span>60</span><span>20</span><span>50</span><span>120</span></span>
+              <span class="op">+</span>
+              <span class="mx c2"><span>60</span><span>30</span><span>50</span><span>130</span></span>
+              <span class="op">=</span><span class="q" style="font-size:1.6em">?</span>
+            </div>
+            <p>0.9배는 무엇을 뜻했나요?</p>
+            <details class="reveal-ans"><summary>정답 보기</summary><div>
+              <div class="eq sm"><span class="mx c2"><span>120</span><span>50</span><span>100</span><span>250</span></span><span>— 같은 자리끼리 더해 연간 발전량</span></div>
+              0.9배 = 전력 수요 10% 절감(모든 발전원이 같은 비율로 준다고 가정)
+            </div></details>
+          </div>
+
+          <div class="step" data-phase="도입 · 발문" data-time="도입 8분 중 ②">
+            <p class="ask">탄소를 배출하면<br><em>돈을 내야</em> 한다?</p>
+            <div class="vframe sm" data-yt="SL3jK3_1kaQ" data-title="영상② [기후이슈] 온실가스를 사고판다고?"></div>
+            <p style="margin-top:.8rem"><a class="live" href="https://ets.krx.co.kr" target="_blank" rel="noopener"><i></i>배출권시장 정보플랫폼 · 오늘의 시세</a></p>
+            <div class="teacher">· K-ETS(2015 시행), EU CBAM(2026 확정 단계 시작 — 6개 품목, 2026년 수입분의 인증서 구매·제출은 2027년부터, 국내 탄소 가격 공제 가능) 사례를 짧게 소개<br>· 오늘 시세와 수업의 30,000원/톤은 다를 수 있으며, 30,000원은 계산을 쉽게 하려고 정한 교육용 가정값임을 먼저 안내. EU 배출권은 국내 배출권보다 몇 배 비싸므로 60,000원 시나리오는 ‘국내 탄소 가격이 크게 오를 때’로 설명<br>· 시간: 지도안은 45분(도입 8 · 전개 34 · 정리 3) 기준. 50분 수업이면 남는 5분을 활동 4에 더해 13분으로</div>
+          </div>
+
+          <div class="step" data-phase="도입 · 목표 확인" data-time="도입 8분 중 ③">
+            <h3>배출권거래제(ETS) — 탄소에 가격이 붙는 세 단계</h3>
+            <div class="flow">
+              <div class="st"><b>할당</b><small>정부가 기업마다 배출 한도(배출권)를 정해 줌 — 대부분 무상, 일부는 경매로 구입(발전 부문 유상 비율 2026년 15% → 2030년 50%)</small></div>
+              <div class="st"><b>배출·정산</b><small>실제 배출량을 할당량과 비교해 초과·잉여 계산</small></div>
+              <div class="st"><b>거래</b><small>부족하면 사고, 남으면 팔거나 다음 해로 이월</small></div>
+            </div>
+            <p class="ask" style="font-size:clamp(1.25rem,2.6vw,1.9rem);margin-top:1.2rem">오늘의 질문: 행렬의 곱으로 <em>우리 기업의 탄소 비용</em>을 어떻게 계산할까?</p>
+            <p class="note">목표: 행렬의 곱셈을 수행하여 탄소 배출량을 예측하고, 그 결과를 배출권 거래 손익으로 해석한다. · 흐름: 곱의 원리(분식집·성적) → 배출량 = 발전량 × 배출계수 → 할당량 비교 → 거래 손익</p>
+            <div class="teacher">· 한국 2015 K-ETS. EU ETS는 거래 금액 기준 세계 최대 탄소시장(대상 배출량 기준으로는 중국 전국 ETS가 최대)<br>· <b>수업 모델은 계산을 쉽게 하려고 할당량 전부를 무상으로, 세 기업 모두 40,000 tCO₂로 같다고 가정함.</b> 실제 발전 부문은 발전량 기반 벤치마크로 할당하고, 제4차 계획기간(2026~2030)에는 유상(경매) 비율이 2026년 15%에서 2030년 50%까지 오름(환경부 「제4차 배출권거래제 기본계획」 2024. 12.) — 유상 비율이 오르면 탄소 비용이 발전 원가·전기요금으로 이어짐을 덧붙임</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 1 · 곱셈의 원리" data-time="전개 34분 중 8분 ①">
+            <p class="ask">‘수량 × 단가’가<br>이미 <em>행렬 곱</em>이에요</p>
+            <p>분식집에서 민준이가 주문한 금액은?</p>
+            <div class="eq">
+              <span class="mxcap"><span class="mx c3"><span class="hl">2</span><span class="hl">1</span><span class="hl">1</span></span><small>수량</small></span>
+              <span class="op">×</span>
+              <span class="mxcap"><span class="mx c1"><span>4,000</span><span>3,000</span><span>3,500</span></span><small>단가(원)</small></span>
+              <span class="op">=</span>
+              <span class="mxcap"><span class="mx c1"><span class="hl">14,500</span></span><small>금액(원)</small></span>
+            </div>
+            <p class="calc">2×4,000 + 1×3,000 + 1×3,500 = <b>14,500원</b></p>
+            <div class="mini-cards">
+              <div><b>분식집</b><span>수량 × 단가 = 금액</span></div>
+              <div><b>성적</b><span>점수 × 학점 = 가중 총점</span></div>
+              <div class="em"><b>에너지</b><span>발전량 × 배출계수 = 배출량</span></div>
+            </div>
+            <div class="timer" data-min="8"></div>
+            <div class="teacher">· 세 가지 모두 ‘곱해서 더하는 계산(가중합)’ — 같은 원리임을 강조</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 1 · 곱셈의 규칙" data-time="↳ 같은 8분 ②">
+            <p class="ask">가운데 수가 같아야 <em>곱할 수 있다</em></p>
+            <div class="szc" data-szc>
+              (<select aria-label="앞 행렬의 행 수" data-v="m"><option>1</option><option selected>2</option><option>3</option></select>×<select class="mid" aria-label="앞 행렬의 열 수" data-v="n"><option>1</option><option>2</option><option selected>3</option></select>)
+              ·
+              (<select class="mid" aria-label="뒤 행렬의 행 수" data-v="n2"><option>1</option><option>2</option><option selected>3</option></select>×<select aria-label="뒤 행렬의 열 수" data-v="p"><option selected>1</option><option>2</option><option>3</option></select>)
+            </div>
+            <div class="chips"><button class="tbtn" data-pre="3,3,3,1">P·E (3×3)·(3×1)</button><button class="tbtn" data-pre="3,1,3,3">E·P (3×1)·(3×3)</button><button class="tbtn" data-pre="1,3,3,1">수량·단가 (1×3)·(3×1)</button></div>
+            <p class="szout" aria-live="polite"></p>
+            <ul>
+              <li>결과의 (i, j) 성분 = 앞 행렬의 <b>i행</b> × 뒤 행렬의 <b>j열</b>을 대응끼리 곱해 모두 더한 값</li>
+              <li>(m × n)·(n × p) = (m × p) — 바깥 두 수가 결과의 크기</li>
+              <li><b class="amber">AB ≠ BA</b> — 곱하는 순서를 바꾸면 일반적으로 답이 달라져요</li>
+            </ul>
+            <div class="teacher">· “가운데 수가 같아야 한다”로 크기 조건 확인<br>· E·P 프리셋으로 “EP는 계산할 수 있나요?”(활동지 ② 활동 1 ②) 발문</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 2 · 배출량 계산" data-time="전개 34분 중 10분">
+            <p class="ask">발전량 × 배출계수 = <em>배출량</em></p>
+            <div class="eq">
+              <span class="mxcap"><span class="mx c3"><span class="hl">50</span><span class="hl">30</span><span class="hl">20</span><span>20</span><span>40</span><span>40</span><span>10</span><span>20</span><span>70</span></span><small>P (GWh) · 행 A·B·C · 열 석탄·가스·신재생</small></span>
+              <span class="op">×</span>
+              <span class="mxcap"><span class="mx c1"><span>900</span><span>400</span><span>50</span></span><small>E (tCO₂/GWh)</small></span>
+              <span class="op">=</span>
+              <span class="mxcap"><span class="mx c1"><span class="hl">58,000</span><span>?</span><span>?</span></span><small>PE (tCO₂)</small></span>
+            </div>
+            <p class="calc">A기업 = 50×900 + 30×400 + 20×50 = 45,000 + 12,000 + 1,000 = <b>58,000</b> tCO₂</p>
+            <p>B·C기업은 모둠에서 구하고 짝과 바꾸어 검산해요.</p>
+            <details class="reveal-ans"><summary>B·C기업 정답</summary><div class="calc">
+              B = 20×900 + 40×400 + 40×50 = 18,000 + 16,000 + 2,000 = <b>36,000</b><br>
+              C = 10×900 + 20×400 + 70×50 = 9,000 + 8,000 + 3,500 = <b>20,500</b>
+            </div></details>
+            <details class="reveal-ans"><summary>PE의 성분은 무엇을 뜻할까?</summary><div>
+              발전량 × 배출계수의 합 = 그 기업이 1년 동안 내보낸 <b>온실가스 양(배출량, tCO₂)</b>이에요. 여기에 톤당 탄소 가격을 곱해야 비로소 돈(비용)이 돼요.
+            </div></details>
+            <p class="note">※ 3×3 · 3×1 행렬의 곱은 공통수학1 교육과정 범위(행·열 각 2 이하)를 넘는 확장 활동이에요. A기업 한 줄만 손으로 계산하고, 나머지는 짝 검산과 스프레드시트로 확인해요.</p>
+            <a class="live" href="lab/index.html#mult" target="_blank" rel="noopener"><i></i>실험실 ③ 행렬 곱 P×E 열기</a>
+            <div class="timer" data-min="10"></div>
+            <div class="teacher">· A기업은 함께, B·C는 모둠이 구해 짝 검산<br>· 단위(GWh, tCO₂/GWh) 점검<br>· 배출계수는 대소관계만 실제와 같게 단순화한 교육용 값. 석탄 900·가스 400은 연소(직접) 배출 수준, 신재생 50은 전과정 어림값이라 기준이 섞여 있음(교육용). 참고: IPCC AR5 전과정 중앙값 석탄 820 · 가스복합 490 · 태양광 41~48 · 풍력 11~12 gCO₂/kWh(= tCO₂/GWh). 실제 배출권거래제에서는 태양광·풍력의 직접 배출을 0으로 봄</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 3 · 할당량과 손익" data-time="전개 34분 중 8분">
+            <p class="ask">부호가 <em>기업의 운명</em>을 가른다</p>
+            <div class="eq">
+              <span class="nm">PE − Q =</span>
+              <span class="mx c1"><span>58,000</span><span>36,000</span><span>20,500</span></span>
+              <span class="op">−</span>
+              <span class="mx c1"><span>40,000</span><span>40,000</span><span>40,000</span></span>
+              <span class="op">=</span>
+              <span class="mx c1"><span class="rs">+18,000</span><span>−4,000</span><span class="hl">−19,500</span></span>
+            </div>
+            <p>A 초과 → 배출권 구매 · B 잉여 → 판매 · C 잉여 → 판매 <span class="note">(세 기업 할당량이 같다고 가정)</span></p>
+            <div class="eq sm">
+              <span class="nm">손익 = −30,000 × (PE − Q) =</span>
+              <span class="mx c1"><span class="rs">−5.4억</span><span>+1.2억</span><span class="hl">+5.85억</span></span><span class="op">원</span>
+            </div>
+            <details class="reveal-ans"><summary>배출권 가격이 두 배(60,000원)가 되면?</summary><div>
+              지금 그대로의 A기업 손익은 <b class="rs">−10.8억 원</b>. 탄소 가격이 오를수록 에너지 전환의 경제적 가치가 커져요.
+            </div></details>
+            <a class="live" href="lab/index.html#trade" target="_blank" rel="noopener"><i></i>실험실 ④ 배출권 거래 손익 열기</a>
+            <div class="timer" data-min="8"></div>
+            <div class="teacher">· 할당량 Q = 성분이 모두 40,000인 3×1 행렬 → 행렬의 뺄셈, 가격 곱 → 실수배<br>· 오늘 시세를 보여 주고 “가격이 두 배가 되면?” 예측<br>· 결론: 세 기업 할당량이 같다고 가정했을 때 신재생 비중이 클수록 이득, 화석연료 의존이 크면 큰 비용<br>· 실제로는 남은 배출권을 다음 해로 이월하거나, 모자란 양을 상쇄배출권으로 일부 메울 수도 있음</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 4 · 스프레드시트" data-time="전개 34분 중 8분 ①">
+            <p class="ask"><em>=MMULT</em> 한 줄이면 끝</p>
+            <p><span class="formula">=MMULT(B6:D8, F6:F8)</span></p>
+            <p>3×3 발전량 범위 × 3×1 배출계수 범위 → 3×1 배출량이 H6:H8에 펼쳐져요. (구형 엑셀은 Ctrl+Shift+Enter)</p>
+            <p>검산: <span class="formula" style="font-size:1.05rem">=B6*F6+C6*F7+D6*F8</span></p>
+            <a class="live" href="https://docs.google.com/spreadsheets/d/1ofjgTo-LoSMTbJjtLQIcSQqFsbvUcM4JOpsKETZcz48/copy" target="_blank" rel="noopener"><i></i>탄소배출권 시뮬레이터 · 구글 시트 사본 만들기</a>
+            <a class="live" href="../materials/p2_탄소배출권_시뮬레이터.xlsx" download><i></i>시뮬레이터 엑셀 파일(xlsx) 내려받기</a>
+            <p class="note">파란 글씨 셀만 바꾸고, 배출량 셀(H6:H8)과 손익 셀의 수식은 지우지 않아요. 구글 시트와 엑셀 파일은 내용이 같아요.</p>
+            <div class="timer" data-min="8"></div>
+            <div class="teacher">· 온라인: 링크·QR → 사본 만들기(구글 로그인 필요) / 오프라인: 미리 내려받은 xlsx와 계산기<br>· <b>구글 계정이 없으면 실험실 ④(거래 손익)·⑤(전환점)로 대체</b> — 실험실은 같은 사이트 안에 있어 계정 없이 열림. ①~③을 실험실에서 하고 활동지 ②의 수식 칸(②)은 판서로 함께 확인<br>· 50분 수업이면 남는 5분을 활동 4에 더해 13분으로. 시간이 부족하면 ①·②만 하고 ③ 전환점은 실험실 ⑤로 함께 확인<br>· 수업 수치는 개념 이해를 위한 교육용 단순화 값임을 안내</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 4 · 만약에?" data-time="↳ 같은 8분 ②">
+            <p class="ask">숫자 하나를 바꾸면<br><em>손익이 바뀐다</em></p>
+            <ol class="qlist">
+              <li><b>①</b>시나리오 1 — A기업 석탄 50→20, 신재생 20→50 (B6·D6 셀)</li>
+              <li><b>②</b>시나리오 2 — 배출권 가격 30,000→60,000원 (D12 셀)</li>
+              <li><b>③</b>전환점 찾기 — 손익이 0에 가장 가까운 석탄·신재생 조합(1 GWh 단위)</li>
+              <li><b>④</b>발견 — 손 계산과 비교해 좋은 점·조심할 점</li>
+            </ol>
+            <details class="reveal-ans"><summary>①·② 정답</summary><div class="calc">
+              ① 20×900 + 30×400 + 50×50 = <b>32,500</b> tCO₂ → PE − Q = −7,500 → 손익 <b>+2.25억 원</b>(흑자)<br>
+              ② 60,000원일 때 처음 값 그대로: A기업 <b class="rs">−10.8억 원</b>, C기업 +11.7억 원 → 신재생 비중이 큰 기업이 더 유리해져요.
+            </div></details>
+            <div class="teacher">· ①~④ 필수, ⑤·⑥ 심화<br>· 바꾼 값은 다음 시나리오 전에 처음 값으로 되돌리기</div>
+          </div>
+
+          <div class="step" data-phase="전개 · 활동 4 · 전환점" data-time="↳ 같은 8분 ③">
+            <p class="ask">어디서 손익이 <em>0</em>이 될까?</p>
+            <div class="turn" data-turn>
+              <div>
+                <label for="tx" style="font-weight:500;color:var(--champ)">석탄 → 신재생으로 바꾼 양 x = <b class="tx-v" style="color:var(--amber);font-size:1.4rem">0</b> GWh</label>
+                <input type="range" id="tx" min="0" max="50" step="1" value="0">
+                <div class="chips"><button class="tbtn" data-price="30000" aria-pressed="true">30,000원/톤</button><button class="tbtn" data-price="60000" aria-pressed="false">60,000원/톤</button></div>
+                <dl class="kv">
+                  <dt>A기업 발전량</dt><dd class="tx-mix"></dd>
+                  <dt>배출량</dt><dd class="tx-y"></dd>
+                  <dt>PE − Q</dt><dd class="tx-d"></dd>
+                  <dt>손익</dt><dd class="tx-m big2"></dd>
+                </dl>
+              </div>
+              <svg viewBox="0 0 360 230" role="img" aria-label="x에 따른 A기업 배출량 그래프와 할당량 40,000 기준선">
+                <g font-size="11" fill="#9A9086" font-family="Noto Sans KR, sans-serif">
+                  <line x1="46" y1="196" x2="346" y2="196" stroke="#9A9086"/>
+                  <line x1="46" y1="16" x2="46" y2="196" stroke="#9A9086"/>
+                  <text x="46" y="212" text-anchor="middle">0</text><text x="106" y="212" text-anchor="middle">10</text><text x="166" y="212" text-anchor="middle">20</text><text x="226" y="212" text-anchor="middle">30</text><text x="286" y="212" text-anchor="middle">40</text><text x="346" y="212" text-anchor="middle">50</text>
+                  <text x="196" y="227" text-anchor="middle">x (GWh)</text>
+                  <text x="40" y="200" text-anchor="end">0</text><text x="40" y="136" text-anchor="end">20,000</text><text x="40" y="76" text-anchor="end">40,000</text><text x="40" y="16" text-anchor="end">60,000</text>
+                </g>
+                <line x1="46" y1="76" x2="346" y2="76" stroke="#F6F3EE" stroke-dasharray="5 5"/>
+                <text x="344" y="70" text-anchor="end" font-size="11" fill="#F6F3EE" font-family="Noto Sans KR, sans-serif">할당량 40,000</text>
+                <line x1="46" y1="22" x2="346" y2="149.5" stroke="#F2B45A" stroke-width="3"/>
+                <text x="150" y="50" font-size="11" fill="#F2B45A" font-family="Noto Sans KR, sans-serif">y = 58,000 − 850x</text>
+                <line class="tx-guide" x1="46" y1="22" x2="46" y2="196" stroke="#EBCB94" stroke-dasharray="2 4"/>
+                <circle class="tx-dot" cx="46" cy="22" r="7" fill="#F2B45A" stroke="#1D1A16" stroke-width="2"/>
+              </svg>
+            </div>
+            <details class="reveal-ans"><summary>정답 보기</summary><div class="calc">
+              석탄 1 GWh를 신재생으로 바꿀 때마다 900 − 50 = <b>850</b> tCO₂ 감소 → 배출량 = 58,000 − 850x<br>
+              58,000 − 850x = 40,000 → x = 18,000 ÷ 850 ≈ <b>21.2</b><br>
+              1 GWh 단위로 손익이 0에 가장 가까운 조합: <b>석탄 29 · 신재생 41</b> (x = 21)
+            </div></details>
+            <a class="live" href="lab/index.html#turn" target="_blank" rel="noopener"><i></i>실험실 ⑤ 전환점 찾기 열기</a>
+            <div class="teacher">· x ≈ 21.2는 정수가 아니므로 x = 21과 x = 22를 비교하게 함<br>· 가격 60,000원이면 전환의 가치가 더 커짐을 확인</div>
+          </div>
+
+          <div class="step" data-phase="정리 · 성찰과 과제" data-time="정리 3분">
+            <p class="ask">작은 숫자 배열이<br><em>에너지의 미래</em>를 정한다</p>
+            <p>행렬 곱의 결과가 기업의 경제적 이해득실을 결정해요. 수학 → 환경 → 경제의 연결을 돌아봐요.</p>
+            <div class="vframe sm" data-yt="h5_-vdIYlqE" data-title="영상③ KDI · 우리나라 배출권거래제, 정상적으로 작동하고 있지 않다?!"></div>
+            <div class="mini-cards" style="margin-top:1rem">
+              <div class="em"><b>과제</b><span>활동지 ② 활동 3 ‘우리 기업 탄소중립 전략’ 제안 + 최종 성찰</span></div>
+              <div><b>과제 제출 뒤 다음 수업 도입 10분(차시 외)</b><span>루브릭으로 자기·동료 평가</span></div>
+            </div>
+            <a class="btn" href="#act">활동 3 · 전략 계산기로 →</a>
+            <div class="teacher">· 보고서 평가 루브릭을 미리 안내<br>· 활동 2는 ①~④ 필수, ⑤·⑥ 심화</div>
+          </div>
+
+        </div>
+        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 6. 활동 ═════════ -->
+<section class="sec panel" id="act">
+  <div class="wrap">
+    <p class="label">활동</p>
+    <h2 class="head">우리 모둠의 기록</h2>
+    <a class="back" href="#lesson">↑ 수업 진행으로 돌아가기</a>
+    <p class="lead">적은 내용은 이 브라우저에만 저장돼요. 서술형 문항과 함께 <b>계산 칸</b>(활동지 ①의 ②~④, 활동지 ②의 활동 1·2)도 아래에 있어요. 종이 활동지를 쓰는 반은 계산을 종이에 써도 돼요.</p>
+
+    <div class="grid g2">
+      <div class="actcard reveal">
+        <h3><small>활동지 ① · 활동 1</small>발전량 데이터를 행렬로 나타내기</h3>
+        <div class="field"><label for="a1">약속 쓰기 — 행 = ?, 열 = ?, 성분의 단위 = ?</label><textarea class="pad" id="a1" data-key="a1-promise" rows="3"></textarea></div>
+        <div class="field"><label for="a2">두 나라의 신재생 성분(p<sub>13</sub>, p<sub>23</sub>)을 비교하면 무엇을 알 수 있나요? 탄소 배출과 어떻게 이어질까요?</label><textarea class="pad" id="a2" data-key="a1-compare"></textarea></div>
+        <div class="field"><label for="a3">프랑스(원자력 중심)를 3번째 행으로 추가하면 행렬의 크기는? 어떤 열을 새로 만들어야 하나요?</label><textarea class="pad" id="a3" data-key="a1-france"></textarea></div>
+      </div>
+      <div class="actcard reveal d1">
+        <h3><small>활동지 ① · 활동 2</small>덧셈과 실수배로 미래 예측하기</h3>
+        <div class="field"><label for="b1">A+B의 (2, 2) 성분은 무엇을 뜻하나요?</label><textarea class="pad" id="b1" data-key="a2-22" rows="3"></textarea></div>
+        <div class="field"><label for="b2">배출을 줄이는 다른 방법은? (모든 발전원을 같은 비율로 줄이는 것 말고)</label><textarea class="pad" id="b2" data-key="a2-other"></textarea></div>
+        <div class="field"><label for="b3">오늘 배운 덧셈·실수배가 쓰일 다른 에너지 상황 (예: 여러 발전소의 월별 발전량 합치기)</label><textarea class="pad" id="b3" data-key="a2-life"></textarea></div>
+      </div>
+    </div>
+
+    <div class="grid g2" style="margin-top:1.6rem">
+      <div class="actcard reveal">
+        <h3><small>활동지 ① · 계산 칸</small>행렬 P · 덧셈 · 실수배</h3>
+        <div class="calcf">
+          <div><label for="k1">② P = ( 1행 / 2행 ) 과 크기</label><input class="pad" id="k1" data-key="k-P" placeholder="예: ( _ _ _ / _ _ _ ), _ × _"></div>
+          <div><label for="k2">③ p<sub>11</sub>, p<sub>23</sub>, 독일 천연가스 성분 기호</label><input class="pad" id="k2" data-key="k-pij"></div>
+          <div><label for="k3">활동 2 ① A + B</label><input class="pad" id="k3" data-key="k-AB"></div>
+          <div><label for="k4">활동 2 ③ 0.9 × (A + B)</label><input class="pad" id="k4" data-key="k-09"></div>
+          <div><label for="k5">활동 2 ④ 30% 감축에 곱할 수 · 0.8 × 0.8</label><input class="pad" id="k5" data-key="k-07"></div>
+          <div><label for="k6">활동 2 ⑤ 10% 할인 · 수량 2배에 곱할 수</label><input class="pad" id="k6" data-key="k-menu"></div>
+        </div>
+      </div>
+      <div class="actcard reveal d1">
+        <h3><small>활동지 ② · 활동 1 계산 칸</small>기업별 배출량과 거래 손익</h3>
+        <div class="calcf" style="margin-bottom:.6rem">
+          <div><label for="k7">② P, E, PE의 크기 · EP는 계산할 수 있나?</label><input class="pad" id="k7" data-key="k-size"></div>
+        </div>
+        <div class="tblwrap"><table class="ctable" aria-label="기업별 배출량과 거래 손익 계산 표">
+          <thead><tr><th>기업</th><th>배출량 PE (tCO₂)</th><th>PE − Q</th><th>초과/잉여</th><th>손익 (원)</th></tr></thead>
+          <tbody>
+            <tr><th>A</th><td><input class="pad" data-key="t-A1" aria-label="A기업 배출량" value=""></td><td><input class="pad" data-key="t-A2" aria-label="A기업 PE−Q"></td><td><input class="pad" data-key="t-A3" aria-label="A기업 초과 또는 잉여"></td><td><input class="pad" data-key="t-A4" aria-label="A기업 손익"></td></tr>
+            <tr><th>B</th><td><input class="pad" data-key="t-B1" aria-label="B기업 배출량"></td><td><input class="pad" data-key="t-B2" aria-label="B기업 PE−Q"></td><td><input class="pad" data-key="t-B3" aria-label="B기업 초과 또는 잉여"></td><td><input class="pad" data-key="t-B4" aria-label="B기업 손익"></td></tr>
+            <tr><th>C</th><td><input class="pad" data-key="t-C1" aria-label="C기업 배출량"></td><td><input class="pad" data-key="t-C2" aria-label="C기업 PE−Q"></td><td><input class="pad" data-key="t-C3" aria-label="C기업 초과 또는 잉여"></td><td><input class="pad" data-key="t-C4" aria-label="C기업 손익"></td></tr>
+          </tbody>
+        </table></div>
+        <h3 style="margin-top:1.2rem;font-size:1.05rem"><small>활동지 ② · 활동 2</small>시뮬레이터 기록</h3>
+        <div class="calcf">
+          <div><label for="k8">② H6 수식 · 검산값</label><input class="pad" id="k8" data-key="k-H6"></div>
+          <div><label for="k9">③ 시나리오 1 — 배출량 · 차 · 손익</label><input class="pad" id="k9" data-key="k-sc1"></div>
+          <div><label for="k10">④ 시나리오 2 — A기업 · C기업 손익</label><input class="pad" id="k10" data-key="k-sc2"></div>
+          <div><label for="k11">⑤ 전환점 — 석탄 · 신재생 · x</label><input class="pad" id="k11" data-key="k-turn"></div>
+        </div>
+      </div>
+    </div>
+
+    <details class="reveal-ans" style="margin-top:1.2rem"><summary>다른 프로그램에서 넘어왔다면 (선택 심화)</summary><div>
+      <b>프로그램 1(국어)에서</b> — “학교가 낮에 만든 전기를 얼마나 쓸 수 있을까?”: 같은 시간대의 발전량과 사용량을 열로 두는 행렬을 만들고(행 = 시간대), 두 열의 차로 남는 전기와 모자란 전기를 비교해 보세요.<br>
+      <b>프로그램 5(기술)에서</b> — “이 태양전지로 모터를 하루에 얼마나 돌릴 수 있을까?”: 발전량과 사용 시간을 같은 단위(Wh)로 맞춘 뒤, 시간대별 값을 행렬에 담아 실수배로 ‘날씨가 흐리면(× 0.5)’을 계산해 보세요.
+    </div></details>
+
+    <div class="calcbox reveal" style="margin-top:1.6rem" id="strategy">
+      <h3><small style="display:block;color:var(--amber);font-size:.85rem;font-weight:500;letter-spacing:.06em">활동지 ② · 활동 3</small>우리 A기업 탄소중립 전략 계산기</h3>
+      <p class="note">전체 발전량 100 GWh는 유지해요. 석탄·가스를 정하면 신재생이 자동으로 맞춰져요. (배출계수 석탄 900 · 가스 400 · 신재생 50 tCO₂/GWh, 할당량 40,000 tCO₂)</p>
+      <div class="two">
+        <div>
+          <div class="sl"><label for="sc">석탄 <output id="scv">50</output></label><input type="range" id="sc" min="0" max="100" value="50"></div>
+          <div class="sl"><label for="sg">가스 <output id="sgv">30</output></label><input type="range" id="sg" min="0" max="100" value="30"></div>
+          <div class="sl"><label>신재생 <output id="srv">20</output></label><p class="note" id="sNote" style="margin:0">합계 100 GWh</p></div>
+          <p class="calc" id="sCalc"></p>
+        </div>
+        <div>
+          <div class="sres">
+            <div><small>배출량 P′E (tCO₂)</small><b id="sY">58,000</b></div>
+            <div><small>PE − Q</small><b id="sD">+18,000</b></div>
+            <div><small>손익 · 30,000원/톤</small><b id="sM3">−5.4억 원</b></div>
+            <div><small>손익 · 60,000원/톤</small><b id="sM6">−10.8억 원</b></div>
+          </div>
+        </div>
+      </div>
+      <p class="scaf" id="sSpeech" aria-live="polite"></p>
+      <p class="note">계산기가 채우는 것은 숫자뿐이에요. 이유·가치·빠진 조건은 아래 칸에 우리 모둠이 직접 써요.</p>
+      <div class="grid g2">
+        <div class="field"><label for="c1">이 조합을 고른 이유</label><textarea class="pad" id="c1" data-key="a3-why"></textarea></div>
+        <div class="field"><label for="c2">이 계산에 빠진 조건과 영향 (설비 투자비 · 날씨에 따른 변동 · 전력망 연결 · 가격 변동 · 일자리·지역 변화)</label><textarea class="pad" id="c2" data-key="a3-limit"></textarea></div>
+        <div class="field"><label for="c3">30초 제안문 완성 — 위 빈칸 틀을 이어 써요. “이 전략은 (CBAM·RE100 대응 / 탄소 감축 / 비용 절감) 측면에서 ___ 가치가 있습니다. 그 이유는 ___이고, 아직 따지지 못한 조건은 ___입니다.”</label><textarea class="pad" id="c3" data-key="a3-speech"></textarea></div>
+        <div class="field"><label for="c4">최종 성찰 — 덧셈·실수배·곱셈은 에너지 데이터에서 각각 무엇을 뜻했나요? 수학은 환경·경제 문제에서 어떤 역할을 할까요?</label><textarea class="pad" id="c4" data-key="a3-reflect"></textarea></div>
+      </div>
+      <p class="note">동료 평가: 수치 근거가 있다 · 한계를 인정했다 · 실현 가능하다</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═════════ 7. 평가 ═════════ -->
+<section class="sec ivory" id="rubric">
+  <div class="wrap">
+    <p class="label">평가</p>
+    <h2 class="head">무엇을 보고 평가하나요</h2>
+    <p class="lead">1차시는 관찰평가·형성평가·활동지 ①, 2차시는 활동지 ②와 ‘우리 기업 탄소중립 전략’ 정책 제안 보고서(루브릭), 자기·동료 평가로 봅니다.</p>
+    <p class="tblnote">A·B·C는 이 과제의 채점 수준이며, 학기 성취도(A~E)는 학교 성취평가 기준에 따라 따로 산출합니다. B·C 칸은 수업 중 보이는 행동으로 적었어요.</p>
+
+    <h3>1차시 관찰 기준</h3>
+    <div class="tblwrap"><table class="tbl rubric">
+      <thead><tr><th>평가 요소</th><th>A</th><th>B</th><th>C</th></tr></thead>
+      <tbody>
+        <tr><td>데이터 구조화</td><td>행·열의 의미를 정확히 약속하고 단위까지 포함하여 발전량 데이터를 행렬로 나타내며, 성분 p<sub>ij</sub>의 의미를 설명한다.</td><td>행렬로 나타내지만 단위나 행·열 라벨 중 하나 이상을 빠뜨리거나, 성분 p<sub>ij</sub>를 위치로만 말하고 뜻(어느 나라의 어떤 발전량)은 말하지 못한다.</td><td>행과 열을 바꾸어 쓰거나 성분을 다른 칸에 적고, 안내를 받은 뒤에 고친다.</td></tr>
+        <tr><td>행렬의 덧셈</td><td>크기가 같은 행렬끼리 같은 위치의 성분을 정확히 더하고, 상·하반기의 합이 연간 발전량이 됨을 설명한다.</td><td>같은 자리 성분을 정확히 더하지만, 크기가 다른 행렬을 더할 수 없는 이유나 결과(연간 발전량)의 뜻을 말하지 못한다.</td><td>다른 자리의 성분끼리 더하거나, 크기가 다른 행렬을 더하려 한다.</td></tr>
+        <tr><td>실수배와 비율</td><td>수요 절감·감축 목표를 알맞은 실수(0.9, 0.8, 0.7)로 바꾸어 모든 성분에 곱하고 결과를 해석한다.</td><td>모든 성분에 정확히 곱하지만 ‘10% 절감 → 0.9’처럼 비율을 실수로 바꾼 까닭을 말하지 못한다.</td><td>일부 성분에만 곱하거나, 10% 절감을 0.1로 곱한다.</td></tr>
+        <tr><td>해석과 협력</td><td>행·열을 바꿨을 때 성분의 의미가 어떻게 달라지는지 예를 들어 설명하고, 모둠의 오류를 바로잡는다.</td><td>행·열을 바꾸면 의미가 달라진다고 말하지만 예를 들지 못한다.</td><td>행·열을 바꾸어도 의미가 같다고 말하거나, 모둠 답을 그대로 옮겨 쓴다.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 style="margin-top:2.4rem">2차시 평가 기준 (정책 제안 보고서 루브릭)</h3>
+    <div class="tblwrap"><table class="tbl rubric">
+      <thead><tr><th>평가 요소</th><th>A</th><th>B</th><th>C</th></tr></thead>
+      <tbody>
+        <tr><td>행렬 곱셈 (모델링)</td><td>곱이 정의되는 크기 조건을 설명하고 P×E를 정확히 계산하여, 각 성분이 ‘발전량×배출계수의 합’임을 설명한다.</td><td>P×E를 정확히 계산하지만 크기 조건(가운데 수)이나 PE 성분의 뜻(그 기업의 배출량) 중 하나를 설명하지 못한다.</td><td>대응하지 않는 성분끼리 곱하거나, 곱한 값을 더하지 않는다.</td></tr>
+        <tr><td>할당량 비교와 손익</td><td>배출량−할당량의 부호로 초과·잉여를 판정하고, 가격을 곱해 기업별 손익을 정확히 구한다.</td><td>초과·잉여는 맞게 판정하지만 손익의 부호나 금액에서 틀린다.</td><td>PE − Q의 부호로 초과·잉여를 판정하지 못하거나, 가격을 곱하지 않는다.</td></tr>
+        <tr><td>결과 해석</td><td>배출량과 손익의 의미를 ETS 맥락에서 논리적으로 해석하고, 신재생 비중과 손익의 관계를 수치로 설명한다.</td><td>‘신재생이 많을수록 이득’처럼 결론은 말하지만 근거 수치를 1개 이하로 든다.</td><td>계산한 수치를 배출·손익의 의미와 잇지 않고 숫자만 나열한다.</td></tr>
+        <tr><td>정책 제안</td><td><b>스스로 정한</b> 성분 조정 시나리오를 2개 이상 다시 계산해 배출량·손익을 비교하고, 계산에 빠진 조건(설비비·날씨 변동 등) 1가지 이상을 밝혀 전략을 제시한다.</td><td>주어진 시나리오(석탄 50→20 등)만 다시 계산해 전환 방향을 제안한다.</td><td>수치 없이 ‘신재생을 늘리자’처럼 방향만 말한다.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</section>
+
+<!-- ═════════ 8. 수업 PPT ═════════ -->
+<section class="sec" id="ppt">
+  <div class="wrap">
+    <p class="label">수업 PPT</p>
+    <h2 class="head">데이터로 그리는 미래 에너지 — 59장</h2>
+    <p class="lead">교실에서 넘기며 쓰는 블랙골드 수업 PPT예요. ← → 키로 넘기고, 전체 화면으로 띄울 수 있어요.</p>
+    <div class="deck" data-dir="../slides/p2/" data-n="59" data-title="수학 수업 PPT 슬라이드"></div>
+    <div class="grid g3" style="margin-top:1.2rem">
+      <a class="dl" href="../materials/p2_수학_행렬과탄소경제_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>수업 PPT 원본</b><small>편집 가능한 파워포인트</small></span></a>
+      <a class="dl" href="../materials/p2_수학_행렬과탄소경제_블랙골드.pdf" target="_blank" rel="noopener"><span class="ext">PDF</span><span><b>수업 PPT · PDF</b><small>인쇄·배포용</small></span></a>
+      <a class="dl" href="https://docs.google.com/spreadsheets/d/1ofjgTo-LoSMTbJjtLQIcSQqFsbvUcM4JOpsKETZcz48/copy" target="_blank" rel="noopener"><span class="ext">시트</span><span><b>탄소배출권 시뮬레이터</b><small>구글 시트 · 사본 만들기(구글 로그인 필요)</small></span></a>
+      <a class="dl" href="../materials/p2_탄소배출권_시뮬레이터.xlsx" download><span class="ext">XLSX</span><span><b>탄소배출권 시뮬레이터 · 엑셀</b><small>인터넷·계정 없이 쓰는 같은 파일</small></span></a>
+    </div>
+    <p class="note" style="margin-top:.8rem">구글 계정이 없거나 엑셀이 없는 교실은 이 사이트의 <a href="lab/index.html#trade" target="_blank" rel="noopener" style="color:var(--champ)">실험실 ④·⑤</a>로 같은 활동을 대신할 수 있어요.</p>
+    <p class="note" style="margin-top:1.2rem">수업의 발전량·가격·할당량은 개념 이해를 위한 교육용 가상 데이터예요. 배출계수(석탄 900 · 가스 400 · 신재생 50)는 대소관계만 실제(IPCC)와 같게 단순화했어요 — 석탄·가스는 연소 배출, 신재생은 전과정 어림값으로 기준이 달라요(교육용). 수업 모델은 할당량 전부를 무상으로 가정했어요(실제는 일부 경매).</p>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="nextmod">
+      <a href="../p1-korean/index.html"><small>← 프로그램 1</small><b>국어 및 가치 발견</b></a>
+      <a href="../p3-global/index.html" style="text-align:right"><small>프로그램 3 →</small><b>4색 글로벌 그린 창업기</b></a>
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <p><b style="color:var(--champ)">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 프로그램 2 「데이터로 그리는 미래 에너지: 행렬 모델링과 탄소 경제」 · 하진수(대전대신고등학교) · 한국에너지정보문화재단 지원</p>
+    <p>자료: 교육부(2022) 수학과 교육과정 · <a href="https://ets.krx.co.kr" target="_blank" rel="noopener">한국거래소 배출권시장 정보플랫폼</a> · <a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" rel="noopener">European Commission, CBAM</a> · <a href="https://www.there100.org" target="_blank" rel="noopener">RE100</a> · <a href="https://ourworldindata.org/electricity-mix" target="_blank" rel="noopener">Our World in Data, Electricity mix</a></p>
+    <p>도입 영상은 생성형 AI로 만든 장면입니다(실제 촬영 아님). 수업 행렬의 발전량·배출계수·가격은 교육용 가상 수치이며, 실제 비교용 참고 수치의 출처는 다음과 같습니다: 산업통상자원부 「2024년 에너지수급동향」(한국 전원 비중) · Fraunhofer ISE 보도자료(2025. 1., 독일 공공 순발전량) · 환경부 「제4차 배출권거래제 기본계획」(2024. 12.) · IPCC AR5 WG3 Annex III(2014, 전과정 배출계수) · RE100 FAQ·가입 기준(2025) · EU 규정 2023/956</p>
+    <p><a href="../index.html">← 전체 프로그램으로</a></p>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+<script>
+/* ── 프로그램 2 전용 동작 ── */
+(function(){
+"use strict";
+var RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function n0(v){return Math.abs(v).toLocaleString("ko-KR")}
+function sgn(v){return v>0?"+":v<0?"−":""}
+/* 원 → "−5.4억 원" / "−450만 원" */
+function won(v){var a=Math.abs(v),s=sgn(v);if(a===0)return "0원";
+  if(a>=1e8){var e=a/1e8;return s+(+e.toFixed(4)).toString()+"억 원"}
+  return s+(+(a/1e4).toFixed(1)).toLocaleString("ko-KR")+"만 원"}
+
+/* ═ 인트로 고유 모션: 흩어진 숫자 → 행렬 칸(끊김 없이), '행 → 열' 와이프, p23 훑기, 연기 → 가격표 ═ */
+(function(){
+  var intro=$("#intro");if(!intro)return;
+  var scenes=$$(".scene",intro),fly=$(".fly",intro),wipeEl=$(".wipe",intro);
+  var nums=$$(".n",fly),slots=$$(".slot",fly),cur=-1,T=[];
+  function later(fn,ms){T.push(setTimeout(fn,RM?0:ms))}
+  function clearT(){T.forEach(clearTimeout);T=[]}
+  /* 숫자 자리: 흩어진 자리(%) 또는 행렬 칸 가운데(px) */
+  function place(){
+    var fr=fly.getBoundingClientRect(),W=fr.width,H=fr.height,inMx=fly.classList.contains("inmx");
+    var k=0;
+    nums.forEach(function(n){
+      var p=n.getAttribute("data-p").split(","),x=W*p[0]/100,y=H*p[1]/100,s=+p[2]||1;
+      n.style.setProperty("--o",p[3]||".92");
+      if(!n.classList.contains("dec")){
+        var sl=slots[k];
+        n.style.setProperty("--d",(k*0.08)+"s");n.style.setProperty("--d0",(k*0.18)+"s");
+        if(inMx&&sl){var r=sl.getBoundingClientRect();x=r.left-fr.left+r.width/2;y=r.top-fr.top+r.height/2;s=1}
+        k++;
+      }else n.style.setProperty("--d0","1.3s");
+      n.style.setProperty("--x",x.toFixed(1)+"px");n.style.setProperty("--y",y.toFixed(1)+"px");n.style.setProperty("--s",s);
+    });
+  }
+  addEventListener("resize",function(){place();if(cur===5)sizeSmoke()});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(place);
+  place();
+
+  /* '행 → 열' 와이프 (Web Animations) */
+  function wipe(){
+    if(RM||!wipeEl.animate)return;
+    var rs=$$(".r",wipeEl),cs=$$(".c",wipeEl),hl=$(".hl",wipeEl);
+    wipeEl.classList.add("go");
+    rs.forEach(function(r,k){r.style.visibility="visible";
+      r.animate([{clipPath:"inset(0 100% 0 0)"},{clipPath:"inset(0 0 0 0)"}],{duration:380,delay:k*110,easing:"cubic-bezier(.7,0,.3,1)",fill:"both"})});
+    setTimeout(function(){
+      rs.forEach(function(r){r.style.visibility="hidden"});
+      hl.animate([{opacity:1},{opacity:1,offset:.6},{opacity:0}],{duration:900,fill:"both"});
+      cs.forEach(function(c,k){c.style.visibility="visible";
+        c.animate([{clipPath:"inset(0 0 0 0)"},{clipPath:"inset(0 0 100% 0)"}],{duration:430,delay:120+k*120,easing:"cubic-bezier(.7,0,.3,1)",fill:"both"})});
+    },640);
+    setTimeout(function(){cs.forEach(function(c){c.style.visibility="hidden";c.getAnimations().forEach(function(a){a.cancel()})});
+      rs.forEach(function(r){r.getAnimations().forEach(function(a){a.cancel()})});wipeEl.classList.remove("go")},1700);
+  }
+
+  /* 연기 입자 → '₩30,000 / tCO₂' 가격표 */
+  var sc6=scenes[5],cv=sc6&&$(".smoke",sc6),ptag=sc6&&$(".ptag",sc6),raf=0,dpr=1;
+  function sizeSmoke(){if(!cv)return;dpr=Math.min(2,devicePixelRatio||1);cv.width=sc6.clientWidth*dpr;cv.height=sc6.clientHeight*dpr}
+  function count(el,to,ms){var t0=null,dec=1;if(RM){el.textContent=to.toFixed(dec);return}
+    function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/ms),e=1-Math.pow(1-p,3);el.textContent=(to*e).toFixed(dec);if(p<1)requestAnimationFrame(f)}
+    requestAnimationFrame(f)}
+  function resetTag(){cancelAnimationFrame(raf);if(!ptag)return;ptag.className="ptag";$(".c1",ptag).textContent="0";$(".c2",ptag).textContent="0";
+    if(cv&&cv.width)cv.getContext("2d").clearRect(0,0,cv.width,cv.height)}
+  function particles(){
+    sizeSmoke();var W=cv.width,H=cv.height,ctx=cv.getContext("2d"),tg=$(".tg",ptag);
+    var sr=sc6.getBoundingClientRect(),r=tg.getBoundingClientRect(),cs=getComputedStyle(tg);
+    var off=document.createElement("canvas");off.width=W;off.height=H;var o=off.getContext("2d");
+    o.font=cs.fontWeight+" "+(parseFloat(cs.fontSize)*dpr)+"px "+cs.fontFamily;o.textAlign="center";o.textBaseline="middle";o.fillStyle="#fff";
+    o.fillText(tg.textContent,(r.left-sr.left+r.width/2)*dpr,(r.top-sr.top+r.height/2)*dpr);
+    var step=Math.max(3,Math.round(Math.min(W,H)/170)),data=o.getImageData(0,0,W,H).data,pts=[];
+    for(var y=0;y<H;y+=step)for(var x=0;x<W;x+=step)if(data[(y*W+x)*4+3]>128)pts.push([x,y]);
+    if(!pts.length)return;
+    var N=Math.min(W<900?320:620,Math.max(pts.length,200)),ps=[];
+    for(var i=0;i<N;i++){var t=pts[Math.floor(Math.random()*pts.length)];
+      ps.push({x:W*(.32+Math.random()*.36),y:H*(.72+Math.random()*.32),vy:-(0.5+Math.random()*1.3)*dpr,w:Math.random()*6.3,
+        tx:t[0]+(Math.random()-.5)*step*.6,ty:t[1]+(Math.random()-.5)*step*.6,sx:0,sy:0,r:(1+Math.random()*1.6)*dpr})}
+    var t0=null,locked=false;
+    function ease(p){return p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2}
+    function frame(ts){if(!t0)t0=ts;var t=ts-t0;ctx.clearRect(0,0,W,H);
+      if(t>=1200&&!locked){locked=true;ps.forEach(function(p){p.sx=p.x;p.sy=p.y})}
+      var fade=t<2900?1:Math.max(0,1-(t-2900)/600);
+      ps.forEach(function(p){p.w+=.05;var a,R,G,B,rad;
+        if(t<1200){p.y+=p.vy;p.x+=Math.sin(p.w)*.7*dpr+.25*dpr;a=Math.min(.5,t/500*.5);R=196;G=186;B=174;rad=p.r*(1.4+t/900)}
+        else{var e=ease(Math.min(1,(t-1200)/1400)),j=(1-e)*5*dpr;
+          p.x=p.sx+(p.tx-p.sx)*e+Math.sin(p.w)*j;p.y=p.sy+(p.ty-p.sy)*e+Math.cos(p.w)*j;
+          R=196+(255-196)*e;G=186+(214-186)*e;B=174+(140-174)*e;a=(.5+.45*e)*fade;rad=p.r*(1.4+1.3*(1-e))}
+        ctx.fillStyle="rgba("+(R|0)+","+(G|0)+","+(B|0)+","+a.toFixed(3)+")";ctx.beginPath();ctx.arc(p.x,p.y,rad,0,6.283);ctx.fill()});
+      if(t<3500)raf=requestAnimationFrame(frame);else ctx.clearRect(0,0,W,H)}
+    raf=requestAnimationFrame(frame);
+  }
+  function runTag(){
+    resetTag();if(!ptag)return;
+    if(RM){ptag.classList.add("s1","s2","s3","s4");$(".c1",ptag).textContent="17.4";$(".c2",ptag).textContent="5.4";return}
+    later(particles,900);
+    later(function(){ptag.classList.add("s1")},900+2350);
+    later(function(){ptag.classList.add("s2");count($(".c1",ptag),17.4,900)},900+2900);
+    later(function(){ptag.classList.add("s3")},900+4200);
+    later(function(){ptag.classList.add("s4");count($(".c2",ptag),5.4,900)},900+5000);
+  }
+
+  /* 장면이 바뀔 때마다 상태 맞추기 (site.js가 .scene에 .on을 붙임) */
+  function stage(i){
+    if(i===cur)return;var prev=cur;cur=i;clearT();
+    intro.classList.toggle("at-last",i===scenes.length-1);
+    var ns=scenes[i+1],nv=ns&&$("video",ns);if(nv&&nv.preload==="none")nv.preload="auto"; /* 다음 장면 영상만 미리 받기 */
+    fly.classList.toggle("vis",i>=2&&i<=4);
+    if(i<=2){fly.classList.remove("inmx","sw");place()}
+    else if(i===3){fly.classList.remove("sw");if(prev<3)wipe();
+      if(fly.classList.contains("inmx"))place();else later(function(){fly.classList.add("inmx");place()},1500)}
+    else if(i===4){fly.classList.add("inmx");place();later(function(){fly.classList.add("sw")},700)}
+    if(i===5)runTag();else resetTag();
+  }
+  function sync(){for(var k=0;k<scenes.length;k++)if(scenes[k].classList.contains("on")){stage(k);return}}
+  if("MutationObserver" in window){var mo=new MutationObserver(sync);scenes.forEach(function(s){mo.observe(s,{attributes:true,attributeFilter:["class"]})})}
+  sync();
+  /* 질문으로 건너뛰기 */
+  var sk=$("[data-skip]",intro);
+  if(sk)sk.onclick=function(){var ds=$$(".dots button",intro);if(ds.length)ds[ds.length-1].click()};
+})();
+
+/* ═ 스크롤 이야기 ═ */
+var story=$("#story"),track=$(".story-track"),stick=$(".story-stick"),viz=$("#viz");
+if(story&&viz){
+  var B=[0,.10,.22,.34,.68,.84],cur=-1,curSub=-2,hdr=$(".top");
+  function topH(){return hdr?hdr.offsetHeight:60}
+  var scs=$$(".story-text .sc"),layers=[$(".layA"),$(".layB"),$(".layC"),$(".layD")];
+  var rail=$(".story-rail"),bar=$(".story-bar");
+  B.forEach(function(b,k){var x=document.createElement("button");x.type="button";x.setAttribute("aria-label",(k+1)+"단계로");
+    x.onclick=function(){var tot=track.offsetHeight-stick.offsetHeight;var y=track.getBoundingClientRect().top+scrollY-topH()+tot*(B[k]+(k===3?.03:.02));scrollTo({top:y,behavior:RM?"auto":"smooth"})};rail.appendChild(x)});
+  var rbs=$$("button",rail);
+  function tween(el,to,dur){var dec=(String(to).split(".")[1]||"").length,t0=null;
+    function f(t){if(!t0)t0=t;var p=Math.min(1,(t-t0)/dur),e=1-Math.pow(1-p,3),v=to*e;
+      el.textContent=(v<0?"−":"+")+Math.abs(v).toFixed(dec);if(p<1)requestAnimationFrame(f)}
+    if(RM){el.textContent=(to<0?"−":"+")+Math.abs(to).toFixed(dec);return}
+    requestAnimationFrame(f)}
+  function setStage(s){
+    story.setAttribute("data-s",s);
+    for(var k=0;k<6;k++){viz.classList.toggle("g"+k,s>=k);viz.classList.toggle("is"+k,s===k)}
+    scs.forEach(function(c){c.classList.toggle("on",+c.getAttribute("data-s")===s)});
+    var L=s<=2?0:s-2;layers.forEach(function(l,k){l.classList.toggle("on",k===L)});
+    rbs.forEach(function(b,k){b.className=k<s?"past":k===s?"on":""});
+    if(s===5)$$("[data-cnt]",viz).forEach(function(c){tween(c,parseFloat(c.getAttribute("data-cnt")),1500)});
+  }
+  function setSub(u){
+    for(var k=0;k<6;k++)viz.classList.toggle("u"+k,u>=k);
+    $$(".pm [data-k],.ecol [data-k]",viz).forEach(function(c){c.classList.toggle("hot",u>=1&&u<=3&&+c.getAttribute("data-k")===u)});
+    $$(".terms .t",viz).forEach(function(t){var k=+t.getAttribute("data-t");t.classList.toggle("on",u>=k);t.classList.toggle("now",u===k)});
+    var r=[$("#r1"),$("#r2"),$("#r3")];
+    r.forEach(function(c,k){var show=k===0?u>=4:u>=5;if(show&&!c.classList.contains("show")){c.classList.add("show","flash");setTimeout(function(){c.classList.remove("flash")},700)}else if(!show)c.classList.remove("show")});
+  }
+  var ticking=false;
+  function upd(){ticking=false;
+    var tot=track.offsetHeight-stick.offsetHeight,top=track.getBoundingClientRect().top;
+    var p=tot>0?Math.min(1,Math.max(0,(topH()-top)/tot)):0,s=0;
+    for(var k=0;k<B.length;k++)if(p>=B[k])s=k;
+    var u=s<3?-1:s>3?5:Math.min(5,Math.floor((p-B[3])/(B[4]-B[3])*6));
+    if(s!==cur){cur=s;setStage(s)}
+    if(u!==curSub){curSub=u;setSub(u)}
+    bar.style.width=(p*100)+"%";
+  }
+  addEventListener("scroll",function(){if(!ticking){ticking=true;requestAnimationFrame(upd)}},{passive:true});
+  addEventListener("resize",upd);upd();
+}
+
+/* ═ a23 찾기 ═ */
+$$("[data-agrid]").forEach(function(g){
+  var fb=g.parentNode.querySelector(".fb");
+  $$("button",g).forEach(function(b){b.onclick=function(){
+    var i=b.getAttribute("data-i"),j=b.getAttribute("data-j");
+    $$("button",g).forEach(function(x){x.className="";x.innerHTML=""});
+    b.innerHTML="a<sub>"+i+j+"</sub>";
+    if(i==="2"&&j==="3"){b.className="ok";fb.innerHTML="정답! <b>2행</b>(가로줄)과 <b>3열</b>(세로줄)이 만나는 칸이에요."}
+    else{b.className="no";fb.innerHTML="이 칸은 <b>a<sub>"+i+j+"</sub></b> ("+i+"행 "+j+"열). a<sub>23</sub>은 행이 먼저, 열이 나중이에요 — 2행에서 3번째 칸을 찾아보세요."}
+  }});
+});
+
+/* ═ 크기 조건 판별기 ═ */
+$$("[data-szc]").forEach(function(box){
+  var step=box.parentNode,out=$(".szout",step),sel={};
+  $$("select",box).forEach(function(s){sel[s.getAttribute("data-v")]=s;s.onchange=draw});
+  function draw(){var m=+sel.m.value,n=+sel.n.value,n2=+sel.n2.value,p=+sel.p.value;
+    if(n===n2){out.className="szout ok";out.textContent="가운데 수 "+n+" = "+n2+" → 곱할 수 있어요. 결과는 "+m+" × "+p+" 행렬"}
+    else{out.className="szout no";out.textContent="가운데 수 "+n+" ≠ "+n2+" → 곱할 수 없어요. (앞 행렬의 열 수 = 뒤 행렬의 행 수여야 해요)"}}
+  $$("[data-pre]",step).forEach(function(b){b.onclick=function(){var v=b.getAttribute("data-pre").split(",");sel.m.value=v[0];sel.n.value=v[1];sel.n2.value=v[2];sel.p.value=v[3];draw()}});
+  draw();
+});
+
+/* ═ 전환점 ═ */
+$$("[data-turn]").forEach(function(box){
+  var sl=$("input",box),price=30000,dot=$(".tx-dot",box),guide=$(".tx-guide",box);
+  var pb=$$("[data-price]",box);
+  pb.forEach(function(b){b.onclick=function(){price=+b.getAttribute("data-price");pb.forEach(function(x){x.setAttribute("aria-pressed",x===b)});draw()}});
+  function draw(){var x=+sl.value,y=58000-850*x,d=y-40000,m=-price*d;
+    $(".tx-v",box).textContent=x;
+    $(".tx-mix",box).textContent="석탄 "+(50-x)+" · 가스 30 · 신재생 "+(20+x)+" GWh";
+    $(".tx-y",box).textContent=n0(y)+" tCO₂";
+    $(".tx-d",box).textContent=sgn(d)+n0(d)+(d>0?" (초과 → 구매)":d<0?" (잉여 → 판매)":"");
+    var md=$(".tx-m",box);md.textContent=won(m);md.classList.toggle("neg",m<0);
+    var cx=46+x*6,cy=196-y*0.003;dot.setAttribute("cx",cx);dot.setAttribute("cy",cy);guide.setAttribute("x1",cx);guide.setAttribute("x2",cx);guide.setAttribute("y1",cy);
+  }
+  sl.addEventListener("input",draw);draw();
+});
+
+/* ═ 전략 계산기 ═ */
+(function(){
+  var sc=$("#sc"),sg=$("#sg");if(!sc)return;
+  function draw(e){
+    var c=+sc.value,g=+sg.value;
+    if(c+g>100){if(e&&e.target===sc){g=100-c;sg.value=g}else{c=100-g;sc.value=c}}
+    var r=100-c-g,y=c*900+g*400+r*50,d=y-40000,m3=-30000*d,m6=-60000*d;
+    $("#scv").textContent=c;$("#sgv").textContent=g;$("#srv").textContent=r;
+    $("#sCalc").innerHTML="P′E = "+c+"×900 + "+g+"×400 + "+r+"×50 = <b>"+n0(y)+"</b> tCO₂";
+    $("#sY").textContent=n0(y);
+    var D=$("#sD");D.textContent=sgn(d)+n0(d);D.className=d>0?"neg":"pos";
+    var M3=$("#sM3"),M6=$("#sM6");M3.textContent=won(m3);M6.textContent=won(m6);
+    M3.className=m3<0?"neg":"pos";M6.className=m6<0?"neg":"pos";
+    /* 30초 제안문 '뼈대': 숫자만 채우고, 이유·가치·조건은 비워 둠(학생이 직접 씀) */
+    var sp=$("#sSpeech"),B='<span class="blank">직접 쓰기</span>';
+    if(c===50&&g===30){sp.innerHTML="“우리 A기업은 석탄 <span class=\"blank\">__</span> GWh를 … ” — 석탄·가스 막대를 움직이면 숫자 칸이 채워져요. 문장의 이유와 조건은 모둠이 써요."}
+    else{sp.innerHTML="“우리 A기업은 발전량을 석탄 <u>"+c+"</u> · 가스 <u>"+g+"</u> · 신재생 <u>"+r+"</u> GWh로 바꾸어 배출량을 <u>58,000</u> → <u>"+n0(y)+"</u> tCO<sub>2</sub>로, 손익을 <u>−5.4억 원</u> → <u>"+won(m3)+"</u>으로 바꾸겠습니다. 이 전략은 "+B+" 측면에서 "+B+" 가치가 있습니다. 그 이유는 "+B+"이고, 아직 따지지 못한 조건은 "+B+"입니다.”"}
+  }
+  sc.addEventListener("input",draw);sg.addEventListener("input",draw);draw();
+})();
+})();
+</script>
+</body>
+</html>
