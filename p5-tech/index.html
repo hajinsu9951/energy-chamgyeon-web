@@ -5,13 +5,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>프로그램 5 · 적정기술 프로토타이핑 | 에너지참견시점</title>
 <meta name="description" content="디자인 씽킹 5단계로 사용자의 불편을 정의하고, 태양전지와 주변 재료로 적정기술 시제품을 만들어 비교 실험하고 개선하는 5차시 기술 수업">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/site.css">
 <!-- 확인 필요: 적용 학년 — 지도안·PPT는 '고등학교 1학년 기술·가정', 보고서 Ⅱ장 검사 대상은 '중학교 3학년 1개 반'으로 서로 다름. 화면에는 학년을 쓰지 않음 -->
 <style>
-/* ── 프로그램 5 전용 보충 스타일 ── */
+/* ── 프로그램 5 전용 보충 스타일 (C안: 에코 페이퍼 + 딥 포레스트) ── */
+/* 어두운 장면(인트로·밤 회로)에만 쓰는 숲색 단계. 나머지는 모두 공통 변수 */
+:root{--f0:#0B1F15;--f1:#10241A;--f3:#1F4A35;--mint:#CFE3CB}
+.intro{background:var(--deep)}
 .intro .art{position:absolute;inset:0;z-index:0}
 .intro .art svg{width:100%;height:100%;display:block}
 .intro .scene > img.blurbg{filter:blur(22px) brightness(.42) saturate(.8);transform:scale(1.15)}
@@ -41,40 +41,40 @@
 .on .s3-nighton{animation:s3night 8.2s linear both}
 @keyframes s3day{0%,42%{opacity:1}54%,100%{opacity:0}}
 @keyframes s3night{0%,48%{opacity:0}60%,100%{opacity:1}}
-.s3-bulb{fill:#FFE6B8}
+.s3-bulb{fill:var(--ivory)}
 .on .s3-bulb{animation:s3bulb 8.2s linear both}
-@keyframes s3bulb{0%,50%{fill:#3a332b}60%,100%{fill:#FFE6B8}}
+@keyframes s3bulb{0%,50%{fill:var(--f3)}60%,100%{fill:var(--ivory)}}
 .s3-chg{transform-box:fill-box;transform-origin:left center;transform:scaleX(.78)}
 .on .s3-chg{animation:s3chg 8.2s linear both}
 @keyframes s3chg{0%{transform:scaleX(.06)}45%{transform:scaleX(1)}100%{transform:scaleX(.78)}}
 .intro canvas.motes{width:100%;height:100%}
-.frame{position:absolute;z-index:2;right:6vw;top:13vh;width:min(26vw,340px);border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.frame{position:absolute;z-index:2;right:6vw;top:13vh;width:min(26vw,340px);border:1px solid var(--line2);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px rgba(16,36,26,.55)}
 .frame img{width:100%}
-.frame figcaption{position:absolute;left:0;right:0;bottom:0;padding:.5rem .8rem;background:rgba(29,26,22,.8);color:var(--champ);font-size:.82rem}
+.frame figcaption{position:absolute;left:0;right:0;bottom:0;padding:.5rem .8rem;background:rgba(16,36,26,.8);color:var(--champ);font-size:.82rem}
 .on .frame img{animation:kenburns 9s var(--ease) both}
 @media (max-width:760px){.frame{top:11vh;right:50%;margin-right:-28vw;width:56vw;max-height:38vh}.frame img{max-height:38vh;object-fit:cover}}
 .vs{display:grid;gap:.6rem;max-width:760px;margin:1rem auto 0;text-align:left}
 .vs p{margin:0;padding:.7rem 1rem;border-radius:12px;font-weight:500;font-size:clamp(.95rem,1.7vw,1.15rem)}
-.vs .no{background:rgba(180,83,42,.18);border:1px solid rgba(180,83,42,.55);color:var(--ink2)}
+.vs .no{background:var(--rustT);border:1px solid color-mix(in srgb,var(--rust) 60%,transparent);color:var(--ink2)}
 .vs .no span{text-decoration:line-through;text-decoration-color:var(--rust);text-decoration-thickness:2px}
 .vs .yes{background:var(--amberT);border:1px solid var(--amber);color:var(--ink)}
-.vs b{color:var(--amber);margin-right:.4rem}.vs .no b{color:var(--rust)}
+.vs b{color:var(--amber);margin-right:.4rem}.vs .no b{color:var(--peach)}
 .dt{display:flex;justify-content:center;gap:.5rem;flex-wrap:wrap;margin:1.2rem auto 1.4rem;max-width:980px}
-.dt div{flex:1 1 140px;max-width:180px;border:1px solid var(--line2);border-radius:16px;padding:.8rem .6rem;background:rgba(29,26,22,.7);opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.dt div{flex:1 1 140px;max-width:180px;border:1px solid var(--line2);border-radius:16px;padding:.8rem .6rem;background:rgba(16,36,26,.7);opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .on .dt div{opacity:1;transform:none}
 .on .dt div:nth-child(2){transition-delay:.25s}.on .dt div:nth-child(3){transition-delay:.5s}.on .dt div:nth-child(4){transition-delay:.75s}.on .dt div:nth-child(5){transition-delay:1s}
-.dt b{display:block;font-family:var(--serif);font-weight:800;font-size:clamp(1.15rem,2.2vw,1.6rem);color:var(--ink)}
+.dt b{display:block;font-family:var(--serif);font-weight:900;font-size:clamp(1.15rem,2.2vw,1.6rem);color:var(--ink)}
 .dt i{font-style:normal;color:var(--amber);font-weight:700;font-size:.82rem}
 .dt small{display:block;color:var(--champ);font-size:.82rem}
 @media (max-width:640px){.dt div{flex:1 1 30%;padding:.5rem .3rem}.dt small{display:none}}
 
-.ivory .attr{color:var(--amber-dark)}.ivory .quote em,.ivory .amber,.ivory .head em{color:var(--amber-dark)}
+.ivory .attr{color:var(--amber-dark)}
 #rubric .tbl td:first-child{min-width:8.5em}
-@media (min-width:901px){.rank{position:sticky;top:80px}}
+/* 순위판은 왼쪽 행렬보다 길어 고정(sticky)하지 않음: 아래 설명과 겹치던 문제 수정 */
 @media (max-width:640px){.tabs button{padding:.45rem .85rem;font-size:.92rem}}
 /* 공통 소품 */
 .fig{margin:.6rem 0 1rem}
-.fig img{border-radius:14px;border:1px solid var(--line);max-height:360px;width:auto;max-width:100%;object-fit:contain;background:#111}
+.fig img{border-radius:14px;border:1px solid var(--line);max-height:360px;width:auto;max-width:100%;object-fit:contain;background:var(--panel2)}
 .fig figcaption{color:var(--grey);font-size:.85rem;margin-top:.35rem}
 .figrow{display:flex;gap:.8rem;flex-wrap:wrap}
 .figrow .fig{flex:1 1 220px;margin:0}
@@ -83,9 +83,9 @@
 .chip{border:1px solid var(--line2);border-radius:12px;padding:.55rem .85rem;background:var(--champT)}
 .chip b{color:var(--amber);display:block;font-size:.95rem}
 .chip span{color:var(--ink2);font-size:.92rem}
-.ivory .chip{background:#fff;border-color:rgba(29,26,22,.14)}.ivory .chip b{color:var(--amber-dark)}.ivory .chip span{color:var(--ink-sub)}
-.sent{font-family:var(--serif);font-weight:800;font-size:clamp(1.1rem,2.4vw,1.6rem);line-height:1.5;padding:.8rem 1.1rem;border-radius:14px;margin:.5rem 0}
-.sent.no{background:var(--rustT);border:1px solid rgba(180,83,42,.6)}
+.ivory .chip{background:#fff;border-color:var(--line)}.ivory .chip b{color:var(--amber-dark)}.ivory .chip span{color:var(--ink-sub)}
+.sent{font-family:var(--serif);font-weight:900;font-size:clamp(1.1rem,2.4vw,1.6rem);line-height:1.5;padding:.8rem 1.1rem;border-radius:14px;margin:.5rem 0}
+.sent.no{background:var(--rustT);border:1px solid color-mix(in srgb,var(--rust) 60%,transparent)}
 .sent.yes{background:var(--amberT);border:1px solid var(--amber)}
 .sent small{display:block;font-family:var(--sans);font-weight:500;font-size:.9rem;color:var(--champ);margin-top:.2rem}
 .formula{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;font-size:clamp(1rem,2vw,1.25rem);font-weight:500}
@@ -102,17 +102,21 @@
 /* (a) 에너지 전환 회로 */
 .elab{display:grid;grid-template-columns:1.45fr 1fr;gap:1.2rem;align-items:start}
 @media (max-width:900px){.elab{grid-template-columns:1fr}.elab .lcol{display:contents}.elab .board{order:1}.elab .ctrl{order:2}.elab .lossbox{order:3}}
-.elab .board{background:#14110E;border:1px solid var(--line);border-radius:20px;overflow:hidden}
+.elab .board{--edge:var(--champ);--body:var(--panel2);--heat:var(--rust);background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);transition:background .8s}
+.elab.night .board{background:var(--deep);--ink:var(--ivory);--ink2:var(--mint);--champ:var(--mint);--grey:var(--mint);--amber:var(--yellow);--body:var(--f3);--heat:var(--peach)}
+.elab .bx{fill:var(--body);stroke:var(--edge);stroke-width:2}
+.elab .pnl{fill:var(--blue);stroke:var(--edge);stroke-width:2.5}
 .elab svg{display:block;width:100%;height:auto}
 .elab .sky{transition:fill .8s}
-.elab.day .sky{fill:#2E2720}.elab.night .sky{fill:#0F0D0B}
+.elab.day .sky{fill:color-mix(in srgb,var(--blue) 9%,var(--panel))}.elab.night .sky{fill:var(--deep)}
 .elab .sun,.elab .moon{transition:opacity .6s;cursor:pointer}
 .elab.night .sun{opacity:0;pointer-events:none}.elab.day .moon{opacity:0;pointer-events:none}
 .elab .ray{opacity:0;transition:opacity .5s}
 .elab.day .ray{opacity:1}
-.wire{fill:none;stroke:#6A5D4F;stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+.wire{fill:none;stroke:var(--sage);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
 .fl{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:8 12;opacity:0;transition:opacity .4s}
 .fl.go{opacity:1;animation:dash .9s linear infinite}
+.elab .ray .fl{stroke:var(--yellow);stroke-width:4}
 .elab .bat{cursor:pointer}
 .elab .bat,.elab .modg,.elab .batw,.elab .bypass{transition:opacity .4s}
 .elab:not(.bat-on) .bat,.elab:not(.bat-on) .modg,.elab:not(.bat-on) .batw{opacity:.2}
@@ -120,16 +124,16 @@
 .elab .sml{font:500 14px var(--sans);fill:var(--grey)}
 .elab .heat{opacity:0;transition:opacity .5s}
 .elab .heat.on{opacity:1}
-.elab .heat path{fill:none;stroke:#E08A5E;stroke-width:2.5;stroke-linecap:round}
-.elab .heat text{font:700 15px var(--sans);fill:#E08A5E}
-.elab .sw circle{fill:#14110E;stroke:#EBCB94;stroke-width:2.5}
+.elab .heat path{fill:none;stroke:var(--heat);stroke-width:2.5;stroke-linecap:round}
+.elab .heat text{font:700 15px var(--sans);fill:var(--heat)}
+.elab .sw circle{fill:var(--body);stroke:var(--edge);stroke-width:2.5}
 .elab .loadg{opacity:0;transition:opacity .35s;pointer-events:none}
 .elab.l-led .g-led,.elab.l-motor .g-motor,.elab.l-buzzer .g-buzzer{opacity:1;pointer-events:auto}
 .elab .loadg{cursor:pointer}
 .elab .ledglow{opacity:0;transition:opacity .5s}
 .elab.out .ledglow{opacity:1}
-.elab .ledbulb{fill:#3A332B;transition:fill .5s}
-.elab.out .ledbulb{fill:#FFE6B8}
+.elab .ledbulb{fill:var(--body);transition:fill .5s}
+.elab.out .ledbulb{fill:var(--yellow)}
 .elab .fan{transform-box:fill-box;transform-origin:center}
 .elab.out .fan{animation:spin .7s linear infinite}
 .elab.out.rev .fan{animation-direction:reverse}
@@ -154,18 +158,18 @@
 .chain span.off{border-color:var(--line);color:var(--grey);background:transparent}
 .chain i{font-style:normal;color:var(--grey)}
 .chain span small{font-weight:500;font-size:.78rem;margin-left:.15rem}
-.chain span.hl{border-style:dashed;border-color:#E08A5E;color:#E08A5E;background:var(--rustT)}
-.chain span.hl.off{border-color:var(--line);color:var(--grey);background:transparent}
+.chain span.heat{border-style:dashed;border-color:var(--rust);color:var(--rust);background:var(--rustT)}
+.chain span.heat.off{border-color:var(--line);color:var(--grey);background:transparent}
 .loss{margin:.2rem 0 .9rem}
 .loss .lb{display:flex;height:14px;border-radius:7px;overflow:hidden;margin:.45rem 0 .35rem}
 .loss .lb i{display:block}
-.loss .k1{background:#7A4A35}.loss .k2{background:#E08A5E}.loss .k3{background:var(--amber)}
+.loss .k1{background:var(--sage)}.loss .k2{background:var(--peach)}.loss .k3{background:var(--yellow)}
 .loss .lg{display:flex;flex-wrap:wrap;gap:.3rem .9rem;font-size:.85rem;color:var(--ink2)}
 .loss .lg b{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:.3rem;vertical-align:middle}
 .loss p{margin:.35rem 0 0}
 .msg{border-left:3px solid var(--amber);padding:.6rem .9rem;background:var(--champT);border-radius:0 12px 12px 0;min-height:4.4em;color:var(--ink)}
 .msg.warn{border-color:var(--rust);background:var(--rustT)}
-.gauge{height:8px;border-radius:4px;background:rgba(246,243,238,.12);overflow:hidden;margin:.3rem 0 .2rem}
+.gauge{height:8px;border-radius:4px;background:var(--line);overflow:hidden;margin:.3rem 0 .2rem}
 .gauge i{display:block;height:100%;background:linear-gradient(90deg,var(--champ),var(--amber));width:50%;transition:width .25s linear}
 
 /* (c) 문장 분류 + 의뢰 카드 */
@@ -173,35 +177,35 @@
 @media (max-width:900px){.sorter{grid-template-columns:1fr}.sorter .bin.l{order:2}.sorter .bin.r{order:3}}
 .bin{border:1.5px dashed var(--line2);border-radius:18px;padding:.9rem;min-height:180px}
 .bin h4{margin:0 0 .5rem;font-size:1.05rem}
-.bin.l h4{color:var(--amber)}.bin.r h4{color:#E08A5E}
+.bin.l h4{color:var(--amber)}.bin.r h4{color:var(--rust)}
 .bin ol{margin:0;padding-left:1.1rem;font-size:.92rem;color:var(--ink2)}
 .bin li{margin:.25rem 0;animation:fadein .4s}
-.bin li.wrong{color:#E08A5E}
-.qcard{position:relative;min-height:250px;display:flex;flex-direction:column;justify-content:center;border-radius:22px;padding:1.4rem;background:linear-gradient(160deg,#352E27,#26211C);border:1px solid var(--line2);box-shadow:0 18px 40px rgba(0,0,0,.35);transition:transform .45s var(--ease),opacity .45s}
+.bin li.wrong{color:var(--rust)}
+.qcard{position:relative;min-height:250px;display:flex;flex-direction:column;justify-content:center;border-radius:22px;padding:1.4rem;background:var(--panel);border:1px solid var(--line2);border-top:6px solid var(--prog);box-shadow:var(--shadow);transition:transform .45s var(--ease),opacity .45s}
 .qcard.fly-l{transform:translateX(-60%) rotate(-10deg);opacity:0}
 .qcard.fly-r{transform:translateX(60%) rotate(10deg);opacity:0}
 .qcard.enter{transform:translateY(20px) scale(.96);opacity:0;transition:none}
 .qcard .qn{color:var(--grey);font-size:.85rem}
-.qcard .qt{font-family:var(--serif);font-weight:800;font-size:clamp(1.2rem,2.4vw,1.6rem);line-height:1.5;margin:.4rem 0 1rem}
+.qcard .qt{font-family:var(--serif);font-weight:900;font-size:clamp(1.2rem,2.4vw,1.6rem);line-height:1.5;margin:.4rem 0 1rem}
 .qcard .qb{display:flex;gap:.5rem;flex-wrap:wrap}
 .qcard .qb .btn{flex:1 1 140px;justify-content:center}
 .qfb{min-height:3.2em;margin-top:.7rem;color:var(--champ);font-size:.95rem}
-.qfb.bad{color:#E08A5E}
+.qfb.bad{color:var(--rust)}
 .score{font-weight:700;color:var(--amber);font-variant-numeric:tabular-nums}
 .deck7{display:grid;grid-template-columns:repeat(auto-fill,minmax(138px,1fr));gap:.8rem;perspective:1200px}
 .rq{position:relative;height:268px;cursor:pointer;border:0;padding:0;background:transparent;font:inherit;color:inherit;text-align:left}
 .rq .in{position:absolute;inset:0;transition:transform .7s var(--ease);transform-style:preserve-3d}
 .rq.flip .in{transform:rotateY(180deg)}
 .rq .f,.rq .b{position:absolute;inset:0;border-radius:18px;padding:1rem;-webkit-backface-visibility:hidden;backface-visibility:hidden;border:1px solid var(--line2);display:flex;flex-direction:column}
-.rq .f{background:linear-gradient(170deg,#3A3129,#211D19)}
-.rq .f .num{font-family:var(--serif);font-weight:800;font-size:2.6rem;color:var(--amber);line-height:1}
+.rq .f{background:var(--panel);border-top:6px solid var(--prog);box-shadow:var(--shadow)}
+.rq .f .num{font-family:var(--serif);font-weight:900;font-size:2.6rem;color:var(--prog-ink);line-height:1}
 .rq .f .rg{margin-top:.35rem;font-weight:700;font-size:1.25rem}
 .rq .f .tp{color:var(--champ);font-size:.95rem}
 .rq .f .kind{margin-top:auto;align-self:flex-start;font-size:.72rem;color:var(--grey);border:1px solid var(--line);border-radius:999px;padding:.05rem .5rem}
 .rq .b{background:var(--panel2);transform:rotateY(180deg);font-size:.82rem;line-height:1.5;color:var(--ink2);gap:.3rem;overflow:hidden;padding:.85rem}
 .rq .b b{color:var(--amber);font-size:.95rem}
 .rq.pick .f,.rq.pick .b{border-color:var(--amber);box-shadow:0 0 0 2px var(--amber) inset}
-.rq.hl .f{box-shadow:0 0 0 2px var(--amber) inset,0 0 30px rgba(242,180,90,.45)}
+.rq.lit .f{box-shadow:0 0 0 3px var(--prog) inset,var(--shadow)}
 .rq .use{margin-top:auto;align-self:flex-start;font-size:.8rem;padding:.35rem .7rem;white-space:nowrap}
 .pickbar{display:flex;align-items:center;gap:.8rem;flex-wrap:wrap;margin:1rem 0}
 .pickbar .now{color:var(--champ)}
@@ -216,33 +220,36 @@
 .sl{display:grid;grid-template-columns:7.6em 1fr 2.2em;align-items:center;gap:.6rem;margin:.25rem 0}
 .sl label{font-size:.9rem;color:var(--ink2)}
 .sl output{font-weight:700;color:var(--amber);text-align:right;font-variant-numeric:tabular-nums}
-input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:rgba(246,243,238,.16);outline-offset:6px}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--line2);outline-offset:6px}
 input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--amber);border:3px solid var(--bg);box-shadow:0 0 0 1px var(--amber);cursor:pointer}
 input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--amber);border:3px solid var(--bg);cursor:pointer}
-.rank{position:relative;background:#14110E;border:1px solid var(--line);border-radius:20px;padding:1rem}
+.rank{position:relative;background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:1rem}
 .rank h4{margin:0 0 .7rem;color:var(--champ);font-weight:500}
 .rlist{position:relative}
 .ritem{position:absolute;left:0;right:0;height:78px;transition:top .7s var(--ease)}
 .ritem .rin{height:70px;border:1px solid var(--line);border-radius:14px;padding:.5rem .8rem;display:grid;grid-template-columns:2.2em 1fr auto;align-items:center;gap:.6rem;background:var(--panel);transition:border-color .3s,box-shadow .3s}
-.ritem.win .rin{border-color:var(--amber);box-shadow:0 0 0 1px var(--amber) inset,0 0 24px rgba(242,180,90,.25)}
-.ritem .rk{font-family:var(--serif);font-weight:800;font-size:1.6rem;color:var(--amber);text-align:center}
+.ritem.win .rin{border-color:var(--prog);box-shadow:0 0 0 2px var(--prog) inset,var(--shadow)}
+.ritem .rk{font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--amber);text-align:center}
 .ritem .rn{font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.ritem .rb{height:6px;border-radius:3px;background:rgba(246,243,238,.12);margin-top:.35rem;overflow:hidden}
+.ritem .rb{height:6px;border-radius:3px;background:var(--line);margin-top:.35rem;overflow:hidden}
 .ritem .rb i{display:block;height:100%;background:linear-gradient(90deg,var(--champ),var(--amber));transition:width .7s var(--ease)}
 .ritem .rt{font-weight:700;font-size:1.35rem;font-variant-numeric:tabular-nums}
 .ritem .rt small{font-size:.8rem;color:var(--grey);font-weight:400}
 .ritem .rin > div{min-width:0}
 .ritem .rt{white-space:nowrap}
 @media (max-width:520px){.ritem .rin{grid-template-columns:1.6em minmax(0,1fr) auto;gap:.45rem;padding:.5rem .6rem}.ritem .rn{font-size:.92rem}.ritem .badge{display:none}}
-.ritem .badge{font-size:.72rem;font-weight:700;color:var(--bg);background:var(--amber);border-radius:999px;padding:.05rem .5rem;margin-left:.4rem;vertical-align:middle}
+.ritem .badge{font-size:.72rem;font-weight:700;color:var(--ink);background:var(--prog);border-radius:999px;padding:.05rem .5rem;margin-left:.4rem;vertical-align:middle}
 
 /* 회로 오류 탐정 */
 .det{display:grid;grid-template-columns:repeat(auto-fit,minmax(118px,1fr));gap:.7rem;margin:.6rem 0}
-.det button{appearance:none;border:1px solid var(--line2);background:#14110E;border-radius:14px;padding:.4rem .4rem .6rem;cursor:pointer;color:var(--ink);font:500 .92rem var(--sans);text-align:center}
+.det button{appearance:none;border:1px solid var(--line2);background:var(--panel);box-shadow:var(--shadow);border-radius:14px;padding:.4rem .4rem .6rem;cursor:pointer;color:var(--ink);font:500 .92rem var(--sans);text-align:center}
 .det svg{width:100%;height:auto;display:block}
 .det .ans{display:block;min-height:1.5em;color:var(--grey)}
 .det button.shown .ans{color:var(--amber);font-weight:700}
-.det button.shown.bad .ans{color:#E08A5E}
+.det button.shown.bad .ans{color:var(--rust)}
+.det .pv{fill:color-mix(in srgb,var(--blue) 22%,var(--panel));stroke:var(--champ);stroke-width:2}
+.det .ld{fill:var(--panel2);stroke:var(--champ);stroke-width:2}
+.det .wl.sc{stroke:var(--rust)}
 .det .wl{fill:none;stroke:var(--champ);stroke-width:3;stroke-linecap:round}
 .det text{font:700 13px var(--sans);fill:var(--champ)}
 
@@ -251,18 +258,18 @@ input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;bac
 .ts .q.act{opacity:1;border-color:var(--amber)}
 .ts .q.ok{opacity:.85}
 .ts .q b{flex:1 1 220px}
-.ts .fix{color:#E08A5E;font-weight:500;flex-basis:100%;display:none}
+.ts .fix{color:var(--rust);font-weight:500;flex-basis:100%;display:none}
 .ts .q.no .fix{display:block}
-.ts .done{display:none;font-family:var(--serif);font-weight:800;font-size:1.6rem;color:var(--amber)}
+.ts .done{display:none;font-family:var(--serif);font-weight:900;font-size:1.6rem;color:var(--amber)}
 .ts.fin .done{display:block}
 .ts .tbtn{min-width:4em}
 
 /* 문장 만들기 */
 .builder{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem}
 input.pad{min-height:0;height:auto;padding:.6rem .8rem}
-.preview{font-family:var(--serif);font-weight:800;font-size:clamp(1.1rem,2.2vw,1.45rem);line-height:1.5;padding:.9rem 1.1rem;border-radius:14px;border:1px solid var(--amber);background:var(--amberT);margin:.8rem 0 .4rem}
+.preview{font-family:var(--serif);font-weight:900;font-size:clamp(1.1rem,2.2vw,1.45rem);line-height:1.5;padding:.9rem 1.1rem;border-radius:14px;border:1px solid var(--amber);background:var(--amberT);margin:.8rem 0 .4rem}
 .preview .ph{color:var(--grey)}
-.pwarn{color:#E08A5E;min-height:1.4em;font-size:.95rem}
+.pwarn{color:var(--rust);min-height:1.4em;font-size:.95rem}
 
 /* (d) 결과 막대 */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
@@ -280,13 +287,13 @@ input.pad{min-height:0;height:auto;padding:.6rem .8rem}
 .it .nm b{color:var(--grey);font-weight:500;margin-right:.2rem}
 .it .bars{position:relative;display:grid;gap:3px}
 .it .bars span{display:block;height:9px;border-radius:5px;width:0;transition:width 1.3s var(--ease)}
-.it .bars .pre{background:#6E6458}
+.it .bars .pre{background:var(--blue)}
 .it .bars .post{background:var(--amber)}
 .items.in .it .pre{width:var(--pre)}
 .items.in .it .post{width:var(--post)}
 .items.in .it:nth-child(n) .post{transition-delay:.35s}
 .it .dl2{font-weight:700;font-variant-numeric:tabular-nums;text-align:right;font-size:.95rem}
-.it .dl2.up{color:var(--amber)}.it .dl2.dn{color:#E08A5E}.it .dl2.eq{color:var(--grey)}
+.it .dl2.up{color:var(--amber)}.it .dl2.dn{color:var(--rust)}.it .dl2.eq{color:var(--grey)}
 .it .vals{display:block;font-weight:400;color:var(--grey);font-size:max(.8rem,13px)}
 .it.hi .nm{color:var(--ink);font-weight:500}
 .items.f-up .it:not(.hi){display:none}
@@ -294,14 +301,14 @@ input.pad{min-height:0;height:auto;padding:.6rem .8rem}
 .axis{display:grid;grid-template-columns:minmax(150px,15rem) 1fr 5rem;gap:.7rem;color:var(--grey);font-size:max(.78rem,13px);margin-top:.3rem}
 .axis div{display:flex;justify-content:space-between}
 @media (max-width:640px){.it,.axis{grid-template-columns:1fr 4.4rem}.it .nm{grid-column:1/-1}.axis>span:first-child{display:none}}
-.caution{border:1px solid rgba(180,83,42,.6);background:var(--rustT);border-radius:16px;padding:1rem 1.2rem;margin-top:1.2rem}
-.caution h4{margin:0 0 .4rem;color:#E8A27E}
+.caution{border:1px solid color-mix(in srgb,var(--rust) 55%,transparent);background:var(--rustT);border-radius:16px;padding:1rem 1.2rem;margin-top:1.2rem}
+.caution h4{margin:0 0 .4rem;color:var(--rust)}
 .caution ul{margin:0;padding-left:1.1rem}.caution li{margin:.25rem 0;color:var(--ink2)}
 
 /* 평가 30점 막대 */
-.pts{display:flex;height:54px;border-radius:14px;overflow:hidden;margin:1rem 0 .4rem;border:1px solid rgba(29,26,22,.15)}
+.pts{display:flex;height:54px;border-radius:14px;overflow:hidden;margin:1rem 0 .4rem;border:1px solid var(--line)}
 .pts div{display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;color:var(--ink-dark);text-align:center;line-height:1.2;padding:0 .3rem}
-.pts .a{flex:10;background:#F2B45A}.pts .b{flex:5;background:#EBCB94}.pts .c{flex:5;background:#DCD5CA}.pts .d{flex:10;background:#D9A55A}
+.pts .a{flex:10;background:var(--yellow)}.pts .b{flex:5;background:var(--peach)}.pts .c{flex:5;background:color-mix(in srgb,var(--sage) 40%,var(--panel))}.pts .d{flex:10;background:color-mix(in srgb,var(--blue) 35%,var(--panel))}
 @media (max-width:520px){.pts div{font-size:.72rem}}
 .gallery{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:.9rem}
 .gallery figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
@@ -314,7 +321,7 @@ body.proj .step img{max-height:38vh}
 .backlink:hover{color:var(--amber)}
 /* 페트병 전구 그림(직접 그림) */
 .pet{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.6rem 0 1rem}
-.pet figure{margin:0;background:#14110E;border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.pet figure{margin:0;background:var(--panel);box-shadow:var(--shadow);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .pet svg{display:block;width:100%;height:auto}
 .pet figcaption{padding:.45rem .8rem;color:var(--ink2);font-size:.88rem}
 @media (max-width:520px){.pet{grid-template-columns:1fr}}
@@ -330,17 +337,26 @@ body.proj .step img{max-height:38vh}
 .fig.paper img{width:100%;max-height:none;object-fit:contain;background:var(--ivory)}
 .ivory .fig figcaption{color:var(--ink-sub)}
 .ivory .fig img{border-color:var(--line)}
+.wrap.recbar{margin:0 auto 1.2rem}
+/* 차시별 수업 화면 카드 */
+.lgo{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:.8rem;margin-top:1.2rem}
+.lgo a{display:block;text-decoration:none;color:var(--ink);background:#fff;border:1px solid var(--line);border-top:6px solid var(--prog);border-radius:16px;padding:.9rem 1rem 1rem;box-shadow:var(--shadow);transition:transform .25s var(--ease),border-color .25s}
+.lgo a:hover{transform:translateY(-3px);border-color:var(--prog)}
+.lgo small{display:block;color:var(--prog-ink);font-weight:700;font-size:.85rem}
+.lgo b{display:block;font-size:1.08rem;margin:.15rem 0 .2rem}
+.lgo span{display:block;color:var(--ink-sub);font-size:.88rem;line-height:1.45}
+.lgo em{font-style:normal;display:inline-block;margin-top:.5rem;font-weight:700;font-size:.85rem;color:var(--prog-ink)}
 </style>
 </head>
-<body>
+<body data-prog="p5">
 
 <header class="top">
   <div class="wrap">
     <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span>· 05</a>
     <nav aria-label="이 페이지 차례">
-      <a href="#intro">시작</a><a href="#goal">질문</a><a href="#lesson">수업 진행</a><a href="#energy">에너지 전환</a><a href="#define">문제 정의</a><a href="#matrix">평가 행렬</a><a href="#act">활동지</a><a href="#rubric">평가</a><a href="#result">결과</a><a href="#ppt">PPT</a>
+      <a href="#intro">시작</a><a href="#goal">질문</a><a href="#lesson">차시 수업</a><a href="#energy">에너지 전환</a><a href="#define">문제 정의</a><a href="#matrix">평가 행렬</a><a href="#act">활동지</a><a href="#rubric">평가</a><a href="#result">결과</a><a href="#ppt">PPT</a>
     </nav>
-    <div class="tools"><button class="tbtn" data-toggle="tmode">교사 모드</button><button class="tbtn" data-toggle="proj">크게 보기</button><button class="tbtn" data-toggle="fs">전체 화면</button></div>
+    <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
   </div>
 </header>
 
@@ -351,20 +367,20 @@ body.proj .step img{max-height:38vh}
   <div class="scene" data-dur="5600">
     <div class="art" aria-hidden="true">
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
-        <defs><linearGradient id="n1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070605"/><stop offset=".7" stop-color="#1D1A16"/><stop offset="1" stop-color="#2B2621"/></linearGradient></defs>
+        <defs><linearGradient id="n1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--f0)"/><stop offset=".7" style="stop-color:var(--deep)"/><stop offset="1" style="stop-color:var(--f3)"/></linearGradient></defs>
         <rect width="1600" height="900" fill="url(#n1)"/>
-        <g fill="#F6F3EE">
+        <g style="fill:var(--ivory)">
           <circle class="tw" cx="120" cy="90" r="1.6"/><circle class="tw" cx="260" cy="180" r="1.2"/><circle class="tw" cx="380" cy="70" r="1.8"/><circle class="tw" cx="520" cy="150" r="1.1"/><circle class="tw" cx="640" cy="60" r="1.5"/><circle class="tw" cx="760" cy="200" r="1.2"/><circle class="tw" cx="880" cy="110" r="1.7"/><circle class="tw" cx="980" cy="40" r="1.1"/><circle class="tw" cx="1080" cy="170" r="1.4"/><circle class="tw" cx="1190" cy="80" r="1.2"/><circle class="tw" cx="1420" cy="210" r="1.6"/><circle class="tw" cx="1520" cy="100" r="1.2"/><circle class="tw" cx="60" cy="240" r="1.1"/><circle class="tw" cx="700" cy="290" r="1"/><circle class="tw" cx="1000" cy="300" r="1.2"/><circle class="tw" cx="330" cy="300" r="1"/>
         </g>
-        <path d="M1290 120a52 52 0 1 0 40 92a44 44 0 1 1-40-92z" fill="#EBCB94" opacity=".85"/>
-        <path d="M0 610 Q300 520 620 590 T1220 560 T1600 600 V900 H0z" fill="#12100D"/>
-        <g fill="#0B0A08" stroke="rgba(235,203,148,.14)" stroke-width="2">
+        <path d="M1290 120a52 52 0 1 0 40 92a44 44 0 1 1-40-92z" style="fill:var(--ivory)" opacity=".85"/>
+        <path d="M0 610 Q300 520 620 590 T1220 560 T1600 600 V900 H0z" style="fill:var(--f1)"/>
+        <g style="fill:var(--f0);stroke:var(--mint);stroke-opacity:.18" stroke-width="2">
           <path d="M200 640 l90-70 90 70 v120 h-180z"/><path d="M420 655 l70-55 70 55 v105 h-140z"/>
           <path d="M640 630 l110-80 110 80 v130 h-220z"/><path d="M930 650 l80-60 80 60 v110 h-160z"/>
           <path d="M1150 640 l95-70 95 70 v120 h-190z"/><path d="M1380 660 l70-52 70 52 v100 h-140z"/>
         </g>
-        <g fill="#1F1B17"><rect x="250" y="680" width="34" height="30"/><rect x="460" y="690" width="28" height="26"/><rect x="700" y="670" width="36" height="32"/><rect x="770" y="670" width="36" height="32"/><rect x="990" y="690" width="30" height="28"/><rect x="1210" y="680" width="34" height="30"/><rect x="1430" y="700" width="26" height="24"/></g>
-        <rect y="760" width="1600" height="140" fill="#0E0C0A"/>
+        <g style="fill:var(--deep)"><rect x="250" y="680" width="34" height="30"/><rect x="460" y="690" width="28" height="26"/><rect x="700" y="670" width="36" height="32"/><rect x="770" y="670" width="36" height="32"/><rect x="990" y="690" width="30" height="28"/><rect x="1210" y="680" width="34" height="30"/><rect x="1430" y="700" width="26" height="24"/></g>
+        <rect y="760" width="1600" height="140" style="fill:var(--f0)"/>
       </svg>
     </div>
     <div class="scrim"></div>
@@ -380,24 +396,24 @@ body.proj .step img{max-height:38vh}
     <div class="art" aria-hidden="true">
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
         <defs>
-          <linearGradient id="s2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F2B45A" stop-opacity=".55"/><stop offset="1" stop-color="#EBCB94" stop-opacity=".2"/></linearGradient>
-          <radialGradient id="s2c" cx=".5" cy="0" r="1"><stop offset="0" stop-color="#FFE6B8" stop-opacity=".85"/><stop offset=".45" stop-color="#F2B45A" stop-opacity=".28"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
-          <radialGradient id="s2f" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F2B45A" stop-opacity=".45"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
+          <linearGradient id="s2sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--yellow);stop-opacity:.5"/><stop offset="1" style="stop-color:var(--mint);stop-opacity:.18"/></linearGradient>
+          <radialGradient id="s2c" cx=".5" cy="0" r="1"><stop offset="0" style="stop-color:var(--ivory);stop-opacity:.85"/><stop offset=".45" style="stop-color:var(--yellow);stop-opacity:.28"/><stop offset="1" style="stop-color:var(--yellow);stop-opacity:0"/></radialGradient>
+          <radialGradient id="s2f" cx=".5" cy=".5" r=".5"><stop offset="0" style="stop-color:var(--yellow);stop-opacity:.42"/><stop offset="1" style="stop-color:var(--yellow);stop-opacity:0"/></radialGradient>
         </defs>
-        <rect width="1600" height="900" fill="#14110E"/>
-        <rect width="1600" height="250" fill="#2B2621"/>
+        <rect width="1600" height="900" style="fill:var(--f1)"/>
+        <rect width="1600" height="250" style="fill:var(--amber-dark)"/>
         <rect width="1600" height="250" fill="url(#s2sky)"/>
-        <g class="s2-ray" stroke="#FFE6B8" stroke-width="5" stroke-linecap="round" opacity=".9">
+        <g class="s2-ray" style="stroke:var(--ivory)" stroke-width="5" stroke-linecap="round" opacity=".9">
           <line class="flowline" x1="420" y1="-40" x2="780" y2="240"/><line class="flowline" x1="520" y1="-60" x2="800" y2="236" style="animation-delay:.3s"/><line class="flowline" x1="620" y1="-60" x2="820" y2="240" style="animation-delay:.6s"/>
         </g>
-        <g fill="#2B2621" stroke="rgba(235,203,148,.25)" stroke-width="2"><rect x="0" y="240" width="1600" height="54"/></g>
-        <g stroke="rgba(235,203,148,.18)" stroke-width="2"><path d="M0 255 H1600 M0 272 H1600"/></g>
+        <g style="fill:var(--f3);stroke:var(--mint);stroke-opacity:.28" stroke-width="2"><rect x="0" y="240" width="1600" height="54"/></g>
+        <g style="stroke:var(--mint);stroke-opacity:.2" stroke-width="2"><path d="M0 255 H1600 M0 272 H1600"/></g>
         <polygon class="s2-cone" points="770,470 830,470 1360,900 240,900" fill="url(#s2c)"/>
         <ellipse class="s2-floor" cx="800" cy="860" rx="560" ry="90" fill="url(#s2f)"/>
-        <rect x="785" y="200" width="30" height="46" rx="6" fill="rgba(246,243,238,.35)" stroke="#EBCB94" stroke-width="2"/>
-        <rect x="755" y="294" width="90" height="176" rx="26" fill="rgba(255,230,184,.55)" stroke="#EBCB94" stroke-width="2.5"/>
-        <rect x="770" y="320" width="18" height="120" rx="9" fill="rgba(255,255,255,.55)"/>
-        <g fill="#0E0C0A"><rect x="80" y="610" width="230" height="290" rx="6"/><rect x="1280" y="560" width="180" height="340" rx="6"/></g>
+        <rect x="785" y="200" width="30" height="46" rx="6" style="fill:var(--ivory);fill-opacity:.35;stroke:var(--mint)" stroke-width="2"/>
+        <rect x="755" y="294" width="90" height="176" rx="26" style="fill:var(--ivory);fill-opacity:.55;stroke:var(--mint)" stroke-width="2.5"/>
+        <rect x="770" y="320" width="18" height="120" rx="9" fill="#fff" fill-opacity=".55"/>
+        <g style="fill:var(--f0)"><rect x="80" y="610" width="230" height="290" rx="6"/><rect x="1280" y="560" width="180" height="340" rx="6"/></g>
       </svg>
     </div>
     <!-- 저작권: 제3자 사진(잡지·유튜브 캡처)은 쓰지 않고 직접 그린 SVG만 씀. 원본 사진은 img/_orig/ (게시 참조 없음) -->
@@ -414,43 +430,43 @@ body.proj .step img{max-height:38vh}
     <div class="art" aria-hidden="true">
       <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
         <defs>
-          <linearGradient id="s3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0B0A08"/><stop offset="1" stop-color="#221E19"/></linearGradient>
-          <linearGradient id="s3day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5A4529"/><stop offset="1" stop-color="#2B2621"/></linearGradient>
-          <radialGradient id="s3g" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE6B8" stop-opacity=".95"/><stop offset=".35" stop-color="#F2B45A" stop-opacity=".45"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
-          <radialGradient id="s3p" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE6B8"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
+          <linearGradient id="s3sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--f0)"/><stop offset="1" style="stop-color:var(--deep)"/></linearGradient>
+          <linearGradient id="s3day" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:color-mix(in srgb,var(--blue) 45%,var(--amber-dark))"/><stop offset="1" style="stop-color:var(--f3)"/></linearGradient>
+          <radialGradient id="s3g" cx=".5" cy=".5" r=".5"><stop offset="0" style="stop-color:var(--ivory);stop-opacity:.95"/><stop offset=".35" style="stop-color:var(--yellow);stop-opacity:.45"/><stop offset="1" style="stop-color:var(--yellow);stop-opacity:0"/></radialGradient>
+          <radialGradient id="s3p" cx=".5" cy=".5" r=".5"><stop offset="0" style="stop-color:var(--ivory)"/><stop offset="1" style="stop-color:var(--yellow);stop-opacity:0"/></radialGradient>
         </defs>
         <rect width="1600" height="900" fill="url(#s3sky)"/>
         <rect class="s3-dayon" width="1600" height="900" fill="url(#s3day)"/>
         <g class="s3g">
         <!-- 낮: 해와 빛 알갱이 -->
-        <g class="s3-dayon"><circle cx="560" cy="150" r="70" fill="url(#s3g)"/><circle cx="560" cy="150" r="30" fill="#F2B45A"/>
-          <text x="690" y="225" fill="#FFE6B8" font-size="17" font-family="Noto Sans KR,sans-serif" font-weight="700">낮 · 충전</text>
+        <g class="s3-dayon"><circle cx="560" cy="150" r="70" fill="url(#s3g)"/><circle cx="560" cy="150" r="30" style="fill:var(--yellow)"/>
+          <text x="690" y="225" style="fill:var(--ivory)" font-size="17" font-family="Noto Sans KR,sans-serif" font-weight="700">낮 · 충전</text>
           <g>
             <circle class="s3-ph" cx="640" cy="232" r="8" fill="url(#s3p)"/><circle class="s3-ph" cx="690" cy="226" r="6" fill="url(#s3p)"/><circle class="s3-ph" cx="735" cy="232" r="9" fill="url(#s3p)"/><circle class="s3-ph" cx="665" cy="240" r="6" fill="url(#s3p)"/><circle class="s3-ph" cx="712" cy="244" r="7" fill="url(#s3p)"/><circle class="s3-ph" cx="625" cy="246" r="5" fill="url(#s3p)"/><circle class="s3-ph" cx="750" cy="246" r="5" fill="url(#s3p)"/><circle class="s3-ph" cx="700" cy="236" r="5" fill="url(#s3p)"/>
           </g>
         </g>
         <!-- 밤: 달과 별 -->
-        <g class="s3-nighton"><path d="M1040 112a34 34 0 1 0 26 60a28 28 0 1 1-26-60z" fill="#EBCB94" opacity=".9"/>
-          <g fill="#F6F3EE"><circle class="tw" cx="640" cy="130" r="1.6"/><circle class="tw" cx="760" cy="90" r="1.3"/><circle class="tw" cx="880" cy="140" r="1.5"/><circle class="tw" cx="980" cy="80" r="1.2"/><circle class="tw" cx="1120" cy="230" r="1.4"/></g>
-          <text x="948" y="262" text-anchor="end" fill="#FFE6B8" font-size="17" font-family="Noto Sans KR,sans-serif" font-weight="700">밤 · 축전지 → LED</text>
+        <g class="s3-nighton"><path d="M1040 112a34 34 0 1 0 26 60a28 28 0 1 1-26-60z" style="fill:var(--ivory)" opacity=".9"/>
+          <g style="fill:var(--ivory)"><circle class="tw" cx="640" cy="130" r="1.6"/><circle class="tw" cx="760" cy="90" r="1.3"/><circle class="tw" cx="880" cy="140" r="1.5"/><circle class="tw" cx="980" cy="80" r="1.2"/><circle class="tw" cx="1120" cy="230" r="1.4"/></g>
+          <text x="948" y="262" text-anchor="end" font-size="17" font-family="Noto Sans KR,sans-serif" font-weight="700" style="fill:var(--ivory)">밤 · 축전지 → LED</text>
         </g>
         <!-- 태양전지 -->
-        <polygon points="615,250 765,250 750,340 600,340" fill="#2B2621" stroke="#EBCB94" stroke-width="2.5"/>
-        <path d="M612 280 H760 M607 310 H755 M665 250 L652 340 M715 250 L702 340" stroke="rgba(235,203,148,.45)" stroke-width="1.5"/>
-        <polygon class="s3-nighton" points="615,250 765,250 750,340 600,340" fill="#0B0A08" opacity=".4"/>
+        <polygon points="615,250 765,250 750,340 600,340" stroke-width="2.5" style="fill:color-mix(in srgb,var(--blue) 55%,var(--f1));stroke:var(--mint)"/>
+        <path d="M612 280 H760 M607 310 H755 M665 250 L652 340 M715 250 L702 340" stroke-width="1.5" style="stroke:var(--ivory);stroke-opacity:.45"/>
+        <polygon class="s3-nighton" points="615,250 765,250 750,340 600,340" opacity=".4" style="fill:var(--f0)"/>
         <!-- 전선: 태양전지 → 축전지 → LED -->
-        <path d="M757 298 H800" fill="none" stroke="#4A4036" stroke-width="7" stroke-linecap="round"/>
-        <path d="M886 298 H960 V238" fill="none" stroke="#4A4036" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-        <path class="s3-dayon flowline" d="M757 298 H800" fill="none" stroke="#F2B45A" stroke-width="3" stroke-linecap="round"/>
-        <path class="s3-nighton flowline" d="M886 298 H960 V240" fill="none" stroke="#F2B45A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M757 298 H800" fill="none" stroke-width="7" stroke-linecap="round" style="stroke:var(--sage)"/>
+        <path d="M886 298 H960 V238" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--sage)"/>
+        <path class="s3-dayon flowline" d="M757 298 H800" fill="none" stroke-width="3" stroke-linecap="round" style="stroke:var(--yellow)"/>
+        <path class="s3-nighton flowline" d="M886 298 H960 V240" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--yellow)"/>
         <!-- 축전지(게이지) -->
-        <rect x="800" y="280" width="80" height="36" rx="6" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><rect x="880" y="291" width="6" height="14" rx="2" fill="#EBCB94"/>
-        <rect class="s3-chg" x="805" y="285" width="70" height="26" rx="3" fill="#F2B45A" opacity=".85"/>
-        <text x="840" y="340" text-anchor="middle" fill="#EBCB94" font-size="15" font-family="Noto Sans KR,sans-serif" font-weight="700">축전지</text>
+        <rect x="800" y="280" width="80" height="36" rx="6" stroke-width="2" style="fill:var(--f3);stroke:var(--mint)"/><rect x="880" y="291" width="6" height="14" rx="2" style="fill:var(--mint)"/>
+        <rect class="s3-chg" x="805" y="285" width="70" height="26" rx="3" opacity=".85" style="fill:var(--yellow)"/>
+        <text x="840" y="340" text-anchor="middle" font-size="15" font-family="Noto Sans KR,sans-serif" font-weight="700" style="fill:var(--mint)">축전지</text>
         <!-- LED 전구 -->
         <circle class="s3-nighton" cx="960" cy="205" r="170" fill="url(#s3g)"/>
-        <path class="s3-bulb" d="M940 205 a20 20 0 1 1 40 0 v20 h-40z" stroke="#EBCB94" stroke-width="2.5"/>
-        <rect x="945" y="225" width="30" height="12" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
+        <path class="s3-bulb" d="M940 205 a20 20 0 1 1 40 0 v20 h-40z" stroke-width="2.5" style="stroke:var(--mint)"/>
+        <rect x="945" y="225" width="30" height="12" stroke-width="2" style="fill:var(--f3);stroke:var(--mint)"/>
         </g>
       </svg>
     </div>
@@ -508,10 +524,10 @@ body.proj .step img{max-height:38vh}
 
   <div class="flash"></div>
   <div class="intro-ui">
-    <button class="tbtn" data-intro="prev" aria-label="이전 장면">◀</button>
+    <button type="button" class="tbtn" data-intro="prev" aria-label="이전 장면">◀</button>
     <div class="dots"></div>
-    <button class="tbtn" data-intro="pause" aria-pressed="false">일시정지</button>
-    <button class="tbtn" data-intro="next" aria-label="다음 장면">▶</button>
+    <button type="button" class="tbtn" data-intro="pause" aria-pressed="false">일시정지</button>
+    <button type="button" class="tbtn" data-intro="next" aria-label="다음 장면">▶</button>
   </div>
   <div class="scroll-hint"><i></i>아래로</div>
 </section>
@@ -547,7 +563,7 @@ body.proj .step img{max-height:38vh}
       <div class="card"><span class="no">조건 2</span><h3>부담 없이</h3><p>사고 쓰는 비용이 알맞아요.</p></div>
       <div class="card"><span class="no">조건 3</span><h3>스스로 지속할 수 있게</h3><p>현지 재료로 현지 사람이 직접 만들고 고칠 수 있어요.</p></div>
     </div>
-    <!-- 보류: AI 생성 이미지(밝은 초록·종이 톤판). 팔레트 결정 전이라 교체·삭제 가능 --><figure class="fig wide reveal" style="margin-top:1.4rem"><img src="img/ai-village.jpg" alt="흙벽돌 집 지붕에 꽂은 물 페트병, 문 옆에서 등불을 충전하는 작은 태양광 패널, 물항아리와 대나무 건조대가 있는 시골 마을 풍경" loading="lazy"><figcaption>▲ 현지 재료와 햇빛을 쓰는 적정기술 마을 상상도 (AI 생성 이미지)</figcaption></figure>
+    <figure class="fig wide reveal" style="margin-top:1.4rem"><img src="img/ai-village.jpg" alt="흙벽돌 집 지붕에 꽂은 물 페트병, 문 옆에서 등불을 충전하는 작은 태양광 패널, 물항아리와 대나무 건조대가 있는 시골 마을 풍경" loading="lazy"><figcaption>▲ 현지 재료와 햇빛을 쓰는 적정기술 마을 상상도 (AI 생성 이미지)</figcaption></figure>
 
     <h2 class="head reveal" style="margin-top:3.5rem">5차시 흐름</h2>
     <div class="flow reveal">
@@ -556,6 +572,15 @@ body.proj .step img{max-height:38vh}
       <div class="st"><b>3~4차시 · 시제품 제작</b><small>선정한 문제를 해결하는 시제품을 완성할 수 있을까? · 활동지 05(개인)·06(모둠)</small></div>
       <div class="st"><b>5차시 · 실험과 개선</b><small>우리 시제품은 처음 정의한 불편을 줄였을까? · 활동지 06(모둠)·07(개인)</small></div>
     </div>
+    <h3 class="reveal" style="margin-top:2rem" id="lessons"><span class="prog-chip">차시별 수업 화면</span></h3>
+    <p class="mini reveal" style="color:var(--ink-sub)">전자칠판에 띄우고 그 자리에서 한 차시를 진행해요. 학생은 태블릿에서 같은 화면을 열어 활동지를 써요.</p>
+    <nav class="lgo reveal" aria-label="차시별 수업 화면">
+      <a href="lesson-1.html"><small>1차시 · 50분</small><b>공감과 문제 정의</b><span>사용자의 하루 → 불편 한 문장 → 아이디어 고르기</span><em>수업 화면 열기 →</em></a>
+      <a href="lesson-2.html"><small>2차시 · 50분</small><b>구상과 설계</b><span>태양전지 원리 → 구상도 → 모둠 계획서</span><em>수업 화면 열기 →</em></a>
+      <a href="lesson-3.html"><small>3차시 · 50분</small><b>시제품 제작 1</b><span>안전 약속 → 기본 구조와 첫 작동</span><em>수업 화면 열기 →</em></a>
+      <a href="lesson-4.html"><small>4차시 · 50분</small><b>시제품 제작 2</b><span>완성·검사 → 작동 영상 → 작품 설명</span><em>수업 화면 열기 →</em></a>
+      <a href="lesson-5.html"><small>5차시 · 50분</small><b>실험과 개선</b><span>비교 실험 → 동료 평가 → 개선점</span><em>수업 화면 열기 →</em></a>
+    </nav>
     <figure class="fig paper reveal" style="margin-top:1.4rem"><a href="img/design-thinking.jpg" target="_blank" rel="noopener" aria-label="디자인 씽킹 5단계 안내 그림 크게 보기"><img src="img/design-thinking.jpg" alt="공감하기, 정의하기, 아이디어 발상하기, 프로토타입 만들기, 테스트하기의 주요 활동과 핵심 질문을 정리한 디자인 씽킹 5단계 안내 그림" loading="lazy"></a><figcaption>▲ 디자인 씽킹 5단계 안내</figcaption></figure>
 
     <div class="cols2" style="margin-top:2.4rem">
@@ -586,17 +611,18 @@ body.proj .step img{max-height:38vh}
   <div class="wrap">
     <p class="label">수업 진행</p>
     <h2 class="head">차시를 고르고, ← → 키로 넘겨요</h2>
-    <p class="lead">한 화면에 질문 하나. 교사 모드를 켜면 지도안의 발문·유의점이 보여요.</p>
+    <p class="lead">한 화면에 질문 하나. 교사 모드를 켜면 지도안의 발문·유의점이 보여요. 교실 전자칠판에서는 차시별 수업 화면을 열면 활동지·슬라이드까지 한 페이지로 진행할 수 있어요.</p>
 
     <div class="tabs" role="tablist" data-key="ecg:p5:tab">
-      <button role="tab" id="t1" aria-controls="L1">1차시 · 공감과 문제 정의</button>
-      <button role="tab" id="t2" aria-controls="L2">2차시 · 구상과 설계</button>
-      <button role="tab" id="t3" aria-controls="L3">3~4차시 · 시제품 제작</button>
-      <button role="tab" id="t5" aria-controls="L5">5차시 · 실험과 개선</button>
+      <button type="button" role="tab" id="t1" aria-controls="L1">1차시 · 공감과 문제 정의</button>
+      <button type="button" role="tab" id="t2" aria-controls="L2">2차시 · 구상과 설계</button>
+      <button type="button" role="tab" id="t3" aria-controls="L3">3~4차시 · 시제품 제작</button>
+      <button type="button" role="tab" id="t5" aria-controls="L5">5차시 · 실험과 개선</button>
     </div>
 
     <!-- 1차시 -->
     <div class="tabpanel" id="L1" role="tabpanel" aria-labelledby="t1">
+      <div class="lesson-links"><a href="lesson-1.html">1차시 수업 화면 열기</a></div>
       <div class="runner">
         <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
         <div class="steps">
@@ -619,36 +645,37 @@ body.proj .step img{max-height:38vh}
             <div class="pet">
               <figure>
                 <svg viewBox="0 0 320 200" role="img" aria-label="낮: 양철 지붕 구멍에 꽂은 물 페트병이 햇빛을 받아 방 안으로 퍼뜨리는 그림">
-                  <rect width="320" height="200" fill="#14110E"/>
-                  <rect width="320" height="62" fill="#3A2E20"/>
-                  <circle cx="44" cy="24" r="14" fill="#F2B45A"/>
-                  <g stroke="#FFE6B8" stroke-width="2.5" stroke-linecap="round" opacity=".85"><path d="M70 14 L150 52"/><path d="M78 30 L152 58"/><path d="M60 40 L148 62"/></g>
-                  <rect y="62" width="320" height="12" fill="#2B2621" stroke="rgba(235,203,148,.35)"/>
-                  <path d="M160 70 L70 200 H250 Z" fill="#F2B45A" opacity=".22"/>
-                  <rect x="150" y="44" width="20" height="20" rx="4" fill="rgba(246,243,238,.35)" stroke="#EBCB94" stroke-width="1.5"/>
-                  <rect x="140" y="74" width="40" height="70" rx="12" fill="rgba(255,230,184,.6)" stroke="#EBCB94" stroke-width="1.5"/>
-                  <text x="190" y="104" fill="#EBCB94" font-size="12" font-family="Noto Sans KR,sans-serif">물 + 표백제 조금</text>
-                  <text x="12" y="188" fill="#B4AA9C" font-size="11" font-family="Noto Sans KR,sans-serif">전기 없음 · 낮에만</text>
+                  <rect width="320" height="200" style="fill:var(--deep)"/>
+                  <rect width="320" height="62" style="fill:color-mix(in srgb,var(--blue) 22%,var(--panel))"/>
+                  <circle cx="44" cy="24" r="14" style="fill:var(--yellow)"/>
+                  <g style="stroke:var(--yellow)" stroke-width="2.5" stroke-linecap="round"><path d="M70 14 L150 52"/><path d="M78 30 L152 58"/><path d="M60 40 L148 62"/></g>
+                  <rect y="62" width="320" height="12" style="fill:var(--sage)"/>
+                  <path d="M160 70 L70 200 H250 Z" style="fill:var(--yellow)" opacity=".26"/>
+                  <rect x="150" y="44" width="20" height="20" rx="4" style="fill:var(--ivory);stroke:var(--champ)" stroke-width="1.5"/>
+                  <rect x="140" y="74" width="40" height="70" rx="12" style="fill:var(--ivory);fill-opacity:.7;stroke:var(--mint)" stroke-width="1.5"/>
+                  <text x="190" y="104" style="fill:var(--mint)" font-size="12" font-family="Noto Sans KR,sans-serif">물 + 표백제 조금</text>
+                  <text x="12" y="188" style="fill:var(--mint)" font-size="11" font-family="Noto Sans KR,sans-serif">전기 없음 · 낮에만</text>
                 </svg>
                 <figcaption>낮 — 물이 햇빛을 굴절·산란시켜 방 안으로 퍼뜨려요</figcaption>
               </figure>
               <figure>
                 <svg viewBox="0 0 320 200" role="img" aria-label="밤: 지붕 위 소형 태양전지가 낮에 축전지를 충전하고, 밤에 축전지가 페트병 안 LED를 켜는 그림">
-                  <rect width="320" height="200" fill="#0B0A08"/>
-                  <path d="M280 18a14 14 0 1 0 10 25a11 11 0 1 1-10-25z" fill="#EBCB94"/>
-                  <rect y="62" width="320" height="12" fill="#2B2621" stroke="rgba(235,203,148,.35)"/>
-                  <polygon points="186,40 236,40 232,58 182,58" fill="#2B2621" stroke="#EBCB94" stroke-width="1.5"/>
-                  <text x="190" y="34" fill="#B4AA9C" font-size="11" font-family="Noto Sans KR,sans-serif">소형 태양전지</text>
-                  <rect x="56" y="38" width="44" height="20" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="1.5"/>
-                  <rect x="60" y="42" width="28" height="12" rx="2" fill="#F2B45A" opacity=".8"/>
-                  <text x="10" y="74" fill="#B4AA9C" font-size="11" font-family="Noto Sans KR,sans-serif" dy="20">축전지·충전 회로</text>
-                  <path d="M182 49 H174 V24 H78 V38 M100 50 H150" fill="none" stroke="#6A5D4F" stroke-width="2.5"/>
-                  <circle cx="160" cy="112" r="64" fill="#F2B45A" opacity=".2"/>
-                  <rect x="150" y="44" width="20" height="20" rx="4" fill="rgba(246,243,238,.35)" stroke="#EBCB94" stroke-width="1.5"/>
-                  <rect x="140" y="74" width="40" height="70" rx="12" fill="rgba(255,230,184,.75)" stroke="#EBCB94" stroke-width="1.5"/>
-                  <circle cx="160" cy="80" r="5" fill="#FFF6E2"/>
-                  <text x="190" y="104" fill="#EBCB94" font-size="12" font-family="Noto Sans KR,sans-serif">병 속 LED</text>
-                  <text x="12" y="188" fill="#B4AA9C" font-size="11" font-family="Noto Sans KR,sans-serif">낮에 충전 → 밤에 LED</text>
+                  <rect width="320" height="200" style="fill:var(--deep)"/>
+                  <rect width="320" height="62" style="fill:var(--f0)"/>
+                  <path d="M280 18a14 14 0 1 0 10 25a11 11 0 1 1-10-25z" style="fill:var(--ivory)"/>
+                  <rect y="62" width="320" height="12" style="fill:var(--f3)"/>
+                  <polygon points="186,40 236,40 232,58 182,58" style="fill:var(--blue);stroke:var(--mint)" stroke-width="1.5"/>
+                  <text x="190" y="34" style="fill:var(--mint)" font-size="11" font-family="Noto Sans KR,sans-serif">소형 태양전지</text>
+                  <rect x="56" y="38" width="44" height="20" rx="4" style="fill:var(--f3);stroke:var(--mint)" stroke-width="1.5"/>
+                  <rect x="60" y="42" width="28" height="12" rx="2" style="fill:var(--yellow)"/>
+                  <text x="10" y="74" style="fill:var(--mint)" font-size="11" font-family="Noto Sans KR,sans-serif" dy="20">축전지·충전 회로</text>
+                  <path d="M182 49 H174 V24 H78 V38 M100 50 H150" fill="none" style="stroke:var(--sage)" stroke-width="2.5"/>
+                  <circle cx="160" cy="112" r="64" style="fill:var(--yellow)" opacity=".22"/>
+                  <rect x="150" y="44" width="20" height="20" rx="4" style="fill:var(--ivory);fill-opacity:.4;stroke:var(--mint)" stroke-width="1.5"/>
+                  <rect x="140" y="74" width="40" height="70" rx="12" style="fill:var(--ivory);fill-opacity:.8;stroke:var(--mint)" stroke-width="1.5"/>
+                  <circle cx="160" cy="80" r="5" style="fill:var(--yellow)"/>
+                  <text x="190" y="104" style="fill:var(--mint)" font-size="12" font-family="Noto Sans KR,sans-serif">병 속 LED</text>
+                  <text x="12" y="188" style="fill:var(--mint)" font-size="11" font-family="Noto Sans KR,sans-serif">낮에 충전 → 밤에 LED</text>
                 </svg>
                 <figcaption>밤 — 소형 태양전지 + 축전지 + LED를 더해 밤에도 켜요</figcaption>
               </figure>
@@ -718,12 +745,13 @@ body.proj .step img{max-height:38vh}
             <div class="timer" data-min="5"></div>
           </div>
         </div>
-        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+        <div class="runner-foot"><button type="button" class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button type="button" class="btn" data-run="next">다음 →</button></div>
       </div>
     </div>
 
     <!-- 2차시 -->
     <div class="tabpanel" id="L2" role="tabpanel" aria-labelledby="t2" hidden>
+      <div class="lesson-links"><a href="lesson-2.html">2차시 수업 화면 열기</a></div>
       <div class="runner">
         <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
         <div class="steps">
@@ -753,7 +781,7 @@ body.proj .step img{max-height:38vh}
             <p class="ask">빛 → <em>전기</em> → 빛·운동·소리</p>
             <p>빛을 받으면 태양전지의 +극과 −극 사이에 전압이 생기고, 회로를 이으면 전기가 흘러요. 전자부품이 전기를 다시 빛·운동·소리로 바꾸는데, 이때 일부는 <b>열</b>로 빠져나가요.</p>
             <div class="chips"><div class="chip"><b>LED</b><span>전기 → 빛에너지</span></div><div class="chip"><b>모터</b><span>전기 → 운동에너지</span></div><div class="chip"><b>피에조 부저</b><span>전기 → 소리에너지</span></div></div>
-            <!-- 보류: AI 생성 이미지(밝은 초록·종이 톤판). 팔레트 결정 전이라 교체·삭제 가능 --><figure class="fig mid"><img src="img/ai-solar-fan.jpg" alt="작은 태양전지에 집게 전선으로 연결한 모터가 흰 프로펠러를 돌리는 모습" loading="lazy"><figcaption>▲ 빛 → 전기 → 운동: 태양전지로 모터 돌리기 (AI 생성 이미지)</figcaption></figure>
+            <figure class="fig mid"><img src="img/ai-solar-fan.jpg" alt="작은 태양전지에 집게 전선으로 연결한 모터가 흰 프로펠러를 돌리는 모습" loading="lazy"><figcaption>▲ 빛 → 전기 → 운동: 태양전지로 모터 돌리기 (AI 생성 이미지)</figcaption></figure>
             <a class="btn" href="#energy">에너지 전환 회로 실험실 ↓</a>
             <div class="teacher">태양전지는 전기를 저장하지 않음 → 밤에 쓰는 설계에는 충전지(니켈수소 AA 등)와 역류 방지 다이오드가 든 충전 모듈(예: 태양광 정원등 모듈)이 필요. 태양전지 출력 전압(V)·전류(mA)를 부품 작동 전압·전류와 비교. 실내 조명에서는 작동하지 않을 수 있으니 햇빛 아래에서 시험. <b>전압이 모자라면 태양전지를 직렬, 전류가 모자라면 병렬</b>로 연결. 실험실 ①의 에너지 손실 막대로 ‘효율’(사후 검사에서 정답률이 내려간 문항)을 함께 짚음.</div>
           </div>
@@ -774,10 +802,10 @@ body.proj .step img{max-height:38vh}
             <h3>회로 오류 탐정 — 어느 회로가 작동할까?</h3>
             <p>4개 중 3개는 작동하지 않아요. 모둠은 미니 화이트보드에 ‘작동 안 하는 회로 번호와 이유’를 쓰고, 하나 둘 셋에 동시 공개! 카드를 누르면 정답이 보여요.</p>
             <div class="det" id="det">
-              <button type="button" data-a="끊어진 곳 — 선이 빠짐" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="16" y="30" width="50" height="60" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H105 M125 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle cx="160" cy="60" r="12" fill="#3A332B" stroke="#EBCB94" stroke-width="2"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>①</b><span class="ans"></span></button>
-              <button type="button" data-a="작동해요 ○"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="16" y="30" width="50" height="60" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle cx="160" cy="60" r="12" fill="#3A332B" stroke="#EBCB94" stroke-width="2"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>②</b><span class="ans"></span></button>
-              <button type="button" data-a="극성 반대 — +와 −가 거꾸로" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="16" y="30" width="50" height="60" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle cx="160" cy="60" r="12" fill="#3A332B" stroke="#EBCB94" stroke-width="2"/><text x="176" y="50">−</text><text x="176" y="80">+</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>③</b><span class="ans"></span></button>
-              <button type="button" data-a="단락(합선) — +와 −가 바로 닿음 · 전지라면 위험! 바로 떼요" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect x="16" y="30" width="50" height="60" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><path class="wl" d="M100 40 V80" style="stroke:#E08A5E"/><circle cx="160" cy="60" r="12" fill="#3A332B" stroke="#EBCB94" stroke-width="2"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>④</b><span class="ans"></span></button>
+              <button type="button" data-a="끊어진 곳 — 선이 빠짐" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect class="pv" x="16" y="30" width="50" height="60" rx="4"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H105 M125 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle class="ld" cx="160" cy="60" r="12"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>①</b><span class="ans"></span></button>
+              <button type="button" data-a="작동해요 ○"><svg viewBox="0 0 200 120" aria-hidden="true"><rect class="pv" x="16" y="30" width="50" height="60" rx="4"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle class="ld" cx="160" cy="60" r="12"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>②</b><span class="ans"></span></button>
+              <button type="button" data-a="극성 반대 — +와 −가 거꾸로" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect class="pv" x="16" y="30" width="50" height="60" rx="4"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><circle class="ld" cx="160" cy="60" r="12"/><text x="176" y="50">−</text><text x="176" y="80">+</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>③</b><span class="ans"></span></button>
+              <button type="button" data-a="단락(합선) — +와 −가 바로 닿음 · 전지라면 위험! 바로 떼요" class="bad"><svg viewBox="0 0 200 120" aria-hidden="true"><rect class="pv" x="16" y="30" width="50" height="60" rx="4"/><text x="72" y="44">+</text><text x="72" y="92">−</text><path class="wl" d="M66 40 H160 V48"/><path class="wl" d="M66 80 H160 V72"/><path class="wl sc" d="M100 40 V80"/><circle class="ld" cx="160" cy="60" r="12"/><text x="176" y="50">+</text><text x="176" y="80">−</text><text x="28" y="112" style="font-size:11px">태양전지</text><text x="146" y="112" style="font-size:11px">LED</text></svg><b>④</b><span class="ans"></span></button>
             </div>
             <p class="mini">힌트: 전기는 +에서 나와 부품을 거쳐 −로 돌아와야 해요. 이유까지 맞히면 2점!</p>
             <div class="timer" data-min="6"></div>
@@ -819,12 +847,13 @@ body.proj .step img{max-height:38vh}
             <div class="timer" data-min="5"></div>
           </div>
         </div>
-        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+        <div class="runner-foot"><button type="button" class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button type="button" class="btn" data-run="next">다음 →</button></div>
       </div>
     </div>
 
     <!-- 3~4차시 -->
     <div class="tabpanel" id="L3" role="tabpanel" aria-labelledby="t3" hidden>
+      <div class="lesson-links"><a href="lesson-3.html">3차시 수업 화면 열기 · 제작 1</a><a href="lesson-4.html">4차시 수업 화면 열기 · 제작 2</a></div>
       <div class="runner">
         <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
         <div class="steps">
@@ -905,12 +934,13 @@ body.proj .step img{max-height:38vh}
             <p class="mini">A 모두 충족(5점) · B 1~2가지 미충족(4~3점) · C 모두 미충족(2점) 또는 미완성(0점)</p>
           </div>
         </div>
-        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+        <div class="runner-foot"><button type="button" class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button type="button" class="btn" data-run="next">다음 →</button></div>
       </div>
     </div>
 
     <!-- 5차시 -->
     <div class="tabpanel" id="L5" role="tabpanel" aria-labelledby="t5" hidden>
+      <div class="lesson-links"><a href="lesson-5.html">5차시 수업 화면 열기</a></div>
       <div class="runner">
         <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
         <div class="steps">
@@ -918,7 +948,7 @@ body.proj .step img{max-height:38vh}
             <p class="ask">우리 시제품은 처음 정의한 불편을 <em>줄였을까?</em></p>
             <p>1차시에 정의한 문제 문장을 다시 읽고, 그 불편이 줄었는지 알려면 무엇을 비교해야 할지 이야기해요.</p>
             <p class="mini">비교 예시: 정수기 사용 전후의 물, 배기구가 있을 때와 없을 때의 화덕</p>
-            <!-- 보류: AI 생성 이미지(밝은 초록·종이 톤판). 팔레트 결정 전이라 교체·삭제 가능 --><figure class="fig mid"><img src="img/ai-pet-cooler.jpg" alt="골판지와 천으로 감싼 페트병 냉장고 옆에 물을 담은 종이컵과 탐침 온도계가 놓인 책상" loading="lazy"><figcaption>▲ 페트병 냉장고와 종이컵, 같은 조건에서 온도를 비교해요 (AI 생성 이미지)</figcaption></figure>
+            <figure class="fig mid"><img src="img/ai-pet-cooler.jpg" alt="골판지와 천으로 감싼 페트병 냉장고 옆에 물을 담은 종이컵과 탐침 온도계가 놓인 책상" loading="lazy"><figcaption>▲ 페트병 냉장고와 종이컵, 같은 조건에서 온도를 비교해요 (AI 생성 이미지)</figcaption></figure>
           </div>
           <div class="step" data-phase="도입" data-time="5분 중 ②">
             <h3>오늘의 목표</h3>
@@ -983,7 +1013,7 @@ body.proj .step img{max-height:38vh}
             <div class="teacher">동료 평가를 하지 않은 학생 확인.</div>
           </div>
         </div>
-        <div class="runner-foot"><button class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button class="btn" data-run="next">다음 →</button></div>
+        <div class="runner-foot"><button type="button" class="btn ghost" data-run="prev">← 이전</button><span class="count"></span><button type="button" class="btn" data-run="next">다음 →</button></div>
       </div>
     </div>
   </div>
@@ -995,18 +1025,18 @@ body.proj .step img{max-height:38vh}
     <a class="backlink" href="#lesson">↑ 수업 진행으로 돌아가기</a>
     <p class="label reveal">실험실 ① · 2차시</p>
     <h2 class="head reveal">빛 → 전기 → <span class="amber">빛·운동·소리</span></h2>
-    <p class="lead reveal">부품을 바꾸고, 축전지를 연결하고, 밤으로 바꿔 보세요. 전기가 흐르는 길이 금빛으로 움직이고, 빠져나가는 열도 보여요.</p>
+    <p class="lead reveal">부품을 바꾸고, 축전지를 연결하고, 밤으로 바꿔 보세요. 전기가 흐르는 길이 움직이는 선으로 보이고, 빠져나가는 열도 보여요. 밤으로 바꾸면 회로판도 어두워져요.</p>
 
     <div class="elab day l-led" id="elab">
      <div class="lcol">
       <div class="board">
         <svg viewBox="0 0 900 460" role="img" aria-label="태양전지, 충전 모듈(역류 방지 다이오드), 병렬로 연결한 축전지, 스위치, 전자부품으로 이루어진 회로. 낮에는 태양전지의 전기가 부품과 축전지로 나뉘고, 밤에는 축전지에서 부품으로만 전기가 흐름">
           <defs>
-            <radialGradient id="eg1" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FFE6B8" stop-opacity=".95"/><stop offset=".4" stop-color="#F2B45A" stop-opacity=".4"/><stop offset="1" stop-color="#F2B45A" stop-opacity="0"/></radialGradient>
+            <radialGradient id="eg1" cx=".5" cy=".5" r=".5"><stop offset="0" stop-opacity=".95" style="stop-color:var(--ivory)"/><stop offset=".4" stop-opacity=".4" style="stop-color:var(--yellow)"/><stop offset="1" stop-opacity="0" style="stop-color:var(--yellow)"/></radialGradient>
           </defs>
           <rect class="sky" width="900" height="460"/>
-          <g class="sun" data-act="day"><circle cx="90" cy="70" r="58" fill="url(#eg1)"/><circle cx="90" cy="70" r="28" fill="#F2B45A"/></g>
-          <g class="moon" data-act="day"><path d="M78 44a28 28 0 1 0 28 48a23 23 0 1 1-28-48z" fill="#EBCB94"/></g>
+          <g class="sun" data-act="day"><circle cx="90" cy="70" r="58" fill="url(#eg1)"/><circle cx="90" cy="70" r="28" style="fill:var(--yellow)"/></g>
+          <g class="moon" data-act="day"><path d="M78 44a28 28 0 1 0 28 48a23 23 0 1 1-28-48z" style="fill:var(--ivory)"/></g>
           <g class="ray"><path class="fl go" d="M112 94 L150 186"/><path class="fl go" d="M122 86 L205 186" style="animation-delay:.2s"/><path class="fl go" d="M132 76 L262 186" style="animation-delay:.4s"/></g>
           <text class="elbl e1" x="196" y="122">빛에너지</text>
           <!-- 전선 -->
@@ -1016,7 +1046,7 @@ body.proj .step img{max-height:38vh}
           <path class="wire batw" d="M530 205 V240 M530 336 V400"/>
           <path class="wire" d="M720 352 V400 H530"/>
           <path class="wire" d="M530 400 H90 V250 H108"/>
-          <!-- 흐르는 전기(금빛) -->
+          <!-- 흐르는 전기(움직이는 선) -->
           <path class="fl fP" d="M300 205 H350"/>
           <path class="fl fBy bypass" d="M350 205 H470"/>
           <path class="fl fN" d="M470 205 H530"/>
@@ -1030,48 +1060,48 @@ body.proj .step img{max-height:38vh}
           <text class="elbl e2" x="560" y="186">전기에너지</text>
           <!-- 태양전지 -->
           <g data-act="panel" style="cursor:pointer">
-            <polygon points="120,190 300,190 285,262 105,262" fill="#2A241E" stroke="#EBCB94" stroke-width="2.5"/>
-            <path d="M115 214 H294 M110 238 H290 M165 190 L150 262 M210 190 L195 262 M255 190 L240 262" stroke="rgba(235,203,148,.4)" stroke-width="1.5"/>
+            <polygon points="120,190 300,190 285,262 105,262" stroke-width="2.5" style="fill:var(--blue);stroke:var(--edge)"/>
+            <path d="M115 214 H294 M110 238 H290 M165 190 L150 262 M210 190 L195 262 M255 190 L240 262" stroke-width="1.5" style="stroke:var(--ivory);stroke-opacity:.55"/>
             <text class="term" x="304" y="196">+</text><text class="term" x="86" y="244">−</text>
             <text class="lbl" x="150" y="292">태양전지</text>
           </g>
           <g class="heat hP"><path d="M262 318 q7 -8 0 -16 q-7 -8 0 -16"/><path d="M278 318 q7 -8 0 -16 q-7 -8 0 -16"/><text x="292" y="314">열</text></g>
           <!-- 충전 모듈(역류 방지 다이오드) -->
           <g class="modg">
-            <rect x="350" y="180" width="120" height="50" rx="8" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
-            <path d="M362 205 H392 M414 205 H458" stroke="#EBCB94" stroke-width="2.5"/>
-            <path d="M392 192 L392 218 L414 205 Z" fill="#EBCB94"/><path d="M416 191 V219" stroke="#EBCB94" stroke-width="3"/>
+            <rect x="350" y="180" width="120" height="50" rx="8" stroke-width="2" style="fill:var(--body);stroke:var(--edge)"/>
+            <path d="M362 205 H392 M414 205 H458" stroke-width="2.5" style="stroke:var(--edge)"/>
+            <path d="M392 192 L392 218 L414 205 Z" style="fill:var(--edge)"/><path d="M416 191 V219" stroke-width="3" style="stroke:var(--edge)"/>
             <text class="lbl" x="410" y="254" text-anchor="middle">충전 모듈</text>
             <text class="sml" x="410" y="274" text-anchor="middle">역류 방지 다이오드</text>
           </g>
-          <circle cx="530" cy="205" r="6" fill="#EBCB94"/><circle cx="530" cy="400" r="6" fill="#EBCB94"/>
+          <circle cx="530" cy="205" r="6" style="fill:var(--edge)"/><circle cx="530" cy="400" r="6" style="fill:var(--edge)"/>
           <!-- 축전지(병렬 가지) -->
           <g class="bat" data-act="bat">
-            <rect x="520" y="234" width="20" height="8" rx="2" fill="#EBCB94"/>
-            <rect x="495" y="242" width="70" height="94" rx="8" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
-            <rect class="charge" x="501" y="294" width="58" height="36" rx="4" fill="#F2B45A" opacity=".8"/>
+            <rect x="520" y="234" width="20" height="8" rx="2" style="fill:var(--edge)"/>
+            <rect x="495" y="242" width="70" height="94" rx="8" stroke-width="2" style="fill:var(--body);stroke:var(--edge)"/>
+            <rect class="charge" x="501" y="294" width="58" height="36" rx="4" opacity=".8" style="fill:var(--yellow)"/>
             <text class="term" x="547" y="262" style="font-size:17px">+</text><text class="term" x="547" y="330" style="font-size:17px">−</text>
             <text class="lbl" x="576" y="290">축전지</text>
             <text class="sml" x="576" y="312">전기 ⇄ 화학</text>
           </g>
           <!-- 스위치 -->
-          <g class="sw"><path d="M590 205 L640 205" stroke="#EBCB94" stroke-width="3"/><circle cx="590" cy="205" r="5"/><circle cx="640" cy="205" r="5"/><text class="sml" x="594" y="236">스위치</text></g>
+          <g class="sw"><path d="M590 205 L640 205" stroke-width="3" style="stroke:var(--edge)"/><circle cx="590" cy="205" r="5"/><circle cx="640" cy="205" r="5"/><text class="sml" x="594" y="236">스위치</text></g>
           <!-- 부품: LED -->
           <g class="loadg g-led" data-act="load">
             <circle class="ledglow" cx="720" cy="300" r="110" fill="url(#eg1)"/>
-            <path class="ledbulb" d="M694 300 a26 26 0 1 1 52 0 v22 h-52z" stroke="#EBCB94" stroke-width="2.5"/>
-            <rect x="700" y="322" width="40" height="10" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
-            <path d="M708 332 V352 M732 332 V346" stroke="#EBCB94" stroke-width="3"/>
+            <path class="ledbulb" d="M694 300 a26 26 0 1 1 52 0 v22 h-52z" stroke-width="2.5" style="stroke:var(--edge)"/>
+            <rect x="700" y="322" width="40" height="10" stroke-width="2" style="fill:var(--body);stroke:var(--edge)"/>
+            <path d="M708 332 V352 M732 332 V346" stroke-width="3" style="stroke:var(--edge)"/>
           </g>
           <!-- 부품: 모터 -->
           <g class="loadg g-motor" data-act="load">
-            <rect x="692" y="262" width="56" height="90" rx="10" fill="#2B2621" stroke="#EBCB94" stroke-width="2.5"/>
-            <g class="fan"><circle cx="720" cy="307" r="34" fill="none" stroke="rgba(235,203,148,.2)"/><path d="M720 307 L720 275 Q736 285 720 307 M720 307 L748 323 Q736 336 720 307 M720 307 L692 323 Q690 304 720 307" fill="#F2B45A" stroke="#F2B45A" stroke-width="2"/><circle cx="720" cy="307" r="5" fill="#1D1A16"/></g>
+            <rect x="692" y="262" width="56" height="90" rx="10" stroke-width="2.5" style="fill:var(--body);stroke:var(--edge)"/>
+            <g class="fan"><circle cx="720" cy="307" r="34" fill="none" style="stroke:var(--edge);stroke-opacity:.3"/><path d="M720 307 L720 275 Q736 285 720 307 M720 307 L748 323 Q736 336 720 307 M720 307 L692 323 Q690 304 720 307" stroke-width="2" style="fill:var(--amber);stroke:var(--amber)"/><circle cx="720" cy="307" r="5" style="fill:var(--ink)"/></g>
           </g>
           <!-- 부품: 능동형 피에조 부저 -->
           <g class="loadg g-buzzer" data-act="load">
-            <circle cx="720" cy="307" r="34" fill="#2B2621" stroke="#EBCB94" stroke-width="2.5"/><circle cx="720" cy="307" r="10" fill="#EBCB94"/>
-            <path class="wave" d="M670 287 q-14 20 0 40" fill="none" stroke="#F2B45A" stroke-width="3"/><path class="wave" d="M654 275 q-22 32 0 64" fill="none" stroke="#F2B45A" stroke-width="3"/><path class="wave" d="M638 263 q-30 44 0 88" fill="none" stroke="#F2B45A" stroke-width="3"/>
+            <circle cx="720" cy="307" r="34" stroke-width="2.5" style="fill:var(--body);stroke:var(--edge)"/><circle cx="720" cy="307" r="10" style="fill:var(--edge)"/>
+            <path class="wave" d="M670 287 q-14 20 0 40" fill="none" stroke-width="3" style="stroke:var(--amber)"/><path class="wave" d="M654 275 q-22 32 0 64" fill="none" stroke-width="3" style="stroke:var(--amber)"/><path class="wave" d="M638 263 q-30 44 0 88" fill="none" stroke-width="3" style="stroke:var(--amber)"/>
           </g>
           <text class="term tp" x="732" y="258">+</text><text class="term tm" x="732" y="372">−</text>
           <text class="lname" x="770" y="300">LED</text><text class="elbl e3" x="770" y="330">빛에너지</text>
@@ -1099,7 +1129,7 @@ body.proj .step img{max-height:38vh}
         </div>
         <div id="gwrap" class="hide"><small class="muted">축전지에 화학에너지로 저장된 양</small><div class="gauge"><i id="gauge"></i></div></div>
         <h4>에너지 전환</h4>
-        <div class="chain"><span id="c1">빛에너지</span><i>→</i><span id="c2">전기에너지</span><i class="cb">→</i><span id="cB" class="cb">화학에너지<small>축전지</small></span><i class="cb">→</i><span id="c2b" class="cb">전기에너지</span><i>→</i><span id="c3">빛에너지</span><span id="cH" class="hl">+ 열(손실)</span></div>
+        <div class="chain"><span id="c1">빛에너지</span><i>→</i><span id="c2">전기에너지</span><i class="cb">→</i><span id="cB" class="cb">화학에너지<small>축전지</small></span><i class="cb">→</i><span id="c2b" class="cb">전기에너지</span><i>→</i><span id="c3">빛에너지</span><span id="cH" class="heat">+ 열(손실)</span></div>
         <p class="msg" id="emsg" aria-live="polite"></p>
         <p class="mini">그림 속 해·축전지·부품을 눌러도 바뀌어요.</p>
       </div>
@@ -1174,12 +1204,12 @@ body.proj .step img{max-height:38vh}
     <p class="lead reveal">쓴 내용은 이 브라우저에만 저장돼요. 제출은 종이 활동지(수업 PPT·보고서 별첨 원본)로 해요.</p>
     <a class="backlink" href="#lesson">↑ 수업 진행으로 돌아가기</a>
     <div class="tabs" role="tablist" data-key="ecg:p5:ws">
-      <button role="tab" id="w1" aria-controls="W1">01 불편에서 문제 찾기</button>
-      <button role="tab" id="w3" aria-controls="W3">03 구상도</button>
-      <button role="tab" id="w4" aria-controls="W4">04 모둠 계획서</button>
-      <button role="tab" id="w5" aria-controls="W5">05 제작 일기</button>
-      <button role="tab" id="w6" aria-controls="W6">06 실험 결과</button>
-      <button role="tab" id="w7" aria-controls="W7">07 개선·돌아보기</button>
+      <button type="button" role="tab" id="w1" aria-controls="W1">01 불편에서 문제 찾기</button>
+      <button type="button" role="tab" id="w3" aria-controls="W3">03 구상도</button>
+      <button type="button" role="tab" id="w4" aria-controls="W4">04 모둠 계획서</button>
+      <button type="button" role="tab" id="w5" aria-controls="W5">05 제작 일기</button>
+      <button type="button" role="tab" id="w6" aria-controls="W6">06 실험 결과</button>
+      <button type="button" role="tab" id="w7" aria-controls="W7">07 개선·돌아보기</button>
     </div>
     <div class="tabpanel" id="W1" role="tabpanel" aria-labelledby="w1">
       <p class="mini">고른 의뢰: <b class="amber" id="wsPick">— (위 카드에서 고르세요)</b></p>
@@ -1304,7 +1334,7 @@ body.proj .step img{max-height:38vh}
     <p class="privacy">학생 얼굴은 흐리게 처리했습니다. 띵커벨 화면의 학번·반·작성 시각은 가렸습니다.</p>
 
     <h2 class="head reveal" style="margin-top:4.5rem">에너지 소양 검사, 사전 vs 사후</h2>
-    <p class="lead reveal">프로그램 운영 전(2026. 8. 18.)과 후(2026. 10. 20.)에 검사했어요. 두 번 모두 응답한 <b>18명</b>의 점수를 대응표본 t검정으로 비교했어요.</p>
+    <p class="lead reveal">프로그램 운영 전(2026. 8. 18.)과 후(2026. 10. 20.)에 검사했어요. 두 번 모두 응답한 <b class="ring">18명</b>의 점수를 대응표본 t검정으로 비교했어요.</p>
     <!-- 확인 필요: 검사 대상 학년(보고서: 중학교 3학년 1개 반 / Ⅴ장: 고등학교 1학년) -->
     <div class="kpis reveal">
       <div class="kpi"><div class="k">지식 (15문항, 15점)</div><div class="v"><span>9.67</span><span class="ar">→</span><span class="post">10.89</span></div><div class="p">+1.22 · t(17)=1.61, p=.127 · 유의하지 않음</div></div>
@@ -1314,7 +1344,7 @@ body.proj .step img{max-height:38vh}
     <p class="mini mt">사전 24명, 사후 20명 응답 · 표준편차: 지식 3.07→3.34, 태도 0.56→0.50, 행동 0.93→0.73 · 지식 점수는 18명 중 11명 오름, 4명 같음, 3명 내림</p>
 
     <h3 style="margin-top:2.6rem">지식 문항별 정답률 (18명)</h3>
-    <div class="legend"><span><i style="background:#6E6458"></i>사전</span><span><i style="background:var(--amber)"></i>사후</span>
+    <div class="legend"><span><i style="background:var(--blue)"></i>사전</span><span><i style="background:var(--amber)"></i>사후</span>
       <span class="seg" style="margin:0" role="group" aria-label="문항 거르기"><button type="button" data-f="all" aria-pressed="true">15문항 전체</button><button type="button" data-f="up" aria-pressed="false">크게 오른 문항</button><button type="button" data-f="dn" aria-pressed="false">내려간 문항</button></span>
     </div>
     <div class="items reveal" id="items"></div>
@@ -1359,7 +1389,7 @@ body.proj .step img{max-height:38vh}
     <h2 class="head reveal">적정기술 프로토타이핑 · 49장</h2>
     <div class="deck" data-dir="../slides/p5/" data-n="49" data-title="프로그램 5 기술 수업 PPT"></div>
     <div class="grid g2 mt" style="margin-top:1.2rem">
-      <a class="dl" href="../materials/p5_기술_적정기술프로토타이핑_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>수업 PPT 내려받기</b><small>p5_기술_적정기술프로토타이핑_블랙골드.pptx</small></span></a>
+      <a class="dl" href="../materials/p5_기술_적정기술프로토타이핑_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>수업 PPT 내려받기</b><small>PPTX · 49장 · 편집 가능</small></span></a>
       <a class="dl" href="../materials/p5_기술_적정기술프로토타이핑_블랙골드.pdf" download><span class="ext">PDF</span><span><b>PDF로 내려받기</b><small>인쇄·배포용</small></span></a>
     </div>
   </div>
@@ -1542,9 +1572,9 @@ function sset(k,v){try{localStorage.setItem(k,v)}catch(e){}}
     var target=Math.floor(Math.random()*7),steps=14+target,n=0;
     var RM=matchMedia("(prefers-reduced-motion: reduce)").matches;if(RM)steps=0;
     (function tick(){
-      cards.forEach(function(c){c.classList.remove("hl")});
-      if(n>=steps){cards[target].classList.add("hl");setTimeout(function(){cards[target].classList.remove("hl");cards[target].classList.add("flip")},500);choose(target);btn.disabled=false;return}
-      cards[n%7].classList.add("hl");n++;setTimeout(tick,60+n*9);
+      cards.forEach(function(c){c.classList.remove("lit")});
+      if(n>=steps){cards[target].classList.add("lit");setTimeout(function(){cards[target].classList.remove("lit");cards[target].classList.add("flip")},500);choose(target);btn.disabled=false;return}
+      cards[n%7].classList.add("lit");n++;setTimeout(tick,60+n*9);
     })();
   };
   paint();

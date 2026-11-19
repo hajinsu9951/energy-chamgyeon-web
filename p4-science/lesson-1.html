@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1차시 문제 정의와 초기 프롬프트 · 프로그램 4 과학 · 에너지참견시점</title>
+<meta name="description" content="프로그램 4 과학 및 지능형 최적화 1차시 — 기후·에너지 문제의 원인과 영향을 과학적 근거로 정의하고, 입력·처리·출력을 담은 초기 프롬프트를 설계하는 50분 수업 화면">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<!--
+  근거: 최종보고서 별첨 프로그램 4 교수·학습 지도안(1차시: 도입 5분 · 교사 시범 10분 · 모둠 활동 1 15분 · 모둠 활동 2 16분 · 정리 4분), 활동지 1·2, 수업 PPT 4~31장.
+  단계의 발문·유의점은 프로그램 페이지(index.html #lesson 1차시)와 같은 문장을 그대로 씀.
+-->
+<style>
+/* 1차시 전용 보충 (색은 공통 변수만) */
+.vars{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:.6rem 0 1rem}
+.vars div{border:1px solid var(--line2);border-radius:14px;padding:.8rem 1rem;background:var(--panel)}
+.vars b{display:block;font-size:1.15rem}
+.vars small{color:var(--grey)}
+.check{margin-left:0!important}
+.check li{list-style:none;position:relative;padding-left:1.6rem}
+.check li::before{content:"";position:absolute;left:0;top:.45em;width:.9em;height:.9em;border:1.5px solid var(--amber);border-radius:4px}
+.sft{border:1px solid var(--rust);background:var(--rustT);border-radius:14px;padding:.7rem 1rem;margin:.8rem 0;font-size:.95rem}
+.sft b{color:var(--rust)}
+.ipo-mini{display:flex;gap:.4rem;flex-wrap:wrap;margin-top:.6rem}
+.ipo-mini span{border:1px solid var(--line2);border-radius:10px;padding:.35rem .6rem;color:var(--ink2);background:var(--panel)}
+.ipo-mini span b{color:var(--prog-ink);margin-right:.3rem}
+.step .live{font-size:.95rem}
+.prompt-demo{white-space:pre-line;line-height:1.8}
+/* 열섬 개념 시뮬레이터 (프로그램 페이지와 같은 그림) */
+.sim{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:1.2rem;align-items:start;margin:1rem 0}
+@media (max-width:900px){.sim{grid-template-columns:1fr}}
+.sim-stage{background:var(--panel);border:1px solid var(--line);border-radius:18px;overflow:hidden;position:relative;box-shadow:var(--shadow)}
+.sim-stage svg{display:block;width:100%;height:auto}
+.badge-concept{position:absolute;left:12px;top:12px;display:inline-flex;align-items:center;gap:.4rem;border:1px dashed var(--line2);color:var(--champ);background:color-mix(in srgb,var(--panel) 90%,transparent);border-radius:999px;padding:.2rem .7rem;font-size:.8rem;font-weight:500}
+.badge-concept::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--rust)}
+.sim-ctrl{padding:1rem 1.1rem 1.2rem;border-top:1px solid var(--line)}
+.sim-ctrl label{display:flex;justify-content:space-between;font-weight:500;color:var(--champ);margin-bottom:.4rem;font-size:1rem}
+.sim-ctrl output{color:var(--prog-ink);font-weight:700}
+input[type=range].rng{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;cursor:pointer}
+input[type=range].rng::-webkit-slider-runnable-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--rust),var(--peach),var(--sage),var(--amber))}
+input[type=range].rng::-moz-range-track{height:6px;border-radius:3px;background:linear-gradient(90deg,var(--rust),var(--peach),var(--sage),var(--amber))}
+input[type=range].rng::-webkit-slider-thumb{-webkit-appearance:none;width:26px;height:26px;border-radius:50%;background:var(--panel);border:3px solid var(--amber);margin-top:-10px;box-shadow:0 0 0 4px var(--amberT)}
+input[type=range].rng::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--panel);border:3px solid var(--amber)}
+.ticks{display:flex;justify-content:space-between;color:var(--grey);font-size:.78rem}
+.meters{display:grid;gap:.7rem}
+.meter{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.7rem .9rem;box-shadow:var(--shadow)}
+.meter .lab{display:flex;justify-content:space-between;font-weight:500;font-size:.95rem}
+.meter .lab b{color:var(--ink)}
+.meter .track{height:10px;border-radius:5px;background:var(--line);margin-top:.5rem;overflow:hidden}
+.meter .track i{display:block;height:100%;border-radius:5px;background:linear-gradient(90deg,var(--peach),var(--rust));transition:width .8s var(--ease)}
+.tree{transform-box:fill-box;transform-origin:50% 100%;transition:transform .7s var(--ease),opacity .5s}
+.tree.off{transform:scale(0);opacity:0}
+.sim-heat{transition:fill .8s var(--ease),opacity .8s}
+.shade{transition:opacity .6s}
+.vap{animation:vapUp 2.4s ease-in infinite;transform-box:fill-box}
+@keyframes vapUp{0%{transform:translateY(0);opacity:0}25%{opacity:.85}100%{transform:translateY(-34px);opacity:0}}
+.fan{transform-box:fill-box;transform-origin:center;animation:spin .55s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hw{stroke-dasharray:6 10;animation:rise 1.6s linear infinite}
+@keyframes rise{to{stroke-dashoffset:-32}}
+/* 활동지: 입력→처리→출력 설계 보드 */
+.ipo{display:grid;grid-template-columns:1fr 40px 1fr 40px 1fr;align-items:stretch}
+.ipo .box{background:var(--panel);border:1px solid var(--line2);border-radius:16px;padding:1rem}
+.ipo .box h4{margin:0 0 .2rem;font-size:1.1rem}
+.ipo .box h4 em{font-style:normal;color:var(--prog-ink);margin-right:.35rem}
+.ipo .box p{color:var(--grey);font-size:.88rem;margin:0 0 .5rem}
+.ipo .arrow{position:relative}
+.ipo .arrow::before{content:"";position:absolute;left:4px;right:10px;top:50%;height:2px;background:var(--line2)}
+.ipo .arrow::after{content:"";position:absolute;right:4px;top:calc(50% - 6px);border:6px solid transparent;border-left:9px solid var(--amber)}
+@media (max-width:900px){.ipo{grid-template-columns:1fr}.ipo .arrow{height:30px}.ipo .arrow::before{left:50%;right:auto;top:2px;bottom:10px;width:2px;height:auto}.ipo .arrow::after{left:calc(50% - 6px);right:auto;top:auto;bottom:0;border:6px solid transparent;border-top:9px solid var(--amber)}}
+.pad.sm{min-height:76px}
+.opts,.crit{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0}
+.opts label,.crit label{display:inline-flex;gap:.4rem;align-items:center;border:1px solid var(--line2);border-radius:999px;padding:.3rem .8rem;font-size:.92rem;cursor:pointer;background:var(--panel)}
+.opts input,.crit input{accent-color:var(--amber)}
+.crit label:has(input:checked),.opts label:has(input:checked){background:var(--amberT);border-color:var(--amber)}
+.btnrow{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0;align-items:center}
+.out-prompt{white-space:pre-wrap;background:var(--panel);border:1.5px dashed var(--amber);border-radius:14px;padding:1rem 1.1rem;line-height:1.7;min-height:4em}
+.lsheet .wide{grid-column:1/-1}
+.lsheet > .card{min-width:0}
+</style>
+</head>
+<body data-prog="p4">
+<header class="top lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+    <div class="crumb"><a class="back-hub" href="index.html">04 과학</a><b>1차시 · 문제 정의와 초기 프롬프트</b></div>
+    <div class="tools">
+      <button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button>
+      <button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button>
+      <button class="tbtn" type="button" data-toggle="fs">전체 화면</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="lhero">
+  <div class="wrap">
+    <div>
+      <span class="no">04 과학 · 1차시 / 2</span>
+      <h1>문제를 정의하고,<br><em>초기 프롬프트</em>를 써요</h1>
+      <p class="goal"><b>오늘의 목표</b>기후·환경 문제의 원인과 영향을 과학적 근거로 설명하고, 해결 대상과 필요한 데이터를 분석해 디지털 시제품의 핵심 기능과 초기 프롬프트를 설계해요.</p>
+      <div class="meta"><span>50분</span><span>모둠 활동</span><span>준비물: 태블릿·노트북</span><span>문제 정의 활동지</span><span>Google Sheets</span></div>
+    </div>
+    <figure>
+      <img src="img/field-01.jpg" alt="학생 다섯 명이 둥근 책상에 모여 한 학생이 든 태블릿 화면을 손가락으로 짚으며 함께 보는 모습. 얼굴은 흐리게 처리함" loading="eager">
+      <figcaption>▲ 문제 월드컵 결과를 태블릿으로 함께 보는 모둠 (수업 PPT 18장 사진 · 얼굴은 흐리게 처리)</figcaption>
+    </figure>
+  </div>
+  <span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice" fill="currentColor"><rect x="0" y="12" width="46" height="58"/><rect x="48" y="46" width="46" height="24"/><rect x="94" y="20" width="40" height="50"/><rect x="138" y="34" width="22" height="36"/><circle cx="175" cy="51" r="13"/><rect x="173.5" y="62" width="3" height="8"/><rect x="192" y="28" width="22" height="42"/><rect x="216" y="20" width="46" height="50"/><rect x="262" y="52" width="46" height="18"/><circle cx="317" cy="55" r="9"/><rect x="315.5" y="62" width="3" height="8"/><rect x="330" y="40" width="40" height="30"/><rect x="372" y="28" width="28" height="42"/><rect x="400" y="52" width="40" height="18"/><circle cx="457" cy="51" r="13"/><rect x="455.5" y="62" width="3" height="8"/><rect x="474" y="12" width="46" height="58"/><rect x="520" y="12" width="34" height="58"/><rect x="554" y="52" width="22" height="18"/><rect x="580" y="52" width="40" height="18"/><rect x="622" y="12" width="22" height="58"/><circle cx="657" cy="55" r="9"/><rect x="655.5" y="62" width="3" height="8"/><rect x="670" y="34" width="22" height="36"/><rect x="694" y="34" width="40" height="36"/><rect x="734" y="12" width="28" height="58"/><rect x="766" y="40" width="22" height="30"/><circle cx="801" cy="53" r="11"/><rect x="799.5" y="62" width="3" height="8"/><rect x="816" y="46" width="22" height="24"/><rect x="838" y="52" width="22" height="18"/><rect x="862" y="20" width="28" height="50"/><rect x="900" y="22" width="2.4" height="48"/><path d="M901.2 22 l-9 -12 l2 -1z M901.2 22 l11 4 l-.6 2z M901.2 22 l-2 13 l-2 -.4z"/><rect x="916" y="34" width="28" height="36"/><rect x="948" y="34" width="40" height="36"/><circle cx="1001" cy="51" r="13"/><rect x="999.5" y="62" width="3" height="8"/><rect x="1018" y="46" width="22" height="24"/><rect x="1040" y="20" width="46" height="50"/><circle cx="1099" cy="55" r="9"/><rect x="1097.5" y="62" width="3" height="8"/><rect x="1118" y="14" width="2.4" height="56"/><path d="M1119.2 14 l-9 -12 l2 -1z M1119.2 14 l11 4 l-.6 2z M1119.2 14 l-2 13 l-2 -.4z"/><circle cx="1147" cy="51" r="13"/><rect x="1145.5" y="62" width="3" height="8"/><rect x="1164" y="34" width="34" height="36"/><circle cx="1207" cy="55" r="9"/><rect x="1205.5" y="62" width="3" height="8"/></svg></span>
+</section>
+
+<section class="sec" id="run">
+  <div class="wrap">
+    <p class="label">수업 흐름 · 50분</p>
+    <div class="lplan">
+      <div style="--m:5"><b>도입</b><small>5분</small></div>
+      <div style="--m:10"><b>교사 시범</b><small>10분</small></div>
+      <div style="--m:15"><b>모둠 활동 1 · 문제 정의</b><small>15분</small></div>
+      <div style="--m:16"><b>모둠 활동 2 · 프롬프트 설계</b><small>16분</small></div>
+      <div style="--m:4"><b>정리</b><small>4분</small></div>
+    </div>
+    <p class="muted" style="font-size:.92rem;margin:0 0 1rem">← → 키나 아래 버튼으로 넘겨요. <b>교사 모드</b>를 켜면 발문·유의점이 보여요.</p>
+
+    <div class="runner stage">
+      <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+      <div class="steps">
+
+        <div class="step" data-phase="도입 · 학습 문제" data-time="5분">
+          <div class="two">
+            <div>
+              <p class="ask">올여름, 우리 주변에서<br><em>더위·에너지</em> 때문에 생긴 문제는 무엇이었나요?</p>
+              <div class="vars">
+                <div><b>폭염</b><small>그리고 늘어나는 전력 수요</small></div>
+                <div><b>도시 열섬</b><small>도시화로 더 심해지는 더위</small></div>
+                <div><b>자원 낭비</b><small>버려지고 새는 에너지·자원</small></div>
+              </div>
+              <div class="do"><b>모둠 이야기</b>일상에서 발견한 기후·환경 문제와 <b>해결이 필요한 이유</b>를 이야기해 봅시다.</div>
+            </div>
+            <figure><img src="../slides/p4/006.jpg" alt="빅카인즈 첫 화면에서 핵심 주제어를 검색하는 모습을 보여 주는 슬라이드" loading="lazy"><figcaption>빅카인즈에서 기후·에너지 기사 찾기 (PPT 6장)</figcaption></figure>
+          </div>
+          <div class="teacher">자료: 기후·에너지 관련 기사, 학생 프로젝트 사례.<br>유의: 단순한 환경 문제 소개보다 <b>과학적으로 해결할 수 있는 문제</b>에 주목하도록.</div>
+        </div>
+
+        <div class="step" data-phase="도입 · 목표 확인" data-time="5분 안">
+          <div class="two">
+            <div>
+              <h3>오늘 우리가 할 일</h3>
+              <p>기후·환경 문제의 원인과 영향을 <b>과학적 근거</b>로 설명하고, 해결 대상과 필요한 데이터를 분석해 디지털 시제품의 <b>핵심 기능</b>과 <b>초기 프롬프트</b>를 설계해요.</p>
+              <div class="flow" style="margin-top:1rem">
+                <div class="st"><b>교사 시범</b><small>도시 열섬 · 10분</small></div>
+                <div class="st"><b>모둠 활동 1</b><small>문제 정의·데이터 탐색 · 15분</small></div>
+                <div class="st"><b>모둠 활동 2</b><small>해결 방안·프롬프트 설계 · 16분</small></div>
+              </div>
+            </div>
+            <figure><img src="img/r-flow.jpg" alt="프로그램 4 핵심 활동 도식. 1. 우리가 발견한 문제, 2. 그린 비즈 프로토타입 두 카드" loading="lazy"><figcaption>핵심 활동 도식 — 우리가 발견한 문제 → 그린 비즈 프로토타입 (최종보고서)</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="step" data-phase="전개 · 교사 시범 ①" data-time="10분">
+          <p class="ask">녹지가 줄어든 도시에서<br><em>냉방 에너지</em>는 어떻게 될까요?</p>
+          <div class="sim">
+            <div class="sim-stage">
+              <span class="badge-concept">개념도 · 실제 측정값·계산값이 아니에요</span>
+              <svg id="simSvg" viewBox="0 0 640 360" role="img" aria-label="햇빛은 그대로인 채, 녹지가 늘면 그늘과 증발산으로 포장면 온도가 낮아지고 실외기 작동이 줄어드는 개념 그림"></svg>
+              <div class="sim-ctrl">
+                <label for="greenR">녹지 (나무·옥상 정원) <output id="greenO">조금</output></label>
+                <input type="range" class="rng" id="greenR" min="0" max="4" step="1" value="1" aria-describedby="greenT">
+                <div class="ticks" id="greenT"><span>거의 없음</span><span>조금</span><span>보통</span><span>많음</span><span>아주 많음</span></div>
+              </div>
+            </div>
+            <div class="meters">
+              <div class="meter"><div class="lab">포장면 온도(열화상) <b id="m1t">-</b></div><div class="track"><i id="m1" style="width:80%"></i></div></div>
+              <div class="meter"><div class="lab">실외기·냉방 부하 <b id="m2t">-</b></div><div class="track"><i id="m2" style="width:80%"></i></div></div>
+              <div class="meter"><div class="lab">전력 사용량 경향 <b id="m3t">-</b></div><div class="track"><i id="m3" style="width:80%"></i></div></div>
+              <div class="vars" style="margin:0">
+                <div><b>기온</b><small>얼마나 더운가</small></div>
+                <div><b>녹지율</b><small>나무·공원·옥상 정원</small></div>
+                <div><b>전력 사용량</b><small>냉방에 쓰는 에너지</small></div>
+              </div>
+            </div>
+          </div>
+          <p style="font-size:1rem;color:var(--ink2)"><b>햇빛은 같아도</b>, 나무의 <b>그늘</b>이 포장면에 닿는 햇빛을 가리고 잎의 <b>증발산</b>(물이 수증기로 바뀌며 열을 가져감)이 표면을 식혀요. 그림은 <b>방향</b>만 보여 줘요.</p>
+          <div class="teacher">시범 순서: 문제 제시 → 관련 변수(기온, 녹지율, 전력 사용량) 살펴보기 → 해결 대상과 필요한 기능 구체화.<br>
+          개념 정리: 도시 열섬 = 도시가 주변 교외보다 더 뜨거운 현상. 원인은 포장면·건물이 열을 모으고 천천히 내놓음, 녹지·물이 적음, 빽빽한 건물이 바람을 막음, <b>실외기·자동차 같은 인공열</b>. 냉방이 늘면 실외기 배열이 다시 열섬을 키우는 <b>되먹임 고리</b>를 짚을 것.<br>
+          시뮬레이터: 들어오는 햇빛(해)은 고정. 막대는 정성적 방향만 표현함(수치 근거 없음, 교육용 단순화). 학생이 "몇 도 내려가요?"라고 물으면 → 원자료에서 확인할 탐구 질문으로 돌려줄 것.<br>
+          출처: US EPA 「Learn About Heat Islands」·「Using Trees and Vegetation to Reduce Heat Islands」, IPCC AR6 WG1 Box 10.3(도시 열섬).</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 교사 시범 ②" data-time="10분 안">
+          <div class="two">
+            <div>
+              <h3>누구를 위해, 무엇을 하는 프로그램일까?</h3>
+              <ul>
+                <li><b>해결 대상</b> — 이 문제로 불편을 겪는 사람은 누구일까요?</li>
+                <li><b>필요한 기능</b> — 그 사람에게 무엇을 보여 주면 도움이 될까요?</li>
+                <li><b>초기 프롬프트</b> — 입력·처리·출력을 AI에게 어떻게 설명할까요?</li>
+              </ul>
+              <details class="reveal-ans">
+                <summary>시범 프롬프트 v1 보기</summary>
+                <div><p class="prompt-demo">도시 열섬 때문에 여름철 냉방 에너지 사용이 늘어나는 문제를 보여 주는 웹페이지를 만들어 줘.
+                사용자가 기온과 녹지율을 입력하면 전력 사용량이 어떻게 달라지는지 보여 줘.
+                결과는 그래프로 멋지게 보여 줘.</p>
+                <p class="muted" style="font-size:.9rem;margin:0">웹 제작용 견본이에요. 2차시에 테스트하고 고칠 출발점이에요 — '멋지게'는 무엇이 모호할까요?</p></div>
+              </details>
+            </div>
+            <figure><img src="../slides/p4/030.jpg" alt="문제상황, 행동가설문장, 예상 장애물, 해결아이디어 네 칸과 '(대상)이 (장소)에서 (어떤 행동)을 하도록 만든다' 문장 틀이 있는 슬라이드" loading="lazy"><figcaption>행동 가설 정리 — (대상)이 (장소)에서 (어떤 행동)을 하도록 만든다 (PPT 30장)</figcaption></figure>
+          </div>
+          <div class="teacher">초기 프롬프트 작성 방법을 시범: 대상, 입력 데이터, 처리(계산·비교·예측·조건 판단), 출력 결과를 문장으로. 위 v1은 웹 제작용 견본이며 프로그램 페이지의 '프롬프트 비교'에서 v2와 겹쳐 볼 수 있음.</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 모둠 활동 1" data-time="15분">
+          <div class="two">
+            <div>
+              <p class="ask">우리 모둠이 풀 <em>핵심 문제 하나</em>를 골라요</p>
+              <p>문제의 <b>원인과 영향</b>을 탐색하고, 해결이 필요한 대상과 사용자의 어려움을 구체화해요.</p>
+              <div class="do"><b>모둠 활동</b>문제 월드컵으로 Top4를 고른 뒤 핵심 문제 하나를 정하고, <a href="#sheet">활동지 ①</a>의 문제 선정·문제 관찰 칸을 채워요.</div>
+              <p><a class="btn ghost" href="index.html#worldcup">문제 월드컵 열기 →</a></p>
+              <div class="timer" data-min="15"></div>
+            </div>
+            <figure><img src="../slides/p4/017.jpg" alt="16강전, 8강전, 4강전, 결승전 대진 화면을 모은 에너지 월드컵 슬라이드" loading="lazy"><figcaption>에너지 문제 월드컵 — 16강부터 결승까지 (PPT 17장)</figcaption></figure>
+          </div>
+          <div class="teacher">유의: 문제의 범위가 지나치게 넓어지지 않도록 <b>핵심 문제 한 가지</b>를 선정하게 함. 범위가 너무 넓은 주제(예: 지구 평균 기온 상승)가 이기면 → 우리 지역에서 관찰 가능한 하위 문제로 좁히도록 안내. 자료: 문제 정의 활동지, Google Sheets.</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 모둠 활동 1" data-time="15분 안">
+          <div class="two">
+            <div>
+              <h3>데이터와 변수 확인하기</h3>
+              <p>우리 문제와 관련된 자료가 원자료 사이트에 있는지 직접 찾아봐요.</p>
+              <a class="live" href="https://data.kma.go.kr" target="_blank" rel="noopener"><i></i>기온 · 기상자료개방포털</a>
+              <a class="live" href="https://bigdata.kepco.co.kr" target="_blank" rel="noopener"><i></i>지역 전력 · 한전 전력데이터 개방포털</a>
+              <a class="live" href="https://epsis.kpx.or.kr" target="_blank" rel="noopener"><i></i>전력 수요 · 전력거래소 EPSIS</a>
+              <a class="live" href="https://egis.mcee.go.kr" target="_blank" rel="noopener"><i></i>녹지 · 토지피복지도</a>
+              <a class="live" href="https://www.data.go.kr" target="_blank" rel="noopener"><i></i>공공데이터포털</a>
+              <a class="live" href="https://sheets.google.com" target="_blank" rel="noopener"><i></i>Google Sheets</a>
+              <div class="do"><b>문제 정의서</b><a href="#sheet">활동지 ①</a>에 근거 자료(출처·확인 날짜) · 탐구 질문을 적어요.</div>
+              <div class="sft"><b>AI가 알려 준 숫자, 그대로 믿어도 될까요?</b> 생성형 AI가 제시한 자료·출처·수치는 원자료에서 <b>직접 확인한 뒤</b> 활동지에 적어요.</div>
+            </div>
+            <figure><img src="../slides/p4/007.jpg" alt="빅카인즈 검색 화면에서 에너지 불평등, 에너지 빈곤, 기후 정의 같은 키워드를 추출하는 과정을 보여 주는 슬라이드" loading="lazy"><figcaption>원자료 사이트에서 주제어 직접 모으기 (PPT 7장)</figcaption></figure>
+          </div>
+          <div class="teacher">유의: 과학적 근거와 검증되지 않은 추정치를 구별하게 함. 녹지율은 토지피복지도에서 녹지 면적 ÷ 행정구역 면적으로 계산. 열섬은 시간대가 중요 — 표면 온도 차이는 한낮, 기온 차이는 밤에도 이어짐. 학교 네트워크에서 각 포털이 열리는지 수업 전에 확인.<br>먼저 끝난 모둠: 같은 변수를 다른 지역(교외 관측소)과 비교해 '주변보다 얼마나 더운가'를 확인하게 함.</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 모둠 활동 2" data-time="16분">
+          <div class="two">
+            <div>
+              <p class="ask">사용자가 <em>무엇을 넣으면</em>,<br>프로그램은 <em>무엇을 보여 줄까요?</em></p>
+              <div class="ipo-mini">
+                <span><b>입력</b>사용자가 넣을 정보</span>
+                <span><b>처리</b>계산 · 비교 · 예측 · 조건 판단</span>
+                <span><b>출력</b>사용자에게 보여 줄 결과</span>
+              </div>
+              <div class="do"><b>설계 보드</b><a href="#sheet">활동지 ②</a>에 해결 아이디어 · 사용자 · 입력 → 처리 → 출력을 채우고 「초기 프롬프트 조립하기」를 눌러요.</div>
+              <div class="timer" data-min="16"></div>
+            </div>
+            <figure><img src="../slides/p4/029.jpg" alt="린 캔버스 작성 예시 슬라이드. 문제, 해결방안, 경제적 가치, 비용구조 칸이 채워져 있음" loading="lazy"><figcaption>린 캔버스 작성 예시 — 문제와 해결 방안 (PPT 29장)</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="step" data-phase="전개 · 모둠 활동 2" data-time="16분 안">
+          <div class="two">
+            <div>
+              <h3>초기 프롬프트 점검하기</h3>
+              <ul class="check">
+                <li>해결하려는 문제와 사용자가 들어 있나요?</li>
+                <li>입력 · 처리 · 출력이 모두 적혀 있나요?</li>
+                <li>빠진 기능이나 <b>모호한 요청</b>("좋게", "알아서")은 없나요?</li>
+                <li>실현 가능한 기능인가요?</li>
+              </ul>
+              <div class="do"><b>v1 보관</b>모둠이 다듬은 초기 프롬프트를 <a href="#sheet">활동지 ②</a> 맨 아래 「v1 · 초기 프롬프트」 칸에 남겨요.</div>
+            </div>
+            <figure><img src="../slides/p4/031.jpg" alt="활동지 기반으로 생성형 AI에 질문해 프롬프트를 생성하는 과정을 화살표로 보여 주는 슬라이드" loading="lazy"><figcaption>프롬프트 만들기 — 활동지 내용을 그대로 프롬프트로 (PPT 31장)</figcaption></figure>
+          </div>
+          <div class="teacher">모둠원과 함께 프롬프트를 검토하고 기능의 실현 가능성을 확인.</div>
+        </div>
+
+        <div class="step" data-phase="정리" data-time="4분">
+          <div class="two">
+            <div>
+              <p class="ask">초기 프롬프트는<br><em>지우지 말고</em> 보관해요</p>
+              <p>모둠별 문제 정의와 초기 프롬프트를 <b>공동 보고서</b>에 기록하고, 다음 차시에 구현할 핵심 기능을 확정해요.</p>
+              <div class="do"><b>마무리</b>아래 「나가기 질문」에 다음 차시에 만들 핵심 기능을 한 문장으로 적어요.</div>
+            </div>
+            <figure><img src="img/r-midterm.jpg" alt="한 모둠의 중간발표 자료. 활용한 AI, 팀원 소개, 문제의 발견 세 칸과 1주차부터 7주차까지의 활동 타임라인" loading="lazy"><figcaption>한 모둠이 정리한 활동 기록 (최종보고서 · 학생 이름은 가림)</figcaption></figure>
+          </div>
+          <div class="teacher">초기 프롬프트와 설계 내용을 보존해 다음 차시의 수정 결과와 비교하도록 함.<br>1차시 관찰평가: 문제 정의 / 데이터와 변수 탐색 / 해결 대상과 가치 발견 / 초기 프롬프트 설계.</div>
+        </div>
+
+      </div>
+      <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">← 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 →</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec panel" id="sheet">
+  <div class="wrap">
+    <p class="label">활동지</p>
+    <h2 class="head">문제를 <em>정의</em>하고 설계해요</h2>
+    <p class="lead">적은 내용은 이 기기의 브라우저에만 저장돼요. 다 쓰면 맨 아래 「내 기록 모두 복사」로 공동 보고서에 붙여 넣어요.</p>
+    <div class="lsheet cols">
+      <div class="card">
+        <h3><span class="n">1</span>우리 모둠이 해결할 문제 정의하기</h3>
+        <p class="muted" style="font-size:.92rem">문제의 원인과 영향을 조사하고, 과학적으로 확인할 수 있는 데이터와 변수를 찾아요.</p>
+        <div class="field"><label for="l1-a1">문제 선정 — 어떤 문제를 골랐나요?</label><textarea class="pad sm" id="l1-a1" data-key="l1-a1"></textarea></div>
+        <p style="margin:.4rem 0 0;font-weight:500;font-size:.95rem">어떤 기준으로 골랐나요? (PPT 4장의 선정 기준)</p>
+        <div class="crit">
+          <label><input type="checkbox">연관성</label>
+          <label><input type="checkbox">급박성</label>
+          <label><input type="checkbox">영향 규모</label>
+          <label><input type="checkbox">미래 영향</label>
+        </div>
+        <div class="field"><label for="l1-why">선정 근거 한 문장</label><textarea class="pad sm" id="l1-why" data-key="l1-why" placeholder="예) ○○ 문제는 우리 학교·지역에서 관찰할 수 있고 영향을 받는 사람이 많아서 먼저 다뤄야 한다."></textarea></div>
+        <div class="field"><label for="l1-a2">문제 관찰 — 원인과 영향은? 누가 어떤 어려움을 겪나요?</label><textarea class="pad sm" id="l1-a2" data-key="l1-a2"></textarea></div>
+        <div class="field"><label for="l1-a3">근거 자료 — 데이터·변수와 자료의 출처</label><textarea class="pad sm" id="l1-a3" data-key="l1-a3" placeholder="예) 기상자료개방포털의 ○○ 자료 — 확인한 날짜, 변수 이름"></textarea></div>
+        <div class="field"><label for="l1-a4">탐구 질문 — 데이터로 확인하고 싶은 핵심 질문은?</label><textarea class="pad sm" id="l1-a4" data-key="l1-a4"></textarea></div>
+      </div>
+      <div class="card">
+        <h3><span class="n">2</span>해결 방안과 초기 프롬프트 설계하기</h3>
+        <p class="muted" style="font-size:.92rem">생성형 AI로 만들 웹사이트·앱·시뮬레이터를 정하고, 누가 어떤 도움을 받는지 적어요.</p>
+        <div class="field"><label for="l1-b1">해결 아이디어 — 어떤 웹사이트·앱·시뮬레이터를 만들고 싶나요?</label><textarea class="pad sm" id="l1-b1" data-key="l1-b1" placeholder="예) 우리 동네 녹지와 냉방 에너지를 비교해 보는 웹페이지"></textarea></div>
+        <div class="field"><label for="l1-b2">핵심 사용자와 가치 제안 — 누가 쓰고, 어떤 도움을 받나요?</label><textarea class="pad sm" id="l1-b2" data-key="l1-b2"></textarea></div>
+        <p style="margin:1rem 0 .2rem;font-weight:500">함께 넣을 조건 (골라요)</p>
+        <div class="opts" id="pbOpts">
+          <label><input type="checkbox" value="AI가 만든 수치나 예측은 화면에 '추정값'이라고 표시해 줘." checked>추정값 표시</label>
+          <label><input type="checkbox" value="이름·연락처·주소 같은 개인정보는 입력받지 않게 해 줘." checked>개인정보 받지 않기</label>
+          <label><input type="checkbox" value="자료 출처를 적는 칸을 화면에 만들어 줘.">자료 출처 칸</label>
+          <label><input type="checkbox" value="휴대전화 화면에서도 보기 쉽게 만들어 줘.">휴대전화 화면</label>
+        </div>
+      </div>
+      <div class="card wide">
+        <h3><span class="n">3</span>입력 → 처리 → 출력 설계 보드</h3>
+        <div class="ipo" style="margin-top:.6rem">
+          <div class="box"><h4><em>입력</em>활용할 정보</h4><p>사용자가 입력하거나 프로그램이 활용할 정보</p><textarea class="pad sm" id="l1-i" data-key="l1-i" aria-label="입력 데이터"></textarea></div>
+          <div class="arrow" aria-hidden="true"></div>
+          <div class="box"><h4><em>처리</em>판단</h4><p>계산·비교·예측하거나 조건에 따라 판단하는 방법</p><textarea class="pad sm" id="l1-p" data-key="l1-p" aria-label="처리 과정 및 알고리즘"></textarea></div>
+          <div class="arrow" aria-hidden="true"></div>
+          <div class="box"><h4><em>출력</em>기능</h4><p>사용자에게 보여 줄 정보나 기능</p><textarea class="pad sm" id="l1-o" data-key="l1-o" aria-label="출력 결과"></textarea></div>
+        </div>
+        <div class="btnrow"><button class="btn" type="button" id="pbBuild">초기 프롬프트 조립하기</button><button class="btn ghost" type="button" id="pbKeep">v1 칸으로 옮기기 ↓</button></div>
+        <div class="out-prompt" id="pbOut" aria-live="polite"><span class="muted">위 칸을 채우고 「초기 프롬프트 조립하기」를 눌러요. 조립된 글은 그대로 쓰지 말고 모둠이 다듬어요.</span></div>
+        <div class="field" style="margin-top:1rem"><label for="l1-v1">v1 · 초기 프롬프트 (모둠이 다듬은 최종본 — 2차시에 그대로 불러와요)</label><textarea class="pad" id="l1-v1" data-key="l1-v1"></textarea></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="slides">
+  <div class="wrap">
+    <p class="label">이 차시 슬라이드 · PPT 4~31장</p>
+    <div class="deck" data-dir="../slides/p4/" data-from="4" data-n="28" data-title="1차시 슬라이드"></div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="exit">
+      <h3>나가기 질문</h3>
+      <p>다음 차시에 바이브 코딩으로 구현할 <b>핵심 기능 하나</b>는 무엇인가요? 그 기능은 어떤 값을 넣으면 무엇을 보여 주나요?</p>
+      <textarea class="pad" data-key="l1-exit" aria-label="나가기 질문 답"></textarea>
+    </div>
+    <div class="lnav" style="margin-top:2rem">
+      <a href="index.html"><small>← 프로그램 4 전체</small>수업 소개·평가·자료</a>
+      <a class="next" href="lesson-2.html"><small>다음 차시 →</small>2차시 · 바이브 코딩과 수정 프롬프트</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p style="margin:0 0 .4rem"><b style="color:var(--champ)">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 프로그램 4 과학 및 지능형 최적화 — 황호연 선생님(서울미술고) · 한국에너지정보문화재단 지원</p>
+    <p style="margin:0">출처: 최종보고서 별첨 교수·학습 지도안·활동지, 수업 PPT · 열섬 개념: US EPA Heat Islands · <a href="index.html">프로그램 4 전체</a> · <a href="../index.html">허브로 돌아가기</a></p>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+var RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches;
+var NS="http://www.w3.org/2000/svg";
+function $(s,r){return (r||document).querySelector(s)}
+function el(t,a,p){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);if(p)p.appendChild(e);return e}
+function V(n){return "var(--"+n+")"}
+/* 식은 쪽 색: 세이지를 종이색으로 밝힌 것 */
+function COOL(p){return "color-mix(in srgb,var(--rust) "+p+"%,color-mix(in srgb,var(--sage) 72%,var(--panel)))"}
+function mix(a,p,b){return "color-mix(in srgb,var(--"+a+") "+p+"%,var(--"+b+"))"}
+
+/* ── 열섬 개념 시뮬레이터 (프로그램 페이지와 같은 그림) ── */
+(function(){
+  var s=$("#simSvg"),r=$("#greenR");if(!s)return;
+  var d=el("defs",{},s);
+  var lg=el("linearGradient",{id:"simSky",x1:0,y1:0,x2:0,y2:1},d);el("stop",{offset:0,style:"stop-color:"+mix("blue",22,"panel")},lg);el("stop",{offset:1,style:"stop-color:"+V("panel")},lg);
+  el("rect",{x:0,y:0,width:640,height:360,fill:"url(#simSky)"},s);
+  var rg=el("radialGradient",{id:"simGlow"},d);el("stop",{offset:0,style:"stop-color:"+V("yellow"),"stop-opacity":1},rg);el("stop",{offset:1,style:"stop-color:"+V("yellow"),"stop-opacity":0},rg);
+  el("circle",{cx:560,cy:62,r:110,fill:"url(#simGlow)",opacity:.55},s);
+  el("circle",{cx:560,cy:62,r:30,style:"fill:"+V("yellow")},s);
+  var B=[[30,150,80],[118,110,70],[196,170,90],[300,120,80],[392,190,70],[470,135,95],[574,160,56]],bodies=[],fans=[];
+  B.forEach(function(b){var x=b[0],h=b[1],w=b[2];
+    bodies.push(el("rect",{x:x,y:300-h,width:w,height:h,rx:3,class:"sim-heat"},s));
+    for(var yy=300-h+14;yy<290;yy+=22)for(var xx=x+8;xx<x+w-10;xx+=16)el("rect",{x:xx,y:yy,width:8,height:10,style:"fill:"+V("panel"),opacity:.55},s);
+    var ax=x+w-26,ay=300-h*0.45;el("rect",{x:ax,y:ay,width:22,height:16,rx:2,style:"fill:"+V("ink2")+";stroke:"+V("panel"),"stroke-width":1},s);
+    var fg=el("g",{class:"fan"},s);el("path",{d:"M"+(ax+11)+","+(ay+8)+" l-5,-5 l2,-1z M"+(ax+11)+","+(ay+8)+" l5,5 l-2,1z M"+(ax+11)+","+(ay+8)+" l5,-5 l1,2z M"+(ax+11)+","+(ay+8)+" l-5,5 l-1,-2z",style:"fill:"+V("panel")},fg);fans.push(fg);
+  });
+  var ground=el("rect",{x:0,y:300,width:640,height:60,class:"sim-heat"},s);
+  var waves=el("g",{},s);
+  for(var i=0;i<9;i++){var p=el("path",{class:"hw",d:"M"+(30+i*70)+",300 q10,-14 0,-28 q-10,-14 0,-28",fill:"none",style:"stroke:"+V("rust"),"stroke-width":2},waves);p.style.animationDelay=(i*.2)+"s"}
+  var T=[[112,300],[190,300],[292,300],[386,300],[466,300],[568,300],[22,300],[60,150],[150,190],[330,180],[505,165],[240,130],[420,110],[620,300],[250,300]];
+  var shades=T.map(function(t){var sc=t[1]<300?.65:1;return el("ellipse",{class:"shade",cx:t[0]-6*sc,cy:t[1]+3,rx:22*sc,ry:5*sc,style:"fill:"+V("deep"),opacity:0},s)});
+  var trees=T.map(function(t,k){var g=el("g",{class:"tree off"},s);var sc=t[1]<300?.65:1;
+    el("rect",{x:t[0]-2*sc,y:t[1]-14*sc,width:4*sc,height:14*sc,style:"fill:"+V("ink2")},g);
+    el("circle",{cx:t[0],cy:t[1]-22*sc,r:13*sc,style:"fill:"+V("amber")},g);el("circle",{cx:t[0]-7*sc,cy:t[1]-17*sc,r:9*sc,style:"fill:"+V("sage")},g);el("circle",{cx:t[0]+7*sc,cy:t[1]-17*sc,r:9*sc,style:"fill:"+V("champ")},g);
+    if(!RM)for(var q=0;q<3;q++){var c=el("circle",{class:"vap",cx:t[0]-6*sc+q*6*sc,cy:t[1]-36*sc,r:2.2*sc,style:"fill:"+V("blue")},g);c.style.animationDelay=(q*.7+k*.13)+"s"}
+    return g});
+  el("text",{x:548,y:112,"text-anchor":"middle",style:"fill:"+V("ink2"),"font-size":12,"font-weight":700},s).textContent="햇빛은 그대로";
+  var L=["거의 없음","조금","보통","많음","아주 많음"],Q=["아주 높음","높음","보통","낮아짐","더 낮아짐"];
+  var HOT=[92,70,48,28,10].map(function(p){return COOL(p)}),GR=[96,74,52,32,14].map(function(p){return "color-mix(in srgb,"+COOL(p)+" 80%,var(--ink2))"});
+  function upd(){var v=+r.value;$("#greenO").textContent=L[v];var nOn=Math.round(v*15/4);
+    trees.forEach(function(t,k){t.classList.toggle("off",k>=nOn)});
+    shades.forEach(function(e,k){e.setAttribute("opacity",k<nOn?".3":"0")});
+    bodies.forEach(function(b){b.style.fill=HOT[v]});ground.style.fill=GR[v];
+    waves.setAttribute("opacity",(1-.2*v).toFixed(2));
+    fans.forEach(function(f){f.style.animationDuration=(.3+v*.35)+"s"});
+    var w=[90,76,60,46,34][v];
+    ["m1","m2","m3"].forEach(function(id,k){$("#"+id).style.width=(w+(k===2?-4:0))+"%";$("#"+id+"t").textContent=Q[v]});
+  }
+  r.addEventListener("input",upd);upd();
+})();
+
+/* ── 초기 프롬프트 조립기 ── */
+(function(){
+  function v(id){return ($("#"+id).value||"").trim()}
+  var built="";
+  $("#pbBuild").onclick=function(){
+    var idea=v("l1-b1"),user=v("l1-b2"),i=v("l1-i"),p=v("l1-p"),o=v("l1-o");
+    if(!idea&&!i&&!p&&!o){$("#pbOut").textContent="설계 보드 칸을 먼저 채워요.";return}
+    var L=[(idea||"(해결 아이디어)")+"을(를) 만들어 줘."];
+    if(user)L.push("사용자와 도움: "+user);
+    L.push("입력: "+(i||"(사용자가 입력하거나 활용할 정보)"));
+    L.push("처리: "+(p||"(계산·비교·예측·조건 판단 방법)"));
+    L.push("출력: "+(o||"(사용자에게 보여 줄 결과)"));
+    Array.prototype.forEach.call(document.querySelectorAll("#pbOpts input:checked"),function(c){L.push(c.value)});
+    built=L.join("\n");$("#pbOut").textContent=built;
+  };
+  $("#pbKeep").onclick=function(){if(!built)$("#pbBuild").click();if(!built)return;var t=$("#l1-v1");
+    if(t.value.trim()&&!confirm("v1 칸에 이미 글이 있어요. 조립한 글로 바꿀까요?"))return;
+    t.value=built;t.dispatchEvent(new Event("input"));t.focus()};
+})();
+})();
+</script>
+</body>
+</html>

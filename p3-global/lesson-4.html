@@ -1,0 +1,121 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>4차시 · 피드백 반영과 중간 공유 · 프로그램 3 글로벌 · 에너지참견시점</title>
+<meta name="description" content="프로그램 3 글로벌 4차시: Padlet 피드백을 하나 이상 반영해 산출물을 완성하고, 평가 루브릭 기준으로 중간 공유와 동료 피드백을 하는 50분 수업 화면">
+<link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/lesson.css">
+<style>
+/* 프로그램 3 차시 페이지 보충 — 색은 C안 변수만. 트랙 글자색(--tXi) 4개만 고정값(공통 --prog-ink 계열과 같은 값) */
+:root{--tA:var(--yellow);--tB:var(--blue);--tC:var(--purple);--tD:var(--peach);--tAi:#8A6A00;--tBi:#16739E;--tCi:#6A3F8E;--tDi:#B85A2A;
+  --cFossil:var(--grey);--cNuc:var(--purple);--cHydro:var(--blue);--cRen:var(--amber);--cGeo:var(--peach);--cOther:var(--sage)}
+.lhero figure img{object-position:var(--pos,center)}
+.boxes{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin:.6rem 0 1rem}
+.box{border:1px solid var(--line);border-left:4px solid var(--prog);border-radius:14px;padding:.9rem 1rem;background:var(--panel)}
+.box h4{margin:0 0 .35rem;font-size:1.1rem;color:var(--ink)}
+.box p{margin:0;color:var(--ink2)}
+.pill-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.pill{border:1px solid var(--line2);border-radius:12px;padding:.55rem .85rem;background:var(--panel)}
+.pill b{color:var(--prog-ink);display:block;font-size:.92rem}
+.sbar{display:flex;height:44px;border-radius:10px;overflow:hidden;margin:.6rem 0 1rem;background:var(--panel2)}
+.sbar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;color:#fff;font-size:.9rem;width:0;transition:width 1.2s var(--ease) .2s;white-space:nowrap;overflow:hidden}
+.step.on .sbar i{width:var(--w)}
+.keys{display:flex;flex-wrap:wrap;gap:.3rem 1rem;color:var(--ink2);font-size:.88rem;margin:.2rem 0 .8rem}
+.key{display:inline-flex;align-items:center;gap:.35rem}.key::before{content:"";width:11px;height:11px;border-radius:3px;background:var(--c)}
+.bigq{font-weight:900;font-size:clamp(1.35rem,2.8vw,2.05rem);line-height:1.45;color:var(--ink);border-left:5px solid var(--prog);padding-left:1rem;margin:.6rem 0 1rem}
+.jump{display:inline-flex;align-items:center;gap:.4rem;color:var(--prog-ink);font-weight:700;text-decoration:none;border-bottom:2px solid var(--progT);margin-top:.4rem}
+.jump:hover{border-color:var(--prog)}
+.tmr-row{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;margin:.6rem 0 1rem}
+.tmr-row > span{display:inline-flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.tmr-row small{color:var(--prog-ink);font-weight:700;font-size:.9rem}
+.runner .step figure.sf{margin:.4rem 0 0}
+.runner .step figure.sf figcaption{font-size:.86rem}
+.runner .step .mini2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.4rem 0 1rem}
+.runner .step .mini2 figure{margin:0;border-radius:12px;overflow:hidden;position:relative}
+.runner .step .mini2 figure img{width:100%;max-height:none;aspect-ratio:524/364;object-fit:cover;border-radius:0;box-shadow:none}
+.runner .step .mini2 figcaption{position:absolute;left:8px;bottom:8px;background:rgba(16,36,26,.8);color:#fff;border-radius:999px;padding:.1rem .7rem;font-size:.88rem;margin:0}
+.gloss{width:100%;border-collapse:collapse;font-size:.95rem}
+.gloss th,.gloss td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left}
+.gloss th{color:var(--prog-ink)}
+.awards{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.awards span{border:1.5px solid var(--prog);border-radius:999px;padding:.3rem 1rem;font-weight:700;color:var(--prog-ink);background:var(--panel)}
+.trk{font-weight:900}
+.lsheet .card p.h,.lsheet small.h{color:var(--grey);font-size:.88rem;margin:.1rem 0 .4rem;display:block}
+input.pad{min-height:0}
+.pad.sm{min-height:76px}
+.sheet-note{color:var(--grey);font-size:.92rem}
+.deckhead{font-weight:700;margin:1.6rem 0 .6rem}
+.deckhead:first-of-type{margin-top:0}
+.rubtbl{min-width:720px}
+.rubtbl td:first-child{font-weight:700;min-width:9.5em}
+.rubtbl small{white-space:nowrap}
+.rubtbl th{color:var(--prog-ink)}
+</style></head>
+<body data-prog="p3">
+<!-- 프로그램 3 4차시 · 근거: index.html 「수업 진행」 3~4차시 탭의 ‘3차시 끝’ 경계 뒤 단계(집중 창작 ② 35분 + 정리·중간 공유 15분), 「평가」 3~4차시 · 수업 PPT slides/p3/ -->
+<header class="top lesson-top"><div class="wrap">
+  <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+  <div class="crumb"><a class="back-hub" href="index.html">03 글로벌</a><b>4차시 · 피드백 반영과 중간 공유</b></div>
+  <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
+</div></header>
+<main>
+<section class="lhero"><div class="wrap">
+  <div><span class="no">03 글로벌 · 4차시 / 6</span>
+    <h1>피드백을 <em>하나 이상</em><br>반영해 완성하기</h1>
+    <p class="goal"><b>오늘의 목표</b>받은 피드백을 반영해 산출물을 완성하고, 루브릭 기준으로 서로 피드백해 데모데이 보완점을 찾아요.</p>
+    <div class="meta"><span>고등학교 50분</span><span>트랙별 모둠</span><span>Padlet · Canva · Google Docs</span><span>자료: 피드백 루브릭</span></div></div>
+  <figure style="--pos:center 42%"><img src="img/class-34-3.jpg" alt="큰 종이 위에 집 모양 그림과 화살표, 설명 글을 색 마커로 채워 가는 모둠의 손과 필기구" loading="eager"><figcaption>▲ 3~4차시 활동사진 · 색 마커로 완성해 가는 모둠 산출물</figcaption></figure>
+</div><span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice" fill="currentColor"><path d="M0 70V60h36V44h24v16h18V34h28v26h14V48h20v12h28V38l10-6 10 6v22h22V52h18v8h40V46h26v14h16V36h32v24h28V52h20v8h34V40h22v20h24V50h22v10h38V44h28v16h20V32h26v28h22V48h20v12h34V42h24v18h22V54h18v6h38V38h28v22h18V48h22v12h38V42h26v18h28V50h20v10h22V36h28v24h18V46h24v14h38V44h26v16h22V52h40v18Z"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M250 60V16M250 16l-13-9M250 16l15-2M250 16l-2 15"/><path d="M290 60V24M290 24l-10-7M290 24l12-2M290 24l-2 12"/><path d="M930 60V12M930 12l-14-9M930 12l16-2M930 12l-2 16"/></g><path d="M470 60l10-12h40l-10 12Zm52 0l10-12h40l-10 12ZM700 60l10-12h40l-10 12Z"/><circle cx="118" cy="52" r="9"/><circle cx="640" cy="50" r="11"/><circle cx="1080" cy="51" r="10"/><circle cx="822" cy="53" r="8"/></svg></span></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <p class="label">수업 흐름</p>
+  <div class="lplan"><div style="--m:35"><b>집중 창작 ② · 피드백 반영</b><small>35분</small></div><div style="--m:15"><b>중간 공유 · 패들렛 피드백</b><small>15분</small></div></div>
+  <p class="sheet-note">← → 키나 아래 버튼으로 넘겨요. 교사 모드를 켜면 발문·유의점이 보여요.</p>
+  <div class="runner stage">
+    <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+    <div class="steps">
+          <div class="step" data-phase="집중 창작 ②" data-time="35분">
+            <div class="two"><div><p class="ask">받은 피드백을<br><em>하나 이상</em> 반영해 완성해요</p><p>Padlet 댓글 가운데 반영할 것을 고르고, 무엇을 어떻게 바꿨는지 한 줄로 남겨요.</p><div class="do"><b>피드백 반영 기록</b><a href="#sheet">활동지</a>에 반영한 피드백과 바꾼 점을 적어요. 트랙 작업 칸은 <a href="lesson-3.html#sheet">3차시 화면</a>에 있어요.</div><div class="tmr-row"><span class="timer" data-min="35"></span></div></div><div><figure class="sf"><img src="img/class-34-2.jpg" alt="과학실 여러 책상에서 모둠별로 큰 종이를 펼쳐 놓고 산출물을 만드는 학생들" loading="lazy"><figcaption>▲ 3~4차시 활동사진 · 모둠별 산출물 만들기</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="정리 · 중간 공유" data-time="15분 중 ① 초안 올리기">
+            <div class="two"><div><h3>중간 공유 &amp; 패들렛 피드백</h3><p>완성된 초안(스토리보드, 포스터, 영상 콘티 등)을 <b>Padlet</b>에 올려요.</p><a class="live" href="https://padlet.com" target="_blank" rel="noopener"><i></i>Padlet</a><div class="tmr-row"><span><small>중간 공유 15분</small><span class="timer" data-min="15"></span></span></div></div><div><figure class="sf"><img src="../slides/p3/030.jpg" alt="수업 PPT 30장 슬라이드: 중간 공유 및 패들렛 피드백" loading="lazy"><figcaption>▲ 수업 PPT 30장 · 중간 공유 및 패들렛 피드백</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="정리 · 중간 공유" data-time="15분 중 ② 동료 피드백">
+            <p class="ask"><em>평가 루브릭</em> 기준으로<br>피드백을 주고받아요</p><div class="boxes"><div class="box" style="border-left-color:var(--tA)"><h4><span class="trk" style="color:var(--tAi)">A 동화책</span></h4><p>해결 원리가 과학적으로 맞게 위기→절정에 드러나나? 다국어 대사인가?</p></div><div class="box" style="border-left-color:var(--tB)"><h4><span class="trk" style="color:var(--tBi)">B 칼럼·포스터</span></h4><p>기사 2편 비교, 주장–근거(데이터)–반론이 이어지나? 실천 수칙 3개?</p></div><div class="box" style="border-left-color:var(--tC)"><h4><span class="trk" style="color:var(--tCi)">C 홍보 영상</span></h4><p>6장면 모두 화면·내레이션·자막이 있나? S#2 데이터에 출처?</p></div><div class="box" style="border-left-color:var(--tD)"><h4><span class="trk" style="color:var(--tDi)">D 사업계획서</span></h4><p>KPI·SVI에 예상 수치와 계산식·출처가 있나?</p></div></div><a class="jump" href="#rubric">평가 기준 전체 보기 →</a><div class="teacher">자료: 피드백 루브릭. 상호 피드백을 산출물에 반영하도록 안내.</div>
+          </div>
+          <div class="step" data-phase="정리 · 데모데이 준비" data-time="15분 중 ③ 보완점 찾기">
+            <div class="two"><div><p class="ask">다음 차시 <em>데모데이</em>를 위한<br>보완점을 찾아요</p><p>5차시에는 팀당 <b>3분 피칭 + 2분 Q&amp;A</b>로 발표해요. 받은 피드백 가운데 데모데이 전까지 고칠 점을 정해요.</p><div class="do"><b>보완점</b><a href="#sheet">활동지 ③</a>에 데모데이 전까지 보완할 점을 적어요.</div><a class="jump" href="lesson-5.html">5차시 수업 화면으로 →</a><div class="teacher">다음 차시 데모데이 예고. 한국–튀르키예 시차 6시간: 파트너 교사와 날짜·시각을 ‘두 나라 시각’으로 함께 적어 공유.</div></div><div><figure class="sf"><img src="../slides/p3/031.jpg" alt="수업 PPT 31장 슬라이드: 5-6차시 한-튀르키예 그린 벤처 글로벌 데모데이" loading="lazy"><figcaption>▲ 수업 PPT 31장 · 5-6차시 한-튀르키예 그린 벤처 글로벌 데모데이</figcaption></figure></div></div>
+          </div>
+    </div>
+    <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">◀ 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 ▶</button></div>
+  </div>
+</div></section>
+
+<section class="sec panel" id="sheet"><div class="wrap">
+  <p class="label">활동지</p><h2 class="head">피드백 반영 <em>기록</em></h2>
+  <p class="sheet-note">쓴 내용은 이 기기의 브라우저에만 저장돼요. 수업이 끝나면 아래 「내 기록 모두 복사」로 모둠 문서에 붙여 두세요.</p>
+  <p><a class="jump" href="lesson-3.html#sheet">트랙 작업 칸(3차시 화면) 이어 쓰기 →</a></p>
+  <div class="lsheet cols" style="margin-top:1rem">
+    <div class="card"><h3><span class="n">1</span>받은 피드백과 반영</h3><div class="field"><label for="l4-fb1">받은 피드백 1 (Padlet 댓글)</label><textarea class="pad sm" id="l4-fb1" data-key="l4-fb1"></textarea></div><div class="field"><label for="l4-fb2">받은 피드백 2 (Padlet 댓글)</label><textarea class="pad sm" id="l4-fb2" data-key="l4-fb2"></textarea></div><div class="field"><label for="l4-change">무엇을 어떻게 바꿨나요? (한 줄)</label><input class="pad" id="l4-change" data-key="l4-change"></div></div>
+    <div class="card"><h3><span class="n">2</span>중간 공유</h3><div class="field"><label for="l4-give">다른 모둠에 남긴 피드백 (루브릭 기준으로)</label><textarea class="pad sm" id="l4-give" data-key="l4-give"></textarea></div><h3 style="margin-top:1.2rem"><span class="n">3</span>데모데이 준비</h3><div class="field"><label for="l4-next">데모데이 전까지 보완할 점</label><textarea class="pad sm" id="l4-next" data-key="l4-next"></textarea></div></div>
+  </div>
+</div></section>
+
+<section class="sec" id="slides"><div class="wrap"><p class="label">이 차시 슬라이드</p>
+  <p class="deckhead">트랙 A 활동지 · 18~20장</p><div class="deck" data-dir="../slides/p3/" data-from="18" data-n="3" data-title="트랙 A 활동지 · 18~20장"></div><p class="deckhead">트랙 B · C · D 활동지 · 중간 공유 · 22~30장</p><div class="deck" data-dir="../slides/p3/" data-from="22" data-n="9" data-title="트랙 B · C · D 활동지 · 중간 공유 · 22~30장"></div>
+  
+</div></section>
+
+<section class="sec panel" id="rubric"><div class="wrap">
+  <p class="label">이 차시 평가</p><h2 class="head">트랙별 <em>산출물</em> 평가 기준</h2>
+  <p class="muted small">트랙별 대응 성취기준 — A 동화책·C 영상: [12기지04-01] [10통과2-02-06] · B 칼럼: [10공국2-03-02] · D 사업계획서: [10공국2-03-02] [12기가05-04] · 관찰 평가 및 산출물(스토리보드, 포스터, 콘티, 사업계획서) 평가</p><div class="tblwrap"><table class="tbl rubtbl"><thead><tr><th>기준</th><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>[A] 동화책 기획·스토리보드<br><small class="muted">12기지04-01 · 10통과2-02-06</small></td><td>에너지 불평등 문제와 해결 원리가 과학적으로 맞게 이야기 전개(위기→절정)에 드러나고, 대상 독자 수준에 맞는 다국어 대사로 전한다. (조건: 5단계·15장면)</td><td>이야기는 완성했지만 해결 원리가 과학적으로 틀리거나 설명 없이 ‘마법처럼’ 해결된다. 또는 대사가 한 언어뿐이다.</td><td>5단계 가운데 위기·절정이 비어 있거나, 에너지 문제가 이야기에 드러나지 않는다.</td></tr><tr><td>[B] 칼럼 집필·포스터 제작<br><small class="muted">10공국2-03-02</small></td><td>양국 기사를 2편 이상 비교해 프레이밍 차이를 짚고, 주장–근거(데이터)–반론 고려가 이어진 칼럼을 쓴다. 포스터에는 슬로건과 실천 수칙 3개가 들어간다.</td><td>기사 1편만 분석했거나, 칼럼의 주장과 근거 데이터가 연결되지 않는다.</td><td>기사 분석 없이 의견만 쓰거나, 포스터에 실천 수칙이 없다.</td></tr><tr><td>[C] 영상 기획·콘티 제작<br><small class="muted">12기지04-01 · 10통과2-02-06</small></td><td>타깃 시청자와 핵심 메시지를 한 문장으로 정하고, 6장면 모두에 화면·내레이션·자막을 채우며, 데이터 장면(S#2)에 출처를 적는다.</td><td>6장면 중 1~2장면이 비어 있거나, 데이터 장면에 출처가 없다.</td><td>타깃 시청자나 핵심 메시지가 정해지지 않았고, 3장면 이상이 비어 있다.</td></tr><tr><td>[D] 사업계획서·피드백 반영<br><small class="muted">10공국2-03-02 · 12기가05-04</small></td><td>캔버스 9요소와 ‘과학·공학 원리’ 칸을 채우고, 가치 제안(KPI·SVI)에 예상 수치와 계산식·출처를 적으며, 받은 Padlet 피드백 2개 이상을 반영한 흔적을 남긴다.</td><td>가치 제안(KPI·SVI)을 수치 없이 적었거나, 받은 피드백을 1개 이하만 반영했다.</td><td>고통점과 솔루션이 서로 연결되지 않거나, 9요소 중 4개 이상이 비어 있다.</td></tr></tbody></table></div><p class="sheet-note">A·B·C는 이 과제의 채점 수준이에요. 학기 성취도(A~E)는 학교 성취평가 기준에 따라 따로 산출해요.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="exit"><h3>나가기 질문</h3><p>우리 산출물이 평가 기준 A 수준이 되려면 무엇이 더 필요할까요?</p><textarea class="pad" data-key="l4-exit" aria-label="나가기 질문 답"></textarea></div>
+  <div class="lnav" style="margin-top:2rem"><a href="lesson-3.html"><small>← 이전 차시</small>3차시 · 4색 트랙 집중 창작 ①</a><a href="index.html"><small>프로그램 3 전체</small>수업 소개 · 4색 트랙 · 평가 · PPT</a><a class="next" href="lesson-5.html"><small>다음 차시 →</small>5차시 · 글로벌 데모데이 ①</a></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+  <p>2026 에너지소양교육 교사연구회 「에너지참견시점」 · 프로그램 3 · 임은희(영훈고등학교) · 한국에너지정보문화재단 지원</p>
+  <p>자료: 최종보고서 별첨 교수·학습 지도안 및 활동지, 수업 PPT 「한-튀르키예 글로벌 기후 행동 프로젝트」 · 시간은 고등학교 50분 수업 기준(지도안의 2차시 블록을 차시 경계에서 나눔) · 수업 사진의 학생 얼굴과 이름은 흐리게 처리했습니다.</p>
+</div></footer>
+<script src="../assets/site.js"></script>
+</body></html>

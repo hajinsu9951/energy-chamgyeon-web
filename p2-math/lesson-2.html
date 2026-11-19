@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2차시 행렬의 곱, 탄소의 값을 매기다 · 프로그램 2 수학 · 에너지참견시점</title>
+<meta name="description" content="프로그램 2 · 2차시 — 발전량 행렬 P와 배출계수 E의 곱으로 기업별 탄소 배출량을 구하고, 할당량과 비교해 배출권 거래 손익과 전환점을 계산합니다. 전자칠판에서 바로 진행하는 수업 화면.">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<link rel="stylesheet" href="p2-lesson.css">
+</head>
+<body data-prog="p2">
+
+<header class="top lesson-top"><div class="wrap">
+  <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+  <div class="crumb"><a class="back-hub" href="index.html">02 수학</a><b>2차시 · 행렬의 곱, 탄소의 값을 매기다</b></div>
+  <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
+</div></header>
+
+<main>
+<section class="lhero"><div class="wrap">
+  <div><span class="no">02 수학 · 2차시 / 2 · 모델링</span>
+    <h1>행렬의 곱,<br><em>탄소의 값</em>을 매기다</h1>
+    <p class="goal"><b>오늘의 목표</b>행렬의 곱셈을 수행하여 탄소 배출량을 정량적으로 예측하고, 그 결과를 탄소배출권 거래제(ETS)의 경제 맥락에서 해석할 수 있다.</p>
+    <div class="meta"><span>45분 (도입 8 · 전개 34 · 정리 3)</span><span>모둠 탐구</span><span>준비물: 노트북·태블릿, 활동지 ②, 탄소배출권 시뮬레이터(구글 시트·엑셀)</span><span>[10공수1-04-02]</span></div></div>
+  <figure><img src="img/field-formula.jpg" alt="앞쪽 대형 화면에 수식이 전개된 자료가 떠 있고, 학생들이 노트북을 펴고 화면과 교사 쪽을 보는 뒷모습. 학생 얼굴과 이름표는 흐리게 처리함" loading="eager"><figcaption>▲ 2026. 11. 대전대신고 2학년 「인공지능 수학」 수업 — 수식 전개를 함께 확인하는 장면 (학생 얼굴은 흐리게 처리)</figcaption></figure>
+</div><span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice"><path fill="currentColor" d="M0 70V31h22V70zM58 70V24h19V70zM64 70V20h6V70zM80 70V51h25V70zM216.5 70v-9h3v9zM213 61a5 5 0 1 0 10 0a5 5 0 1 0 -10 0zM226 70V38h22V70zM252 70V45h27V70zM261 70V37h9V70zM284 70V52h21V70zM309 70V29h39V70zM357.5 70v-12h3v12zM351 58a8 8 0 1 0 16 0a8 8 0 1 0 -16 0zM371 70V41h23V70zM378 70V35h7V70zM398 70V28h28V70zM407 70V24h9V70zM430.5 70v-10h3v10zM426 60a6 6 0 1 0 12 0a6 6 0 1 0 -12 0zM446 70V30h33V70zM457 70V21h11V70zM486.5 70v-13h3v13zM479 57a9 9 0 1 0 18 0a9 9 0 1 0 -18 0zM541 70V25h29V70zM573 70V39h20V70zM598 70V37h40V70zM684.5 70v-11h3v11zM679 59a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM731 70V25h21V70zM738 70V15h7V70zM754 70V31h25V70zM785 70V28h23V70zM887.5 70v-11h3v11zM882 59a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM939 70V47h23V70zM946 70V42h7V70zM962 70V45h36V70zM974 70V41h12V70zM999 70V36h29V70zM1069 70V31h39V70zM1111 70V31h38V70zM1123 70V27h12V70zM1150 70V35h21V70zM1171 70V50h22V70zM1197 70V32h24V70zM1205 70V26h8V70z"/><g stroke="currentColor" stroke-linecap="round"><path d="M40 70V27" stroke-width="2"/><path d="M40 27L40.0 11.0" stroke-width="2.2"/><path d="M40 27L26.1 35.0" stroke-width="2.2"/><path d="M40 27L53.9 35.0" stroke-width="2.2"/><path d="M123 70V27" stroke-width="2"/><path d="M123 27L123.0 11.0" stroke-width="2.2"/><path d="M123 27L109.1 35.0" stroke-width="2.2"/><path d="M123 27L136.9 35.0" stroke-width="2.2"/><path d="M159 70V12" stroke-width="2"/><path d="M159 12L159.0 -4.0" stroke-width="2.2"/><path d="M159 12L145.1 20.0" stroke-width="2.2"/><path d="M159 12L172.9 20.0" stroke-width="2.2"/><path d="M195 70V12" stroke-width="2"/><path d="M195 12L195.0 -4.0" stroke-width="2.2"/><path d="M195 12L181.1 20.0" stroke-width="2.2"/><path d="M195 12L208.9 20.0" stroke-width="2.2"/><path d="M523 70V20" stroke-width="2"/><path d="M523 20L523.0 4.0" stroke-width="2.2"/><path d="M523 20L509.1 28.0" stroke-width="2.2"/><path d="M523 20L536.9 28.0" stroke-width="2.2"/><path d="M661 70V21" stroke-width="2"/><path d="M661 21L661.0 5.0" stroke-width="2.2"/><path d="M661 21L647.1 29.0" stroke-width="2.2"/><path d="M661 21L674.9 29.0" stroke-width="2.2"/><path d="M713 70V19" stroke-width="2"/><path d="M713 19L713.0 3.0" stroke-width="2.2"/><path d="M713 19L699.1 27.0" stroke-width="2.2"/><path d="M713 19L726.9 27.0" stroke-width="2.2"/><path d="M828 70V17" stroke-width="2"/><path d="M828 17L828.0 1.0" stroke-width="2.2"/><path d="M828 17L814.1 25.0" stroke-width="2.2"/><path d="M828 17L841.9 25.0" stroke-width="2.2"/><path d="M864 70V22" stroke-width="2"/><path d="M864 22L864.0 6.0" stroke-width="2.2"/><path d="M864 22L850.1 30.0" stroke-width="2.2"/><path d="M864 22L877.9 30.0" stroke-width="2.2"/><path d="M921 70V23" stroke-width="2"/><path d="M921 23L921.0 7.0" stroke-width="2.2"/><path d="M921 23L907.1 31.0" stroke-width="2.2"/><path d="M921 23L934.9 31.0" stroke-width="2.2"/><path d="M1051 70V29" stroke-width="2"/><path d="M1051 29L1051.0 13.0" stroke-width="2.2"/><path d="M1051 29L1037.1 37.0" stroke-width="2.2"/><path d="M1051 29L1064.9 37.0" stroke-width="2.2"/></g></svg></span></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <p class="label">수업 흐름</p>
+  <div class="lplan" aria-label="2차시 시간 흐름">
+    <div style="--m:8"><b>도입</b><small>8분</small></div>
+    <div style="--m:8"><b>활동 1 · 곱셈의 원리</b><small>8분</small></div>
+    <div style="--m:10"><b>활동 2 · 배출량</b><small>10분</small></div>
+    <div style="--m:8"><b>활동 3 · 손익</b><small>8분</small></div>
+    <div style="--m:8"><b>활동 4 · 스프레드시트</b><small>8분</small></div>
+    <div style="--m:3"><b>정리</b><small>3분</small></div>
+  </div>
+  <p class="note" style="margin:0 0 1.2rem">지도안은 45분 기준이에요. 50분 수업이면 남는 5분을 활동 4에 더해 13분으로 해요. 자기·동료 평가는 과제 제출 뒤 다음 수업 도입 10분(차시 외)에 해요.</p>
+
+  <div class="runner stage">
+    <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+    <div class="steps">
+
+      <div class="step" data-phase="도입 · 복습" data-time="도입 8분 중 ①">
+        <p class="ask">지난 시간, <em>기억나나요?</em></p>
+        <div class="two">
+          <div>
+            <div class="eq">
+              <span class="mx c2"><span>60</span><span>20</span><span>50</span><span>120</span></span>
+              <span class="op">+</span>
+              <span class="mx c2"><span>60</span><span>30</span><span>50</span><span>130</span></span>
+              <span class="op">=</span><span class="q" style="font-size:1.6em">?</span>
+            </div>
+            <div class="do"><b>떠올리기</b>0.9배는 무엇을 뜻했나요?</div>
+            <details class="reveal-ans"><summary>정답 보기</summary><div>
+              <div class="eq sm"><span class="mx c2"><span>120</span><span>50</span><span>100</span><span>250</span></span><span>— 같은 자리끼리 더해 연간 발전량</span></div>
+              0.9배 = 전력 수요 10% 절감(모든 발전원이 같은 비율로 준다고 가정)
+            </div></details>
+          </div>
+          <figure><img src="../slides/p2/033.jpg" alt="‘지난 시간, 기억나나요?’ 제목 아래 상반기·하반기 2×2 행렬의 덧셈과 물음표를 담은 복습 슬라이드" loading="lazy"><figcaption>[수업 PPT 33] 복습</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step" data-phase="도입 · 발문" data-time="도입 8분 중 ②">
+        <p class="ask">탄소를 배출하면<br><em>돈을 내야</em> 한다?</p>
+        <div class="vframe sm" data-yt="SL3jK3_1kaQ" data-title="영상② [기후이슈] 온실가스를 사고판다고?"></div>
+        <p style="margin-top:.8rem"><a class="live" href="https://ets.krx.co.kr" target="_blank" rel="noopener"><i></i>배출권시장 정보플랫폼 · 오늘의 시세</a></p>
+        <div class="teacher">· K-ETS(2015 시행), EU CBAM(2026 확정 단계 시작 — 6개 품목, 2026년 수입분의 인증서 구매·제출은 2027년부터, 국내 탄소 가격 공제 가능) 사례를 짧게 소개<br>· 오늘 시세와 수업의 30,000원/톤은 다를 수 있으며, 30,000원은 계산을 쉽게 하려고 정한 교육용 가정값임을 먼저 안내. EU 배출권은 국내 배출권보다 몇 배 비싸므로 60,000원 시나리오는 ‘국내 탄소 가격이 크게 오를 때’로 설명<br>· 시간: 지도안은 45분(도입 8 · 전개 34 · 정리 3) 기준. 50분 수업이면 남는 5분을 활동 4에 더해 13분으로</div>
+      </div>
+
+      <div class="step" data-phase="도입 · 목표 확인" data-time="도입 8분 중 ③">
+        <h3>배출권거래제(ETS) — 탄소에 가격이 붙는 세 단계</h3>
+        <div class="flow">
+          <div class="st"><b>할당</b><small>정부가 기업마다 배출 한도(배출권)를 정해 줌 — 대부분 무상, 일부는 경매로 구입(발전 부문 유상 비율 2026년 15% → 2030년 50%)</small></div>
+          <div class="st"><b>배출·정산</b><small>실제 배출량을 할당량과 비교해 초과·잉여 계산</small></div>
+          <div class="st"><b>거래</b><small>부족하면 사고, 남으면 팔거나 다음 해로 이월</small></div>
+        </div>
+        <p class="ask" style="font-size:clamp(1.3rem,2.8vw,2rem);margin-top:1.2rem">오늘의 질문: 행렬의 곱으로 <em>우리 기업의 탄소 비용</em>을 어떻게 계산할까?</p>
+        <figure><img src="../slides/p2/035.jpg" alt="할당, 배출·정산, 거래의 세 단계를 화살표로 이은 배출권거래제 설명 슬라이드" loading="lazy"><figcaption>[수업 PPT 35] 탄소에 가격이 붙는 세 단계</figcaption></figure>
+        <p class="note">목표: 행렬의 곱셈을 수행하여 탄소 배출량을 예측하고, 그 결과를 배출권 거래 손익으로 해석한다. · 흐름: 곱의 원리(분식집·성적) → 배출량 = 발전량 × 배출계수 → 할당량 비교 → 거래 손익</p>
+        <div class="teacher">· 한국 2015 K-ETS. EU ETS는 거래 금액 기준 세계 최대 탄소시장(대상 배출량 기준으로는 중국 전국 ETS가 최대)<br>· <b>수업 모델은 계산을 쉽게 하려고 할당량 전부를 무상으로, 세 기업 모두 40,000 tCO₂로 같다고 가정함.</b> 실제 발전 부문은 발전량 기반 벤치마크로 할당하고, 제4차 계획기간(2026~2030)에는 유상(경매) 비율이 2026년 15%에서 2030년 50%까지 오름(환경부 「제4차 배출권거래제 기본계획」 2024. 12.) — 유상 비율이 오르면 탄소 비용이 발전 원가·전기요금으로 이어짐을 덧붙임</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 1 · 곱셈의 원리" data-time="전개 34분 중 8분 ①">
+        <p class="ask">‘수량 × 단가’가<br>이미 <em>행렬 곱</em>이에요</p>
+        <div class="two">
+          <div>
+            <p>분식집에서 민준이가 주문한 금액은?</p>
+            <div class="eq">
+              <span class="mxcap"><span class="mx c3"><span class="hl">2</span><span class="hl">1</span><span class="hl">1</span></span><small>수량</small></span>
+              <span class="op">×</span>
+              <span class="mxcap"><span class="mx c1"><span>4,000</span><span>3,000</span><span>3,500</span></span><small>단가(원)</small></span>
+              <span class="op">=</span>
+              <span class="mxcap"><span class="mx c1"><span>?</span></span><small>금액(원)</small></span>
+            </div>
+            <details class="reveal-ans"><summary>정답 보기</summary><div class="calc">2×4,000 + 1×3,000 + 1×3,500 = <b>14,500원</b></div></details>
+            <div class="mini-cards">
+              <div><b>분식집</b><span>수량 × 단가 = 금액</span></div>
+              <div><b>성적</b><span>점수 × 학점 = 가중 총점</span></div>
+              <div class="em"><b>에너지</b><span>발전량 × 배출계수 = 배출량</span></div>
+            </div>
+          </div>
+          <figure><img src="img/ppt-daily-matrix.jpg" alt="분식집 수량×단가=금액, 성적 점수×학점=가중 총점을 행렬 곱으로 나타낸 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT] 일상 속 행렬(분식집·성적)</figcaption></figure>
+        </div>
+        <div class="timer" data-min="8"></div>
+        <div class="teacher">· 세 가지 모두 ‘곱해서 더하는 계산(가중합)’ — 같은 원리임을 강조<br>· 분식집 정답: 2×4,000 + 1×3,000 + 1×3,500 = 14,500원</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 1 · 곱셈의 규칙" data-time="↳ 같은 8분 ②">
+        <p class="ask">가운데 수가 같아야 <em>곱할 수 있다</em></p>
+        <div class="two">
+          <div class="do"><b>크기 조건 판별기</b>
+            <div class="szc" data-szc>
+              (<select aria-label="앞 행렬의 행 수" data-v="m"><option>1</option><option selected>2</option><option>3</option></select>×<select class="mid" aria-label="앞 행렬의 열 수" data-v="n"><option>1</option><option>2</option><option selected>3</option></select>)
+              ·
+              (<select class="mid" aria-label="뒤 행렬의 행 수" data-v="n2"><option>1</option><option>2</option><option selected>3</option></select>×<select aria-label="뒤 행렬의 열 수" data-v="p"><option selected>1</option><option>2</option><option>3</option></select>)
+            </div>
+            <div class="chips"><button class="tbtn" type="button" data-pre="3,3,3,1">P·E (3×3)·(3×1)</button><button class="tbtn" type="button" data-pre="3,1,3,3">E·P (3×1)·(3×3)</button><button class="tbtn" type="button" data-pre="1,3,3,1">수량·단가 (1×3)·(3×1)</button></div>
+            <p class="szout" aria-live="polite"></p>
+          </div>
+          <figure><img src="img/ppt-mult-rule.jpg" alt="크기 조건 (2×3)·(3×1)=(2×1), 내적 규칙, 교환법칙이 성립하지 않는다는 주의를 정리한 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT] 행렬 곱셈의 원리 — 행과 열의 만남</figcaption></figure>
+        </div>
+        <ul>
+          <li>결과의 (i, j) 성분 = 앞 행렬의 <b>i행</b> × 뒤 행렬의 <b>j열</b>을 대응끼리 곱해 모두 더한 값</li>
+          <li>(m × n)·(n × p) = (m × p) — 바깥 두 수가 결과의 크기</li>
+          <li><b class="hl">AB ≠ BA</b> — 곱하는 순서를 바꾸면 일반적으로 답이 달라져요</li>
+        </ul>
+        <div class="teacher">· “가운데 수가 같아야 한다”로 크기 조건 확인<br>· E·P 프리셋으로 “EP는 계산할 수 있나요?”(활동지 ② 활동 1 ②) 발문</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 2 · 배출량 계산" data-time="전개 34분 중 10분">
+        <p class="ask">발전량 × 배출계수 = <em>배출량</em></p>
+        <div class="eq">
+          <span class="mxcap"><span class="mx c3"><span class="hl">50</span><span class="hl">30</span><span class="hl">20</span><span>20</span><span>40</span><span>40</span><span>10</span><span>20</span><span>70</span></span><small>P (GWh) · 행 A·B·C · 열 석탄·가스·신재생</small></span>
+          <span class="op">×</span>
+          <span class="mxcap"><span class="mx c1"><span>900</span><span>400</span><span>50</span></span><small>E (tCO₂/GWh)</small></span>
+          <span class="op">=</span>
+          <span class="mxcap"><span class="mx c1"><span class="ring">58,000</span><span>?</span><span>?</span></span><small>PE (tCO₂)</small></span>
+        </div>
+        <div class="two">
+          <div>
+            <p class="calc">A기업 = 50×900 + 30×400 + 20×50 = 45,000 + 12,000 + 1,000 = <b>58,000</b> tCO₂</p>
+            <div class="do"><b>모둠 활동</b>B·C기업은 모둠에서 구하고 짝과 바꾸어 검산해요.
+              <a class="live" href="lab/index.html#mult" target="_blank" rel="noopener"><i></i>실험실 ③ 행렬 곱 P×E 열기</a>
+            </div>
+            <details class="reveal-ans"><summary>B·C기업 정답</summary><div class="calc">
+              B = 20×900 + 40×400 + 40×50 = 18,000 + 16,000 + 2,000 = <b>36,000</b><br>
+              C = 10×900 + 20×400 + 70×50 = 9,000 + 8,000 + 3,500 = <b>20,500</b>
+            </div></details>
+            <details class="reveal-ans"><summary>PE의 성분은 무엇을 뜻할까?</summary><div>
+              발전량 × 배출계수의 합 = 그 기업이 1년 동안 내보낸 <b>온실가스 양(배출량, tCO₂)</b>이에요. 여기에 톤당 탄소 가격을 곱해야 비로소 돈(비용)이 돼요.
+            </div></details>
+          </div>
+          <figure><img src="img/ppt-emission.jpg" alt="발전량 행렬 P와 배출계수 행렬 E를 곱해 기업별 배출량 58,000·36,000·20,500을 구하는 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT] 행렬 곱으로 탄소 배출량 계산</figcaption></figure>
+        </div>
+        <p class="note">※ 3×3 · 3×1 행렬의 곱은 공통수학1 교육과정 범위(행·열 각 2 이하)를 넘는 확장 활동이에요. A기업 한 줄만 손으로 계산하고, 나머지는 짝 검산과 스프레드시트로 확인해요.</p>
+        <div class="timer" data-min="10"></div>
+        <div class="teacher">· A기업은 함께, B·C는 모둠이 구해 짝 검산<br>· 단위(GWh, tCO₂/GWh) 점검<br>· 배출계수는 대소관계만 실제와 같게 단순화한 교육용 값. 석탄 900·가스 400은 연소(직접) 배출 수준, 신재생 50은 전과정 어림값이라 기준이 섞여 있음(교육용). 참고: IPCC AR5 전과정 중앙값 석탄 820 · 가스복합 490 · 태양광 41~48 · 풍력 11~12 gCO₂/kWh(= tCO₂/GWh). 실제 배출권거래제에서는 태양광·풍력의 직접 배출을 0으로 봄</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 3 · 할당량과 손익" data-time="전개 34분 중 8분">
+        <p class="ask">부호가 <em>기업의 운명</em>을 가른다</p>
+        <div class="eq">
+          <span class="nm">PE − Q =</span>
+          <span class="mx c1"><span>58,000</span><span>36,000</span><span>20,500</span></span>
+          <span class="op">−</span>
+          <span class="mx c1"><span>40,000</span><span>40,000</span><span>40,000</span></span>
+          <span class="op">=</span>
+          <span class="mx c1"><span class="rs">+18,000</span><span>−4,000</span><span class="hl">−19,500</span></span>
+        </div>
+        <p>A 초과 → 배출권 구매 · B 잉여 → 판매 · C 잉여 → 판매 <span class="note">(세 기업 할당량이 같다고 가정)</span></p>
+        <div class="two">
+          <div>
+            <div class="eq sm">
+              <span class="nm">손익 = −30,000 × (PE − Q) =</span>
+              <span class="mx c1"><span class="rs">−5.4억</span><span>+1.2억</span><span class="hl">+5.85억</span></span><span class="op">원</span>
+            </div>
+            <div class="do"><b>예측해 보기</b>배출권 가격이 두 배(60,000원)가 되면 A기업 손익은?
+              <a class="live" href="lab/index.html#trade" target="_blank" rel="noopener"><i></i>실험실 ④ 배출권 거래 손익 열기</a>
+              <details class="reveal-ans"><summary>정답 보기</summary><div>
+                지금 그대로의 A기업 손익은 <b class="rs">−10.8억 원</b>. 탄소 가격이 오를수록 에너지 전환의 경제적 가치가 커져요.
+              </div></details>
+            </div>
+          </div>
+          <figure><img src="img/ppt-trade-result.jpg" alt="A기업 −5.40억, B기업 +1.20억, C기업 +5.85억 원의 거래 손익을 막대그래프로 비교한 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT] 누가 이익을 보는가 — 거래 손익</figcaption></figure>
+        </div>
+        <div class="timer" data-min="8"></div>
+        <div class="teacher">· 할당량 Q = 성분이 모두 40,000인 3×1 행렬 → 행렬의 뺄셈, 가격 곱 → 실수배<br>· 오늘 시세를 보여 주고 “가격이 두 배가 되면?” 예측<br>· 결론: 세 기업 할당량이 같다고 가정했을 때 신재생 비중이 클수록 이득, 화석연료 의존이 크면 큰 비용<br>· 실제로는 남은 배출권을 다음 해로 이월하거나, 모자란 양을 상쇄배출권으로 일부 메울 수도 있음</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 4 · 스프레드시트" data-time="전개 34분 중 8분 ①">
+        <p class="ask"><em>=MMULT</em> 한 줄이면 끝</p>
+        <div class="two">
+          <div>
+            <p><span class="formula">=MMULT(B6:D8, F6:F8)</span></p>
+            <p>3×3 발전량 범위 × 3×1 배출계수 범위 → 3×1 배출량이 H6:H8에 펼쳐져요. (구형 엑셀은 Ctrl+Shift+Enter)</p>
+            <p>검산: <span class="formula" style="font-size:1.05rem">=B6*F6+C6*F7+D6*F8</span></p>
+            <div class="do"><b>시뮬레이터 열기</b>
+              <a class="live" href="https://docs.google.com/spreadsheets/d/1ofjgTo-LoSMTbJjtLQIcSQqFsbvUcM4JOpsKETZcz48/copy" target="_blank" rel="noopener"><i></i>탄소배출권 시뮬레이터 · 구글 시트 사본 만들기</a>
+              <a class="live" href="../materials/p2_탄소배출권_시뮬레이터.xlsx" download><i></i>시뮬레이터 엑셀 파일(xlsx) 내려받기</a>
+              <p class="note" style="margin:.4rem 0 0">파란 글씨 셀만 바꾸고, 배출량 셀(H6:H8)과 손익 셀의 수식은 지우지 않아요. 구글 시트와 엑셀 파일은 내용이 같아요.</p>
+            </div>
+          </div>
+          <figure><img src="img/ppt-mmult.jpg" alt="스프레드시트 함수 MMULT, SUMPRODUCT, TRANSPOSE 안내와 =MMULT(B6:D8, F6:F8)로 배출량을 계산한 시트 화면을 담은 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT] 스프레드시트 MMULT 자동화</figcaption></figure>
+        </div>
+        <div class="timer" data-min="8"></div>
+        <div class="teacher">· 온라인: 링크·QR → 사본 만들기(구글 로그인 필요) / 오프라인: 미리 내려받은 xlsx와 계산기<br>· <b>구글 계정이 없으면 실험실 ④(거래 손익)·⑤(전환점)로 대체</b> — 실험실은 같은 사이트 안에 있어 계정 없이 열림. ①~③을 실험실에서 하고 활동지 ②의 수식 칸(②)은 판서로 함께 확인<br>· 50분 수업이면 남는 5분을 활동 4에 더해 13분으로. 시간이 부족하면 ①·②만 하고 ③ 전환점은 실험실 ⑤로 함께 확인<br>· 수업 수치는 개념 이해를 위한 교육용 단순화 값임을 안내</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 4 · 만약에?" data-time="↳ 같은 8분 ②">
+        <p class="ask">숫자 하나를 바꾸면<br><em>손익이 바뀐다</em></p>
+        <div class="two">
+          <div>
+            <ol class="qlist">
+              <li><b>①</b>시나리오 1 — A기업 석탄 50→20, 신재생 20→50 (B6·D6 셀)</li>
+              <li><b>②</b>시나리오 2 — 배출권 가격 30,000→60,000원 (D12 셀)</li>
+              <li><b>③</b>전환점 찾기 — 손익이 0에 가장 가까운 석탄·신재생 조합(1 GWh 단위)</li>
+              <li><b>④</b>발견 — 손 계산과 비교해 좋은 점·조심할 점</li>
+            </ol>
+            <div class="do"><b>기록하기</b>결과는 아래 <a href="#sheet">활동지 ② 시뮬레이터 기록</a> 칸에 적어요.</div>
+          </div>
+          <figure><img src="../slides/p2/050.jpg" alt="시나리오 1, 시나리오 2, 전환점 찾기, 발견의 네 칸으로 된 ‘숫자 하나를 바꾸면 손익이 바뀐다’ 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT 50] 활동 2 · 만약에?</figcaption></figure>
+        </div>
+        <details class="reveal-ans"><summary>①·② 정답</summary><div class="calc">
+          ① 20×900 + 30×400 + 50×50 = <b>32,500</b> tCO₂ → PE − Q = −7,500 → 손익 <b>+2.25억 원</b>(흑자)<br>
+          ② 60,000원일 때 처음 값 그대로: A기업 <b class="rs">−10.8억 원</b>, C기업 +11.7억 원 → 신재생 비중이 큰 기업이 더 유리해져요.
+        </div></details>
+        <div class="teacher">· ①~④ 필수, ⑤·⑥ 심화<br>· 바꾼 값은 다음 시나리오 전에 처음 값으로 되돌리기</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 4 · 전환점" data-time="↳ 같은 8분 ③">
+        <p class="ask">어디서 손익이 <em>0</em>이 될까?</p>
+        <div class="turn" data-turn>
+          <div class="do"><b>막대를 움직여 보기</b>
+            <label for="tx" style="font-weight:500;color:var(--champ)">석탄 → 신재생으로 바꾼 양 x = <b class="tx-v" style="color:var(--prog-ink);font-size:1.4rem">0</b> GWh</label>
+            <input type="range" id="tx" min="0" max="50" step="1" value="0">
+            <div class="chips"><button class="tbtn" type="button" data-price="30000" aria-pressed="true">30,000원/톤</button><button class="tbtn" type="button" data-price="60000" aria-pressed="false">60,000원/톤</button></div>
+            <dl class="kv">
+              <dt>A기업 발전량</dt><dd class="tx-mix"></dd>
+              <dt>배출량</dt><dd class="tx-y"></dd>
+              <dt>PE − Q</dt><dd class="tx-d"></dd>
+              <dt>손익</dt><dd class="tx-m big2"></dd>
+            </dl>
+          </div>
+          <svg viewBox="0 0 360 230" role="img" aria-label="x에 따른 A기업 배출량 그래프와 할당량 40,000 기준선">
+            <g class="ax">
+              <line class="axl" x1="46" y1="196" x2="346" y2="196"/>
+              <line class="axl" x1="46" y1="16" x2="46" y2="196"/>
+              <text x="46" y="212" text-anchor="middle">0</text><text x="106" y="212" text-anchor="middle">10</text><text x="166" y="212" text-anchor="middle">20</text><text x="226" y="212" text-anchor="middle">30</text><text x="286" y="212" text-anchor="middle">40</text><text x="346" y="212" text-anchor="middle">50</text>
+              <text x="196" y="227" text-anchor="middle">x (GWh)</text>
+              <text x="40" y="200" text-anchor="end">0</text><text x="40" y="136" text-anchor="end">20,000</text><text x="40" y="76" text-anchor="end">40,000</text><text x="40" y="16" text-anchor="end">60,000</text>
+            </g>
+            <line class="cap" x1="46" y1="76" x2="346" y2="76" stroke-dasharray="5 5"/>
+            <text class="capt" x="344" y="70" text-anchor="end">할당량 40,000</text>
+            <line class="fn" x1="46" y1="22" x2="346" y2="149.5" stroke-width="3"/>
+            <text class="fnt" x="150" y="50">y = 58,000 − 850x</text>
+            <line class="tx-guide" x1="46" y1="22" x2="46" y2="196" stroke-dasharray="2 4"/>
+            <circle class="tx-dot" cx="46" cy="22" r="7" stroke-width="2"/>
+          </svg>
+        </div>
+        <details class="reveal-ans"><summary>정답 보기</summary><div class="calc">
+          석탄 1 GWh를 신재생으로 바꿀 때마다 900 − 50 = <b>850</b> tCO₂ 감소 → 배출량 = 58,000 − 850x<br>
+          58,000 − 850x = 40,000 → x = 18,000 ÷ 850 ≈ <b>21.2</b><br>
+          1 GWh 단위로 손익이 0에 가장 가까운 조합: <b>석탄 29 · 신재생 41</b> (x = 21)
+        </div></details>
+        <a class="live" href="lab/index.html#turn" target="_blank" rel="noopener"><i></i>실험실 ⑤ 전환점 찾기 열기</a>
+        <div class="teacher">· x ≈ 21.2는 정수가 아니므로 x = 21과 x = 22를 비교하게 함<br>· 가격 60,000원이면 전환의 가치가 더 커짐을 확인</div>
+      </div>
+
+      <div class="step" data-phase="정리 · 성찰과 과제" data-time="정리 3분">
+        <p class="ask">작은 숫자 배열이<br><em>에너지의 미래</em>를 정한다</p>
+        <p>행렬 곱의 결과가 기업의 경제적 이해득실을 결정해요. 수학 → 환경 → 경제의 연결을 돌아봐요.</p>
+        <div class="two">
+          <div class="vframe sm" data-yt="h5_-vdIYlqE" data-title="영상③ KDI · 우리나라 배출권거래제, 정상적으로 작동하고 있지 않다?!"></div>
+          <div>
+            <div class="mini-cards" style="margin-top:0">
+              <div class="em"><b>과제</b><span>활동지 ② 활동 3 ‘우리 기업 탄소중립 전략’ 제안 + 최종 성찰</span></div>
+              <div><b>과제 제출 뒤 다음 수업 도입 10분(차시 외)</b><span>루브릭으로 자기·동료 평가</span></div>
+            </div>
+            <a class="btn" href="#strategy">활동 3 · 전략 계산기로 →</a>
+          </div>
+        </div>
+        <div class="teacher">· 보고서 평가 루브릭을 미리 안내(<a href="index.html#rubric">프로그램 페이지 평가</a>)<br>· 활동 2는 ①~④ 필수, ⑤·⑥ 심화</div>
+      </div>
+
+    </div>
+    <div class="runner-foot"><button class="btn ghost" type="button" data-run="prev">← 이전</button><span class="count"></span><button class="btn" type="button" data-run="next">다음 →</button></div>
+  </div>
+</div></section>
+
+<section class="sec panel" id="sheet"><div class="wrap">
+  <p class="label">활동지 ②</p>
+  <h2 class="head">탄소의 값을 <em>계산하라</em></h2>
+  <p class="note" style="margin-top:-.4rem">적은 내용은 이 기기의 브라우저에만 저장돼요. 종이 활동지를 쓰는 반은 계산을 종이에 써도 돼요.</p>
+  <div class="lsheet cols">
+    <div class="card">
+      <h3><span class="n">1</span>기업별 배출량과 거래 손익</h3>
+      <div class="calcf" style="margin-bottom:.6rem">
+        <div><label for="l2k7">② P, E, PE의 크기 · EP는 계산할 수 있나?</label><input class="pad" id="l2k7" data-key="l2-size"></div>
+      </div>
+      <div class="tblwrap"><table class="ctable" aria-label="기업별 배출량과 거래 손익 계산 표">
+        <thead><tr><th>기업</th><th>배출량 PE (tCO₂)</th><th>PE − Q</th><th>초과/잉여</th><th>손익 (원)</th></tr></thead>
+        <tbody>
+          <tr><th>A</th><td><input class="pad" data-key="l2-A1" aria-label="A기업 배출량"></td><td><input class="pad" data-key="l2-A2" aria-label="A기업 PE−Q"></td><td><input class="pad" data-key="l2-A3" aria-label="A기업 초과 또는 잉여"></td><td><input class="pad" data-key="l2-A4" aria-label="A기업 손익"></td></tr>
+          <tr><th>B</th><td><input class="pad" data-key="l2-B1" aria-label="B기업 배출량"></td><td><input class="pad" data-key="l2-B2" aria-label="B기업 PE−Q"></td><td><input class="pad" data-key="l2-B3" aria-label="B기업 초과 또는 잉여"></td><td><input class="pad" data-key="l2-B4" aria-label="B기업 손익"></td></tr>
+          <tr><th>C</th><td><input class="pad" data-key="l2-C1" aria-label="C기업 배출량"></td><td><input class="pad" data-key="l2-C2" aria-label="C기업 PE−Q"></td><td><input class="pad" data-key="l2-C3" aria-label="C기업 초과 또는 잉여"></td><td><input class="pad" data-key="l2-C4" aria-label="C기업 손익"></td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="card">
+      <h3><span class="n">2</span>시뮬레이터 기록</h3>
+      <div class="calcf">
+        <div><label for="l2k8">② H6 수식 · 검산값</label><input class="pad" id="l2k8" data-key="l2-H6"></div>
+        <div><label for="l2k9">③ 시나리오 1 — 배출량 · 차 · 손익</label><input class="pad" id="l2k9" data-key="l2-sc1"></div>
+        <div><label for="l2k10">④ 시나리오 2 — A기업 · C기업 손익</label><input class="pad" id="l2k10" data-key="l2-sc2"></div>
+        <div><label for="l2k11">⑤ 전환점 — 석탄 · 신재생 · x</label><input class="pad" id="l2k11" data-key="l2-turn"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calcbox" style="margin-top:1.4rem" id="strategy">
+    <h3><span class="prog-chip">활동 3 · 과제</span><br>우리 A기업 탄소중립 전략 계산기</h3>
+    <figure class="ph" style="margin:.6rem 0 1rem"><img src="img/sheet2-act3.jpg" alt="현재와 우리 모둠 전환안의 발전량 행렬, 배출량·손익 빈칸 표, 손익이 0이 되는 전환점을 구하는 칸으로 된 종이 활동지 그림" loading="lazy"><figcaption>[활동지 ②] 우리 모둠의 에너지 믹스 전환안 계산하기</figcaption></figure>
+    <p class="note">전체 발전량 100 GWh는 유지해요. 석탄·가스를 정하면 신재생이 자동으로 맞춰져요. (배출계수 석탄 900 · 가스 400 · 신재생 50 tCO₂/GWh, 할당량 40,000 tCO₂)</p>
+    <div class="two">
+      <div>
+        <div class="sl"><label for="sc">석탄 <output id="scv">50</output></label><input type="range" id="sc" min="0" max="100" value="50"></div>
+        <div class="sl"><label for="sg">가스 <output id="sgv">30</output></label><input type="range" id="sg" min="0" max="100" value="30"></div>
+        <div class="sl"><label>신재생 <output id="srv">20</output></label><p class="note" style="margin:0">합계 100 GWh</p></div>
+        <p class="calc" id="sCalc"></p>
+      </div>
+      <div class="sres">
+        <div><small>배출량 P′E (tCO₂)</small><b id="sY">58,000</b></div>
+        <div><small>PE − Q</small><b id="sD">+18,000</b></div>
+        <div><small>손익 · 30,000원/톤</small><b id="sM3">−5.4억 원</b></div>
+        <div><small>손익 · 60,000원/톤</small><b id="sM6">−10.8억 원</b></div>
+      </div>
+    </div>
+    <p class="scaf" id="sSpeech" aria-live="polite"></p>
+    <p class="note">계산기가 채우는 것은 숫자뿐이에요. 이유·가치·빠진 조건은 아래 칸에 우리 모둠이 직접 써요.</p>
+    <div class="lsheet cols">
+      <div class="field"><label for="l2c1">이 조합을 고른 이유</label><textarea class="pad" id="l2c1" data-key="l2-why"></textarea></div>
+      <div class="field"><label for="l2c2">이 계산에 빠진 조건과 영향 (설비 투자비 · 날씨에 따른 변동 · 전력망 연결 · 가격 변동 · 일자리·지역 변화)</label><textarea class="pad" id="l2c2" data-key="l2-limit"></textarea></div>
+      <div class="field" style="grid-column:1/-1"><label for="l2c3">30초 제안문 완성 — “이 전략은 (CBAM·RE100 대응 / 탄소 감축 / 비용 절감) 측면에서 ___ 가치가 있습니다. 그 이유는 ___이고, 아직 따지지 못한 조건은 ___입니다.”</label><textarea class="pad" id="l2c3" data-key="l2-speech"></textarea></div>
+    </div>
+    <p class="note">동료 평가: 수치 근거가 있다 · 한계를 인정했다 · 실현 가능하다</p>
+  </div>
+</div></section>
+
+<section class="sec" id="slides"><div class="wrap">
+  <p class="label">이 차시 슬라이드</p>
+  <p class="note" style="margin-top:-.2rem">수업 PPT 30~59장. 슬라이드는 처음 만든 어두운 판 그대로예요.</p>
+  <div class="deck" data-dir="../slides/p2/" data-from="30" data-n="30" data-title="2차시 슬라이드"></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="exit"><h3>나가기 질문 · 최종 성찰</h3><p>덧셈·실수배·곱셈은 에너지 데이터에서 각각 무엇을 뜻했나요? 수학은 환경·경제 문제에서 어떤 역할을 할까요?</p><textarea class="pad" data-key="l2-exit" aria-label="최종 성찰 답"></textarea></div>
+  <div class="lnav" style="margin-top:2rem"><a href="lesson-1.html"><small>← 이전 차시</small>1차시 · 세상을 행렬로 담다</a><a class="next" href="index.html#rubric"><small>프로그램 2 전체 →</small>평가 기준·수업 PPT·자료</a></div>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <p><b style="color:var(--champ)">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 프로그램 2 「데이터로 그리는 미래 에너지: 행렬 모델링과 탄소 경제」 · 하진수(대전대신고등학교) · 한국에너지정보문화재단 지원</p>
+  <p>수업의 발전량·가격·할당량은 교육용 가상 데이터이고, 배출계수(석탄 900 · 가스 400 · 신재생 50)는 대소관계만 실제(IPCC)와 같게 단순화했어요. 수업 모델은 할당량 전부를 무상으로 가정했어요(실제는 일부 경매). 자료: 환경부 「제4차 배출권거래제 기본계획」(2024. 12.) · IPCC AR5 WG3 Annex III(2014) · <a href="https://ets.krx.co.kr" target="_blank" rel="noopener">한국거래소 배출권시장 정보플랫폼</a> · <a href="https://taxation-customs.ec.europa.eu/carbon-border-adjustment-mechanism_en" target="_blank" rel="noopener">European Commission, CBAM</a></p>
+  <p><a href="index.html">← 프로그램 2 전체</a> · <a href="../index.html">전체 프로그램</a></p>
+</div></footer>
+<script src="../assets/site.js"></script>
+<script src="p2-lesson.js"></script>
+</body>
+</html>

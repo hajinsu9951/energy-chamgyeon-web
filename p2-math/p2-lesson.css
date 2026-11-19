@@ -1,0 +1,119 @@
+/* 프로그램 2 차시 페이지 보충 (site.css · lesson.css 다음, 변수만 사용)
+   행렬 표기 · 위치 찾기 · 크기 판별기 · 전환점 그래프 · 전략 계산기 · 계산 칸 */
+:root{--neg:var(--rust)}
+
+/* 행렬 표기 */
+.mx{display:inline-grid;position:relative;padding:.22em .72em;column-gap:1em;row-gap:.15em;text-align:right;font-weight:700;font-variant-numeric:tabular-nums;vertical-align:middle;line-height:1.35}
+.mx::before,.mx::after{content:"";position:absolute;top:.04em;bottom:.04em;width:.36em;border:.11em solid var(--prog-ink)}
+.mx::before{left:0;border-right:none}.mx::after{right:0;border-left:none}
+.mx > span,.mx > b{white-space:nowrap;overflow-wrap:normal}
+.mx.c1{grid-template-columns:auto}.mx.c2{grid-template-columns:repeat(2,auto)}.mx.c3{grid-template-columns:repeat(3,auto)}
+.mx .hl{color:inherit}.mx .rs,.rs{color:var(--neg)}
+.eq{display:flex;flex-wrap:wrap;align-items:center;gap:.5em .7em;font-size:clamp(1.15rem,2.6vw,1.7rem);margin:.6rem 0 1.1rem}
+.eq .op{color:var(--champ);font-weight:500}
+.eq .nm{font-weight:900;color:var(--prog-ink)}
+.eq .q{color:var(--prog-ink);font-weight:900}
+.eq.sm{font-size:clamp(1rem,2vw,1.25rem)}
+.mxcap{display:inline-flex;flex-direction:column;align-items:center;gap:.25rem}
+.mxcap small{font-size:max(.8rem,.55em);color:var(--grey);font-weight:500;white-space:nowrap}
+.arrow{color:var(--prog-ink);font-size:1.6em;line-height:1}
+.dt{border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:1.05rem;background:var(--panel)}
+.dt th,.dt td{border:1px solid var(--line2);padding:.4rem .75rem;text-align:right}
+.dt th{color:var(--champ);font-weight:500;text-align:center}
+.formula{font-weight:700;letter-spacing:.02em;color:var(--prog-ink);font-size:clamp(1.15rem,2.8vw,1.7rem);background:var(--panel);border:1px solid var(--line2);border-radius:12px;padding:.6rem 1rem;display:inline-block;overflow-wrap:anywhere}
+.calc{font-variant-numeric:tabular-nums;line-height:1.8}
+.calc b{color:var(--prog-ink)}
+.mini-cards{display:grid;gap:.7rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr));margin:.8rem 0 1rem}
+.mini-cards > div{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.85rem 1rem}
+.mini-cards b{display:block;color:var(--prog-ink);font-size:1.3rem}
+.mini-cards span{color:var(--ink2);font-size:.98rem}
+.mini-cards .em{border-color:var(--prog);background:var(--progT)}
+.qlist{list-style:none;margin:.4rem 0 1rem!important;padding:0!important;display:grid;gap:.55rem}
+.qlist li{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:.7rem 1rem;margin:0!important}
+.qlist li b{color:var(--prog-ink);margin-right:.4rem}
+.note{color:var(--grey);font-size:.92rem}
+.runner.stage .step p.note{font-size:.95rem}
+.vframe.sm{max-width:640px}
+.step .do .vframe{margin:.4rem 0}
+.step figure figcaption{font-size:.85rem}
+.step .do textarea.pad{min-height:84px}
+
+/* a23 찾기 */
+.agrid{display:inline-grid;grid-template-columns:auto repeat(3,70px);grid-template-rows:auto repeat(3,56px);gap:6px;align-items:center;justify-items:center;margin:.4rem 0 .6rem}
+.agrid .h{color:var(--grey);font-size:.9rem}
+.agrid button{width:100%;height:100%;border:1px solid var(--line2);background:var(--panel);color:var(--ink);border-radius:8px;cursor:pointer;font:700 1.1rem var(--sans);transition:.2s}
+.agrid button:hover{border-color:var(--prog)}
+.agrid button.ok{background:var(--prog);color:#fff;border-color:var(--prog)}
+.agrid button.no{border-color:var(--rust);color:var(--neg)}
+.fb{min-height:1.6em;font-weight:500;color:var(--champ)}
+
+/* 에너지 믹스 막대 */
+.mix{display:grid;gap:.6rem;margin:.6rem 0 1rem}
+.mix .r{display:grid;grid-template-columns:3.6em 1fr 4.2em;align-items:center;gap:.6rem;font-weight:500}
+.mix .st{display:flex;height:34px;border-radius:6px;overflow:hidden;background:var(--panel2)}
+.mix .st i{display:block;height:100%}
+.mix .tot{color:var(--grey);font-size:.85rem;text-align:right}
+.legend{display:flex;flex-wrap:wrap;gap:.4rem 1rem;font-size:.9rem;color:var(--ink2)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:.35rem;vertical-align:-1px}
+.c-coal{background:var(--ink2)}.c-gas{background:var(--peach)}.c-nuc{background:var(--purple)}.c-ren{background:var(--amber)}
+
+/* 크기 조건 판별기 */
+.szc{display:flex;flex-wrap:wrap;align-items:center;gap:.5rem .6rem;font-size:1.35rem;font-weight:700;margin:.4rem 0}
+.szc select{appearance:none;background:var(--panel);color:var(--ink);border:1px solid var(--line2);border-radius:10px;padding:.3rem .8rem;font:700 1.25rem var(--sans);cursor:pointer}
+.szc select.mid{border-color:var(--prog);color:var(--prog-ink)}
+.szout{font-weight:700;font-size:1.15rem;padding:.6rem 1rem;border-radius:12px;background:var(--panel);border:1px solid var(--line2);display:inline-block}
+.szout.ok{border-color:var(--prog);color:var(--prog-ink)}.szout.no{border-color:var(--rust);color:var(--neg)}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.4rem 0}
+
+/* 전환점 그래프 */
+.turn{display:grid;gap:1.2rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center}
+.turn svg{width:100%;height:auto;display:block;font-family:var(--sans);background:var(--panel);border-radius:12px}
+.turn .ax{fill:var(--grey);font-size:11px}.turn .axl{stroke:var(--grey)}
+.turn .cap{stroke:var(--ink2)}.turn .capt{fill:var(--ink2);font-size:11px}
+.turn .fn{stroke:var(--prog)}.turn .fnt{fill:var(--prog-ink);font-size:11px;font-weight:700}
+.turn .tx-guide{stroke:var(--grey)}.turn .tx-dot{fill:var(--prog);stroke:#fff}
+.turn input[type=range]{width:100%;accent-color:var(--prog)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:.25rem .9rem;font-variant-numeric:tabular-nums;margin-top:.6rem}
+.kv dt{color:var(--grey)}.kv dd{margin:0;font-weight:700}
+.kv dd.big2{font-size:1.5rem;color:var(--prog-ink)}.kv dd.big2.neg{color:var(--neg)}
+
+/* 전략 계산기 */
+.calcbox{background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:20px;padding:1.4rem}
+.calcbox .two{display:grid;gap:1.2rem}
+@media (min-width:900px){.calcbox .two{grid-template-columns:1fr 1fr;align-items:start}}
+.sl{margin:.7rem 0}
+.sl label{display:flex;justify-content:space-between;font-weight:500;color:var(--champ)}
+.sl output{color:var(--ink);font-weight:700;font-variant-numeric:tabular-nums}
+.sl input{width:100%;accent-color:var(--prog)}
+.sres{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,128px),1fr));margin-top:1rem}
+.sres > div{background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:.7rem .9rem}
+.sres small{display:block;color:var(--grey);font-size:.82rem}
+.sres b{font-size:1.35rem;font-variant-numeric:tabular-nums}
+.sres b.neg{color:var(--neg)}.sres b.pos{color:var(--prog-ink)}
+.scaf{font-weight:500;font-size:clamp(1.05rem,2vw,1.3rem);line-height:1.9;border-left:3px solid var(--prog);padding:.4rem 0 .4rem 1rem;margin:1rem 0}
+.scaf u{text-decoration:none;color:var(--prog-ink);font-weight:700;border-bottom:1px solid var(--prog);padding:0 .2em}
+.scaf .blank{display:inline-block;min-width:6em;border-bottom:1px dashed var(--grey);color:var(--grey);font-weight:500;font-size:.85em;text-align:center}
+
+/* 계산 칸 */
+.calcf{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))}
+.calcf label{display:block;font-size:.92rem;color:var(--champ);margin-bottom:.2rem}
+.calcf input.pad,.ctable input.pad{min-height:0;resize:none;line-height:1.4;padding:.5rem .7rem}
+.ctable{width:100%;min-width:460px;border-collapse:collapse;font-variant-numeric:tabular-nums;font-size:.95rem}
+.ctable th,.ctable td{border:1px solid var(--line);padding:.3rem .4rem;text-align:center}
+.ctable th{color:var(--champ);font-weight:500;white-space:nowrap}
+.ctable input.pad{min-width:4.2em;text-align:right;padding:.35rem .45rem}
+.lsheet > *{min-width:0}
+.lsheet .card figure{margin:0 0 .8rem}
+.lsheet .card figure img{width:100%;border-radius:10px;border:1px solid var(--line)}
+
+@media (max-width:640px){
+  .agrid{grid-template-columns:auto repeat(3,56px);grid-template-rows:auto repeat(3,48px)}
+  .eq{font-size:1.05rem;gap:.4em .5em}
+  .dt{font-size:.92rem}.dt th,.dt td{padding:.3rem .45rem}
+  .szc{font-size:1.1rem}
+}
+
+/* 공통 CSS 보정(이 프로그램 페이지에서만): 기록 막대가 왼쪽에 붙는 것 */
+.recbar.wrap{margin:0 auto 1.2rem}
+/* lesson.css의 .step .do b:first-child가 .do 안 목록·정답·피드백의 첫 <b>까지 블록으로 만드는 것 되돌림 */
+.step .do > * b:first-child{display:inline;font-size:inherit;letter-spacing:normal;margin-bottom:0}

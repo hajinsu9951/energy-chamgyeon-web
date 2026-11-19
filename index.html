@@ -7,45 +7,55 @@
 <meta name="description" content="2026 에너지소양교육 교사연구회 「에너지참견시점」 — 그린 벤처 프로젝트 5개 프로그램(국어·수학·국제공동수업·과학·기술)을 수업 시간에 바로 운영하는 교육용 웹페이지">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@800&family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/site.css">
 <style>
-/* 허브 전용 */
-.journey{position:relative;display:grid;gap:1.1rem}
-.journey .line{position:absolute;left:31px;top:20px;bottom:20px;width:2px;background:rgba(235,203,148,.18);overflow:hidden}
-.journey .line i{position:absolute;left:0;top:0;width:100%;height:0;background:linear-gradient(var(--champ),var(--amber));box-shadow:0 0 12px var(--amber);transition:height .2s linear}
-.prog{position:relative;display:grid;grid-template-columns:64px 1fr;gap:1.2rem;align-items:start;text-decoration:none;color:var(--ink)}
-.prog .dot{width:64px;height:64px;border-radius:50%;border:1.5px solid var(--line2);background:var(--bg);display:grid;place-items:center;font-weight:700;color:var(--champ);font-size:1.15rem;position:relative;z-index:1;transition:.4s}
-.prog.in .dot{border-color:var(--amber);color:var(--amber);box-shadow:0 0 0 6px rgba(242,180,90,.08)}
-.prog .body{background:var(--panel);border:1px solid var(--line);border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr;transition:border-color .3s,transform .4s var(--ease)}
-@media (min-width:860px){.prog .body{grid-template-columns:1.25fr 1fr}}
-.prog:hover .body{border-color:var(--amber);transform:translateX(4px)}
-.prog .txt{padding:1.5rem 1.6rem}
-.prog .txt .sub{color:var(--amber);font-weight:500;font-size:.95rem}
-.prog .txt h3{font-size:clamp(1.35rem,2.6vw,1.8rem);margin:.25rem 0 .55rem}
-.prog .txt p{color:var(--ink2);margin:0 0 .8rem}
-.prog .txt .go{color:var(--amber);font-weight:700}
-.prog .vis{position:relative;min-height:190px;background:#000;overflow:hidden}
-.prog .vis svg{position:absolute;inset:0;width:100%;height:100%}
+/* 허브 전용 (C안) */
+.c1{--prog:#7A4E9F;--prog-ink:#6A3F8E;--progT:rgba(122,78,159,.12)}
+.c2{--prog:#1E8FC4;--prog-ink:#16739E;--progT:rgba(30,143,196,.12)}
+.c3{--prog:#F2A06B;--prog-ink:#B85A2A;--progT:rgba(248,184,139,.22)}
+.c4{--prog:#3A855D;--prog-ink:#2C6A49;--progT:rgba(58,133,93,.12)}
+.c5{--prog:#F2C230;--prog-ink:#8A6A00;--progT:rgba(242,194,48,.2)}
+.journey{position:relative;display:grid;gap:1.4rem}
+.journey .line{position:absolute;left:31px;top:20px;bottom:20px;width:3px;border-radius:2px;background:rgba(44,106,73,.14);overflow:hidden}
+.journey .line i{position:absolute;left:0;top:0;width:100%;height:0;background:linear-gradient(#7A4E9F,#1E8FC4,#F2A06B,#3A855D,#F2C230);transition:height .2s linear}
+.prog{position:relative;display:grid;grid-template-columns:64px 1fr;gap:1.2rem;align-items:start;color:var(--ink)}
+.prog .dot{width:64px;height:64px;border-radius:50%;border:3px solid var(--prog);background:var(--panel);display:grid;place-items:center;font-weight:900;color:var(--prog-ink);font-size:1.2rem;position:relative;z-index:1;transition:.4s;box-shadow:var(--shadow)}
+.prog.in .dot{background:var(--prog);color:#fff}
+.prog.c3.in .dot,.prog.c5.in .dot{color:var(--ink)}
+.prog .body{background:var(--panel);border:1px solid var(--line);border-top:6px solid var(--prog);border-radius:20px;overflow:hidden;display:grid;grid-template-columns:1fr;box-shadow:var(--shadow);transition:transform .4s var(--ease),box-shadow .3s}
+@media (min-width:860px){.prog .body{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr)}}
+.prog:hover .body{transform:translateY(-3px);box-shadow:0 2px 4px rgba(31,42,36,.06),0 16px 36px rgba(31,42,36,.12)}
+.prog .ph{position:relative;display:block;min-height:220px;overflow:hidden;background:var(--panel2)}
+.prog .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+.prog:hover .ph img{transform:scale(1.04)}
+.prog .ph .ai{position:absolute;left:10px;bottom:10px;font-size:.74rem;color:#fff;background:rgba(16,36,26,.6);border-radius:999px;padding:.1rem .55rem}
+.prog .txt{padding:1.5rem 1.6rem 1.4rem}
+.prog .txt .sub{display:inline-block;color:var(--prog-ink);background:var(--progT);border-radius:999px;padding:.15rem .7rem;font-weight:700;font-size:.88rem}
+.prog .txt h3{font-size:clamp(1.35rem,2.6vw,1.8rem);font-weight:900;margin:.55rem 0 .55rem;letter-spacing:-.01em}
+.prog .txt h3 a{color:inherit;text-decoration:none}
+.prog .txt h3 a:hover{text-decoration:underline;text-decoration-color:var(--prog);text-decoration-thickness:3px;text-underline-offset:5px}
+.prog .txt p{color:var(--ink2);margin:0 0 .9rem}
+.lessons{display:flex;flex-wrap:wrap;align-items:center;gap:.35rem;margin:0 0 1rem}
+.lessons span{font-size:.85rem;color:var(--grey);margin-right:.2rem}
+.lessons a{min-width:2.4rem;height:2.4rem;padding:0 .6rem;border-radius:999px;border:1.5px solid var(--prog);display:inline-grid;place-items:center;font-weight:700;color:var(--ink);text-decoration:none;font-size:.92rem;transition:.2s}
+.lessons a:hover{background:var(--prog);color:#fff}
+.c3 .lessons a:hover,.c5 .lessons a:hover{color:var(--ink)}
+.prog .go{display:inline-flex;align-items:center;gap:.3rem;color:var(--prog-ink);font-weight:700;text-decoration:none}
+.prog .go:hover{text-decoration:underline}
 .who{color:var(--grey);font-size:.9rem}
-/* 각 프로그램 미니 모션 */
-@keyframes rise{from{transform:translateY(100%)}to{transform:none}}
-@keyframes blink{0%,100%{opacity:.25}50%{opacity:1}}
-@keyframes dash{to{stroke-dashoffset:0}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes bob{50%{transform:translateY(-6px)}}
-.vis .bar{transform-box:fill-box;transform-origin:bottom;animation:rise 1.4s var(--ease) both}
-.prog.in .vis .bar{animation-play-state:running}
-.vis .blink{animation:blink 2.4s infinite}
-.vis .flowline{stroke-dasharray:420;stroke-dashoffset:420;animation:dash 2.6s var(--ease) infinite alternate}
-.vis .orbit{transform-origin:center;transform-box:fill-box;animation:spin 14s linear infinite}
-.vis .bob{animation:bob 2.6s ease-in-out infinite}
-.stat{border-top:1px solid var(--line2);padding-top:1rem}
-.stat .big{font-size:clamp(3rem,8vw,5.5rem)}
+/* 수업 현장 (딥 포레스트 띠) */
+.field-grid{display:grid;gap:.8rem;grid-template-columns:repeat(2,1fr)}
+@media (min-width:860px){.field-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:150px}.field-grid figure:nth-child(1){grid-column:span 3;grid-row:span 2}.field-grid figure:nth-child(2),.field-grid figure:nth-child(3){grid-column:span 3}.field-grid figure:nth-child(n+4){grid-column:span 2;grid-row:span 1}}
+.field-grid figure{margin:0;position:relative;border-radius:14px;overflow:hidden;background:rgba(255,253,248,.06);min-height:140px}
+.field-grid img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.field-grid figcaption{position:absolute;left:0;right:0;bottom:0;margin:0;padding:1.6rem .8rem .6rem;color:#FFFDF8;font-size:.85rem;background:linear-gradient(transparent,rgba(16,36,26,.85))}
+.field-grid figcaption b{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:.4rem;vertical-align:1px}
+.stat{border-top:3px solid var(--amber);padding-top:1rem}
+.stat .big{font-size:clamp(3rem,8vw,5.5rem);font-weight:900}
 .how li{margin:.4rem 0}
 .themes td:not(:first-child),.themes th:not(:first-child){text-align:center}
 .themes td:not(:first-child){color:var(--amber);font-size:1.1rem}
-kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:500 .85rem var(--sans);color:var(--champ)}
+kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:500 .85rem var(--sans);color:var(--champ);background:var(--panel)}
 </style>
 </head>
 <body>
@@ -54,7 +64,7 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
   <div class="wrap">
     <a class="brand" href="#intro"><i></i><span>에너지참견시점 수업실</span></a>
     <nav aria-label="섹션">
-      <a href="#why">왜</a><a href="#programs">프로그램</a><a href="#results">결과</a><a href="#materials">자료</a><a href="#how">사용법</a>
+      <a href="#why">왜</a><a href="#field">현장</a><a href="#programs">프로그램</a><a href="#results">결과</a><a href="#materials">자료</a><a href="#how">사용법</a>
     </nav>
     <div class="tools">
       <button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button>
@@ -63,10 +73,10 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
   </div>
 </header>
 
-<!-- ① 몰입형 인트로: 석탄 발전소 → 태양광·풍력 단지(M0) → 도시 불빛 격자(M1) → 연기가 금빛 입자로(M2) -->
+<!-- ① 몰입형 인트로: 석탄 발전소 골짜기 → 태양광·풍력 단지(M0) → 저녁 도시 → 초록 아침 도시(M1) → 새싹 → 학교 옥상 태양광(M2) -->
 <section class="intro" id="intro" aria-label="도입 영상" data-hold-last>
   <div class="scene" data-dur="4300">
-    <video src="assets/video/M0.mp4" poster="assets/video/M0_first.jpg" muted playsinline preload="auto"></video>
+    <video aria-label="회색 연기의 석탄 발전소 골짜기가 초록 언덕의 태양광·풍력 단지로 바뀌는 영상" src="assets/video/M0.mp4" poster="assets/video/M0_first.jpg" muted playsinline preload="auto"></video>
     <div class="scrim"></div>
     <div class="cap"><div class="wrap">
       <span class="kicker fadeup">2026 에너지소양교육 교사연구회</span>
@@ -74,7 +84,7 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
     </div></div>
   </div>
   <div class="scene" data-dur="4300" data-flash>
-    <video src="assets/video/M1.mp4" poster="assets/video/M1_first.jpg" muted playsinline preload="none"></video>
+    <video aria-label="불빛이 흩어진 저녁 도시가 옥상 정원과 태양광이 덮인 아침 도시로 바뀌는 영상" src="assets/video/M1.mp4" poster="assets/video/M1_first.jpg" muted playsinline preload="none"></video>
     <div class="scrim"></div>
     <div class="cap"><div class="wrap">
       <span class="kicker fadeup">읽고 · 계산하고 · 함께 만들고</span>
@@ -82,11 +92,11 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
     </div></div>
   </div>
   <div class="scene" data-dur="4300" data-flash>
-    <video src="assets/video/M2.mp4" poster="assets/video/M2_first.jpg" muted playsinline preload="none"></video>
+    <video aria-label="재생지 화분의 새싹에서 태양광 패널이 놓인 학교 옥상으로 시야가 열리는 영상" src="assets/video/M2.mp4" poster="assets/video/M2_first.jpg" muted playsinline preload="none"></video>
     <div class="scrim"></div>
     <div class="cap"><div class="wrap">
       <span class="kicker fadeup">문제를 기회로</span>
-      <h1 class="display"><span class="mask"><span>연기는</span></span><span class="mask"><span><em>가치</em>가 됩니다</span></span></h1>
+      <h1 class="display"><span class="mask"><span>교실의 작은 질문이</span></span><span class="mask"><span><em>해법</em>으로 자랍니다</span></span></h1>
     </div></div>
   </div>
   <div class="scene" data-flash>
@@ -114,7 +124,7 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
 <section class="sec" id="why">
   <div class="wrap">
     <p class="label reveal">연구 주제</p>
-    <h2 class="head serif reveal d1">아끼자는 구호를 넘어,<br><span class="amber">가치를 만드는</span> 에너지 교육</h2>
+    <h2 class="head reveal d1">아끼자는 구호를 넘어,<br><span class="amber">가치를 만드는</span> 에너지 교육</h2>
     <p class="lead reveal d2">그린 벤처(Green Venture) 프로젝트를 통한 에너지 믹스 최적화 및 기후 행동 역량 강화</p>
     <div class="grid g4">
       <div class="card reveal d1"><span class="no">01</span><h3>에너지 기업가 정신</h3><p>에너지 문제를 가치 창출의 기회로 다시 읽고, 실효성 있는 해법을 제안합니다.</p></div>
@@ -125,133 +135,102 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
   </div>
 </section>
 
+<!-- ②-1 수업 현장 (딥 포레스트 띠) -->
+<section class="sec green" id="field" aria-label="수업 현장">
+  <div class="wrap">
+    <p class="label reveal">수업 현장</p>
+    <h2 class="head reveal d1">교실에서 실제로 <em>일어난 일</em></h2>
+    <p class="lead reveal d2" style="color:#DDEBD9">계산하고, 그리고, 만들고, 재고, 발표했습니다. 학생 얼굴과 이름은 흐리게 처리했습니다.</p>
+    <div class="field-grid reveal d2">
+      <figure><img src="p2-math/img/laptop_blur.jpg" alt="학생이 노트북에서 행렬 × 탄소 실험실 화면을 조작하는 손과 화면" loading="lazy"><figcaption><b style="background:#1E8FC4"></b>수학 · 실험실에서 배출량 계산</figcaption></figure>
+      <figure><img src="p3-global/img/class-56-1.jpg" alt="학생이 모둠 포스터 앞에서 발표하는 데모데이 장면" loading="lazy"><figcaption><b style="background:#F2A06B"></b>국제공동 · 데모데이 발표</figcaption></figure>
+      <figure><img src="p3-global/img/class-34-1.jpg" alt="두 학생이 책상에 종이를 펼쳐 산출물을 그리는 장면" loading="lazy"><figcaption><b style="background:#F2A06B"></b>국제공동 · 산출물 만들기</figcaption></figure>
+      <figure><img src="p5-tech/img/proto-bottle.jpg" alt="페트병과 작은 태양전지판으로 만든 냉장 시제품" loading="lazy"><figcaption><b style="background:#F2C230"></b>기술 · 페트병 냉장고 시제품</figcaption></figure>
+      <figure><img src="p5-tech/img/exp-temp.jpg" alt="디지털 온도계로 종이컵과 페트병 냉장고의 물 온도를 재는 실험" loading="lazy"><figcaption><b style="background:#F2C230"></b>기술 · 사용 전후 온도 실험</figcaption></figure>
+      <figure><img src="p2-math/img/field-group.jpg" alt="넓은 교실에서 모둠별로 앉아 활동하는 학생들" loading="lazy"><figcaption><b style="background:#1E8FC4"></b>수학 · 모둠 활동</figcaption></figure>
+    </div>
+  </div>
+</section>
+
 <!-- ③ 다섯 프로그램 여정 -->
 <section class="sec panel" id="programs">
   <div class="wrap">
     <p class="label reveal">다섯 개의 프로그램</p>
     <h2 class="head reveal d1">읽고, 계산하고, 함께 나누고,<br>설계하고, 만들어 봅니다</h2>
-    <p class="lead reveal d2">카드를 누르면 그 프로그램의 수업 화면으로 갑니다. 화면마다 도입 영상, 단계별 수업 진행, 활동, 평가 기준, 수업 PPT가 들어 있어요.</p>
+    <p class="lead reveal d2">제목을 누르면 프로그램 전체 화면(도입 영상, 활동, 평가 기준, 수업 PPT)으로, 숫자를 누르면 그 차시를 교실에서 바로 진행하는 수업 화면으로 갑니다.</p>
 
     <div class="journey" id="journey">
       <div class="line" aria-hidden="true"><i></i></div>
 
-      <a class="prog reveal" href="p1-korean/">
+      <article class="prog c1 reveal">
         <span class="dot">01</span>
         <div class="body">
+          <a class="ph" href="p1-korean/" tabindex="-1" aria-hidden="true"><img src="p1-korean/img/ai-reading.jpg" alt="" loading="lazy"><span class="ai">AI 생성 이미지</span></a>
           <div class="txt">
             <span class="sub">국어 · 가치 발견 · 4차시</span>
-            <h3>기사를 의심하고, 그린 벤처를 제안하다</h3>
+            <h3><a href="p1-korean/">기사를 의심하고, 그린 벤처를 제안하다</a></h3>
             <p>빅카인즈에서 에너지 기사를 찾아 제목과 본문을 비교하고, 인용된 원자료를 확인한 뒤 모둠 공동 보고서로 가치 제안서를 씁니다.</p>
-            <span class="go">수업 열기 →</span> <span class="who">· 미림마이스터고 이대형</span>
-          </div>
-          <div class="vis" aria-hidden="true">
-            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="220" fill="#1D1A16"/>
-              <rect x="40" y="38" width="240" height="22" rx="4" fill="#F2B45A"/>
-              <rect x="40" y="76" width="300" height="8" rx="4" fill="#9A9086" opacity=".6"/>
-              <rect x="40" y="94" width="270" height="8" rx="4" fill="#9A9086" opacity=".6"/>
-              <rect x="40" y="112" width="290" height="8" rx="4" fill="#9A9086" opacity=".6"/>
-              <rect x="40" y="130" width="200" height="8" rx="4" fill="#9A9086" opacity=".6"/>
-              <g class="bob"><circle cx="300" cy="150" r="34" fill="none" stroke="#EBCB94" stroke-width="5"/><line x1="324" y1="174" x2="356" y2="206" stroke="#EBCB94" stroke-width="8" stroke-linecap="round"/><text x="300" y="162" text-anchor="middle" font-size="34" font-weight="700" fill="#F2B45A" font-family="Noto Sans KR">?</text></g>
-            </svg>
+            <div class="lessons"><span>차시별 수업 화면</span><a href="p1-korean/lesson-1.html" aria-label="프로그램 1 1차시 수업 화면">1</a><a href="p1-korean/lesson-2.html" aria-label="프로그램 1 2차시 수업 화면">2</a><a href="p1-korean/lesson-3.html" aria-label="프로그램 1 3차시 수업 화면">3</a><a href="p1-korean/lesson-4.html" aria-label="프로그램 1 4차시 수업 화면">4</a></div>
+            <a class="go" href="p1-korean/">프로그램 전체 열기 →</a> <span class="who">· 미림마이스터고 이대형</span>
           </div>
         </div>
-      </a>
+      </article>
 
-      <a class="prog reveal" href="p2-math/">
+      <article class="prog c2 reveal">
         <span class="dot">02</span>
         <div class="body">
+          <a class="ph" href="p2-math/" tabindex="-1" aria-hidden="true"><img src="p2-math/img/class_wide_blur.jpg" alt="" loading="lazy"></a>
           <div class="txt">
             <span class="sub">수학 · 데이터 모델링 · 2차시</span>
-            <h3>행렬의 곱으로 탄소의 값을 매기다</h3>
+            <h3><a href="p2-math/">행렬의 곱으로 탄소의 값을 매기다</a></h3>
             <p>국가·기업별 발전량을 행렬로 담고, 배출계수와 곱해 탄소 배출량과 배출권 거래 손익을 계산합니다. 「행렬 × 탄소 실험실」에서 직접 바꿔 봐요.</p>
-            <span class="go">수업 열기 →</span> <span class="who">· 대전대신고 하진수</span>
-          </div>
-          <div class="vis" aria-hidden="true">
-            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="220" fill="#1D1A16"/>
-              <path d="M70 50 h-12 v120 h12 M250 50 h12 v120 h-12" fill="none" stroke="#EBCB94" stroke-width="4"/>
-              <g font-family="Noto Sans KR" font-weight="700" font-size="26" fill="#F6F3EE" text-anchor="middle">
-                <text x="100" y="92">120</text><text x="160" y="92" class="blink">80</text><text x="220" y="92">50</text>
-                <text x="100" y="150">100</text><text x="160" y="150">120</text><text x="220" y="150" class="blink" fill="#F2B45A">250</text>
-              </g>
-              <rect x="64" y="66" width="192" height="36" rx="6" fill="none" stroke="#F2B45A" stroke-width="2" class="blink"/>
-              <text x="320" y="120" font-family="Noto Sans KR" font-weight="700" font-size="34" fill="#F2B45A" text-anchor="middle">× E</text>
-            </svg>
+            <div class="lessons"><span>차시별 수업 화면</span><a href="p2-math/lesson-1.html" aria-label="프로그램 2 1차시 수업 화면">1</a><a href="p2-math/lesson-2.html" aria-label="프로그램 2 2차시 수업 화면">2</a></div>
+            <a class="go" href="p2-math/">프로그램 전체 열기 →</a> <span class="who">· 대전대신고 하진수</span>
           </div>
         </div>
-      </a>
+      </article>
 
-      <a class="prog reveal" href="p3-global/">
+      <article class="prog c3 reveal">
         <span class="dot">03</span>
         <div class="body">
+          <a class="ph" href="p3-global/" tabindex="-1" aria-hidden="true"><img src="p3-global/img/class-12-2.jpg" alt="" loading="lazy"></a>
           <div class="txt">
             <span class="sub">국제공동수업 · 한국–튀르키예 · 6차시</span>
-            <h3>4색 글로벌 그린 창업기</h3>
+            <h3><a href="p3-global/">4색 글로벌 그린 창업기</a></h3>
             <p>두 나라의 에너지 믹스를 데이터로 비교하고, 동화책·칼럼과 포스터·홍보 영상·사업계획서 중 하나를 만들어 글로벌 데모데이에서 피칭합니다.</p>
-            <span class="go">수업 열기 →</span> <span class="who">· 영훈고 임은희</span>
-          </div>
-          <div class="vis" aria-hidden="true">
-            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="220" fill="#1D1A16"/>
-              <g class="orbit"><circle cx="200" cy="110" r="70" fill="none" stroke="#EBCB94" stroke-width="1.5" stroke-dasharray="4 8"/><circle cx="270" cy="110" r="8" fill="#F2B45A"/></g>
-              <circle cx="130" cy="110" r="38" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
-              <circle cx="270" cy="110" r="38" fill="#2B2621" stroke="#F2B45A" stroke-width="2"/>
-              <text x="130" y="119" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="24" fill="#F6F3EE">KR</text>
-              <text x="270" y="119" text-anchor="middle" font-family="Noto Sans KR" font-weight="700" font-size="24" fill="#F6F3EE">TR</text>
-              <path class="flowline" d="M168 110 C 200 70, 200 70, 232 110" fill="none" stroke="#F2B45A" stroke-width="3"/>
-            </svg>
+            <div class="lessons"><span>차시별 수업 화면</span><a href="p3-global/lesson-1.html" aria-label="프로그램 3 1차시 수업 화면">1</a><a href="p3-global/lesson-2.html" aria-label="프로그램 3 2차시 수업 화면">2</a><a href="p3-global/lesson-3.html" aria-label="프로그램 3 3차시 수업 화면">3</a><a href="p3-global/lesson-4.html" aria-label="프로그램 3 4차시 수업 화면">4</a><a href="p3-global/lesson-5.html" aria-label="프로그램 3 5차시 수업 화면">5</a><a href="p3-global/lesson-6.html" aria-label="프로그램 3 6차시 수업 화면">6</a></div>
+            <a class="go" href="p3-global/">프로그램 전체 열기 →</a> <span class="who">· 영훈고 임은희</span>
           </div>
         </div>
-      </a>
+      </article>
 
-      <a class="prog reveal" href="p4-science/">
+      <article class="prog c4 reveal">
         <span class="dot">04</span>
         <div class="body">
+          <a class="ph" href="p4-science/" tabindex="-1" aria-hidden="true"><img src="p4-science/img/field-01.jpg" alt="" loading="lazy"></a>
           <div class="txt">
             <span class="sub">과학 · 지능형 최적화 · 2차시</span>
-            <h3>AI와 바이브 코딩으로 기후 문제를 풀다</h3>
+            <h3><a href="p4-science/">AI와 바이브 코딩으로 기후 문제를 풀다</a></h3>
             <p>폭염과 전력 수요, 도시 열섬 같은 문제를 데이터로 정의하고, 생성형 AI 프롬프트로 디지털 시제품을 만들고 고쳐 갑니다.</p>
-            <span class="go">수업 열기 →</span> <span class="who">· 서울미술고 황호연</span>
-          </div>
-          <div class="vis" aria-hidden="true">
-            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="220" fill="#1D1A16"/>
-              <rect x="40" y="40" width="320" height="140" rx="12" fill="#2B2621" stroke="#EBCB94" stroke-width="1.5"/>
-              <circle cx="62" cy="60" r="5" fill="#B4532A"/><circle cx="80" cy="60" r="5" fill="#F2B45A"/><circle cx="98" cy="60" r="5" fill="#EBCB94"/>
-              <g font-family="Noto Sans KR" font-size="17" fill="#F6F3EE">
-                <text x="62" y="100"><tspan fill="#F2B45A">&gt;</tspan> 열섬 지도를 만들어 줘</text>
-                <text x="62" y="130" fill="#9A9086">  수정: 녹지율 변수를 추가해</text>
-              </g>
-              <rect x="62" y="146" width="12" height="20" fill="#F2B45A" class="blink"/>
-            </svg>
+            <div class="lessons"><span>차시별 수업 화면</span><a href="p4-science/lesson-1.html" aria-label="프로그램 4 1차시 수업 화면">1</a><a href="p4-science/lesson-2.html" aria-label="프로그램 4 2차시 수업 화면">2</a></div>
+            <a class="go" href="p4-science/">프로그램 전체 열기 →</a> <span class="who">· 서울미술고 황호연</span>
           </div>
         </div>
-      </a>
+      </article>
 
-      <a class="prog reveal" href="p5-tech/">
+      <article class="prog c5 reveal">
         <span class="dot">05</span>
         <div class="body">
+          <a class="ph" href="p5-tech/" tabindex="-1" aria-hidden="true"><img src="p5-tech/img/meeting-blur.jpg" alt="" loading="lazy"></a>
           <div class="txt">
             <span class="sub">기술 · 시제품 구현 · 5차시</span>
-            <h3>불편에서 출발하는 태양광 적정기술</h3>
+            <h3><a href="p5-tech/">불편에서 출발하는 태양광 적정기술</a></h3>
             <p>디자인 씽킹 5단계로 사용자의 불편을 한 문장으로 정의하고, 태양전지와 주변 재료로 시제품을 만들어 사용 전후를 비교 실험합니다.</p>
-            <span class="go">수업 열기 →</span> <span class="who">· 사당중 김이현</span>
-          </div>
-          <div class="vis" aria-hidden="true">
-            <svg viewBox="0 0 400 220" preserveAspectRatio="xMidYMid slice">
-              <rect width="400" height="220" fill="#1D1A16"/>
-              <circle cx="80" cy="60" r="24" fill="#F2B45A"/>
-              <g stroke="#F2B45A" stroke-width="3" class="blink"><line x1="80" y1="22" x2="80" y2="12"/><line x1="118" y1="60" x2="128" y2="60"/><line x1="107" y1="33" x2="114" y2="26"/></g>
-              <rect x="60" y="130" width="110" height="56" rx="4" fill="#2B2621" stroke="#EBCB94" stroke-width="2"/>
-              <g stroke="#EBCB94" stroke-width="1"><line x1="96" y1="130" x2="96" y2="186"/><line x1="132" y1="130" x2="132" y2="186"/><line x1="60" y1="158" x2="170" y2="158"/></g>
-              <path class="flowline" d="M170 158 H 260 V 110" fill="none" stroke="#F2B45A" stroke-width="3"/>
-              <circle cx="290" cy="96" r="26" fill="#F2B45A" class="blink"/>
-              <rect x="280" y="120" width="20" height="18" fill="#EBCB94"/>
-            </svg>
+            <div class="lessons"><span>차시별 수업 화면</span><a href="p5-tech/lesson-1.html" aria-label="프로그램 5 1차시 수업 화면">1</a><a href="p5-tech/lesson-2.html" aria-label="프로그램 5 2차시 수업 화면">2</a><a href="p5-tech/lesson-3.html" aria-label="프로그램 5 3차시 수업 화면">3</a><a href="p5-tech/lesson-4.html" aria-label="프로그램 5 4차시 수업 화면">4</a><a href="p5-tech/lesson-5.html" aria-label="프로그램 5 5차시 수업 화면">5</a></div>
+            <a class="go" href="p5-tech/">프로그램 전체 열기 →</a> <span class="who">· 사당중 김이현</span>
           </div>
         </div>
-      </a>
+      </article>
     </div>
   </div>
 </section>
@@ -290,7 +269,7 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
     </div>
     <p class="muted" style="font-size:.9rem;margin-bottom:3rem">● 핵심으로 다룸 · ○ 함께 다룸 — 연구회가 각 프로그램의 수업 내용을 기준으로 정리한 표입니다.</p>
     <div class="grid g3">
-      <div class="stat reveal"><div class="big" data-count-to="19">0</div><div class="numlab">차시 · 5개 프로그램(4 + 2 + 6 + 2 + 5)</div></div>
+      <div class="stat reveal"><div class="big"><span class="ring" data-count-to="19">0</span></div><div class="numlab">차시 · 5개 프로그램(4 + 2 + 6 + 2 + 5)</div></div>
       <div class="stat reveal d1"><div class="big" data-count-to="5">0</div><div class="numlab">개 학교 교사 공동 개발</div></div>
       <div class="stat reveal d2"><div class="big" data-count-to="2">0</div><div class="numlab">개 나라 학생이 함께한 데모데이 · 한국 · 튀르키예</div></div>
     </div>
@@ -320,7 +299,7 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
   <div class="wrap">
     <p class="label reveal">수업 자료</p>
     <h2 class="head reveal d1">수업 PPT 다섯 개, 한 가지 옷</h2>
-    <p class="lead reveal d2">다섯 선생님의 수업 PPT를 같은 블랙골드 양식으로 맞췄습니다. 내용과 배치는 그대로예요. 각 프로그램 화면의 ‘수업 PPT’에서 넘겨 보거나 내려받을 수 있습니다.</p>
+    <p class="lead reveal d2">다섯 선생님의 수업 PPT를 한 가지 양식으로 맞췄습니다. 내용과 배치는 그대로예요. 각 프로그램 화면의 ‘수업 PPT’에서 넘겨 보거나 내려받을 수 있습니다.</p>
     <div class="grid g2">
       <a class="dl reveal" href="materials/p1_국어_가치발견_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>프로그램 1 · 국어 및 가치 발견</b><small>47장 · 이대형</small></span></a>
       <a class="dl reveal d1" href="materials/p2_수학_행렬과탄소경제_블랙골드.pptx" download><span class="ext">PPTX</span><span><b>프로그램 2 · 행렬 모델링과 탄소 경제</b><small>59장 · 하진수</small></span></a>
@@ -341,7 +320,7 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
     <div class="grid g3">
       <div class="card reveal"><span class="no">학생</span><h3>각자 열어 따라 하기</h3><p>노트북으로 같은 주소를 열고, 활동 칸에 생각을 적어요. 적은 내용은 이 기기 브라우저에만 남습니다.</p></div>
       <div class="card reveal d1"><span class="no">교사</span><h3>교사 모드</h3><p>오른쪽 위 ‘교사 모드’를 켜면 발문, 예상 답, 유의점이 단계마다 나타납니다. 끄면 학생 화면이 됩니다.</p></div>
-      <div class="card reveal d2"><span class="no">진행</span><h3>키보드로 넘기기</h3><p>수업 진행 상자에서 <kbd>←</kbd> <kbd>→</kbd>로 단계를 넘기고, 타이머로 활동 시간을 잽니다. ‘크게 보기’는 전자칠판용입니다.</p></div>
+      <div class="card reveal d2"><span class="no">진행</span><h3>차시 화면으로 바로 수업</h3><p>프로그램 카드의 차시 숫자를 누르면 그 시간만 담은 수업 화면이 열립니다. 수업 진행 상자에서 <kbd>←</kbd> <kbd>→</kbd>로 단계를 넘기고, 타이머로 활동 시간을 잽니다. ‘크게 보기’는 전자칠판용입니다.</p></div>
     </div>
   </div>
 </section>
@@ -355,7 +334,7 @@ kbd{border:1px solid var(--line2);border-radius:6px;padding:.05rem .45rem;font:5
 
 <script src="assets/site.js"></script>
 <script>
-/* 여정 선: 스크롤에 맞춰 금빛 선이 자람 */
+/* 여정 선: 스크롤에 맞춰 다섯 색 선이 자람 */
 (function(){
   var j=document.getElementById("journey");if(!j)return;var bar=j.querySelector(".line i");
   function f(){var r=j.getBoundingClientRect(),h=r.height,p=Math.min(1,Math.max(0,(innerHeight*.6-r.top)/h));bar.style.height=(p*100)+"%"}

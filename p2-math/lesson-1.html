@@ -1,0 +1,322 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>1차시 세상을 행렬로 담다 · 프로그램 2 수학 · 에너지참견시점</title>
+<meta name="description" content="프로그램 2 · 1차시 — 국가별 발전량 데이터를 행렬로 나타내고, 행렬의 덧셈·실수배로 연간 발전량과 수요 절감을 계산합니다. 전자칠판에서 바로 진행하는 수업 화면.">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<link rel="stylesheet" href="p2-lesson.css">
+</head>
+<body data-prog="p2">
+
+<header class="top lesson-top"><div class="wrap">
+  <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+  <div class="crumb"><a class="back-hub" href="index.html">02 수학</a><b>1차시 · 세상을 행렬로 담다</b></div>
+  <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
+</div></header>
+
+<main>
+<section class="lhero"><div class="wrap">
+  <div><span class="no">02 수학 · 1차시 / 2 · 구조화</span>
+    <h1>세상을 <em>행렬</em>로 담다</h1>
+    <p class="goal"><b>오늘의 목표</b>실생활 에너지 데이터를 행렬로 나타내고, 행렬의 덧셈·실수배를 수행하여 그 사회적 의미를 설명할 수 있다.</p>
+    <div class="meta"><span>45분 (도입 10 · 전개 30 · 정리 5)</span><span>모둠 탐구</span><span>준비물: 노트북·태블릿, 활동지 ①, 색상 스티커(선택)</span><span>[10공수1-04-01] · [10공수1-04-02]</span></div></div>
+  <figure><img src="img/field-talk.jpg" alt="교사가 모둠 학생들과 마주 앉아 이야기하고, 다른 학생들은 앞쪽 대형 화면을 보며 노트북을 쓰는 교실. 학생 얼굴과 이름표는 흐리게 처리함" loading="eager"><figcaption>▲ 2026. 11. 대전대신고 2학년 「인공지능 수학」 수업 — 교사 설명과 모둠 토의 (학생 얼굴은 흐리게 처리)</figcaption></figure>
+</div><span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice"><path fill="currentColor" d="M0 70V31h22V70zM58 70V24h19V70zM64 70V20h6V70zM80 70V51h25V70zM216.5 70v-9h3v9zM213 61a5 5 0 1 0 10 0a5 5 0 1 0 -10 0zM226 70V38h22V70zM252 70V45h27V70zM261 70V37h9V70zM284 70V52h21V70zM309 70V29h39V70zM357.5 70v-12h3v12zM351 58a8 8 0 1 0 16 0a8 8 0 1 0 -16 0zM371 70V41h23V70zM378 70V35h7V70zM398 70V28h28V70zM407 70V24h9V70zM430.5 70v-10h3v10zM426 60a6 6 0 1 0 12 0a6 6 0 1 0 -12 0zM446 70V30h33V70zM457 70V21h11V70zM486.5 70v-13h3v13zM479 57a9 9 0 1 0 18 0a9 9 0 1 0 -18 0zM541 70V25h29V70zM573 70V39h20V70zM598 70V37h40V70zM684.5 70v-11h3v11zM679 59a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM731 70V25h21V70zM738 70V15h7V70zM754 70V31h25V70zM785 70V28h23V70zM887.5 70v-11h3v11zM882 59a7 7 0 1 0 14 0a7 7 0 1 0 -14 0zM939 70V47h23V70zM946 70V42h7V70zM962 70V45h36V70zM974 70V41h12V70zM999 70V36h29V70zM1069 70V31h39V70zM1111 70V31h38V70zM1123 70V27h12V70zM1150 70V35h21V70zM1171 70V50h22V70zM1197 70V32h24V70zM1205 70V26h8V70z"/><g stroke="currentColor" stroke-linecap="round"><path d="M40 70V27" stroke-width="2"/><path d="M40 27L40.0 11.0" stroke-width="2.2"/><path d="M40 27L26.1 35.0" stroke-width="2.2"/><path d="M40 27L53.9 35.0" stroke-width="2.2"/><path d="M123 70V27" stroke-width="2"/><path d="M123 27L123.0 11.0" stroke-width="2.2"/><path d="M123 27L109.1 35.0" stroke-width="2.2"/><path d="M123 27L136.9 35.0" stroke-width="2.2"/><path d="M159 70V12" stroke-width="2"/><path d="M159 12L159.0 -4.0" stroke-width="2.2"/><path d="M159 12L145.1 20.0" stroke-width="2.2"/><path d="M159 12L172.9 20.0" stroke-width="2.2"/><path d="M195 70V12" stroke-width="2"/><path d="M195 12L195.0 -4.0" stroke-width="2.2"/><path d="M195 12L181.1 20.0" stroke-width="2.2"/><path d="M195 12L208.9 20.0" stroke-width="2.2"/><path d="M523 70V20" stroke-width="2"/><path d="M523 20L523.0 4.0" stroke-width="2.2"/><path d="M523 20L509.1 28.0" stroke-width="2.2"/><path d="M523 20L536.9 28.0" stroke-width="2.2"/><path d="M661 70V21" stroke-width="2"/><path d="M661 21L661.0 5.0" stroke-width="2.2"/><path d="M661 21L647.1 29.0" stroke-width="2.2"/><path d="M661 21L674.9 29.0" stroke-width="2.2"/><path d="M713 70V19" stroke-width="2"/><path d="M713 19L713.0 3.0" stroke-width="2.2"/><path d="M713 19L699.1 27.0" stroke-width="2.2"/><path d="M713 19L726.9 27.0" stroke-width="2.2"/><path d="M828 70V17" stroke-width="2"/><path d="M828 17L828.0 1.0" stroke-width="2.2"/><path d="M828 17L814.1 25.0" stroke-width="2.2"/><path d="M828 17L841.9 25.0" stroke-width="2.2"/><path d="M864 70V22" stroke-width="2"/><path d="M864 22L864.0 6.0" stroke-width="2.2"/><path d="M864 22L850.1 30.0" stroke-width="2.2"/><path d="M864 22L877.9 30.0" stroke-width="2.2"/><path d="M921 70V23" stroke-width="2"/><path d="M921 23L921.0 7.0" stroke-width="2.2"/><path d="M921 23L907.1 31.0" stroke-width="2.2"/><path d="M921 23L934.9 31.0" stroke-width="2.2"/><path d="M1051 70V29" stroke-width="2"/><path d="M1051 29L1051.0 13.0" stroke-width="2.2"/><path d="M1051 29L1037.1 37.0" stroke-width="2.2"/><path d="M1051 29L1064.9 37.0" stroke-width="2.2"/></g></svg></span></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <p class="label">수업 흐름</p>
+  <div class="lplan" aria-label="1차시 시간 흐름">
+    <div style="--m:10"><b>도입</b><small>10분</small></div>
+    <div style="--m:8"><b>활동 1 · 행렬의 뜻</b><small>8분</small></div>
+    <div style="--m:8"><b>활동 2 · 구조화</b><small>8분</small></div>
+    <div style="--m:7"><b>활동 3 · 덧셈</b><small>7분</small></div>
+    <div style="--m:7"><b>활동 4 · 실수배</b><small>7분</small></div>
+    <div style="--m:5"><b>정리</b><small>5분</small></div>
+  </div>
+  <p class="note" style="margin:0 0 1.2rem">지도안은 45분 기준이에요. 50분 수업이면 남는 5분을 모둠 활동(활동지 ①)에 더해요. ← → 키로 단계를 넘기고, 발문·정답·유의점은 <b>교사 모드</b>에서 보여요.</p>
+
+  <div class="runner stage">
+    <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+    <div class="steps">
+
+      <div class="step" data-phase="도입 · 학습 문제" data-time="도입 10분 중 ①">
+        <p class="ask">이 수많은 숫자를<br><em>어떻게 한눈에</em> 정리할 수 있을까?</p>
+        <div class="two">
+          <div>
+            <p>영상을 보고, 칠판에 흩어진 발전량 숫자를 살펴봐요.</p>
+            <div class="vframe sm" data-yt="jBPWUAOveoc" data-title="영상① 3분 안에 알아보는 온실가스 배출권 거래제"></div>
+            <p style="margin-top:.8rem"><a class="live" href="https://ourworldindata.org/electricity-mix" target="_blank" rel="noopener"><i></i>Our World in Data · 국가별 전력 에너지 믹스</a></p>
+          </div>
+          <figure><img src="../slides/p2/012.jpg" alt="‘흩어진 숫자에 줄과 칸을 주면’이라는 문구와 비교·연산·예측이 가능해진다는 설명을 담은 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT 12] 흩어진 숫자에 줄과 칸을 주면</figcaption></figure>
+        </div>
+        <div class="teacher">
+          · 국가별 발전량·탄소 배출 통계 화면과 영상①을 보여 준 뒤 발문<br>
+          · 한 국가의 에너지원별 발전량을 칠판에 흩뜨려 적어 정리의 필요성을 느끼게 함<br>
+          · 숫자의 ‘무질서’를 일부러 보여 주어 구조화의 필요를 끌어냄<br>
+          · 시간: 지도안은 45분(도입 10 · 전개 30 · 정리 5) 기준. 50분 수업이면 남는 5분을 모둠 활동(활동지 ①)에 더함
+        </div>
+      </div>
+
+      <div class="step" data-phase="도입 · 왜 지금?" data-time="도입 10분 중 ②">
+        <h3>탄소를 계산해야 하는 이유</h3>
+        <div class="mini-cards">
+          <div><b>2015</b><span>한국 배출권거래제(K-ETS) — 할당량을 넘기면 배출권을 산다</span></div>
+          <div><b>2026</b><span>EU CBAM 본격 시행 — 철강·알루미늄·시멘트·비료·수소·전력 수출에 탄소 비용(인증서 구매·제출은 2027년부터)</span></div>
+          <div><b>RE100</b><span>쓰는 전력을 늦어도 2050년까지 100% 재생에너지로 — 애플·구글·삼성전자 등 참여, 협력사도 요구받음</span></div>
+        </div>
+        <div class="do"><b>함께 보기</b>배출권 1톤의 가격은 시기마다 크게 달라져요. 오늘 시세를 같이 확인해 볼까요?<br>
+          <a class="live" href="https://ets.krx.co.kr" target="_blank" rel="noopener"><i></i>배출권시장 정보플랫폼 · 오늘의 시세</a></div>
+        <div class="teacher">· “국가·기업은 매일 발전량·배출량 데이터를 행렬로 다룬다”로 연결<br>· 시세 화면은 수업 시점에 실시간으로 조회</div>
+      </div>
+
+      <div class="step" data-phase="도입 · 목표 확인" data-time="도입 10분 중 ③">
+        <h3>오늘의 목표</h3>
+        <p class="ask" style="font-size:clamp(1.3rem,2.8vw,2rem)">실생활 에너지 데이터를 <em>행렬</em>로 나타내고, 행렬의 덧셈·실수배를 수행하여 그 사회적 의미를 설명해요.</p>
+        <div class="two">
+          <div class="flow">
+            <div class="st"><b>행렬의 뜻</b><small>행·열·성분</small></div>
+            <div class="st"><b>발전량 행렬</b><small>2 × 3 행렬 P</small></div>
+            <div class="st"><b>덧셈</b><small>시계열 통합</small></div>
+            <div class="st"><b>실수배</b><small>수요 절감·감축 목표</small></div>
+          </div>
+          <figure><img src="img/ppt-why-matrix.jpg" alt="구조화·연산·해석 세 단계를 번호 원으로 잇고, 핵심 질문을 적은 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT] 왜 ‘행렬’로 ‘에너지’를 다루는가</figcaption></figure>
+        </div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 1 · 행렬의 뜻" data-time="전개 30분 중 8분">
+        <p class="ask">3×3 격자에서 <em>a<sub>23</sub></em>은 어디에 있을까?</p>
+        <div class="two">
+          <div class="do"><b>직접 눌러 보기</b>
+            <div class="agrid" data-agrid>
+              <span></span><span class="h">1열</span><span class="h">2열</span><span class="h">3열</span>
+              <span class="h">1행</span><button data-i="1" data-j="1" aria-label="1행 1열"></button><button data-i="1" data-j="2" aria-label="1행 2열"></button><button data-i="1" data-j="3" aria-label="1행 3열"></button>
+              <span class="h">2행</span><button data-i="2" data-j="1" aria-label="2행 1열"></button><button data-i="2" data-j="2" aria-label="2행 2열"></button><button data-i="2" data-j="3" aria-label="2행 3열"></button>
+              <span class="h">3행</span><button data-i="3" data-j="1" aria-label="3행 1열"></button><button data-i="3" data-j="2" aria-label="3행 2열"></button><button data-i="3" data-j="3" aria-label="3행 3열"></button>
+            </div>
+            <p class="fb" aria-live="polite">칸을 눌러 보세요.</p>
+          </div>
+          <div>
+            <ul>
+              <li><b>행렬</b>: 여러 수를 직사각형 모양으로 배열해 괄호로 묶은 것</li>
+              <li><b>행</b> = 가로줄, <b>열</b> = 세로줄</li>
+              <li><b>성분 a<sub>ij</sub></b> = i행 j열의 수 (행이 먼저, 열이 나중)</li>
+              <li>행이 m개, 열이 n개 → <b>m × n 행렬</b></li>
+            </ul>
+            <figure><img src="../slides/p2/013.jpg" alt="가로줄은 행, 세로줄은 열이고 두 줄이 만나는 칸이 성분 a_ij임을 보여 주는 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT 13] 가로는 행, 세로는 열</figcaption></figure>
+          </div>
+        </div>
+        <div class="timer" data-min="8"></div>
+        <div class="teacher">· 학생이 손으로 짚어 위치를 말하게 함<br>· ‘i행 j열 → a<sub>ij</sub>’ 표기를 반드시 쓰게 함</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 2 · 데이터 구조화" data-time="전개 30분 중 8분 ①">
+        <h3>표를 행렬로 옮기면</h3>
+        <p>약속: <b>행 = 국가, 열 = 에너지원, 성분 = 발전량(TWh)</b></p>
+        <div class="eq">
+          <table class="dt" aria-label="국가별 에너지원 발전량 표(TWh)">
+            <tr><th></th><th>석탄</th><th>천연가스</th><th>신재생</th></tr>
+            <tr><th>한국</th><td>120</td><td>80</td><td>50</td></tr>
+            <tr><th>독일</th><td>100</td><td>120</td><td>250</td></tr>
+          </table>
+          <span class="arrow" aria-hidden="true">→</span>
+          <span class="nm">P =</span>
+          <span class="mx c3"><span>120</span><span>80</span><span>50</span><span>100</span><span>120</span><span class="hl">250</span></span>
+        </div>
+        <div class="do"><b>모둠 질문</b>
+          <ol class="qlist">
+            <li><b>Q</b>P는 몇 × 몇 행렬인가요? p<sub>11</sub>과 p<sub>23</sub>은 무엇을 뜻하나요?</li>
+            <li><b>Q</b>행과 열을 서로 바꾸면 무엇이 달라질까요?</li>
+          </ol>
+          <a class="live" href="lab/index.html#make" target="_blank" rel="noopener"><i></i>실험실 ① 행렬 만들기 열기</a>
+        </div>
+        <p class="note">표의 값은 교육용 가상 수치예요(실제와 달라요). 3열로 단순하게 하려고 <b>원자력은 뺐어요</b> — 실제 한국은 원자력이 가장 큰 발전원(2024년 31.7%)이고, 독일은 2023년 4월 원전을 모두 멈췄어요. 원자력 열을 더하면 P는 몇 × 몇 행렬이 될까요?</p>
+        <details class="reveal-ans"><summary>정답 보기</summary><div>
+          P는 <b>2 × 3</b> 행렬. p<sub>11</sub> = 120 → 한국의 석탄 발전량, p<sub>23</sub> = 250 → 독일의 신재생 발전량, 독일 천연가스 = p<sub>22</sub> = 120.<br>
+          행·열을 바꾸면 <b>3 × 2</b> 행렬이 되고, 원래 p<sub>23</sub> = 250은 새 행렬의 (3, 2) 성분이 돼요.
+        </div></details>
+        <div class="timer" data-min="8"></div>
+        <div class="teacher">· 독일의 신재생 성분이 큰 까닭을 재생에너지 확대 정책과 연결해 질문<br>· 값은 교육용 가상 수치(원자력 등 생략). 실제 2024년 한국: 원자력 31.7% · 석탄 28.1% · LNG 28.1% · 신재생 10.6%(산업통상자원부 「2024년 에너지수급동향」, 잠정) / 독일: 공공 순발전량 중 재생 62.7%, 석탄 약 22%(갈탄 71.1·무연탄 24.2 TWh), 가스 약 11%(Fraunhofer ISE, 2025. 1.) — 가스 대소는 수업 값과 실제가 반대이니 Our World in Data에서 직접 비교하게 함<br>· 심화: “원자력 열을 추가하면 E와 PE는 어떻게 바뀔까?”(무탄소 전원)<br>· 단위(TWh)를 반드시 쓰게 함</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 2 · 에너지 믹스" data-time="↳ 같은 8분 ②">
+        <p class="ask">믹스가 다르면 <em>탄소도 다르다</em></p>
+        <div class="mix" role="img" aria-label="한국·독일·프랑스의 에너지원별 발전량 비중 막대(교육용 단순화 값)">
+          <div class="r"><span>한국</span><div class="st"><i class="c-coal" style="width:30%"></i><i class="c-gas" style="width:20%"></i><i class="c-nuc" style="width:37.5%"></i><i class="c-ren" style="width:12.5%"></i></div><span class="tot">400 TWh</span></div>
+          <div class="r"><span>독일</span><div class="st"><i class="c-coal" style="width:21.28%"></i><i class="c-gas" style="width:25.53%"></i><i class="c-ren" style="width:53.19%"></i></div><span class="tot">470 TWh</span></div>
+          <div class="r"><span>프랑스</span><div class="st"><i class="c-coal" style="width:3.92%"></i><i class="c-gas" style="width:7.84%"></i><i class="c-nuc" style="width:70.59%"></i><i class="c-ren" style="width:17.65%"></i></div><span class="tot">510 TWh</span></div>
+        </div>
+        <div class="legend"><span><i class="c-coal"></i>석탄</span><span><i class="c-gas"></i>천연가스</span><span><i class="c-nuc"></i>원자력</span><span><i class="c-ren"></i>신재생</span><span class="note">(비중, 교육용 단순화 값)</span></div>
+        <div class="do"><b>생각해 보기</b>프랑스를 3번째 행으로 추가하면 행렬의 크기는 어떻게 바뀔까요? 어떤 열을 새로 만들어야 할까요?</div>
+        <details class="reveal-ans"><summary>값과 읽는 법</summary><div>
+          한국 석탄 120 · 천연가스 80 · 원자력 150 · 신재생 50 / 독일 100 · 120 · 0 · 250 / 프랑스 20 · 40 · 360 · 90 (TWh).<br>
+          프랑스는 원자력 중심 → 저탄소, 독일은 신재생 비중이 가장 크고, 한국은 석탄·가스 등 화석 비중이 커요. 믹스의 차이가 탄소 배출의 차이로 이어져요.
+        </div></details>
+        <div class="teacher">· 프랑스를 3번째 행으로 추가하면? → 행렬의 크기 변화, 원자력 열을 새로 만들어야 함(활동지 ① ④)</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 3 · 행렬의 덧셈" data-time="전개 30분 중 7분">
+        <p class="ask">같은 자리끼리 <em>더한다</em></p>
+        <p class="note">행 = 한국·독일, 열 = 석탄·신재생, 단위 TWh</p>
+        <div class="eq">
+          <span class="mxcap"><span class="mx c2"><span class="hl">60</span><span>20</span><span>50</span><span>120</span></span><small>상반기 A</small></span>
+          <span class="op">+</span>
+          <span class="mxcap"><span class="mx c2"><span class="hl">60</span><span>30</span><span>50</span><span>130</span></span><small>하반기 B</small></span>
+          <span class="op">=</span>
+          <span class="mxcap"><span class="mx c2"><span class="hl">120</span><span>50</span><span>100</span><span>250</span></span><small>연간 A + B</small></span>
+        </div>
+        <p>1행 1열끼리: 60 + 60 = <b class="ring">120</b> → 연간 한국 석탄 발전량 120 TWh</p>
+        <div class="two">
+          <div class="do"><b>짝과 확인</b>나머지 세 칸도 같은 자리끼리 더해 짝과 답을 비교해요.
+            <a class="live" href="lab/index.html#add" target="_blank" rel="noopener"><i></i>실험실 ② 덧셈·실수배 열기</a>
+            <details class="reveal-ans"><summary>2×2 행렬 + 2×3 행렬은 더할 수 있을까?</summary><div>
+              더할 수 없어요. 크기가 다르면 같은 위치의 짝이 맞지 않아요. 원자력 열을 상반기 자료에도 만들어 두 행렬의 크기를 맞추면 더할 수 있어요.
+            </div></details>
+          </div>
+          <figure><img src="../slides/p2/019.jpg" alt="‘크기가 다르면 더할 수 없습니다’라는 문구와 2×2 + 2×3 → ? 질문을 담은 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT 19] 크기가 다르면 더할 수 없다</figcaption></figure>
+        </div>
+        <div class="timer" data-min="7"></div>
+        <div class="teacher">· 반례(2×2 + 2×3)를 보여 주며 크기가 다르면 더할 수 없음을 강조<br>· 짝과 답을 비교하게 함</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 활동 4 · 실수배" data-time="전개 30분 중 7분">
+        <p class="ask">곱하는 수가 곧 <em>정책</em></p>
+        <div class="eq">
+          <span class="q">0.9</span><span class="op">×</span>
+          <span class="mx c2"><span>120</span><span>50</span><span>100</span><span>250</span></span>
+          <span class="op">=</span>
+          <span class="mx c2"><span class="hl">108</span><span class="hl">45</span><span class="hl">90</span><span class="hl">225</span></span>
+        </div>
+        <div class="mini-cards">
+          <div class="em"><b>× 0.9</b><span>전력 수요 10% 절감</span></div>
+          <div><b>× 0.8</b><span>발전량 20% 감축 목표</span></div>
+          <div><b>× 1.1</b><span>발전량 10% 증설 시나리오</span></div>
+        </div>
+        <p class="note">모든 발전원이 같은 비율로 변한다는 단순 가정이에요.</p>
+        <div class="do"><b>모둠 질문</b>모든 발전량을 30% 줄이려면 몇을 곱할까요?
+          <details class="reveal-ans"><summary>정답 보기</summary><div>
+            <b>0.7</b>을 곱해요(남는 비율 70%). 분식집 전 메뉴 10% 할인이 단가 × 0.9인 것과 같은 구조예요.
+          </div></details>
+        </div>
+        <div class="timer" data-min="7"></div>
+        <div class="teacher">· “10% 줄인다” = 남는 비율 90% = 0.9를 곱함<br>· 일부 성분에만 곱하는 오류 점검</div>
+      </div>
+
+      <div class="step" data-phase="전개 · 모둠 활동 (활동지 ①)" data-time="↳ 활동 1~4와 함께">
+        <h3>데이터를 행렬로 담기 — 모둠 활동</h3>
+        <div class="two">
+          <div>
+            <ol class="qlist">
+              <li><b>Q1</b>발전량 행렬 만들기 — 2×3 데이터를 행렬 P로, 성분의 의미 쓰기</li>
+              <li><b>Q2</b>행렬의 덧셈 — 상반기 + 하반기 → 연간</li>
+              <li><b>Q3</b>실수배 — 수요 10% 절감(× 0.9) 후 계산·해석</li>
+              <li><b>Q4</b>생각 넓히기 — 행·열을 바꾸면? 모든 발전량 30% 감축은 몇을 곱할까?</li>
+            </ol>
+            <div class="do"><b>기록하기</b>답은 아래 <a href="#sheet">활동지 ①</a> 칸이나 종이 활동지에 적어요.</div>
+          </div>
+          <figure><img src="img/sheet1-act1.jpg" alt="국가·에너지원 발전량 표를 2×3 행렬 P로 옮기고 p11=120, p23=250의 뜻을 적은 활동지 그림" loading="lazy"><figcaption>[활동지 ①] 흩어진 숫자를 행렬로 담기</figcaption></figure>
+        </div>
+        <details class="reveal-ans"><summary>정답 (교사용)</summary><div>
+          <b>1-2</b> P = (120 80 50 / 100 120 250), 2×3 행렬<br>
+          <b>1-3</b> p<sub>11</sub> = 120 → 한국의 석탄 발전량, p<sub>23</sub> = 250 → 독일의 신재생 발전량, 독일 천연가스 = p<sub>22</sub> = 120<br>
+          <b>1-4</b> 행·열을 바꾸면 3×2 행렬, 원래 p<sub>23</sub> = 250은 새 행렬의 (3, 2) 성분 · 한국 신재생 50 &lt; 독일 신재생 250 → 독일의 화석 비중이 상대적으로 낮다<br>
+          <b>2-1</b> A + B = (120 50 / 100 250) → 연간 한국 석탄 120 TWh<br>
+          <b>2-3</b> 0.9 × (A + B) = (108 45 / 90 225) → 한국 석탄 108 TWh<br>
+          <b>2-4</b> 모든 발전량 30% 감축 → × 0.7 · 0.8 × 0.8 = 0.64 → 64% 남음<br>
+          <b>2-5</b> 메뉴 10% 할인 → 단가 × 0.9, 수량 2배 → 수량 × 2
+        </div></details>
+        <div class="teacher">· 평가[지식·기능]: 행렬 표현과 덧셈·실수배 연산의 정확성 — 관찰 기준은 <a href="index.html#rubric">프로그램 페이지 평가 표</a><br>· 색상 스티커·태블릿(선택)<br>· 50분 수업이면 남는 5분을 이 모둠 활동에 더함</div>
+      </div>
+
+      <div class="step" data-phase="정리 · 형성평가" data-time="정리 5분 중 ①">
+        <h3>세 문제로 확인해요</h3>
+        <div class="two">
+          <div>
+            <ol class="qlist">
+              <li><b>Q1</b>한국 석탄 130·신재생 60 / 독일 석탄 90·신재생 270을 2×2 행렬로 나타내 보세요.</li>
+              <li><b>Q2</b>2×2 행렬과 2×3 행렬을 더할 수 있을까요? 이유는?</li>
+              <li><b>Q3</b>(120 50 / 100 250)에 0.8을 곱하면?</li>
+            </ol>
+            <div class="do"><b>내 답</b><textarea class="pad" data-key="l1-check" aria-label="형성평가 세 문제의 내 답"></textarea></div>
+          </div>
+          <figure><img src="../slides/p2/026.jpg" alt="형성평가 세 문제(2×2 행렬로 나타내기, 크기가 다른 행렬의 덧셈, 0.8배)를 세 칸에 담은 수업 슬라이드" loading="lazy"><figcaption>[수업 PPT 26] 세 문제로 확인합니다</figcaption></figure>
+        </div>
+        <details class="reveal-ans"><summary>정답 보기</summary><div>
+          <div class="eq sm"><b>Q1</b><span class="mx c2"><span>130</span><span>60</span><span>90</span><span>270</span></span>
+          <b style="margin-left:1rem">Q3</b><span class="mx c2"><span>96</span><span>40</span><span>80</span><span>200</span></span></div>
+          <b>Q2</b> 크기가 달라 같은 위치의 짝이 맞지 않으므로 더할 수 없어요.
+        </div></details>
+        <div class="teacher">· 성분 위치를 혼동하는 오개념은 바로 고쳐 줌</div>
+      </div>
+
+      <div class="step" data-phase="정리 · 예고" data-time="정리 5분 중 ②">
+        <p class="ask">담고, 더하고,<br><em>비율을 곱한다</em></p>
+        <div class="mini-cards">
+          <div><b>행렬</b><span>데이터를 담는 그릇</span></div>
+          <div><b>덧셈</b><span>통합</span></div>
+          <div><b>실수배</b><span>비율 적용</span></div>
+        </div>
+        <div class="do"><b>다음 시간</b>행렬의 곱으로 탄소의 값을 매긴다 — <a href="lesson-2.html">2차시 수업 화면</a></div>
+        <figure><img src="../slides/p2/029.jpg" alt="‘다음 시간, 행렬의 곱으로 탄소의 값을 매긴다’라는 2차시 예고 슬라이드" loading="lazy"><figcaption>[수업 PPT 29] 2차시 예고</figcaption></figure>
+      </div>
+
+    </div>
+    <div class="runner-foot"><button class="btn ghost" type="button" data-run="prev">← 이전</button><span class="count"></span><button class="btn" type="button" data-run="next">다음 →</button></div>
+  </div>
+</div></section>
+
+<section class="sec panel" id="sheet"><div class="wrap">
+  <p class="label">활동지 ①</p>
+  <h2 class="head">우리 모둠의 <em>기록</em></h2>
+  <p class="note" style="margin-top:-.4rem">적은 내용은 이 기기의 브라우저에만 저장돼요. 종이 활동지를 쓰는 반은 계산을 종이에 써도 돼요.</p>
+  <div class="lsheet cols">
+    <div class="card">
+      <h3><span class="n">1</span>발전량 데이터를 행렬로 나타내기</h3>
+      <figure><img src="img/sheet1-act1.jpg" alt="국가·에너지원 발전량 표를 2×3 행렬 P로 옮기고 p11=120, p23=250의 뜻을 적은 활동지 그림" loading="lazy"><figcaption>[활동지 ①] 활동 1</figcaption></figure>
+      <div class="field"><label for="l1a1">약속 쓰기 — 행 = ?, 열 = ?, 성분의 단위 = ?</label><textarea class="pad" id="l1a1" data-key="l1-promise" rows="3"></textarea></div>
+      <div class="field"><label for="l1a2">두 나라의 신재생 성분(p<sub>13</sub>, p<sub>23</sub>)을 비교하면 무엇을 알 수 있나요? 탄소 배출과 어떻게 이어질까요?</label><textarea class="pad" id="l1a2" data-key="l1-compare"></textarea></div>
+      <div class="field"><label for="l1a3">프랑스(원자력 중심)를 3번째 행으로 추가하면 행렬의 크기는? 어떤 열을 새로 만들어야 하나요?</label><textarea class="pad" id="l1a3" data-key="l1-france"></textarea></div>
+    </div>
+    <div class="card">
+      <h3><span class="n">2</span>덧셈과 실수배로 미래 예측하기</h3>
+      <figure><img src="img/sheet1-act2.jpg" alt="상반기 A와 하반기 B 행렬을 더하고, 연간 행렬에 0.9를 곱해 수요 10% 절감을 계산한 활동지 그림" loading="lazy"><figcaption>[활동지 ①] 활동 2</figcaption></figure>
+      <div class="field"><label for="l1b1">A+B의 (2, 2) 성분은 무엇을 뜻하나요?</label><textarea class="pad" id="l1b1" data-key="l1-22" rows="3"></textarea></div>
+      <div class="field"><label for="l1b2">배출을 줄이는 다른 방법은? (모든 발전원을 같은 비율로 줄이는 것 말고)</label><textarea class="pad" id="l1b2" data-key="l1-other"></textarea></div>
+    </div>
+    <div class="card" style="grid-column:1/-1">
+      <h3><span class="n">3</span>계산 칸 — 행렬 P · 덧셈 · 실수배</h3>
+      <div class="calcf">
+        <div><label for="l1k1">② P = ( 1행 / 2행 ) 과 크기</label><input class="pad" id="l1k1" data-key="l1-kP" placeholder="예: ( _ _ _ / _ _ _ ), _ × _"></div>
+        <div><label for="l1k2">③ p<sub>11</sub>, p<sub>23</sub>, 독일 천연가스 성분 기호</label><input class="pad" id="l1k2" data-key="l1-kpij"></div>
+        <div><label for="l1k3">활동 2 ① A + B</label><input class="pad" id="l1k3" data-key="l1-kAB"></div>
+        <div><label for="l1k4">활동 2 ③ 0.9 × (A + B)</label><input class="pad" id="l1k4" data-key="l1-k09"></div>
+        <div><label for="l1k5">활동 2 ④ 30% 감축에 곱할 수 · 0.8 × 0.8</label><input class="pad" id="l1k5" data-key="l1-k07"></div>
+        <div><label for="l1k6">활동 2 ⑤ 10% 할인 · 수량 2배에 곱할 수</label><input class="pad" id="l1k6" data-key="l1-kmenu"></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="slides"><div class="wrap">
+  <p class="label">이 차시 슬라이드</p>
+  <p class="note" style="margin-top:-.2rem">수업 PPT 1~29장(공통 도입 1~9장 포함). 슬라이드는 처음 만든 어두운 판 그대로예요.</p>
+  <div class="deck" data-dir="../slides/p2/" data-from="1" data-n="29" data-title="1차시 슬라이드"></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="exit"><h3>나가기 질문</h3><p>오늘 배운 덧셈·실수배가 쓰일 다른 에너지 상황을 하나 적어 보세요. (예: 여러 발전소의 월별 발전량 합치기)</p><textarea class="pad" data-key="l1-exit" aria-label="나가기 질문 답"></textarea></div>
+  <div class="lnav" style="margin-top:2rem"><a href="index.html"><small>← 프로그램 2 전체</small>수업 소개·평가·자료</a><a class="next" href="lesson-2.html"><small>다음 차시 →</small>2차시 · 행렬의 곱, 탄소의 값을 매기다</a></div>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <p><b style="color:var(--champ)">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 프로그램 2 「데이터로 그리는 미래 에너지: 행렬 모델링과 탄소 경제」 · 하진수(대전대신고등학교) · 한국에너지정보문화재단 지원</p>
+  <p>수업 행렬의 발전량·배출계수·가격은 교육용 가상 수치입니다. 실제 비교 수치: 산업통상자원부 「2024년 에너지수급동향」 · Fraunhofer ISE(2025. 1.) · <a href="https://ourworldindata.org/electricity-mix" target="_blank" rel="noopener">Our World in Data</a> · <a href="https://ets.krx.co.kr" target="_blank" rel="noopener">한국거래소 배출권시장 정보플랫폼</a></p>
+  <p><a href="index.html">← 프로그램 2 전체</a> · <a href="../index.html">전체 프로그램</a></p>
+</div></footer>
+<script src="../assets/site.js"></script>
+<script src="p2-lesson.js"></script>
+</body>
+</html>

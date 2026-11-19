@@ -1,0 +1,123 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5차시 · 글로벌 데모데이 ① · 프로그램 3 글로벌 · 에너지참견시점</title>
+<meta name="description" content="프로그램 3 글로벌 5차시: 데모데이 심사 기준과 시차 6시간의 실시간 연결 방법을 확인하고, Track A 동화책과 Track B 칼럼·포스터 팀이 피칭하는 50분 수업 화면">
+<link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/lesson.css">
+<style>
+/* 프로그램 3 차시 페이지 보충 — 색은 C안 변수만. 트랙 글자색(--tXi) 4개만 고정값(공통 --prog-ink 계열과 같은 값) */
+:root{--tA:var(--yellow);--tB:var(--blue);--tC:var(--purple);--tD:var(--peach);--tAi:#8A6A00;--tBi:#16739E;--tCi:#6A3F8E;--tDi:#B85A2A;
+  --cFossil:var(--grey);--cNuc:var(--purple);--cHydro:var(--blue);--cRen:var(--amber);--cGeo:var(--peach);--cOther:var(--sage)}
+.lhero figure img{object-position:var(--pos,center)}
+.boxes{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin:.6rem 0 1rem}
+.box{border:1px solid var(--line);border-left:4px solid var(--prog);border-radius:14px;padding:.9rem 1rem;background:var(--panel)}
+.box h4{margin:0 0 .35rem;font-size:1.1rem;color:var(--ink)}
+.box p{margin:0;color:var(--ink2)}
+.pill-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.pill{border:1px solid var(--line2);border-radius:12px;padding:.55rem .85rem;background:var(--panel)}
+.pill b{color:var(--prog-ink);display:block;font-size:.92rem}
+.sbar{display:flex;height:44px;border-radius:10px;overflow:hidden;margin:.6rem 0 1rem;background:var(--panel2)}
+.sbar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;color:#fff;font-size:.9rem;width:0;transition:width 1.2s var(--ease) .2s;white-space:nowrap;overflow:hidden}
+.step.on .sbar i{width:var(--w)}
+.keys{display:flex;flex-wrap:wrap;gap:.3rem 1rem;color:var(--ink2);font-size:.88rem;margin:.2rem 0 .8rem}
+.key{display:inline-flex;align-items:center;gap:.35rem}.key::before{content:"";width:11px;height:11px;border-radius:3px;background:var(--c)}
+.bigq{font-weight:900;font-size:clamp(1.35rem,2.8vw,2.05rem);line-height:1.45;color:var(--ink);border-left:5px solid var(--prog);padding-left:1rem;margin:.6rem 0 1rem}
+.jump{display:inline-flex;align-items:center;gap:.4rem;color:var(--prog-ink);font-weight:700;text-decoration:none;border-bottom:2px solid var(--progT);margin-top:.4rem}
+.jump:hover{border-color:var(--prog)}
+.tmr-row{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;margin:.6rem 0 1rem}
+.tmr-row > span{display:inline-flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.tmr-row small{color:var(--prog-ink);font-weight:700;font-size:.9rem}
+.runner .step figure.sf{margin:.4rem 0 0}
+.runner .step figure.sf figcaption{font-size:.86rem}
+.runner .step .mini2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.4rem 0 1rem}
+.runner .step .mini2 figure{margin:0;border-radius:12px;overflow:hidden;position:relative}
+.runner .step .mini2 figure img{width:100%;max-height:none;aspect-ratio:524/364;object-fit:cover;border-radius:0;box-shadow:none}
+.runner .step .mini2 figcaption{position:absolute;left:8px;bottom:8px;background:rgba(16,36,26,.8);color:#fff;border-radius:999px;padding:.1rem .7rem;font-size:.88rem;margin:0}
+.gloss{width:100%;border-collapse:collapse;font-size:.95rem}
+.gloss th,.gloss td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left}
+.gloss th{color:var(--prog-ink)}
+.awards{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.awards span{border:1.5px solid var(--prog);border-radius:999px;padding:.3rem 1rem;font-weight:700;color:var(--prog-ink);background:var(--panel)}
+.trk{font-weight:900}
+.lsheet .card p.h,.lsheet small.h{color:var(--grey);font-size:.88rem;margin:.1rem 0 .4rem;display:block}
+input.pad{min-height:0}
+.pad.sm{min-height:76px}
+.sheet-note{color:var(--grey);font-size:.92rem}
+.deckhead{font-weight:700;margin:1.6rem 0 .6rem}
+.deckhead:first-of-type{margin-top:0}
+.rubtbl{min-width:720px}
+.rubtbl td:first-child{font-weight:700;min-width:9.5em}
+.rubtbl small{white-space:nowrap}
+.rubtbl th{color:var(--prog-ink)}
+</style></head>
+<body data-prog="p3">
+<!-- 프로그램 3 5차시 · 근거: index.html 「수업 진행」 5~6차시 탭의 ‘5차시 끝’ 경계 앞 단계(도입 10분 + 데모데이 피칭 ① 40분), 「데모데이」 동료 평가, 「평가」 5~6차시 · 수업 PPT slides/p3/ -->
+<header class="top lesson-top"><div class="wrap">
+  <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+  <div class="crumb"><a class="back-hub" href="index.html">03 글로벌</a><b>5차시 · 글로벌 데모데이 ①</b></div>
+  <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
+</div></header>
+<main>
+<section class="lhero"><div class="wrap">
+  <div><span class="no">03 글로벌 · 5차시 / 6</span>
+    <h1>한-튀르키예<br><em>글로벌 데모데이</em></h1>
+    <p class="goal"><b>오늘의 목표</b>심사 기준을 확인하고, 팀당 3분 피칭과 2분 Q&amp;A로 우리 아이디어의 가치를 세상에 제안해요.</p>
+    <div class="meta"><span>고등학교 50분</span><span>Zoom/Teams 연결</span><span>Mentimeter · Padlet</span><span>시차 6시간</span></div></div>
+  <figure><img src="img/class-56-1.jpg" alt="장치 구조를 그린 손그림 포스터들을 칠판에 붙이고 두 학생이 마이크를 들고 발표하는 장면" loading="eager"><figcaption>▲ 5~6차시 활동사진 · 포스터를 붙여 두고 발표</figcaption></figure>
+</div><span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice" fill="currentColor"><path d="M0 70V60h36V44h24v16h18V34h28v26h14V48h20v12h28V38l10-6 10 6v22h22V52h18v8h40V46h26v14h16V36h32v24h28V52h20v8h34V40h22v20h24V50h22v10h38V44h28v16h20V32h26v28h22V48h20v12h34V42h24v18h22V54h18v6h38V38h28v22h18V48h22v12h38V42h26v18h28V50h20v10h22V36h28v24h18V46h24v14h38V44h26v16h22V52h40v18Z"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M250 60V16M250 16l-13-9M250 16l15-2M250 16l-2 15"/><path d="M290 60V24M290 24l-10-7M290 24l12-2M290 24l-2 12"/><path d="M930 60V12M930 12l-14-9M930 12l16-2M930 12l-2 16"/></g><path d="M470 60l10-12h40l-10 12Zm52 0l10-12h40l-10 12ZM700 60l10-12h40l-10 12Z"/><circle cx="118" cy="52" r="9"/><circle cx="640" cy="50" r="11"/><circle cx="1080" cy="51" r="10"/><circle cx="822" cy="53" r="8"/></svg></span></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <p class="label">수업 흐름</p>
+  <div class="lplan"><div style="--m:3"><b>학습 문제</b><small>3분</small></div><div style="--m:4"><b>심사 기준</b><small>4분</small></div><div style="--m:3"><b>피칭 방법</b><small>3분</small></div><div style="--m:40"><b>피칭 ① · Track A·B</b><small>40분</small></div></div>
+  <p class="sheet-note">← → 키나 아래 버튼으로 넘겨요. 교사 모드를 켜면 발문·유의점이 보여요.</p>
+  <div class="runner stage">
+    <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+    <div class="steps">
+          <div class="step" data-phase="도입 · 학습 문제" data-time="10분 중 ① (3분)">
+            <div class="two"><div><p class="ask">한-튀르키예 그린 벤처<br><em>글로벌 데모데이</em></p><p>데모데이는 우리가 만든 아이디어의 기능과 환경적·사회적 가치를 세상에 제안하는 자리예요.</p><div class="teacher">자료: 데모데이 안내 슬라이드.</div></div><div><figure class="sf"><img src="img/class-56-2.jpg" alt="손그림 포스터를 벽에 붙여 두고 한 학생이 마이크와 노트를 들고 발표하는 장면" loading="lazy"><figcaption>▲ 5~6차시 활동사진 · 포스터 앞 발표</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="도입 · 목표 확인" data-time="10분 중 ② (4분)">
+            <div class="two"><div><h3>심사 기준 · 데모데이 평가 루브릭</h3><div class="boxes"><div class="box"><h4>1. 가치 제안 설득력</h4><p>솔루션이 만드는 환경적·사회적 가치와 <b>예상</b> 효과가 구체적인가? 예상치(추정)와 실제로 측정할 값을 구분했는가?</p></div><div class="box"><h4>2. 논증의 논리성</h4><p>문제 정의부터 해결책까지의 서사가 논리적이고 과학적 근거에 기반하는가?</p></div><div class="box"><h4>3. Q&amp;A 대응력</h4><p>청중의 질문과 반론에 타당한 근거로 유연하게 답하는가?</p></div></div></div><div><figure class="sf"><img src="../slides/p3/033.jpg" alt="수업 PPT 33장 슬라이드: 데모데이 평가 루브릭" loading="lazy"><figcaption>▲ 수업 PPT 33장 · 데모데이 평가 루브릭</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="도입 · 활동 안내" data-time="10분 중 ③ (3분)">
+            <div class="two"><div><h3>피칭 방법 · 참여 시스템</h3><div class="pill-row"><div class="pill"><b>피칭</b>팀당 3분 발표</div><div class="pill"><b>Q&amp;A</b>2분</div><div class="pill"><b>시차</b>튀르키예가 <span class="ring" style="margin:0 .4em">6시간</span> 늦어요</div></div><ul><li>화상 플랫폼: Zoom/Teams로 한국–튀르키예 연결</li><li>시간 맞추기: 한국 15:00 = 튀르키예 09:00 (한국 오전 9시는 튀르키예 새벽 3시!)</li><li>실시간 번역: 다국어 라이브 자막 기능 활성화</li><li>실시간 투표: Mentimeter / Padlet 평가 시트 접속</li><li>경청 매너: 다른 모둠 발표 때 리액션과 질문 준비</li></ul><a class="live" href="https://www.mentimeter.com" target="_blank" rel="noopener"><i></i>Mentimeter</a><a class="live" href="https://padlet.com" target="_blank" rel="noopener"><i></i>Padlet</a><div class="teacher"><b>시차 6시간</b> — 한국 UTC+9, 튀르키예 UTC+3(2016년부터 연중 고정, 서머타임 없음). 한국 6~7교시(약 14:00~16:00) = 튀르키예 08:00~10:00 → 실시간 데모데이는 한국 오후 차시에 잡기. 파트너 교사와 날짜·시각을 ‘두 나라 시각’으로 함께 적어 공유. 연결이 안 되거나 시간이 맞지 않으면 튀르키예 팀 피칭은 사전 녹화 영상 + Padlet 비동기 Q&amp;A(24시간)로 대체.</div><!-- 확인 필요: PPT 32장 「실시간 피칭 타임테이블」은 '10분 팀별 핵심 피칭 / 2분 Q&A', 지도안·루브릭은 '팀당 3분 발표 + 2분 Q&A' — 화면은 지도안 기준 --></div><div><figure class="sf"><img src="../slides/p3/034.jpg" alt="수업 PPT 34장 슬라이드: 글로벌 피칭 참여 시스템" loading="lazy"><figcaption>▲ 수업 PPT 34장 · 글로벌 피칭 참여 시스템</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="전개 · 데모데이 피칭 ①" data-time="40분 중 ①">
+            <div class="two"><div><h3><span class="trk" style="color:var(--tAi)">세션 1</span> · Track A 동화책 시연</h3><p class="bigq">에너지 불평등을 해결하는 <em class="hl">스토리북</em></p><p>아이들의 시선에서 풀어낸 양국의 에너지 우정과 적정기술 이야기를 낭독하고, 15장면 일러스트를 시연해요.</p><div class="tmr-row"><span><small>피칭 3분</small><span class="timer" data-min="3"></span></span><span><small>Q&amp;A 2분</small><span class="timer" data-min="2"></span></span></div><div class="do"><b>동료 평가</b>팀마다 <a href="#sheet">동료 평가 시트</a>에 강점과 근거를 짚은 질문을 남겨요.</div></div><div><figure class="sf"><img src="../slides/p3/035.jpg" alt="수업 PPT 35장 슬라이드: Track A · 동화책 시연" loading="lazy"><figcaption>▲ 수업 PPT 35장 · Track A · 동화책 시연</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="전개 · 데모데이 피칭 ①" data-time="40분 중 ②">
+            <div class="two"><div><h3><span class="trk" style="color:var(--tBi)">세션 2·3</span> · Track B 칼럼 &amp; 포스터</h3><div class="boxes"><div class="box"><h4>언론이 놓친 기후 위기의 본질</h4><p>미디어 프레이밍 비판적 분석 결과를 브리핑하고, 논리적 대안을 담은 오피니언 칼럼을 발표해요.</p></div><div class="box"><h4>직관적인 기후 행동 메시지</h4><p>Canva로 디자인한 슬로건과 일상 속 3대 실천 수칙을 시각화해 브리핑해요.</p></div></div><div class="tmr-row"><span><small>피칭 3분</small><span class="timer" data-min="3"></span></span><span><small>Q&amp;A 2분</small><span class="timer" data-min="2"></span></span></div><div class="do"><b>동료 평가</b>팀마다 <a href="#sheet">동료 평가 시트</a>에 강점과 근거를 짚은 질문을 남겨요.</div></div><div><figure class="sf"><img src="../slides/p3/036.jpg" alt="수업 PPT 36장 슬라이드: Track B · 신문 칼럼 발표" loading="lazy"><figcaption>▲ 수업 PPT 36장 · Track B · 신문 칼럼 발표</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="5차시 끝 · 쉬는 시간" data-time="↳ 50분 지점">
+            <div class="two"><div><p class="ask"><em>5차시</em> 끝!</p><p>동료 평가 시트를 저장하고, 다음 시간 발표 팀은 화면 공유를 미리 확인해요.</p><a class="jump" href="lesson-6.html">6차시 수업 화면으로 →</a><div class="teacher">화상 연결은 끊지 않고 유지(재접속 지연 방지). 블록 수업이 아니면 6차시 첫 발표 팀부터 이어 감.</div></div><div><figure class="sf"><img src="img/class-56-4.jpg" alt="다른 모둠의 손그림 포스터 앞에서 한 학생이 손짓을 하며 마이크로 설명하는 장면" loading="lazy"><figcaption>▲ 5~6차시 활동사진 · 손짓을 섞어 설명하는 발표자</figcaption></figure></div></div>
+          </div>
+    </div>
+    <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">◀ 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 ▶</button></div>
+  </div>
+</div></section>
+
+<section class="sec panel" id="sheet"><div class="wrap">
+  <p class="label">활동지</p><h2 class="head">동료 평가 <em>시트</em></h2>
+  <p class="sheet-note">쓴 내용은 이 기기의 브라우저에만 저장돼요. 수업이 끝나면 아래 「내 기록 모두 복사」로 모둠 문서에 붙여 두세요.</p>
+  <div class="boxes"><div class="box"><h4>1. 가치 제안 설득력</h4><p>환경적·사회적 가치와 예상 효과가 구체적인가? 예상치(계산식·출처)와 실제로 측정할 값을 구분했는가?</p></div><div class="box"><h4>2. 논증의 논리성</h4><p>문제 정의부터 해결책까지 논리적이고 과학적 근거에 기반하는가?</p></div><div class="box"><h4>3. Q&amp;A 대응력</h4><p>질문과 반론에 타당한 근거로 유연하게 답하는가?</p></div></div><p class="sheet-note">별점 평가판과 3분+2분 원형 피칭 타이머는 <a href="index.html#demo">프로그램 페이지 「데모데이」</a>에 있어요. 공식 투표는 Mentimeter·Padlet에서 해요.</p><div class="lsheet cols"><div class="card"><h3><span class="n">1</span>평가 1</h3><div class="field"><label for="l5-t1-team">발표 팀 · 트랙</label><input class="pad" id="l5-t1-team" data-key="l5-t1-team" placeholder="예: Team 1 / Track A 동화책"></div><div class="field"><label for="l5-t1-good">가장 인상 깊은 점 (강점)</label><textarea class="pad sm" id="l5-t1-good" data-key="l5-t1-good" placeholder="예: 캐릭터 설정이 기발함…"></textarea></div><div class="field"><label for="l5-t1-more">더 발전시킬 점 / 근거를 짚은 질문</label><textarea class="pad sm" id="l5-t1-more" data-key="l5-t1-more" placeholder="예: 감축량 계산에 쓴 배출계수는 어디서 가져왔나요?"></textarea></div></div><div class="card"><h3><span class="n">2</span>평가 2</h3><div class="field"><label for="l5-t2-team">발표 팀 · 트랙</label><input class="pad" id="l5-t2-team" data-key="l5-t2-team" placeholder="예: Team 1 / Track A 동화책"></div><div class="field"><label for="l5-t2-good">가장 인상 깊은 점 (강점)</label><textarea class="pad sm" id="l5-t2-good" data-key="l5-t2-good" placeholder="예: 캐릭터 설정이 기발함…"></textarea></div><div class="field"><label for="l5-t2-more">더 발전시킬 점 / 근거를 짚은 질문</label><textarea class="pad sm" id="l5-t2-more" data-key="l5-t2-more" placeholder="예: 감축량 계산에 쓴 배출계수는 어디서 가져왔나요?"></textarea></div></div><div class="card"><h3><span class="n">3</span>평가 3</h3><div class="field"><label for="l5-t3-team">발표 팀 · 트랙</label><input class="pad" id="l5-t3-team" data-key="l5-t3-team" placeholder="예: Team 1 / Track A 동화책"></div><div class="field"><label for="l5-t3-good">가장 인상 깊은 점 (강점)</label><textarea class="pad sm" id="l5-t3-good" data-key="l5-t3-good" placeholder="예: 캐릭터 설정이 기발함…"></textarea></div><div class="field"><label for="l5-t3-more">더 발전시킬 점 / 근거를 짚은 질문</label><textarea class="pad sm" id="l5-t3-more" data-key="l5-t3-more" placeholder="예: 감축량 계산에 쓴 배출계수는 어디서 가져왔나요?"></textarea></div></div><div class="card"><h3><span class="n">4</span>평가 4</h3><div class="field"><label for="l5-t4-team">발표 팀 · 트랙</label><input class="pad" id="l5-t4-team" data-key="l5-t4-team" placeholder="예: Team 1 / Track A 동화책"></div><div class="field"><label for="l5-t4-good">가장 인상 깊은 점 (강점)</label><textarea class="pad sm" id="l5-t4-good" data-key="l5-t4-good" placeholder="예: 캐릭터 설정이 기발함…"></textarea></div><div class="field"><label for="l5-t4-more">더 발전시킬 점 / 근거를 짚은 질문</label><textarea class="pad sm" id="l5-t4-more" data-key="l5-t4-more" placeholder="예: 감축량 계산에 쓴 배출계수는 어디서 가져왔나요?"></textarea></div></div></div>
+</div></section>
+
+<section class="sec" id="slides"><div class="wrap"><p class="label">이 차시 슬라이드</p>
+  <p class="deckhead">5차시 슬라이드 · 31~37장</p><div class="deck" data-dir="../slides/p3/" data-from="31" data-n="7" data-title="5차시 슬라이드 · 31~37장"></div>
+  
+</div></section>
+
+<section class="sec panel" id="rubric"><div class="wrap">
+  <p class="label">이 차시 평가</p><h2 class="head">피칭과 <em>동료 피드백</em></h2>
+  <p class="muted small">[10공국2-03-02] · 피칭(발표) 평가, 동료 피드백(Padlet)</p><div class="tblwrap"><table class="tbl rubtbl"><thead><tr><th>기준</th><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>산출물 및 피칭<br><small class="muted">10공국2-03-02</small></td><td>3분 안에 문제–해결–예상 효과(계산 근거 포함)를 순서대로 말하고, 예상치와 실제로 측정할 값을 구분한다. Q&amp;A 질문에 데이터나 원리를 들어 답한다.</td><td>피칭은 시간 안에 했지만 예상 효과에 근거(수치·계산)가 없거나, Q&amp;A에서 근거 없이 답한다.</td><td>3분 안에 문제–해결을 다 말하지 못했거나, Q&amp;A에 답하지 못했다.</td></tr><tr><td>동료 피드백의 질<br><small class="muted">10공국2-03-02</small></td><td>다른 팀 발표의 근거·데이터를 짚어 개선 질문을 2팀 이상에 남긴다(예: “배출계수 출처는?”).</td><td>인상 평(“좋았다”, “재밌다”)만 남긴다.</td><td>피드백을 남기지 못했다.</td></tr></tbody></table></div><p class="sheet-note">참여 여부(투표·평가 시트 제출)는 성취 수준이 아니라 체크리스트로 따로 기록해요.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="exit"><h3>나가기 질문</h3><p>오늘 들은 발표 가운데 근거·데이터를 짚어 남긴 질문 하나를 적어요. (예: “배출계수 출처는?”)</p><textarea class="pad" data-key="l5-exit" aria-label="나가기 질문 답"></textarea></div>
+  <div class="lnav" style="margin-top:2rem"><a href="lesson-4.html"><small>← 이전 차시</small>4차시 · 피드백 반영과 중간 공유</a><a href="index.html"><small>프로그램 3 전체</small>수업 소개 · 4색 트랙 · 평가 · PPT</a><a class="next" href="lesson-6.html"><small>다음 차시 →</small>6차시 · 글로벌 데모데이 ② · 성찰</a></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+  <p>2026 에너지소양교육 교사연구회 「에너지참견시점」 · 프로그램 3 · 임은희(영훈고등학교) · 한국에너지정보문화재단 지원</p>
+  <p>자료: 최종보고서 별첨 교수·학습 지도안 및 활동지, 수업 PPT 「한-튀르키예 글로벌 기후 행동 프로젝트」 · 시간은 고등학교 50분 수업 기준(지도안의 2차시 블록을 차시 경계에서 나눔) · 수업 사진의 학생 얼굴과 이름은 흐리게 처리했습니다.</p>
+</div></footer>
+<script src="../assets/site.js"></script>
+</body></html>

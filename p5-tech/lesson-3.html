@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3차시 시제품 제작 1 · 프로그램 5 기술 · 에너지참견시점</title>
+<meta name="description" content="공구·전지 안전 약속을 확인하고, 구상도대로 마름질·가공해 기본 구조를 만들고 태양전지를 연결해 첫 작동을 확인하는 기술 3차시(50분) 수업 화면">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<link rel="stylesheet" href="p5-lesson.css">
+</head>
+<body data-prog="p5">
+<header class="top lesson-top"><div class="wrap">
+  <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+  <div class="crumb"><a class="back-hub" href="index.html">05 기술</a><b>3차시 · 시제품 제작 1</b></div>
+  <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
+</div></header>
+
+<main>
+<section class="lhero"><div class="wrap">
+  <div><span class="no">05 기술 · 3차시 / 5</span>
+    <h1>제작 1 — <em>기본 구조</em>와 첫 작동</h1>
+    <p class="goal"><b>오늘의 목표</b>모둠원과 역할을 나누어 공구를 안전하게 쓰며 시제품의 기본 구조를 만들고, 태양전지와 전자부품을 연결해 에너지 전환이 일어나는지 확인하고 기록해요.</p>
+    <div class="meta"><span>50분</span><span>모둠 실습 · 기술실</span><span>디벗 모둠당 1대</span><span>활동지 05(개인)</span></div></div>
+  <figure><img src="img/proto-bottle.jpg" alt="페트병 구조물과 작은 태양전지를 연결한 학생 시제품" loading="eager"><figcaption>▲ 페트병과 태양전지를 활용한 시제품</figcaption></figure>
+</div><span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice" fill="currentColor"><path d="M0 70V60h36V44h24v16h18V34h28v26h14V48h20v12h28V38l10-6 10 6v22h22V52h18v8h40V46h26v14h16V36h32v24h28V52h20v8h34V40h22v20h24V50h22v10h38V44h28v16h20V32h26v28h22V48h20v12h34V42h24v18h22V54h18v6h38V38h28v22h18V48h22v12h38V42h26v18h28V50h20v10h22V36h28v24h18V46h24v14h38V44h26v16h22V52h40v18Z"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M250 60V16M250 16l-13-9M250 16l15-2M250 16l-2 15"/><path d="M290 60V24M290 24l-10-7M290 24l12-2M290 24l-2 12"/><path d="M930 60V12M930 12l-14-9M930 12l16-2M930 12l-2 16"/></g><path d="M470 60l10-12h40l-10 12Zm52 0l10-12h40l-10 12ZM700 60l10-12h40l-10 12Z"/><circle cx="118" cy="52" r="9"/><circle cx="640" cy="50" r="11"/><circle cx="1080" cy="51" r="10"/><circle cx="822" cy="53" r="8"/></svg></span></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <p class="label">수업 흐름</p>
+  <div class="lplan"><div style="--m:5"><b>도입 · 안전 약속</b><small>5분</small></div><div style="--m:35"><b>제작 1 · 기본 구조와 첫 작동</b><small>35분</small></div><div style="--m:10"><b>정리 · 제작 일기</b><small>10분</small></div></div>
+  <p class="mini" style="margin:0 0 1rem">← → 키로 단계를 넘겨요. 교사 모드를 켜면 지도안의 발문과 유의점이 함께 보여요.</p>
+
+  <div class="runner stage">
+    <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+    <div class="steps">
+      <div class="step" data-phase="도입 · 안전 약속 ①" data-time="5분 중 ①">
+        <p class="ask">공구 사용 <em>약속</em>부터</p>
+        <div class="grid g3 safe">
+          <div class="card"><span class="no">칼 · 페트병 · 깡통</span><p>평평한 재료는 커팅 매트 위에서 쇠자를 대고, 날은 몸 바깥 방향으로. <b>둥근 페트병·깡통은 칼로 작은 틈만 낸 뒤 가위로</b> 잘라요. 자른 단면과 깡통 가장자리는 <b>절연 테이프로 감싸요</b>.</p></div>
+          <div class="card"><span class="no">글루건</span><p>받침대에 세워 두기. 노즐과 녹은 접착제는 맨손으로 만지지 않기. 다 쓰면 전원 분리.</p></div>
+          <div class="card"><span class="no">순간접착제</span><p>보안경을 쓰고 환기되는 곳에서 소량만. 면장갑 등 흡수성 재료와 닿지 않게. 피부가 붙으면 억지로 떼지 말고 따뜻한 비눗물에 불린 뒤 선생님께 알려요.</p></div>
+        </div>
+        <div class="two mt"><div>
+          <p class="mini">금 간 태양전지는 쓰지 않아요(깨진 모서리에 베일 수 있어요). 햇빛 시험 때 해를 직접 보지 않아요. 연결은 납땜 없이 집게 전선·커넥터로 해요.</p>
+          <div class="timer" data-min="5"></div>
+        </div>
+        <figure class="fig"><img src="../slides/p5/033.jpg" alt="수업 PPT 33장. 안전 교육 — 칼, 글루건, 순간접착제 사용 약속과 안전 확인 체크리스트" loading="lazy"><figcaption>▲ 수업 PPT 33장</figcaption></figure></div>
+        <div class="teacher"><b>3차시 도입 5분</b>: 칼과 커팅 매트, 글루건, 순간접착제 사용법과 전자부품 기본 연결법을 확인(지도안). 안전 약속 ①·② 카드를 함께 읽고 공구를 확인. 칼·가위로 페트병 자르기와 전지 연결 시범은 ‘제작 1’(35분)의 처음 몇 분에 모둠별로 보여 줌(지도안대로 안전 교육은 제작 1 안에 포함 → 5+35+10=50분).</div>
+      </div>
+      <div class="step" data-phase="도입 · 안전 약속 ②" data-time="5분 중 ②">
+        <p class="ask">전지와 회로 <em>약속</em></p>
+        <div class="grid g2 safe">
+          <div class="card"><span class="no">충전 금지</span><p>충전지가 아닌 <b>건전지·코인전지는 절대 충전하지 않아요</b>. 새거나 터질 수 있어요. 밤에 쓰는 설계는 충전지(예: 니켈수소 AA)와 충전 모듈로 만들어요.</p></div>
+          <div class="card"><span class="no">리튬 전지</span><p>리튬 전지는 수업에서 쓰지 않아요. 합선되거나 과충전되면 뜨거워지고 불이 날 수 있어요(쓰려면 보호 회로가 든 충전 모듈과 선생님 확인).</p></div>
+          <div class="card"><span class="no">합선 금지</span><p>전지의 +와 −를 전선으로 바로 잇지 않아요. 뜨거워지면 바로 떼고 선생님께 알려요.</p></div>
+          <div class="card"><span class="no">LED에는 저항</span><p>전지·충전지에 LED를 달 때는 <b>저항을 직렬로 함께</b> 연결해요. 저항 없이 연결하면 전류가 너무 커서 LED가 망가져요.</p></div>
+        </div>
+      </div>
+      <div class="step" data-phase="도입" data-time="5분 중 ③">
+        <h3>오늘의 질문</h3>
+        <p class="ask">선정한 문제를 해결하는 <em>시제품</em>을 완성할 수 있을까?</p>
+        <div class="two"><div>
+          <ol><li>모둠원과 역할을 나누어 협력하며 공구를 안전하게 사용해 태양전지 시제품을 만들 수 있다.</li><li>의도한 대로 에너지 전환이 일어나는지 확인하고, 제작 과정의 문제를 기록할 수 있다.</li></ol>
+          <p class="mini">오늘의 활동: <b>제작 1(3차시)</b> → 제작 2(4차시) → 작동 확인</p>
+        </div>
+        <figure class="fig"><img src="../slides/p5/032.jpg" alt="수업 PPT 32장. 3~4차시 학습 목표와 오늘의 활동 — 제작 1(3차시), 제작 2(4차시), 작동 확인" loading="lazy"><figcaption>▲ 수업 PPT 32장</figcaption></figure></div>
+      </div>
+      <div class="step" data-phase="전개" data-time="제작 35분 안">
+        <h3>마름질 → 가공 → 조립 → 검사</h3>
+        <div class="flow">
+          <div class="st"><b>마름질</b><small>구상도의 치수대로 재료 자르기</small></div>
+          <div class="st"><b>가공</b><small>구멍 뚫기, 접기, 모양 다듬기</small></div>
+          <div class="st"><b>조립</b><small>구조 만들고 부품은 떼어 바꿀 수 있게</small></div>
+          <div class="st"><b>검사</b><small>햇빛 아래에서 모든 부품 작동 확인</small></div>
+        </div>
+        <div class="two mt"><div>
+          <p class="say">오늘 3차시 · 제작 1 — 기본 구조 + 태양전지 연결해 첫 작동</p>
+          <p class="mini">다음 시간 4차시 · 제작 2 — 완성 · 고정 · 작동 영상 촬영 / 끝나기 10분 전: 정리하고 제작 일기 쓰기</p>
+        </div>
+        <figure class="fig"><img src="../slides/p5/034.jpg" alt="수업 PPT 34장. 제작 순서 — 마름질, 가공, 조립, 검사와 3차시 제작 1, 4차시 제작 2" loading="lazy"><figcaption>▲ 수업 PPT 34장</figcaption></figure></div>
+      </div>
+      <div class="step" data-phase="전개" data-time="제작 35분 안">
+        <h3>선배들의 적정기술 시제품</h3>
+        <div class="figrow">
+          <figure class="fig"><img src="img/proto-bottle.jpg" alt="페트병 구조물과 작은 태양전지를 연결한 학생 시제품" loading="lazy"><figcaption>▲ 페트병과 태양전지를 활용한 시제품</figcaption></figure>
+          <figure class="fig"><img src="img/proto-box.jpg" alt="주변 재료로 만든 선반형 구조물 시제품과 그 앞의 구상도" loading="lazy"><figcaption>▲ 주변 재료로 만든 구조물형 시제품</figcaption></figure>
+        </div>
+        <p class="mini">어떤 재료로, 태양전지와 부품을 어떻게 붙였는지 살펴보고 우리 구상도와 비교해요.</p>
+      </div>
+      <div class="step" data-phase="전개 · 모둠 실습" data-time="35분">
+        <p class="ask">제작 1 — <em>기본 구조</em>와 첫 작동</p>
+        <div class="two"><div>
+          <p>구상도에 따라 재료를 마름질하고 가공해 기본 구조를 만들어요. 태양전지와 전자부품을 연결해 기본 작동을 확인하고, 만드는 과정을 디벗으로 찍어요.</p>
+          <div class="do"><b>모둠 실습</b>개인 활동지의 구상도와 모둠 계획서를 펴 놓고, 맡은 역할대로 만들어요.</div>
+          <div class="timer" data-min="35"></div>
+        </div>
+        <figure class="fig"><img src="img/sketch.jpg" alt="치수와 재료를 적은 학생 구상도 예시" loading="lazy"><figcaption>▲ 구상도의 치수대로 마름질해요 (학생 구상도 예시)</figcaption></figure></div>
+        <div class="teacher">처음 몇 분은 칼·가위로 페트병 자르기와 전지 연결을 모둠별로 시범. 개인 학습지의 구상도와 모둠 계획서를 보며 제작. 평가 후 직접 분리배출하므로 글루건은 필요한 곳에만. 작동하지 않으면 극성(+/−), 끊어진 곳, 단락을 먼저 확인.</div>
+      </div>
+      <div class="step" data-phase="전개 · 작동 확인" data-time="제작 35분 안">
+        <h3>작동하지 않으면? — 차례대로 확인해요</h3>
+        <div class="two"><div>
+        <div class="ts">
+          <div class="q"><b>1. 극성이 맞나요?</b><button class="tbtn" type="button" data-y>예</button><button class="tbtn" type="button" data-n>아니요</button><span class="fix">→ LED·부저의 +/−를 뒤집어 다시 연결해요.</span></div>
+          <div class="q"><b>2. 끊어진 곳은 없나요?</b><button class="tbtn" type="button" data-y>예</button><button class="tbtn" type="button" data-n>아니요</button><span class="fix">→ 빠진 선을 다시 연결하고 고정해요.</span></div>
+          <div class="q"><b>3. +와 −가 바로 닿지 않았나요?</b><button class="tbtn" type="button" data-y>예</button><button class="tbtn" type="button" data-n>아니요</button><span class="fix">→ 닿은 부분을 떼고 선이 겹치지 않게 해요.</span></div>
+          <p class="done">작동!</p>
+          <button class="tbtn" type="button" data-reset>처음부터</button>
+        </div>
+          <p class="mini mt">고친 내용은 제작 일기에: 증상 → 확인한 원인 → 시도한 해결 → 다음에 할 일</p>
+        </div>
+        <figure class="fig"><img src="../slides/p5/036.jpg" alt="수업 PPT 36장. 작동하지 않으면 차례대로 확인하기 — 극성, 끊어진 곳, 단락 순서도" loading="lazy"><figcaption>▲ 수업 PPT 36장</figcaption></figure></div>
+      </div>
+      <div class="step" data-phase="정리" data-time="10분">
+        <h3>정리하고 제작 일기 쓰기</h3>
+        <div class="two"><div>
+          <div class="tblwrap"><table class="tbl sm"><tr><th colspan="2">예시 · 문제와 해결 쓰기</th></tr><tr><td>증상</td><td>햇빛 아래에서 LED가 안 켜짐</td></tr><tr><td>원인</td><td>LED 다리를 반대로 꽂음</td></tr><tr><td>해결</td><td>뒤집어 다시 연결 → 켜짐!</td></tr><tr><td>다음 할 일</td><td>집게 전선으로 바꿔 떼어 바꾸기 쉽게</td></tr></table></div>
+          <p class="mini" style="margin-top:.8rem">종료 확인</p><ul class="checks" aria-label="종료 확인"><li>글루건 전원 분리</li><li>정리 완료</li><li>사진·기록 저장</li><li>자리 정리</li></ul>
+          <div class="do"><b>개인 활동</b>아래 <a href="#sheet">활동지 05 · 제작 ①</a>을 써요. ‘다음 시간에 할 일’은 4차시 도입에서 다시 읽어요.</div>
+          <div class="timer" data-min="10"></div>
+        </div>
+        <figure class="fig"><img src="../slides/p5/037.jpg" alt="수업 PPT 37장. 활동지 05 제작 일기와 문제 해결 기록 — 내가 만든 부분, 잘 된 점·협력, 문제와 해결, 종료 확인" loading="lazy"><figcaption>▲ 수업 PPT 37장</figcaption></figure></div>
+        <div class="teacher">끝나기 10분 전에 공구와 자리를 정리하고 제작 일기를 씀. 글루건 전원을 뽑고 정리 상태를 확인.</div>
+      </div>
+    </div>
+    <div class="runner-foot"><button class="btn ghost" type="button" data-run="prev">← 이전</button><span class="count"></span><button class="btn" type="button" data-run="next">다음 →</button></div>
+  </div>
+</div></section>
+
+<section class="sec panel" id="sheet"><div class="wrap">
+  <p class="label">활동지</p>
+  <h2 class="head">활동지 05 · 제작 일기 — <em>제작 ①</em> 3차시</h2>
+  <p class="mini">마름질 → 가공 → 조립 → 검사. 끝나기 10분 전부터 정리하고 기록해요. 쓴 내용은 이 기기의 브라우저에만 저장돼요.</p>
+  <ul class="checks" aria-label="안전 확인"><li>커팅 매트·공구 방향</li><li>글루건 받침·화상 주의</li><li>전원 분리</li><li>보안경·지정 보호구</li><li>환기·정리</li></ul>
+  <div class="lsheet cols">
+    <div class="card"><h3><span class="n">1</span>내가 만든 부분</h3><div class="field"><label for="l3-e1">맡은 역할 / 마름질·가공·조립·검사 중 한 일</label><textarea class="pad" id="l3-e1" data-key="l3-made"></textarea></div></div>
+    <div class="card"><h3><span class="n">2</span>잘 된 점·협력</h3><div class="field"><label for="l3-e2">관찰한 작동 / 함께 해결한 일 / 나의 기여</label><textarea class="pad" id="l3-e2" data-key="l3-good"></textarea></div></div>
+    <div class="card"><h3><span class="n">3</span>문제와 다음 행동</h3><div class="field"><label for="l3-e3">증상 → 확인한 원인 → 시도한 해결 → 다음 시간에 할 일</label><textarea class="pad" id="l3-e3" data-key="l3-prob"></textarea></div></div>
+  </div>
+  <ul class="checks" aria-label="종료 확인"><li>글루건 전원 분리</li><li>정리 완료</li><li>사진·기록 저장</li><li>자리 정리</li></ul>
+</div></section>
+
+<section class="sec" id="slides"><div class="wrap">
+  <p class="label">이 차시 슬라이드</p>
+  <div class="deck" data-dir="../slides/p5/" data-from="31" data-n="9" data-title="3~4차시 슬라이드"></div>
+  <p class="mini" style="margin-top:.6rem">3·4차시는 같은 슬라이드(31~39장)를 함께 써요. 오늘은 31~37장, 다음 시간에 34~39장을 봐요.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="exit"><h3>나가기 질문</h3><p>다음 시간(제작 2)에 <b>가장 먼저 할 일</b>은 무엇인가요? 오늘 생긴 문제와 함께 적어요.</p><textarea class="pad" data-key="l3-exit" aria-label="나가기 질문 답"></textarea></div>
+  <div class="lnav" style="margin-top:2rem"><a href="index.html"><small>← 프로그램 5 전체</small>수업 소개·평가·자료</a><a href="lesson-2.html"><small>← 이전 차시</small>2차시 · 구상과 설계</a><a class="next" href="lesson-4.html"><small>다음 차시 →</small>4차시 · 시제품 제작 2</a></div>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <p><b class="champ">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 「그린 벤처(Green Venture) 프로젝트를 통한 에너지 믹스 최적화 및 기후 행동 역량 강화」<br>프로그램 5 기술 및 시제품 구현 — 적정기술 프로토타이핑과 태양광 업사이클링 제작 · 김이현 선생님(사당중학교) · 한국에너지정보문화재단 지원</p>
+  <p style="margin:0">출처: 연구회 최종보고서(교수·학습 지도안, 학생 활동지) · 수업 PPT · 학생 얼굴은 흐리게 처리했어요.</p>
+</div></footer>
+<script src="../assets/site.js"></script>
+<script src="p5-lesson.js"></script>
+</body>
+</html>

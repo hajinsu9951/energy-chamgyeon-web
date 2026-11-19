@@ -1,0 +1,124 @@
+/* 프로그램 5 기술 · 차시 페이지 보충 (lesson-1~5 공통, C안 변수만 사용)
+   site.css → lesson.css 다음에 불러온다. 프로그램 색 = 옐로: 채움은 띠·칩에만, 글자는 --prog-ink */
+
+/* 밤 그림(페트병 전구)에만 쓰는 숲색 단계 — 프로그램 페이지와 같은 값 */
+:root{--f0:#0B1F15;--f3:#1F4A35;--mint:#CFE3CB}
+
+/* 머리 사진 위치(세로 사진) */
+.lhero figure img.top{object-position:50% 18%}
+
+/* 공통 보정: 크게 보기에서 발문 키움, 기록 막대 가운데 정렬 */
+body.proj .runner.stage .step p.ask{font-size:clamp(1.9rem,4vw,3rem)}
+.wrap.recbar{margin:0 auto 1.2rem}
+#slides{padding-bottom:2.5rem}
+#slides + .sec{padding-top:2.5rem}
+
+/* 단계 안 보조 요소 */
+.step .sub{color:var(--prog-ink);font-weight:700;margin:-.2rem 0 .7rem}
+.mini{font-size:.95rem;color:var(--grey)}
+.runner.stage .step p.mini{font-size:clamp(.92rem,1.2vw,1.02rem)}
+.say{font-weight:700;font-size:clamp(1.1rem,2vw,1.4rem);line-height:1.55;border-left:4px solid var(--prog);padding:.2rem 0 .2rem 1rem;margin:.6rem 0 1rem;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.chip{border:1px solid var(--line2);border-radius:12px;padding:.55rem .85rem;background:var(--panel);box-shadow:var(--shadow)}
+.chip b{color:var(--champ);display:block;font-size:.98rem}
+.chip span{color:var(--ink2);font-size:.95rem}
+.sent{font-weight:900;font-size:clamp(1.1rem,2.4vw,1.6rem);line-height:1.5;padding:.8rem 1.1rem;border-radius:14px;margin:.5rem 0}
+.sent.no{background:var(--rustT);border:1px solid color-mix(in srgb,var(--rust) 60%,transparent)}
+.sent.yes{background:var(--amberT);border:1px solid var(--amber)}
+.sent small{display:block;font-weight:500;font-size:.9rem;color:var(--champ);margin-top:.2rem}
+.formula{display:flex;flex-wrap:wrap;gap:.35rem;align-items:center;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:500}
+.formula span{background:var(--progT);border:1px solid var(--prog);color:var(--ink);border-radius:10px;padding:.2rem .6rem;font-weight:700}
+.cols2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:1rem}
+.mt{margin-top:1rem}
+.tbl.sm td,.tbl.sm th{padding:.5rem .5rem;font-size:.95rem}
+.runner.stage .step .tbl td,.runner.stage .step .tbl th{font-size:clamp(.95rem,1.3vw,1.08rem)}
+.safe .card p{font-size:clamp(.95rem,1.3vw,1.05rem)}
+.checks{list-style:none;margin:.4rem 0 1rem;padding:0;display:flex;flex-wrap:wrap;gap:.4rem .8rem}
+.step .checks{margin-left:0}
+.checks li{display:flex;align-items:center;gap:.4rem;margin:0}
+.checks li::before{content:"";width:1em;height:1em;border:2px solid var(--champ);border-radius:4px;flex:0 0 auto}
+
+/* 그림: 사진·슬라이드 */
+.step figure.fig{margin:.4rem 0 1rem}
+.step figure.fig img{display:block;border:1px solid var(--line)}
+.step figure.fig figcaption{margin-top:.35rem}
+.figrow{display:flex;gap:.8rem;flex-wrap:wrap}
+.figrow figure.fig{flex:1 1 220px;margin:0}
+.runner.stage .step .figrow figure img{width:100%;max-height:34vh;object-fit:cover}
+
+/* 학생 활동 칸 안 입력 */
+.do .field{margin:.5rem 0 0}
+.do .pad{min-height:84px}
+input.pad{min-height:0;height:auto;padding:.6rem .8rem}
+.pick{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+.pick button{appearance:none;border:1px solid var(--line2);background:var(--panel);color:var(--ink);border-radius:12px;padding:.5rem .8rem;font:500 .98rem var(--sans);cursor:pointer;transition:.2s}
+.pick button:hover{border-color:var(--prog)}
+.pick button[aria-pressed="true"]{background:var(--prog);border-color:var(--prog);color:var(--ink);font-weight:700}
+.pick button b,.step .do .pick button b:first-child{display:inline;color:var(--prog-ink);margin:0 .25rem 0 0;font-size:inherit;letter-spacing:0}
+.pick button[aria-pressed="true"] b{color:var(--ink)}
+
+/* 문장 분류 연습 */
+.quiz{border:1px solid var(--line2);border-top:5px solid var(--prog);border-radius:16px;padding:1rem 1.1rem;background:var(--panel)}
+.quiz .qn{color:var(--grey);font-size:.9rem}
+.quiz .qt{font-weight:900;font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.5;margin:.3rem 0 .8rem}
+.quiz .qb{display:flex;gap:.5rem;flex-wrap:wrap}
+.quiz .qb .btn{flex:1 1 150px;justify-content:center}
+.quiz .qfb{min-height:2.8em;margin:.6rem 0 0;color:var(--champ)}
+.quiz .qfb.bad{color:var(--rust)}
+.quiz .score{font-weight:700;color:var(--champ)}
+
+/* 문제 정의 한 문장 만들기 */
+.builder{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:.6rem}
+.preview{font-weight:900;font-size:clamp(1.1rem,2.2vw,1.45rem);line-height:1.5;padding:.9rem 1.1rem;border-radius:14px;border:1px solid var(--amber);background:var(--amberT);margin:.8rem 0 .4rem}
+.preview .ph{color:var(--grey)}
+.pwarn{color:var(--rust);min-height:1.4em;font-size:.95rem}
+
+/* 평가 행렬(간단판) */
+.mxl{display:grid;gap:.7rem}
+.mxl .row{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:.8rem 1rem}
+.mxl .row.win{border-color:var(--prog);box-shadow:0 0 0 2px var(--prog) inset}
+.mxl .sl{display:grid;grid-template-columns:8.2em 1fr 2.2em;align-items:center;gap:.6rem;margin:.25rem 0}
+.mxl .sl label{font-size:.92rem;color:var(--ink2)}
+.mxl output{font-weight:700;color:var(--champ);text-align:right;font-variant-numeric:tabular-nums}
+.mxl .tot{display:flex;justify-content:space-between;align-items:center;margin-top:.3rem;font-weight:700}
+.mxl .tot span{font-variant-numeric:tabular-nums}
+.mxl .badge{font-size:.78rem;font-weight:700;color:var(--ink);background:var(--prog);border-radius:999px;padding:.08rem .55rem;margin-left:.4rem}
+.mxl input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;border-radius:3px;background:var(--line2)}
+.mxl input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--amber);border:3px solid var(--panel);box-shadow:0 0 0 1px var(--amber);cursor:pointer}
+.mxl input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--amber);border:3px solid var(--panel);cursor:pointer}
+.mxnote{color:var(--champ);font-weight:500;margin:.6rem 0}
+
+/* 페트병 전구 그림 */
+.pet{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.6rem 0 1rem}
+.pet figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+.pet svg{display:block;width:100%;height:auto}
+.pet figcaption{padding:.45rem .8rem;color:var(--ink2);font-size:.92rem;margin:0}
+@media (max-width:520px){.pet{grid-template-columns:1fr}}
+
+/* 회로 오류 탐정 */
+.det{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.7rem;margin:.6rem 0}
+.det button{appearance:none;border:1px solid var(--line2);background:var(--panel);box-shadow:var(--shadow);border-radius:14px;padding:.4rem .4rem .6rem;cursor:pointer;color:var(--ink);font:500 .98rem var(--sans);text-align:center}
+.det svg{width:100%;height:auto;display:block}
+.det .ans{display:block;min-height:1.5em;color:var(--grey)}
+.det button.shown .ans{color:var(--champ);font-weight:700}
+.det button.shown.bad .ans{color:var(--rust)}
+.det .pv{fill:color-mix(in srgb,var(--blue) 22%,var(--panel));stroke:var(--champ);stroke-width:2}
+.det .ld{fill:var(--panel2);stroke:var(--champ);stroke-width:2}
+.det .wl{fill:none;stroke:var(--champ);stroke-width:3;stroke-linecap:round}
+.det .wl.sc{stroke:var(--rust)}
+.det text{font:700 13px var(--sans);fill:var(--champ)}
+
+/* 고장 점검 순서 */
+.ts .q{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap;padding:.6rem .8rem;border:1px solid var(--line);border-radius:12px;margin:.4rem 0;opacity:.4;transition:.3s;background:var(--panel)}
+.ts .q.act{opacity:1;border-color:var(--prog);box-shadow:0 0 0 1px var(--prog) inset}
+.ts .q.ok{opacity:.85}
+.ts .q b{flex:1 1 220px}
+.ts .fix{color:var(--rust);font-weight:500;flex-basis:100%;display:none}
+.ts .q.no .fix{display:block}
+.ts .done{display:none;font-weight:900;font-size:1.6rem;color:var(--champ)}
+.ts.fin .done{display:block}
+.ts .tbtn{min-width:4em}
+
+/* 활동지 */
+.lsheet .card .mini{margin:.2rem 0 .4rem}
+.lsheet h3 + .mini{margin-top:-.2rem}

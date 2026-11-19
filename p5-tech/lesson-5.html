@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5차시 실험과 개선 · 프로그램 5 기술 · 에너지참견시점</title>
+<meta name="description" content="시제품을 쓰기 전후를 비교하는 실험 영상을 찍고, 띵커벨 동료 평가에서 받은 피드백으로 개선점을 두 가지 이상 쓰며 공학적 소양을 돌아보는 기술 5차시(50분) 수업 화면">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<link rel="stylesheet" href="p5-lesson.css">
+</head>
+<body data-prog="p5">
+<header class="top lesson-top"><div class="wrap">
+  <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+  <div class="crumb"><a class="back-hub" href="index.html">05 기술</a><b>5차시 · 실험과 개선</b></div>
+  <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
+</div></header>
+
+<main>
+<section class="lhero"><div class="wrap">
+  <div><span class="no">05 기술 · 5차시 / 5</span>
+    <h1>우리 시제품은 처음 정의한 불편을 <em>줄였을까?</em></h1>
+    <p class="goal"><b>오늘의 목표</b>시제품을 쓰기 전후를 비교하는 실험으로 효과를 확인하고, 동료의 피드백을 바탕으로 개선점을 두 가지 이상 제시하며, 문제 해결에 공학적 소양이 왜 필요한지 설명해요.</p>
+    <div class="meta"><span>50분</span><span>모둠 실험 → 개인 개선</span><span>디벗 모둠당 1대 · 띵커벨</span><span>활동지 06(모둠)·07(개인)</span></div></div>
+  <figure><img src="img/exp-temp.jpg" alt="온도계로 종이컵과 페트병 냉장고의 물 온도를 재는 실험 영상 화면" loading="eager"><figcaption>▲ 사용 전후를 비교하는 실험 영상 일부</figcaption></figure>
+</div><span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice" fill="currentColor"><path d="M0 70V60h36V44h24v16h18V34h28v26h14V48h20v12h28V38l10-6 10 6v22h22V52h18v8h40V46h26v14h16V36h32v24h28V52h20v8h34V40h22v20h24V50h22v10h38V44h28v16h20V32h26v28h22V48h20v12h34V42h24v18h22V54h18v6h38V38h28v22h18V48h22v12h38V42h26v18h28V50h20v10h22V36h28v24h18V46h24v14h38V44h26v16h22V52h40v18Z"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M250 60V16M250 16l-13-9M250 16l15-2M250 16l-2 15"/><path d="M290 60V24M290 24l-10-7M290 24l12-2M290 24l-2 12"/><path d="M930 60V12M930 12l-14-9M930 12l16-2M930 12l-2 16"/></g><path d="M470 60l10-12h40l-10 12Zm52 0l10-12h40l-10 12ZM700 60l10-12h40l-10 12Z"/><circle cx="118" cy="52" r="9"/><circle cx="640" cy="50" r="11"/><circle cx="1080" cy="51" r="10"/><circle cx="822" cy="53" r="8"/></svg></span></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <p class="label">수업 흐름</p>
+  <div class="lplan"><div style="--m:5"><b>도입</b><small>5분</small></div><div style="--m:12"><b>비교 실험</b><small>12분</small></div><div style="--m:15"><b>보고서와 동료 평가</b><small>15분</small></div><div style="--m:13"><b>개선점 쓰기</b><small>13분</small></div><div style="--m:5"><b>정리</b><small>5분</small></div></div>
+  <p class="mini" style="margin:0 0 1rem">← → 키로 단계를 넘겨요. 교사 모드를 켜면 지도안의 발문과 유의점이 함께 보여요.</p>
+
+  <div class="runner stage">
+    <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+    <div class="steps">
+      <div class="step" data-phase="도입" data-time="5분 중 ①">
+        <div class="two"><div>
+          <p class="ask">우리 시제품은 처음 정의한 불편을 <em>줄였을까?</em></p>
+          <p>1차시에 정의한 문제 문장을 다시 읽고, 그 불편이 줄었는지 알려면 무엇을 비교해야 할지 이야기해요.</p>
+          <p class="mini">비교 예시: 정수기 사용 전후의 물, 배기구가 있을 때와 없을 때의 화덕</p>
+          <div class="do"><b>모둠 활동</b><div class="field"><label for="l5-cmp">우리 모둠이 비교할 것 (A ↔ B)</label><input class="pad" id="l5-cmp" data-key="l5-cmp" placeholder="예: 종이컵의 물 ↔ 페트병 냉장고의 물"></div></div>
+        </div>
+        <figure class="fig"><img src="img/ai-pet-cooler.jpg" alt="골판지와 천으로 감싼 페트병 냉장고 옆에 물을 담은 종이컵과 탐침 온도계가 놓인 책상" loading="lazy"><figcaption>▲ 페트병 냉장고와 종이컵, 같은 조건에서 온도를 비교해요 (AI 생성 이미지)</figcaption></figure></div>
+      </div>
+      <div class="step" data-phase="도입" data-time="5분 중 ②">
+        <h3>오늘의 목표</h3>
+        <div class="two"><div>
+          <ol><li>시제품을 쓰기 전후를 비교하는 실험으로 작동과 효과를 확인할 수 있다.</li><li>동료의 피드백을 바탕으로 개선점을 두 가지 이상 제시할 수 있다.</li><li>문제 해결에 공학적 소양이 왜 필요한지 설명할 수 있다.</li></ol>
+          <p class="mini">오늘의 활동: 비교 실험 → 보고서와 동료 평가 → 개선점 쓰기</p>
+        </div>
+        <figure class="fig"><img src="../slides/p5/041.jpg" alt="수업 PPT 41장. 5차시 학습 목표와 오늘의 활동 — 비교 실험, 보고서와 동료 평가, 개선점 쓰기" loading="lazy"><figcaption>▲ 수업 PPT 41장</figcaption></figure></div>
+      </div>
+      <div class="step" data-phase="전개 · 모둠 활동" data-time="12분 중 ①">
+        <h3>비교 실험 영상 찍기</h3>
+        <div class="chips"><div class="chip"><b>사용 전 vs 사용 후</b></div><div class="chip"><b>개선 전 vs 개선 후</b></div><div class="chip"><b>제품 없을 때 vs 제품 있을 때</b></div></div>
+        <div class="two"><div>
+          <ol><li>1차시 문제 문장 다시 읽기</li><li>조건 하나만 바꾸고 나머지는 같게</li><li>영상에 자막으로 설명 넣기</li><li>실패해도 괜찮아요 — 원인을 써요</li></ol>
+          <div class="timer" data-min="12"></div>
+        </div>
+        <div class="figrow">
+          <figure class="fig"><img src="img/exp-method.jpg" alt="공기층 단열과 습도 조절을 한 페트병 냉장고와 일반 종이컵의 물 온도를 비교하는 실험 방법을 자막으로 설명한 영상 화면" loading="lazy"><figcaption>▲ 자막으로 실험 방법 설명</figcaption></figure>
+          <figure class="fig"><img src="img/exp-temp.jpg" alt="온도계로 종이컵과 페트병 냉장고의 물 온도를 재는 실험 영상 화면" loading="lazy"><figcaption>▲ 시작 온도 측정 장면</figcaption></figure>
+        </div></div>
+      </div>
+      <div class="step" data-phase="전개 · 모둠 활동" data-time="12분 중 ②">
+        <h3>비교 실험 결과와 해석</h3>
+        <div class="two"><div>
+          <div class="tblwrap"><table class="tbl sm"><tr><th>가상 예시 · 얇게 썬 사과 3시간 뒤 무게 (가상 수치)</th><th>A 건조대 밖 (g)</th><th>B 건조대 안 (g)</th></tr><tr><td>1회</td><td>100 → 82</td><td>100 → 64</td></tr><tr><td>2회</td><td>100 → 80</td><td>100 → 61</td></tr></table></div>
+          <p><b>해석</b> 건조대 안에서 수분이 더 많이 빠졌다 → <b class="hl">부분 성공</b></p>
+          <p class="ask" style="font-size:clamp(1.2rem,2.4vw,1.7rem)">결과는 단위와 함께, <em>있는 그대로</em> 정직하게!</p>
+          <ul class="checks" aria-label="판정"><li>성공</li><li>부분 성공</li><li>실패</li><li>판단 보류</li></ul>
+          <div class="do"><b>모둠 활동</b>우리 결과는 아래 <a href="#sheet">활동지 06 · 비교 실험 결과</a>에 써요.</div>
+        </div>
+        <figure class="fig"><img src="../slides/p5/043.jpg" alt="수업 PPT 43장. 활동지 06 비교 실험 결과와 해석 — 회차별 A·B 결과, 결과 해석, 판정" loading="lazy"><figcaption>▲ 수업 PPT 43장</figcaption></figure></div>
+        <div class="teacher">가상 예시 수치임(실제 학생 결과 아님). PPT 43장의 원래 예시는 ‘고추’였으나 통고추는 마르는 데 며칠이 걸려 3시간 결과로는 비현실적이라 얇게 썬 사과로 바꿈. 성공과 실패를 모두 인정하고, 실패했다면 결과 해석에 원인을 함께 쓰게 함.</div>
+      </div>
+      <div class="step" data-phase="전개" data-time="15분">
+        <h3>띵커벨 동료 평가</h3>
+        <div class="two"><div>
+          <ol><li>보고서와 사진·영상을 띵커벨에 올려요.</li><li>자기 모둠을 뺀 1·2·3등을 고르고 한 줄 코멘트!</li><li>모둠당 1명씩 다른 모둠 보고서에 댓글 1~2개</li></ol>
+          <p>좋은 댓글 예: <b>“비 오는 날에는 어떻게 하나요?”</b> — 사용자 입장의 질문</p>
+          <a class="live" href="https://www.tkbell.co.kr" target="_blank" rel="noopener"><i></i>띵커벨 열기</a>
+          <div class="timer" data-min="15"></div>
+        </div>
+        <figure class="fig"><img src="img/tkbell-masked.jpg" alt="띵커벨 보드에 모둠 보고서와 댓글이 게시된 화면(학번·반·작성 시각은 가림)" loading="lazy"><figcaption>▲ 띵커벨 보고서 게시 예시 · 학번·반·작성 시각은 가렸어요</figcaption></figure></div>
+        <div class="teacher">동료 평가를 하지 않은 학생 확인.</div>
+      </div>
+      <div class="step" data-phase="전개 · 선택 활동" data-time="15분 · 동료 평가 15분 대신">
+        <h3>그린 벤처 투자 게임</h3>
+        <p class="mini">선택 활동 — 하면 바로 앞 ‘띵커벨 동료 평가’(15분)를 <b>대신</b>해요. 개선점 쓰기 13분은 그대로.</p>
+        <div class="two"><div>
+          <ol><li>한 사람당 가상 그린 코인 100개를 받아요.</li><li>자기 모둠을 뺀 시제품 2~3곳에 코인을 나눠 투자하고, 포스트잇에 투자 이유를 한 줄씩 써요.</li><li>코인을 가장 많이 받은 모둠은 ‘올해의 그린 벤처’! 받은 투자 메모는 개선점 쓰기에 활용해요.</li></ol>
+          <div class="chips"><div class="chip"><span>사용자의 불편을 줄였나?</span></div><div class="chip"><span>현지 재료로 만들 수 있나?</span></div><div class="chip"><span>고장 나면 고치기 쉬운가?</span></div></div>
+          <p class="mini">투자 예시: A모둠 50 · B모둠 30 · C모둠 20 — “비 오는 날에도 쓸 수 있어서!”</p>
+          <div class="timer" data-min="15"></div>
+        </div>
+        <figure class="fig"><img src="../slides/p5/044.jpg" alt="수업 PPT 44장. 선택 활동 그린 벤처 투자 게임 — 진행 방법, 투자 기준, 투자 예시" loading="lazy"><figcaption>▲ 수업 PPT 44장</figcaption></figure></div>
+        <div class="teacher"><b>대체 활동</b> — 띵커벨 동료 평가 대신 할 때만(15분). 투자 메모가 동료 피드백 역할을 하므로 개선점 쓰기 13분은 유지. 원래 안내(PPT 44장)의 20분은 50분을 넘겨 15분으로 맞춤.</div>
+      </div>
+      <div class="step" data-phase="전개 · 개인 실습" data-time="13분">
+        <h3>피드백으로 개선점 쓰기</h3>
+        <div class="flow">
+          <div class="st"><b>받은 피드백</b><small>“비 오는 날에는 어떻게 하나요?”</small></div>
+          <div class="st"><b>문제점</b><small>비가 오면 태양전지가 젖는다</small></div>
+          <div class="st"><b>개선</b><small>투명 덮개를 비스듬히 붙여 빗물이 흘러내리게</small></div>
+        </div>
+        <div class="two mt"><div>
+          <p>개선안은 <b>2가지 이상</b>, 각자 써요. 모둠원과 같으면 인정되지 않아요!</p>
+          <div class="do"><b>개인 활동</b>아래 <a href="#sheet">활동지 07</a>에 문제점과 근거 → 바꿀 부분 → 기대하는 변화를 써요.</div>
+          <div class="timer" data-min="13"></div>
+        </div>
+        <figure class="fig"><img src="img/improve.jpg" alt="받은 피드백으로 개선점을 쓴 학생 활동지" loading="lazy"><figcaption>▲ 받은 피드백으로 개선점을 쓴 학생 활동지</figcaption></figure></div>
+        <div class="teacher">문제해결력(개인 10점): 피드백·실험 결과를 근거로 문제를 찾고, 바꿀 부분과 기대하는 변화를 갖춘 개선점을 두 가지 이상 쓰면 A(10점).</div>
+      </div>
+      <div class="step" data-phase="정리" data-time="5분">
+        <h3>나의 공학적 문제해결 돌아보기</h3>
+        <div class="grid g3">
+          <div class="card"><span class="no">창의성</span><p>사용자 문제를 해결하려고 내가 새롭게 시도한 것은?</p></div>
+          <div class="card"><span class="no">팀워크</span><p>역할을 나누고 어려움을 함께 해결한 실제 행동은?</p></div>
+          <div class="card"><span class="no">의사소통</span><p>어떤 의견을 듣고 내 생각이나 설계를 바꾸었나요?</p></div>
+        </div>
+        <div class="two mt"><div>
+          <p>모둠별로 한 가지씩 나누기 → 개인 활동지와 모둠 실험 보고서 제출 → 시제품은 <b>전자부품 먼저 분리 → 재료별로 나누기 → 분리배출</b></p>
+          <div class="timer" data-min="5"></div>
+        </div>
+        <figure class="fig"><img src="../slides/p5/048.jpg" alt="수업 PPT 48장. 나의 공학적 문제해결 돌아보기 — 창의성, 팀워크, 의사소통과 시제품 정리(분리배출)" loading="lazy"><figcaption>▲ 수업 PPT 48장</figcaption></figure></div>
+        <div class="teacher">[12기가04-04] 활동지 07 공학적 소양 성찰: 문제 해결 과정에서 창의성·팀워크·의사소통이 한 역할을 자신의 실제 행동을 들어 설명(보고서·학습지 평가, 관찰평가).</div>
+      </div>
+    </div>
+    <div class="runner-foot"><button class="btn ghost" type="button" data-run="prev">← 이전</button><span class="count"></span><button class="btn" type="button" data-run="next">다음 →</button></div>
+  </div>
+</div></section>
+
+<section class="sec panel" id="sheet"><div class="wrap">
+  <p class="label">활동지</p>
+  <h2 class="head">활동지 06 · 07 — 결과를 <em>정직하게</em>, 개선은 두 가지 이상</h2>
+  <p class="mini">쓴 내용은 이 기기의 브라우저에만 저장돼요. 제출은 종이 활동지와 모둠 실험 보고서로 해요.</p>
+  <h3 class="mt">활동지 06 · 비교 실험 결과 (모둠)</h3>
+  <div class="lsheet cols">
+    <div class="card"><h3><span class="n">1</span>회차별 결과</h3><div class="field"><label for="l5-f1">A 결과 · B 결과 (단위 포함, 1회·2회)</label><textarea class="pad" id="l5-f1" data-key="l5-res"></textarea></div></div>
+    <div class="card"><h3><span class="n">2</span>결과 해석</h3><div class="field"><label for="l5-f2">성공 기준과 비교 / 처음 불편이 얼마나 줄었나 / 판정(성공·부분 성공·실패·판단 보류)</label><textarea class="pad" id="l5-f2" data-key="l5-int"></textarea></div></div>
+  </div>
+  <p class="mini">보고서 점검: 작동 영상 · 비교로 문제 개선 확인 · 작품 설명 · 제품+전자부품 스케치</p>
+  <h3 style="margin-top:2.4rem">활동지 07 · 개선점과 돌아보기 (개인)</h3>
+  <div class="lsheet cols">
+    <div class="card"><h3><span class="n">1</span>받은 피드백</h3><div class="field"><label for="l5-g0">동료 평가·댓글·투자 메모에서 받은 피드백</label><textarea class="pad" id="l5-g0" data-key="l5-fb"></textarea></div></div>
+    <div class="card"><h3><span class="n">2</span>개선안 ①</h3><div class="field"><label for="l5-g1">문제점과 근거 → 바꿀 부분 → 기대하는 변화</label><textarea class="pad" id="l5-g1" data-key="l5-i1"></textarea></div></div>
+    <div class="card"><h3><span class="n">3</span>개선안 ②</h3><div class="field"><label for="l5-g2">문제점과 근거 → 바꿀 부분 → 기대하는 변화</label><textarea class="pad" id="l5-g2" data-key="l5-i2"></textarea></div></div>
+    <div class="card"><h3><span class="n">4</span>창의성</h3><div class="field"><label for="l5-g3">사용자 문제를 해결하려고 내가 새롭게 시도한 것은?</label><textarea class="pad" id="l5-g3" data-key="l5-cr"></textarea></div></div>
+    <div class="card"><h3><span class="n">5</span>팀워크</h3><div class="field"><label for="l5-g4">역할을 나누고 어려움을 함께 해결한 실제 행동은?</label><textarea class="pad" id="l5-g4" data-key="l5-tw"></textarea></div></div>
+    <div class="card"><h3><span class="n">6</span>의사소통</h3><div class="field"><label for="l5-g5">어떤 의견을 듣고 내 생각이나 설계를 바꾸었나요?</label><textarea class="pad" id="l5-g5" data-key="l5-cm"></textarea></div></div>
+  </div>
+</div></section>
+
+<section class="sec" id="slides"><div class="wrap">
+  <p class="label">이 차시 슬라이드</p>
+  <div class="deck" data-dir="../slides/p5/" data-from="40" data-n="10" data-title="5차시 슬라이드"></div>
+  
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="exit"><h3>나가기 질문</h3><p>우리 시제품은 처음 정의한 불편을 <b>얼마나</b> 줄였나요? 측정한 값(단위 포함)을 근거로 한 문장으로 써요.</p><textarea class="pad" data-key="l5-exit" aria-label="나가기 질문 답"></textarea></div>
+  <div class="lnav" style="margin-top:2rem"><a href="lesson-4.html"><small>← 이전 차시</small>4차시 · 시제품 제작 2</a><a class="next" href="index.html#result"><small>프로그램 5 전체 →</small>수업 결과·평가·자료</a></div>
+</div></section>
+</main>
+
+<footer class="foot"><div class="wrap">
+  <p><b class="champ">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 「그린 벤처(Green Venture) 프로젝트를 통한 에너지 믹스 최적화 및 기후 행동 역량 강화」<br>프로그램 5 기술 및 시제품 구현 — 적정기술 프로토타이핑과 태양광 업사이클링 제작 · 김이현 선생님(사당중학교) · 한국에너지정보문화재단 지원</p>
+  <p style="margin:0">출처: 연구회 최종보고서(교수·학습 지도안, 학생 활동지) · 수업 PPT · <a href="https://www.tkbell.co.kr" target="_blank" rel="noopener">띵커벨</a> · 띵커벨 화면의 학번·반·작성 시각은 가렸어요 · 학생 얼굴은 흐리게 처리했어요.</p>
+</div></footer>
+<script src="../assets/site.js"></script>
+<script src="p5-lesson.js"></script>
+</body>
+</html>

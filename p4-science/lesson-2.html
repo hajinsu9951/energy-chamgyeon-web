@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2차시 바이브 코딩과 수정 프롬프트 · 프로그램 4 과학 · 에너지참견시점</title>
+<meta name="description" content="프로그램 4 과학 및 지능형 최적화 2차시 — 초기 프롬프트로 바이브 코딩 시제품을 만들고, 기능 테스트와 수정 프롬프트로 고치며, 환경적·사회적 가치를 설명하는 50분 수업 화면">
+<link rel="stylesheet" href="../assets/site.css">
+<link rel="stylesheet" href="../assets/lesson.css">
+<!--
+  근거: 최종보고서 별첨 프로그램 4 교수·학습 지도안(2차시: 도입 6분 · 교사 시범 7분 · 모둠 활동 1 15분 · 모둠 활동 2 18분 · 정리 4분), 활동지 3·4·5, 수업 PPT 31~40장.
+  단계의 발문·유의점은 프로그램 페이지(index.html #lesson 2차시)와 같은 문장을 그대로 씀.
+-->
+<style>
+/* 2차시 전용 보충 (색은 공통 변수만) */
+.sft{border:1px solid var(--rust);background:var(--rustT);border-radius:14px;padding:.7rem 1rem;margin:.8rem 0;font-size:.95rem}
+.sft b{color:var(--rust)}
+.sfx{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.6rem;margin:.6rem 0}
+.sfx div{border-radius:14px;padding:.8rem 1rem;background:var(--panel);border:1px solid var(--line);box-shadow:var(--shadow)}
+.sfx b{display:block;color:var(--prog-ink);letter-spacing:.06em}
+.sfx q{color:var(--ink2);font-size:.95rem}
+.step .live{font-size:.95rem}
+.pad.sm{min-height:76px}
+.lsheet .wide{grid-column:1/-1}
+.lsheet > .card{min-width:0}
+.ttbl{width:100%;border-collapse:separate;border-spacing:0 .4rem;min-width:620px}
+.ttbl th{color:var(--champ);font-weight:500;font-size:.88rem;text-align:left;padding:0 .3rem}
+.ttbl td{padding:0 .3rem;vertical-align:top}
+.ttbl td:first-child{color:var(--prog-ink);font-weight:700;white-space:nowrap;padding-top:.6rem}
+.ttbl .pad{min-height:58px;font-size:.92rem;padding:.5rem .6rem}
+.qnum{display:inline-grid;place-items:center;width:1.7em;height:1.7em;border-radius:50%;background:var(--progT);color:var(--prog-ink);font-weight:700;font-size:.85rem;margin-right:.4rem}
+.btnrow{display:flex;gap:.5rem;flex-wrap:wrap;margin:.8rem 0;align-items:center}
+/* v1 · v2 비교 (더한 말 = 노란 형광펜, 뺀 말 = 러스트 취소선) */
+.pv-own{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+@media (max-width:760px){.pv-own{grid-template-columns:1fr}}
+.pv-out{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:1rem 1.1rem;line-height:1.85;min-height:5em}
+.pv-out .br{display:block;height:.25em}
+.pv-out del{text-decoration:line-through;text-decoration-color:var(--rust);text-decoration-thickness:2px;color:var(--rust);background:var(--rustT);border-radius:4px;padding:0 .12em}
+.pv-out ins{text-decoration:none;color:var(--ink);background:color-mix(in srgb,var(--yellow) 62%,transparent);border-radius:4px;padding:0 .14em}
+.pv-stats{display:flex;gap:.4rem;flex-wrap:wrap}
+.pv-stats span{font-size:.86rem;border-radius:999px;padding:.2rem .7rem;border:1px solid var(--line2);color:var(--ink2);background:var(--panel)}
+.pv-stats .plus{border-color:var(--yellow);background:color-mix(in srgb,var(--yellow) 30%,var(--panel));color:var(--ink)}
+.pv-stats .minus{border-color:var(--rust);color:var(--rust)}
+</style>
+</head>
+<body data-prog="p4">
+<header class="top lesson-top">
+  <div class="wrap">
+    <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+    <div class="crumb"><a class="back-hub" href="index.html">04 과학</a><b>2차시 · 바이브 코딩과 수정 프롬프트</b></div>
+    <div class="tools">
+      <button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button>
+      <button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button>
+      <button class="tbtn" type="button" data-toggle="fs">전체 화면</button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="lhero">
+  <div class="wrap">
+    <div>
+      <span class="no">04 과학 · 2차시 / 2</span>
+      <h1>시제품을 만들고,<br><em>수정 프롬프트</em>로 고쳐요</h1>
+      <p class="goal"><b>오늘의 목표</b>생성형 AI와 바이브 코딩으로 디지털 시제품을 만들고, 기능 테스트와 프롬프트 수정으로 개선하며, 해결 방안의 환경적·사회적 가치를 설명해요.</p>
+      <div class="meta"><span>50분</span><span>모둠 활동</span><span>준비물: 노트북·태블릿</span><span>1차시 문제 정의서·초기 프롬프트</span><span>바이브 코딩 도구</span></div>
+    </div>
+    <figure>
+      <img src="img/ai-prototype.jpg" alt="나무 책상 위 태블릿에 초록 카드, 토글, 슬라이더, 막대그래프로 된 시제품 화면이 떠 있고 손가락이 버튼을 누르려는 모습" loading="eager">
+      <figcaption>▲ 작동하는 시제품 — v1을 테스트해서 v2로 고쳐요 (AI 생성 이미지)</figcaption>
+    </figure>
+  </div>
+  <span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice" fill="currentColor"><rect x="0" y="12" width="46" height="58"/><rect x="48" y="46" width="46" height="24"/><rect x="94" y="20" width="40" height="50"/><rect x="138" y="34" width="22" height="36"/><circle cx="175" cy="51" r="13"/><rect x="173.5" y="62" width="3" height="8"/><rect x="192" y="28" width="22" height="42"/><rect x="216" y="20" width="46" height="50"/><rect x="262" y="52" width="46" height="18"/><circle cx="317" cy="55" r="9"/><rect x="315.5" y="62" width="3" height="8"/><rect x="330" y="40" width="40" height="30"/><rect x="372" y="28" width="28" height="42"/><rect x="400" y="52" width="40" height="18"/><circle cx="457" cy="51" r="13"/><rect x="455.5" y="62" width="3" height="8"/><rect x="474" y="12" width="46" height="58"/><rect x="520" y="12" width="34" height="58"/><rect x="554" y="52" width="22" height="18"/><rect x="580" y="52" width="40" height="18"/><rect x="622" y="12" width="22" height="58"/><circle cx="657" cy="55" r="9"/><rect x="655.5" y="62" width="3" height="8"/><rect x="670" y="34" width="22" height="36"/><rect x="694" y="34" width="40" height="36"/><rect x="734" y="12" width="28" height="58"/><rect x="766" y="40" width="22" height="30"/><circle cx="801" cy="53" r="11"/><rect x="799.5" y="62" width="3" height="8"/><rect x="816" y="46" width="22" height="24"/><rect x="838" y="52" width="22" height="18"/><rect x="862" y="20" width="28" height="50"/><rect x="900" y="22" width="2.4" height="48"/><path d="M901.2 22 l-9 -12 l2 -1z M901.2 22 l11 4 l-.6 2z M901.2 22 l-2 13 l-2 -.4z"/><rect x="916" y="34" width="28" height="36"/><rect x="948" y="34" width="40" height="36"/><circle cx="1001" cy="51" r="13"/><rect x="999.5" y="62" width="3" height="8"/><rect x="1018" y="46" width="22" height="24"/><rect x="1040" y="20" width="46" height="50"/><circle cx="1099" cy="55" r="9"/><rect x="1097.5" y="62" width="3" height="8"/><rect x="1118" y="14" width="2.4" height="56"/><path d="M1119.2 14 l-9 -12 l2 -1z M1119.2 14 l11 4 l-.6 2z M1119.2 14 l-2 13 l-2 -.4z"/><circle cx="1147" cy="51" r="13"/><rect x="1145.5" y="62" width="3" height="8"/><rect x="1164" y="34" width="34" height="36"/><circle cx="1207" cy="55" r="9"/><rect x="1205.5" y="62" width="3" height="8"/></svg></span>
+</section>
+
+<section class="sec" id="run">
+  <div class="wrap">
+    <p class="label">수업 흐름 · 50분</p>
+    <div class="lplan">
+      <div style="--m:6"><b>도입</b><small>6분</small></div>
+      <div style="--m:7"><b>교사 시범</b><small>7분</small></div>
+      <div style="--m:15"><b>모둠 활동 1 · 구현·테스트</b><small>15분</small></div>
+      <div style="--m:18"><b>모둠 활동 2 · 수정·개선</b><small>18분</small></div>
+      <div style="--m:4"><b>정리</b><small>4분</small></div>
+    </div>
+    <p class="muted" style="font-size:.92rem;margin:0 0 1rem">← → 키나 아래 버튼으로 넘겨요. <b>교사 모드</b>를 켜면 발문·유의점이 보여요.</p>
+
+    <div class="runner stage">
+      <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+      <div class="steps">
+
+        <div class="step" data-phase="도입 · 학습 문제" data-time="6분">
+          <div class="two">
+            <div>
+              <p class="ask">AI가 만든 시제품은<br>처음 의도한 기능을 <em>모두</em> 구현할까요?</p>
+              <div class="do"><b>다시 보기</b>지난 차시의 <b>문제 정의서</b>와 <b>초기 프롬프트</b>를 다시 확인해요. <a href="#v12">v1 불러오기 ↓</a></div>
+            </div>
+            <figure><img src="img/d-proto-meal.jpg" alt="'오늘은 한 숟갈만 남기기 챌린지' 참여 화면 시제품 v1. 이름과 반을 고르고 참여하기 버튼을 누르는 카드" loading="lazy"><figcaption>AI가 처음 만든 시제품 v1 — 이름 칸을 받아요. 의도와 맞을까요? (PPT 33장)</figcaption></figure>
+          </div>
+          <div class="teacher">AI가 생성한 결과가 처음부터 완전하지 않을 수 있음을 안내.</div>
+        </div>
+
+        <div class="step" data-phase="도입 · 목표 확인" data-time="6분 안">
+          <div class="two">
+            <div>
+              <h3>오늘 우리가 할 일</h3>
+              <p>생성형 AI와 바이브 코딩으로 디지털 시제품을 만들고, <b>기능 테스트</b>와 <b>프롬프트 수정</b>으로 개선하며, 환경적·사회적 가치를 설명해요.</p>
+              <div class="flow" style="margin-top:1rem">
+                <div class="st"><b>교사 시범</b><small>7분</small></div>
+                <div class="st"><b>모둠 활동 1</b><small>시제품 구현·기능 테스트 · 15분</small></div>
+                <div class="st"><b>모둠 활동 2</b><small>프롬프트 수정·개선 · 18분</small></div>
+              </div>
+            </div>
+            <figure><img src="../slides/p4/035.jpg" alt="프로토타입 예시 세 화면과 '프로토타입은 예쁜 디자인보다 행동 유발에 초점'이라는 문구가 있는 슬라이드" loading="lazy"><figcaption>프로토타입은 '예쁜 디자인'보다 '행동 유발'에 초점 (PPT 35장)</figcaption></figure>
+          </div>
+        </div>
+
+        <div class="step" data-phase="전개 · 교사 시범" data-time="7분">
+          <div class="two">
+            <div>
+              <h3>초기 프롬프트를 바이브 코딩 도구에 넣어 봅니다</h3>
+              <p>말(자연어)로 설명하면 AI가 웹사이트·앱·시뮬레이터를 만들어 줘요.</p>
+              <a class="live" href="https://lovable.dev" target="_blank" rel="noopener"><i></i>Lovable</a>
+              <a class="live" href="https://bolt.new" target="_blank" rel="noopener"><i></i>Bolt.new</a>
+              <a class="live" href="https://replit.com" target="_blank" rel="noopener"><i></i>Replit</a>
+              <div class="sft"><b>쓰기 전에 꼭!</b> 도구마다 이용 연령이 달라요(Bolt.new·Lovable은 만 18세 기준). 학생 계정을 쓸 수 없는 도구는 <b>선생님 화면에서 함께</b> 만들어요. 이름·연락처·주소 같은 <b>개인정보는 프롬프트와 시제품에 넣지 않아요.</b></div>
+            </div>
+            <figure><img src="../slides/p4/032.jpg" alt="Canva AI 화면에서 코드 기능을 고르는 순서를 1, 2 번호로 표시한 슬라이드" loading="lazy"><figcaption>Canva AI code 접속 — 수업 PPT의 실습 예시 (PPT 32장)</figcaption></figure>
+          </div>
+          <div class="teacher">도구별 약관 연령(2026. 11. 확인): ChatGPT·Replit 만 13세 이상(만 18세 미만 보호자 허락), Lovable 만 18세 이상(미만은 보호자 허락), Bolt.new 만 18세 이상 → 학생 계정 불가, 교사 시연용. 표는 프로그램 페이지 '목표' 섹션의 '이용 연령과 대안'.<br>
+          수업 전날: 쓸 도구에 미리 로그인해 두고(15분 구현 시간에 가입 시간 없음), 무료 요금제의 하루 사용 한도 확인. 교사 계정 하나를 여러 모둠이 돌려 쓰지 말 것(계정 공유 금지 조항·한도 소진).<br>
+          접속이 막히면: 교사 화면 한 대로 시연하고, 모둠은 활동지의 v1·v2 프롬프트 작성 + 아래 'v1·v2 비교'로 대체. 또는 Google Sheets 계산표 시제품(입력 칸 → 계산식 → 결과)으로 대체.<br>
+          시제품을 외부에 공개할 때는 공개 범위를 교사가 확인. 수업 PPT의 실습 예시는 Canva AI(Canva Code, 교육용 Canva)로 프로토타입을 만들고 피드백 수집 버튼을 붙이는 흐름(31~36장).</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 교사 시범" data-time="7분 안">
+          <div class="two">
+            <div>
+              <p class="ask">예상과 다르게 작동하면,<br>AI에게 <em>어떻게</em> 다시 말할까요?</p>
+              <ol>
+                <li><b>어떤 조건에서</b> — 어떤 값을 넣었을 때</li>
+                <li><b>무엇이</b> — 어떤 기능·화면이</li>
+                <li><b>어떻게 달랐는지</b> — 예상 결과 vs 실제 결과</li>
+                <li><b>원하는 모습</b> — 이렇게 바꿔 줘</li>
+                <li><b>지킬 것</b> — 기존 기능은 그대로 유지해 줘</li>
+              </ol>
+              <details class="reveal-ans">
+                <summary>수정 프롬프트 예시 보기</summary>
+                <div><p style="margin:0">"이름 칸을 지우고 반·모둠 번호만 받게 바꿔 줘. 기존 기능은 그대로 유지해 줘."</p><p class="muted" style="font-size:.9rem;margin:.3rem 0 0">v1(PPT 33장)이 학생 이름을 받는 문제를 고친 예 — 프로그램 페이지 '수업에서 나온 것들'의 개인정보 점검 예시</p></div>
+              </details>
+            </div>
+            <figure><img src="img/d-redesign.jpg" alt="생성형 AI 채팅 화면에 접근성 조건과 교내 일회용 컵 줄이기 입력 요소를 담은 리디자인 명령이 입력된 모습" loading="lazy"><figcaption>리디자인 명령 — 조건을 더한 수정 프롬프트 (PPT 40장)</figcaption></figure>
+          </div>
+          <div class="teacher">지도안: 기능이 작동하지 않거나 예상과 다른 결과가 나타났을 때, 문제를 구체적으로 설명하고 수정 프롬프트를 작성하는 방법 안내.</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 모둠 활동 1" data-time="15분">
+          <div class="two">
+            <div>
+              <h3>시제품 만들고 기능 테스트하기</h3>
+              <p>핵심 기능을 직접 실행하고, <b>입력값에 따른 출력 결과</b>와 화면 작동 여부를 확인해요.</p>
+              <div class="do"><b>테스트 기록</b><a href="#sheet">활동지 ③</a>에 구현된 기능 · 미구현 기능 · 오류를 적고, 테스트 1~3을 <b>입력값 → 예상 결과 → 실제 결과 → 판정(○ / △ / ×)</b> 순서로 기록해요.</div>
+              <div class="timer" data-min="15"></div>
+            </div>
+            <figure><img src="img/ai-laptop.jpg" alt="햇빛이 드는 교실 창가에서 학생이 노트북으로 작업하는 뒷모습. 책상 위에 작은 화분과 공책이 놓여 있음" loading="lazy"><figcaption>프롬프트로 시제품을 만들어 보는 시간 (AI 생성 이미지)</figcaption></figure>
+          </div>
+          <div class="teacher">유의: 화면 디자인보다 문제 해결에 필요한 <b>핵심 기능의 작동 여부</b>를 우선 확인. 기능 구현과 실제 작동 여부를 구분하게 함.<br>먼저 끝난 모둠: 경곗값(녹지율 0·100, 범위 밖 값)으로 테스트를 하나 더 해 보게 함.</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 모둠 활동 2" data-time="18분">
+          <div class="two">
+            <div>
+              <p class="ask">발견한 오류를<br><em>수정 프롬프트</em>로 바꿔요</p>
+              <p>필요한 기능을 추가하거나 입력·출력 방식과 알고리즘을 보완하고, 수정된 시제품을 <b>다시 테스트</b>해요.</p>
+              <div class="do"><b>수정 기록</b><a href="#sheet">활동지 ④</a>에 수정할 문제 · 이유 · 추가 요청 · 재검증 결과를 적어요.</div>
+              <div class="timer" data-min="18"></div>
+            </div>
+            <figure><img src="../slides/p4/040.jpg" alt="리디자인 명령을 입력한 화면에서 화살표를 따라 적용된 웹앱 화면으로 바뀌는 과정을 보여 주는 슬라이드" loading="lazy"><figcaption>리디자인 명령 → 적용된 웹앱 (PPT 40장)</figcaption></figure>
+          </div>
+          <div class="teacher">유의: 수정 과정에서 <b>기존 기능이 유지되는지</b> 확인. AI가 제시한 수치와 예측 결과는 실제 데이터와 구분하고, 검증되지 않은 효과를 사실처럼 표현하지 않도록.</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 모둠 활동 2" data-time="18분 안">
+          <div class="two">
+            <div>
+              <h3>동료 피드백을 인사이트로</h3>
+              <p>다른 모둠이 우리 시제품을 써 보게 하고, 받은 말에서 세 가지를 하나씩 찾아요.</p>
+              <div class="sfx">
+                <div><b>SIGNAL</b>반복된 말, 행동의 신호<br><q>시간이 너무 오래 걸린다.</q></div>
+                <div><b>FRICTION</b>행동을 방해한 요인<br><q>참여 과정이 복잡함.</q></div>
+                <div><b>TRIGGER</b>행동을 촉진한 요인<br><q>친구랑 같이 하면 재밌을 것 같음.</q></div>
+              </div>
+            </div>
+            <figure><img src="img/d-feedback.jpg" alt="별점과 '어떤 점이 좋았나요', '개선했으면 하는 점' 입력칸이 있는 피드백 수집 화면" loading="lazy"><figcaption>시제품에 붙인 피드백 수집 화면 (PPT 34·36장)</figcaption></figure>
+          </div>
+          <div class="teacher">PPT 38장: "피드백은 해석하지 말고 그대로!" — 지금은 분석이 아니라 있는 그대로 관찰하는 단계. 인사이트 도출은 PPT 39장.</div>
+        </div>
+
+        <div class="step" data-phase="전개 · 모둠 활동 2" data-time="18분 안">
+          <div class="two">
+            <div>
+              <p class="ask">처음 프롬프트와 지금 프롬프트,<br><em>무엇이, 왜</em> 달라졌나요?</p>
+              <p>초기 프롬프트와 수정 프롬프트를 나란히 놓고 바뀐 부분과 그 이유를 기록해요.</p>
+              <div class="do"><b>v1 · v2 비교</b>아래 <a href="#v12">v1 · v2 비교</a> 칸에 두 프롬프트를 넣고 「비교하기」를 눌러요. 더한 말마다 '어떤 테스트 결과 때문인지' 적어요.</div>
+            </div>
+            <figure><img src="img/d-proto-cup.jpg" alt="교내 일회용 컵 사용 줄이기 웹앱. 텀블러 인증, 포인트 획득, 주간 리더보드 세 단계 카드" loading="lazy"><figcaption>수정 프롬프트로 다시 만든 웹앱 — 이 화면에도 이름 칸이 남아 있어요 (PPT 40장)</figcaption></figure>
+          </div>
+          <div class="teacher">발문: "새로 더한 말은 어떤 테스트 결과에서 나왔나요?" "뺀 말은 왜 필요 없었나요?" — 성찰 평가 A 기준(초기·수정 프롬프트를 비교해 모둠이 직접 판단·결정한 내용과 근거를 구체적으로 설명)과 연결.</div>
+        </div>
+
+        <div class="step" data-phase="정리" data-time="4분">
+          <div class="two">
+            <div>
+              <h3>우리 시제품을 1분으로 소개해요</h3>
+              <ul>
+                <li>해결하려는 문제와 <b>핵심 기능</b></li>
+                <li>수정으로 <b>달라진 점</b></li>
+                <li>사용자에게 주는 <b>환경적·사회적 가치</b> — 연결되는 <b>탄소 저감 기술 사례 1개</b>(출처)와 <b>시민이 참여하는 방법</b></li>
+                <li>아직 <b>추가 검증이 필요한 부분</b></li>
+              </ul>
+              <div class="do"><b>가치 제안</b><a href="#sheet">활동지 ⑤</a>의 가치 제안 칸을 보며 발표해요.</div>
+            </div>
+            <figure><img src="img/r-seablend.jpg" alt="학생 모둠이 바이브 코딩으로 만든 친환경 포장재 소개 웹페이지 화면" loading="lazy"><figcaption>학생 산출물 — 바이브 코딩으로 만든 소재 소개 웹페이지 (화면의 성능 수치는 학생이 정한 가상 값)</figcaption></figure>
+          </div>
+          <div class="teacher">초기·수정 프롬프트와 테스트 결과를 함께 보관해 문제 해결 과정을 확인할 수 있도록. 공유 결과는 Google Docs·Google Sites 등 공동 문서에 정리.</div>
+        </div>
+
+        <div class="step" data-phase="정리 · 성찰" data-time="4분 안">
+          <div class="two">
+            <div>
+              <p class="ask">AI가 만든 결과 앞에서,<br><em>우리가 직접 판단한 것</em>은 무엇인가요?</p>
+              <ol>
+                <li>처음 프롬프트와 최종 프롬프트는 어떻게 달라졌나요? 가장 중요했던 수정 이유는?</li>
+                <li>AI 결과를 검토·개선하면서 우리 모둠이 직접 판단하고 결정한 것은?</li>
+                <li>과학적 탐구와 디지털 기술은 기후·환경 문제 해결에 어떻게 연결될까요? <span class="muted">AI도 전기를 써요 — 우리 시제품이 아끼는 에너지와 만드는 데 든 에너지를 함께 생각해 봐요.</span></li>
+              </ol>
+              <div class="do"><b>성찰</b><a href="#sheet">활동지 ⑤</a>의 최종 성찰 1~3에 적어요.</div>
+            </div>
+            <figure><img src="img/r-mogi.jpg" alt="MOGI-S 교사 화면의 차시별 통합 조회. 제품 시뮬레이션 및 피어리뷰 최종발표 준비 과제에 학생들이 제출한 성찰 글 카드가 보임. 학생 이름은 흐리게 처리함" loading="lazy"><figcaption>차시별로 제출한 성찰일지 (MOGI · 학생 이름은 가림)</figcaption></figure>
+          </div>
+          <div class="teacher">AI와 전력: 전 세계 데이터센터는 2024년 약 415 TWh(세계 전력 소비의 약 1.5%)를 썼고, 2030년에는 약 945 TWh로 두 배 넘게 늘 전망(IEA 「Energy and AI」 2025, 기준 시나리오).</div>
+        </div>
+
+      </div>
+      <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">← 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 →</button></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec panel" id="sheet">
+  <div class="wrap">
+    <p class="label">활동지</p>
+    <h2 class="head">만들고, 시험하고, <em>고쳐요</em></h2>
+    <p class="lead">적은 내용은 이 기기의 브라우저에만 저장돼요. 다 쓰면 맨 아래 「내 기록 모두 복사」로 공동 보고서에 붙여 넣어요.</p>
+    <div class="lsheet cols">
+      <div class="card">
+        <h3><span class="n">3</span>시제품 제작과 기능 테스트</h3>
+        <div class="field"><label for="l2-a1">시제품 이름과 목적 — 어떤 문제를 해결하나요?</label><textarea class="pad sm" id="l2-a1" data-key="l2-a1"></textarea></div>
+        <div class="field"><label for="l2-a2">사용한 AI 도구 — 어떤 바이브 코딩 도구?</label><textarea class="pad sm" id="l2-a2" data-key="l2-a2"></textarea></div>
+        <div class="field"><label for="l2-a3">핵심 기능 — 가장 중요한 기능은?</label><textarea class="pad sm" id="l2-a3" data-key="l2-a3"></textarea></div>
+        <div class="field"><label for="l2-a4">입력과 출력 — 무엇을 넣고, 무엇이 나오나요?</label><textarea class="pad sm" id="l2-a4" data-key="l2-a4"></textarea></div>
+        <div class="field"><label for="l2-a5">발견한 문제 — 작동하지 않거나 예상과 다르게 나타난 부분</label><textarea class="pad sm" id="l2-a5" data-key="l2-a5"></textarea></div>
+      </div>
+      <div class="card">
+        <h3><span class="n">4</span>프롬프트 수정과 시제품 개선</h3>
+        <p class="muted" style="font-size:.92rem">바꾸려는 기능과 오류가 생긴 조건을 구체적으로 설명하고, 수정 후 다시 테스트해요.</p>
+        <div class="field"><label for="l2-b1">수정할 문제 — 어떤 기능·결과를 개선하나요?</label><textarea class="pad sm" id="l2-b1" data-key="l2-b1"></textarea></div>
+        <div class="field"><label for="l2-b2">수정 이유 — 왜 해결해야 하나요?</label><textarea class="pad sm" id="l2-b2" data-key="l2-b2"></textarea></div>
+        <div class="field"><label for="l2-b3">추가 요청 — AI에 새로 요청한 내용</label><textarea class="pad sm" id="l2-b3" data-key="l2-b3"></textarea></div>
+        <div class="field"><label for="l2-b5">재검증 — 의도대로 작동하나요? 어떤 테스트로 확인했나요?</label><textarea class="pad sm" id="l2-b5" data-key="l2-b5"></textarea></div>
+        <div class="field"><label for="l2-b6">추가 개선 — 아직 해결하지 못했거나 더 검증할 부분</label><textarea class="pad sm" id="l2-b6" data-key="l2-b6"></textarea></div>
+      </div>
+      <div class="card wide">
+        <h3>기능 테스트 기록표</h3>
+        <div class="tblwrap">
+          <table class="ttbl">
+            <thead><tr><th></th><th>입력값 또는 실행 조건</th><th>예상 결과</th><th>실제 결과</th><th>판정 (○ / △ / ×)</th></tr></thead>
+            <tbody>
+              <tr><td>테스트 1</td><td><textarea class="pad" data-key="l2-t1a" aria-label="테스트 1 입력값"></textarea></td><td><textarea class="pad" data-key="l2-t1b" aria-label="테스트 1 예상 결과"></textarea></td><td><textarea class="pad" data-key="l2-t1c" aria-label="테스트 1 실제 결과"></textarea></td><td><textarea class="pad" data-key="l2-t1d" aria-label="테스트 1 판정"></textarea></td></tr>
+              <tr><td>테스트 2</td><td><textarea class="pad" data-key="l2-t2a" aria-label="테스트 2 입력값"></textarea></td><td><textarea class="pad" data-key="l2-t2b" aria-label="테스트 2 예상 결과"></textarea></td><td><textarea class="pad" data-key="l2-t2c" aria-label="테스트 2 실제 결과"></textarea></td><td><textarea class="pad" data-key="l2-t2d" aria-label="테스트 2 판정"></textarea></td></tr>
+              <tr><td>테스트 3</td><td><textarea class="pad" data-key="l2-t3a" aria-label="테스트 3 입력값"></textarea></td><td><textarea class="pad" data-key="l2-t3b" aria-label="테스트 3 예상 결과"></textarea></td><td><textarea class="pad" data-key="l2-t3c" aria-label="테스트 3 실제 결과"></textarea></td><td><textarea class="pad" data-key="l2-t3d" aria-label="테스트 3 판정"></textarea></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="card wide" id="v12">
+        <h3>v1 · v2 비교 — 무엇이, 왜 달라졌나</h3>
+        <div class="pv-own">
+          <div class="field"><label for="l2-v1">v1 · 초기 프롬프트 (1차시)</label><textarea class="pad" id="l2-v1" data-key="l2-v1" placeholder="1차시에 쓴 초기 프롬프트를 붙여 넣거나 아래 「1차시 v1 불러오기」를 눌러요."></textarea></div>
+          <div class="field"><label for="l2-v2">v2 · 수정 프롬프트 (2차시)</label><textarea class="pad" id="l2-v2" data-key="l2-v2" placeholder="테스트 후 고친 프롬프트를 붙여 넣어요."></textarea></div>
+        </div>
+        <div class="btnrow"><button class="btn" type="button" id="pvGo">비교하기</button><button class="btn ghost" type="button" id="pvLoad">1차시 v1 불러오기</button><span class="pv-stats" id="pvStats"></span></div>
+        <div class="pv-out" id="pvOut" aria-live="polite"><span class="muted">두 칸을 채우고 「비교하기」를 누르면 <ins>더한 말</ins>과 <del>뺀 말</del>이 표시돼요.</span></div>
+        <div class="field" style="margin-top:1rem"><label for="l2-b4">수정 프롬프트 비교 — 바꾼 뒤 무엇이 달라졌나요? (더한 말마다 그 이유가 된 테스트 결과)</label><textarea class="pad sm" id="l2-b4" data-key="l2-b4"></textarea></div>
+      </div>
+      <div class="card wide">
+        <h3><span class="n">5</span>디지털 시제품의 환경적 가치 제안과 성찰</h3>
+        <p class="muted" style="font-size:.92rem">구현된 기능과 <b>기대 효과</b>를 구분하고, 실제로 쓰려면 어떤 검증이 더 필요한지 적어요.</p>
+        <div class="grid g2">
+          <div class="field"><label for="l2-c1">최종 시제품과 핵심 기능</label><textarea class="pad sm" id="l2-c1" data-key="l2-c1"></textarea></div>
+          <div class="field"><label for="l2-c2">문제 해결 대상 — 누구의 어떤 어려움을?</label><textarea class="pad sm" id="l2-c2" data-key="l2-c2"></textarea></div>
+          <div class="field"><label for="l2-c3">환경적·사회적 가치 — 에너지 절약, 자원순환, 기후위기 대응 등</label><textarea class="pad sm" id="l2-c3" data-key="l2-c3"></textarea></div>
+          <div class="field"><label for="l2-c4">과학적 근거와 검증 — 기대 효과를 확인할 데이터와 과정</label><textarea class="pad sm" id="l2-c4" data-key="l2-c4"></textarea></div>
+          <div class="field"><label for="l2-c6">탄소 저감 기술 연결 — 이어지는 탄소 저감 기술·적용 사례 1개와 출처</label><textarea class="pad sm" id="l2-c6" data-key="l2-c6" placeholder="예) 옥상 녹화·쿨루프 사업 사례 — 기관 이름, 자료 이름, 확인한 날짜"></textarea></div>
+          <div class="field"><label for="l2-c7">시민 참여 — 우리 시제품이 시민(학생·주민)의 참여를 어떻게 도울까?</label><textarea class="pad sm" id="l2-c7" data-key="l2-c7"></textarea></div>
+        </div>
+        <div class="field"><label for="l2-c5">한계와 발전 방향 — 실제 서비스가 되려면 보완할 점</label><textarea class="pad sm" id="l2-c5" data-key="l2-c5"></textarea></div>
+        <h3 style="margin-top:1.4rem">최종 성찰</h3>
+        <div class="field"><label for="l2-r1"><span class="qnum">1</span>처음 프롬프트와 최종 프롬프트는 어떻게 달라졌나요? 가장 중요했던 수정 이유는?</label><textarea class="pad" id="l2-r1" data-key="l2-r1"></textarea></div>
+        <div class="field"><label for="l2-r2"><span class="qnum">2</span>AI 결과를 검토하고 개선하며 우리 모둠이 직접 판단하고 결정한 것은?</label><textarea class="pad" id="l2-r2" data-key="l2-r2"></textarea></div>
+        <div class="field"><label for="l2-r3"><span class="qnum">3</span>과학적 탐구와 디지털 기술이 기후·환경 문제 해결에 어떻게 연결될 수 있을까요? AI도 전기를 써요 — 우리 시제품이 아끼는 에너지와 만드는 데 든 에너지를 함께 생각해 봐요.</label><textarea class="pad" id="l2-r3" data-key="l2-r3"></textarea></div>
+        <p class="src">참고: 전 세계 데이터센터는 2024년 약 <span class="ring">415 TWh</span>(세계 전력 소비의 약 1.5%)를 썼고, 2030년에는 약 945 TWh로 두 배 넘게 늘 전망이에요. — IEA 「Energy and AI」(2025), 기준 시나리오</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="slides">
+  <div class="wrap">
+    <p class="label">이 차시 슬라이드 · PPT 31~40장</p>
+    <div class="deck" data-dir="../slides/p4/" data-from="31" data-n="10" data-title="2차시 슬라이드"></div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap">
+    <div class="exit">
+      <h3>나가기 질문</h3>
+      <p>우리 시제품에서 <b>아직 추가 검증이 필요한 부분</b> 한 가지는 무엇이고, 어떤 데이터로 확인할 수 있을까요?</p>
+      <textarea class="pad" data-key="l2-exit" aria-label="나가기 질문 답"></textarea>
+    </div>
+    <div class="lnav" style="margin-top:2rem">
+      <a href="lesson-1.html"><small>← 이전 차시</small>1차시 · 문제 정의와 초기 프롬프트</a>
+      <a class="next" href="index.html#rubric"><small>프로그램 4 전체 →</small>평가 기준·수업 PPT·자료</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p style="margin:0 0 .4rem"><b style="color:var(--champ)">에너지참견시점</b> · 2026 에너지소양교육 교사연구회 · 프로그램 4 과학 및 지능형 최적화 — 황호연 선생님(서울미술고) · 한국에너지정보문화재단 지원</p>
+    <p style="margin:0">출처: 최종보고서 별첨 교수·학습 지도안·활동지, 수업 PPT · AI 전력: IEA 「Energy and AI」(2025) · <a href="index.html">프로그램 4 전체</a> · <a href="../index.html">허브로 돌아가기</a></p>
+  </div>
+</footer>
+
+<script src="../assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+function $(s){return document.querySelector(s)}
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+/* ── v1 · v2 단어 단위 비교 ── */
+function tok(s){return (s||"").replace(/\r/g,"").match(/\n|[^\s]+/g)||[]}
+function lcs(a,b){var n=a.length,m=b.length;if(n*m>900000)return null;
+  var D=[],i,j;for(i=0;i<=n;i++)D[i]=new Uint16Array(m+1);
+  for(i=n-1;i>=0;i--)for(j=m-1;j>=0;j--)D[i][j]=a[i]===b[j]?D[i+1][j+1]+1:Math.max(D[i+1][j],D[i][j+1]);
+  var ops=[];i=0;j=0;while(i<n&&j<m){if(a[i]===b[j]){ops.push(["=",a[i]]);i++;j++}else if(D[i+1][j]>=D[i][j+1]){ops.push(["-",a[i]]);i++}else{ops.push(["+",b[j]]);j++}}
+  while(i<n)ops.push(["-",a[i++]]);while(j<m)ops.push(["+",b[j++]]);return ops}
+function render(ops){var out=[],buf=[],bt=null;
+  function flush(){if(!buf.length)return;var w=buf.join(" ");out.push(bt==="+"?"<ins>"+w+"</ins> ":bt==="-"?"<del>"+w+"</del> ":w+" ");buf=[];bt=null}
+  ops.forEach(function(o){if(o[1]==="\n"){flush();out.push('<span class="br"></span>');return}if(o[0]!==bt)flush();bt=o[0];buf.push(esc(o[1]))});
+  flush();return out.join("")}
+$("#pvGo").onclick=function(){
+  var a=$("#l2-v1").value.trim(),b=$("#l2-v2").value.trim();
+  if(!a||!b){$("#pvOut").textContent="v1과 v2를 모두 적어요.";$("#pvStats").innerHTML="";return}
+  var ops=lcs(tok(a),tok(b));
+  if(!ops){$("#pvOut").textContent="글이 너무 길어 강조를 생략했어요.";return}
+  var ins=0,del=0,eq=0;ops.forEach(function(o){if(o[1]==="\n")return;if(o[0]==="+")ins++;else if(o[0]==="-")del++;else eq++});
+  $("#pvOut").innerHTML=render(ops);
+  $("#pvStats").innerHTML='<span class="plus">+'+ins+' 더함</span><span class="minus">−'+del+' 뺌</span><span>'+eq+' 그대로</span>';
+};
+/* 1차시 화면에서 이 기기에 저장한 v1 불러오기 */
+$("#pvLoad").onclick=function(){
+  var k="ecg:"+location.pathname.replace(/lesson-2\.html$/,"lesson-1.html")+":l1-v1",v=null;
+  try{v=localStorage.getItem(k)}catch(e){}
+  var t=$("#l2-v1");
+  if(!v){this.textContent="1차시 v1이 이 기기에 없어요";var b=this;setTimeout(function(){b.textContent="1차시 v1 불러오기"},1800);return}
+  if(t.value.trim()&&t.value!==v&&!confirm("v1 칸의 글을 1차시에 저장한 글로 바꿀까요?"))return;
+  t.value=v;t.dispatchEvent(new Event("input"));
+};
+})();
+</script>
+</body>
+</html>

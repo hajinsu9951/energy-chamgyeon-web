@@ -1,0 +1,176 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2차시 · 기업가 정신과 공동 선언문 · 프로그램 3 글로벌 · 에너지참견시점</title>
+<meta name="description" content="프로그램 3 글로벌 2차시: 에너지 기업가 정신을 정의하고 SDGs 7·13과 연결한 뒤, 한-튀르키예 공동 선언문을 쓰고 4색 트랙을 고르는 50분 수업 화면">
+<link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/lesson.css">
+<style>
+/* 프로그램 3 차시 페이지 보충 — 색은 C안 변수만. 트랙 글자색(--tXi) 4개만 고정값(공통 --prog-ink 계열과 같은 값) */
+:root{--tA:var(--yellow);--tB:var(--blue);--tC:var(--purple);--tD:var(--peach);--tAi:#8A6A00;--tBi:#16739E;--tCi:#6A3F8E;--tDi:#B85A2A;
+  --cFossil:var(--grey);--cNuc:var(--purple);--cHydro:var(--blue);--cRen:var(--amber);--cGeo:var(--peach);--cOther:var(--sage)}
+.lhero figure img{object-position:var(--pos,center)}
+.boxes{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin:.6rem 0 1rem}
+.box{border:1px solid var(--line);border-left:4px solid var(--prog);border-radius:14px;padding:.9rem 1rem;background:var(--panel)}
+.box h4{margin:0 0 .35rem;font-size:1.1rem;color:var(--ink)}
+.box p{margin:0;color:var(--ink2)}
+.pill-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.pill{border:1px solid var(--line2);border-radius:12px;padding:.55rem .85rem;background:var(--panel)}
+.pill b{color:var(--prog-ink);display:block;font-size:.92rem}
+.sbar{display:flex;height:44px;border-radius:10px;overflow:hidden;margin:.6rem 0 1rem;background:var(--panel2)}
+.sbar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;color:#fff;font-size:.9rem;width:0;transition:width 1.2s var(--ease) .2s;white-space:nowrap;overflow:hidden}
+.step.on .sbar i{width:var(--w)}
+.keys{display:flex;flex-wrap:wrap;gap:.3rem 1rem;color:var(--ink2);font-size:.88rem;margin:.2rem 0 .8rem}
+.key{display:inline-flex;align-items:center;gap:.35rem}.key::before{content:"";width:11px;height:11px;border-radius:3px;background:var(--c)}
+.bigq{font-weight:900;font-size:clamp(1.35rem,2.8vw,2.05rem);line-height:1.45;color:var(--ink);border-left:5px solid var(--prog);padding-left:1rem;margin:.6rem 0 1rem}
+.jump{display:inline-flex;align-items:center;gap:.4rem;color:var(--prog-ink);font-weight:700;text-decoration:none;border-bottom:2px solid var(--progT);margin-top:.4rem}
+.jump:hover{border-color:var(--prog)}
+.tmr-row{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;margin:.6rem 0 1rem}
+.tmr-row > span{display:inline-flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.tmr-row small{color:var(--prog-ink);font-weight:700;font-size:.9rem}
+.runner .step figure.sf{margin:.4rem 0 0}
+.runner .step figure.sf figcaption{font-size:.86rem}
+.runner .step .mini2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.4rem 0 1rem}
+.runner .step .mini2 figure{margin:0;border-radius:12px;overflow:hidden;position:relative}
+.runner .step .mini2 figure img{width:100%;max-height:none;aspect-ratio:524/364;object-fit:cover;border-radius:0;box-shadow:none}
+.runner .step .mini2 figcaption{position:absolute;left:8px;bottom:8px;background:rgba(16,36,26,.8);color:#fff;border-radius:999px;padding:.1rem .7rem;font-size:.88rem;margin:0}
+.gloss{width:100%;border-collapse:collapse;font-size:.95rem}
+.gloss th,.gloss td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left}
+.gloss th{color:var(--prog-ink)}
+.awards{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.awards span{border:1.5px solid var(--prog);border-radius:999px;padding:.3rem 1rem;font-weight:700;color:var(--prog-ink);background:var(--panel)}
+.trk{font-weight:900}
+.lsheet .card p.h,.lsheet small.h{color:var(--grey);font-size:.88rem;margin:.1rem 0 .4rem;display:block}
+input.pad{min-height:0}
+.pad.sm{min-height:76px}
+.sheet-note{color:var(--grey);font-size:.92rem}
+.deckhead{font-weight:700;margin:1.6rem 0 .6rem}
+.deckhead:first-of-type{margin-top:0}
+.rubtbl{min-width:720px}
+.rubtbl td:first-child{font-weight:700;min-width:9.5em}
+.rubtbl small{white-space:nowrap}
+.rubtbl th{color:var(--prog-ink)}
+
+/* 공동 선언문 미리보기 */
+.decl{display:grid;gap:1.4rem;align-items:start}
+@media (min-width:900px){.decl{grid-template-columns:1fr minmax(300px,460px)}}
+.charter{overflow:hidden;background:#fff;color:var(--ink);border-radius:8px;padding:1.8rem 1.6rem;position:relative;box-shadow:var(--shadow);border:1px solid var(--line2);outline:1px solid var(--line2);outline-offset:-10px;border-top:5px solid var(--prog)}
+.charter .ttl{text-align:center;font-weight:900;font-size:1.3rem;line-height:1.4}
+.charter .ttl small{display:block;font-weight:700;font-size:.78rem;color:var(--prog-ink);letter-spacing:.08em}
+.charter .pre{font-weight:700;line-height:1.7;margin:1rem 0 .3rem}
+.charter .pre-en{color:var(--grey);font-size:.84rem;margin:0 0 .8rem}
+.charter ol{margin:0 0 1rem 1.2rem;padding:0}
+.charter li{margin:.35rem 0;line-height:1.55}
+.charter .ph{color:var(--grey);opacity:.75}
+.charter .sig{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem}
+.charter .sig div{border-top:1px solid var(--line2);padding-top:.3rem;font-size:.82rem;color:var(--grey)}
+.charter .sig b{display:block;font-family:var(--hand);font-weight:400;font-size:1.6rem;color:var(--ink);min-height:1.4em;line-height:1.2}
+.stamp{position:absolute;right:16px;bottom:14px;width:84px;height:84px;border-radius:50%;border:3px solid var(--champ);color:var(--champ);display:grid;place-items:center;text-align:center;font-weight:700;font-size:.78rem;line-height:1.25;transform:rotate(-14deg) scale(2.2);opacity:0;pointer-events:none}
+.stamp.on{opacity:.9;transform:rotate(-14deg) scale(1);transition:transform .45s cubic-bezier(.3,1.5,.5,1),opacity .2s}
+@media (max-width:640px){.charter{padding-bottom:6.4rem}}
+</style></head>
+<body data-prog="p3">
+<!-- 프로그램 3 2차시 · 근거: index.html 「수업 진행」 1~2차시 탭의 ‘1차시 끝’ 경계 뒤 단계(활동 2 25분 + 활동 3 20분 + 정리 5분), 「활동지」 활동 2·3, 「평가」 1~2차시 4~5행 · 수업 PPT slides/p3/ -->
+<header class="top lesson-top"><div class="wrap">
+  <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+  <div class="crumb"><a class="back-hub" href="index.html">03 글로벌</a><b>2차시 · 기업가 정신과 공동 선언문</b></div>
+  <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
+</div></header>
+<main>
+<section class="lhero"><div class="wrap">
+  <div><span class="no">03 글로벌 · 2차시 / 6</span>
+    <h1>에너지를 <em>기회</em>로<br>바꾸는 약속</h1>
+    <p class="goal"><b>오늘의 목표</b>우리 모둠의 ‘에너지 기업가 정신’을 정의하고, 두 나라 친구들과 공동 선언문을 써요.</p>
+    <div class="meta"><span>고등학교 50분</span><span>한국–튀르키예 모둠</span><span>Padlet · DeepL</span><span>자료: 그린 스타트업 사례집</span></div></div>
+  <figure><img src="img/class-12-3.jpg" alt="교사가 몸을 숙여 노트북과 태블릿을 앞에 둔 모둠 학생들과 이야기를 나누는 장면" loading="eager"><figcaption>▲ 1~2차시 활동사진 · 모둠과 함께 자료를 살피는 교사</figcaption></figure>
+</div><span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice" fill="currentColor"><path d="M0 70V60h36V44h24v16h18V34h28v26h14V48h20v12h28V38l10-6 10 6v22h22V52h18v8h40V46h26v14h16V36h32v24h28V52h20v8h34V40h22v20h24V50h22v10h38V44h28v16h20V32h26v28h22V48h20v12h34V42h24v18h22V54h18v6h38V38h28v22h18V48h22v12h38V42h26v18h28V50h20v10h22V36h28v24h18V46h24v14h38V44h26v16h22V52h40v18Z"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M250 60V16M250 16l-13-9M250 16l15-2M250 16l-2 15"/><path d="M290 60V24M290 24l-10-7M290 24l12-2M290 24l-2 12"/><path d="M930 60V12M930 12l-14-9M930 12l16-2M930 12l-2 16"/></g><path d="M470 60l10-12h40l-10 12Zm52 0l10-12h40l-10 12ZM700 60l10-12h40l-10 12Z"/><circle cx="118" cy="52" r="9"/><circle cx="640" cy="50" r="11"/><circle cx="1080" cy="51" r="10"/><circle cx="822" cy="53" r="8"/></svg></span></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <p class="label">수업 흐름</p>
+  <div class="lplan"><div style="--m:25"><b>활동 2 · 기업가 정신과 SDGs</b><small>25분</small></div><div style="--m:20"><b>활동 3 · 공동 선언문</b><small>20분</small></div><div style="--m:5"><b>정리 · 트랙 선택</b><small>5분</small></div></div>
+  <p class="sheet-note">← → 키나 아래 버튼으로 넘겨요. 교사 모드를 켜면 발문·유의점이 보여요.</p>
+  <div class="runner stage">
+    <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+    <div class="steps">
+          <div class="step" data-phase="전개 · 활동 2 개념 탐구" data-time="25분 중 ①">
+            <div class="two"><div><h3>에너지 기업가 정신이란?</h3><p class="bigq">에너지를 수동적으로 절약하는 데 그치지 않고, 기술과 혁신을 통해 <em class="hl">경제적·사회적 가치 창출의 기회</em>로 전환하는 것</p><p class="muted small">Energy Entrepreneurship — 이번 프로젝트 전체를 꿰는 핵심 가치예요.</p></div><div><figure class="sf"><img src="../slides/p3/010.jpg" alt="수업 PPT 10장 슬라이드: 에너지 기업가 정신이란?" loading="lazy"><figcaption>▲ 수업 PPT 10장 · 에너지 기업가 정신이란?</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="전개 · 활동 2 개념 탐구" data-time="25분 중 ②">
+            <div class="two"><div><h3>그린 스타트업 &amp; 적정기술 벤치마킹</h3><div class="boxes"><div class="box"><h4>휴대용 태양광 램프</h4><p>전력망이 닿지 않는 오지 마을에 빛을 제공해 교육과 안전 문제를 함께 해결.</p></div><div class="box"><h4>폐기물 바이오가스</h4><p>농업 부산물을 가스로 바꿔 지역 주민의 청정 조리 연료로 공급.</p></div><div class="box"><h4>P2P 전력 거래 앱</h4><p>남는 태양광 전력을 이웃과 스마트폰으로 직거래하는 소규모 스마트그리드.</p></div></div><p>이 사례들은 어떤 문제를 <b>기회</b>로 바꾸었나요?</p><div class="teacher">자료: 해외 적정기술 및 그린 스타트업 사례집.</div></div><div><figure class="sf"><img src="img/class-12-2.jpg" alt="칠판 화면에 적정기술 사례를 찾아 장단점을 정리하라는 과제가 떠 있고, 교사가 앞에서 설명하는 동안 학생들이 노트북으로 조사하는 교실" loading="lazy"><figcaption>▲ 1~2차시 활동사진 · 적정기술 사례를 찾아 정리하는 시간</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="전개 · 활동 2 개념 탐구" data-time="25분 중 ③ (작성 10분)">
+            <div class="two"><div><h3>우리가 해결할 SDGs</h3><div class="boxes"><div class="box"><h4>07 · 모두를 위한 적정가격의 깨끗한 에너지</h4><p>Affordable and Clean Energy — 저렴하고 신뢰할 수 있으며 지속가능한 현대적 에너지에 대한 접근 보장.</p></div><div class="box"><h4>13 · 기후변화 대응</h4><p>Climate Action — 기후변화와 그 영향을 방지하기 위한 긴급한 행동 실시.</p></div></div><div class="do"><b>활동 2 · 작성 10분</b>우리 모둠의 ① 에너지 기업가 정신 정의 ② 핵심 해결 과제 ③ 해결 대상과 필요성을 <a href="#sheet">활동지</a>에 적어요.</div><div class="tmr-row"><span class="timer" data-min="10"></span></div><a class="live" href="https://sdgs.un.org/goals/goal7" target="_blank" rel="noopener"><i></i>UN SDG 7</a><a class="live" href="https://sdgs.un.org/goals/goal13" target="_blank" rel="noopener"><i></i>UN SDG 13</a></div><div><figure class="sf"><img src="../slides/p3/012.jpg" alt="수업 PPT 12장 슬라이드: 우리가 해결할 UN 지속가능발전목표(SDGs) 7 · 13" loading="lazy"><figcaption>▲ 수업 PPT 12장 · 우리가 해결할 UN 지속가능발전목표(SDGs) 7 · 13</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="전개 · 활동 3 공동 선언문" data-time="20분">
+            <div class="two"><div><p class="ask">국경을 넘어 무엇을 <em>약속</em>할까요?</p><p>“우리 모둠은 글로벌 에너지 문제 해결을 위해 국경을 넘어 다음과 같이 실천하고 협력할 것을 다짐합니다.” 뒤에 이어질 핵심 약속 3~4문장을 써요. 한국 팀원과 튀르키예 팀원이 함께 서명해요.</p><div class="do"><b>선언문 작성 15분</b><a href="#declare">공동 선언문 칸</a>에 약속을 쓰고, 나머지 5분은 양국 서명·Padlet 공유.</div><div class="tmr-row"><span class="timer" data-min="15"></span></div><div class="teacher">자료: 에코액션랩 선언문 양식. 관찰 기준: 양국 학생이 글로벌 에너지 문제를 함께 해결할 동반자임을 인식하고 구체적인 실천 다짐을 담았는가. 먼저 끝난 모둠: 선언문을 영어·튀르키예어로 옮겨 Padlet에 올리기.</div></div><div><figure class="sf"><img src="../slides/p3/014.jpg" alt="수업 PPT 14장 슬라이드: 한-튀르키예 공동 선언문 서명" loading="lazy"><figcaption>▲ 수업 PPT 14장 · 한-튀르키예 공동 선언문 서명</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="정리 · 차시 예고" data-time="5분">
+            <div class="two"><div><h3>우리 모둠의 트랙을 골라요</h3><div class="pill-row"><div class="pill" style="border-color:var(--tA)"><b style="color:var(--tAi)">Track A</b>에너지 SDGs 동화책</div><div class="pill" style="border-color:var(--tB)"><b style="color:var(--tBi)">Track B</b>신문 칼럼 &amp; 비주얼 포스터</div><div class="pill" style="border-color:var(--tC)"><b style="color:var(--tCi)">Track C</b>기업가 정신 홍보 영상</div><div class="pill" style="border-color:var(--tD)"><b style="color:var(--tDi)">Track D</b>그린 벤처 사업계획서</div></div><p>역할 나누기: 시나리오 기획 · 데이터 조사 · 시각 디자인 · 다국어 번역(한국어/영어/튀르키예어) — 각자의 강점에 맞게!</p><div class="do"><b>트랙과 역할</b><a href="#track">활동지 ④</a>에 우리 모둠의 트랙과 역할 분담을 적어요.</div><a class="jump" href="index.html#tracks">4색 트랙 미리 보기 →</a><div class="teacher">자료: 트랙 선택 조사지. 다음 차시 집중 창작(40분 + 35분) 예고.</div></div><div><figure class="sf"><img src="../slides/p3/015.jpg" alt="수업 PPT 15장 슬라이드: 4대 산출물 트랙 선택 및 역할 분담" loading="lazy"><figcaption>▲ 수업 PPT 15장 · 4대 산출물 트랙 선택 및 역할 분담</figcaption></figure></div></div>
+          </div>
+    </div>
+    <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">◀ 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 ▶</button></div>
+  </div>
+</div></section>
+
+<section class="sec panel" id="sheet"><div class="wrap">
+  <p class="label">활동지</p><h2 class="head">활동 2·3 · 기업가 정신과 <em>공동 선언문</em></h2>
+  <p class="sheet-note">쓴 내용은 이 기기의 브라우저에만 저장돼요. 수업이 끝나면 아래 「내 기록 모두 복사」로 모둠 문서에 붙여 두세요.</p>
+  <div class="lsheet cols">
+    <div class="card"><h3><span class="n">2</span>에너지 기업가 정신과 SDGs 연계</h3><div class="field"><label for="l2-def">우리가 정의하는 ‘에너지 기업가 정신’</label><textarea class="pad" id="l2-def" data-key="l2-def" placeholder="에너지를 소비하는 것을 넘어, 우리 모둠이 발휘할 수 있는 기업가 정신은?"></textarea></div><div class="field"><label for="l2-task">핵심 해결 과제 (SDGs 7·13 연계)</label><textarea class="pad sm" id="l2-task" data-key="l2-task" placeholder="양국 상황 중 가장 해결하고 싶은 구체적 문제"></textarea></div><div class="field"><label for="l2-who">해결 대상과 필요성</label><textarea class="pad sm" id="l2-who" data-key="l2-who" placeholder="누가, 어떤 어려움을 겪고, 왜 시급한가?"></textarea></div></div>
+    <div class="card" id="track"><h3><span class="n">4</span>우리 모둠의 트랙과 역할</h3><div class="field"><label for="l2-track">우리 모둠의 트랙</label><input class="pad" id="l2-track" data-key="l2-track" placeholder="A 동화책 / B 칼럼·포스터 / C 홍보 영상 / D 사업계획서"></div><div class="field"><label for="l2-role">모둠 역할 분담</label><textarea class="pad" id="l2-role" data-key="l2-role" placeholder="시나리오 기획, 데이터 조사, 시각 디자인, 다국어 번역(한/영/튀)"></textarea></div></div>
+  </div>
+  <h3 style="margin-top:2.4rem" id="declare"><span class="prog-chip">활동 3</span> 한-튀르키예 공동 선언문</h3>
+  <p class="sheet-note">핵심 약속을 쓰면 오른쪽 선언문에 바로 새겨져요. 두 나라 팀원이 모두 서명하면 도장이 찍혀요.</p>
+  <div class="decl">
+    <div class="card">
+      <div class="field"><label for="l2-group">모둠 이름</label><input class="pad" id="l2-group" data-key="l2-group" data-mirror="cv-group"></div>
+      <div class="field"><label for="l2-p1">약속 1</label><input class="pad" id="l2-p1" data-key="l2-p1" data-mirror="cv-1"></div>
+      <div class="field"><label for="l2-p2">약속 2</label><input class="pad" id="l2-p2" data-key="l2-p2" data-mirror="cv-2"></div>
+      <div class="field"><label for="l2-p3">약속 3</label><input class="pad" id="l2-p3" data-key="l2-p3" data-mirror="cv-3"></div>
+      <div class="field"><label for="l2-p4">약속 4 (선택)</label><input class="pad" id="l2-p4" data-key="l2-p4" data-mirror="cv-4"></div>
+      <div class="g2f" style="display:grid;gap:0 1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))">
+        <div class="field"><label for="l2-kr">한국 팀원 서명</label><input class="pad" id="l2-kr" data-key="l2-kr" data-mirror="cv-kr"></div>
+        <div class="field"><label for="l2-tr">튀르키예 팀원 서명</label><input class="pad" id="l2-tr" data-key="l2-tr" data-mirror="cv-tr"></div>
+      </div>
+    </div>
+    <div class="charter" aria-label="공동 선언문 미리보기">
+      <p class="ttl"><small>CO-AUTHOR &amp; GREEN ENTREPRENEUR DECLARATION</small>글로벌 기후 행동 공동 저자 및<br>그린 창업가 선언문</p>
+      <p class="pre">“<span id="cv-group" data-ph="우리 모둠">우리 모둠</span>은 글로벌 에너지 문제 해결을 위해 국경을 넘어 다음과 같이 실천하고 협력할 것을 다짐합니다.”</p>
+      <p class="pre-en">Our group pledges to practice and cooperate as follows to solve global energy problems.</p>
+      <ol><li id="cv-1" data-ph="첫 번째 약속"></li><li id="cv-2" data-ph="두 번째 약속"></li><li id="cv-3" data-ph="세 번째 약속"></li><li id="cv-4" data-ph="(네 번째 약속)"></li></ol>
+      <div class="sig"><div><b id="cv-kr" data-ph=""></b>한국 팀원 서명</div><div><b id="cv-tr" data-ph=""></b>튀르키예 팀원 서명</div></div>
+      <div class="stamp" id="stamp" aria-hidden="true">KOR · TÜR<br>공동 선언</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="slides"><div class="wrap"><p class="label">이 차시 슬라이드</p>
+  <p class="deckhead">2차시 슬라이드 · 10~15장</p><div class="deck" data-dir="../slides/p3/" data-from="10" data-n="6" data-title="2차시 슬라이드 · 10~15장"></div>
+  
+</div></section>
+
+<section class="sec panel" id="rubric"><div class="wrap">
+  <p class="label">이 차시 평가</p><h2 class="head">약속에 <em>실천</em>이 보이나요?</h2>
+  <p class="muted small">[12기지04-01] · 관찰 평가, 활동지 2, 공동 선언문 작성 기록</p><div class="tblwrap"><table class="tbl rubtbl"><thead><tr><th>기준</th><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>기업가 정신 및 SDGs 연계<br><small class="muted">12기지04-01</small></td><td>모둠의 ‘에너지 기업가 정신’ 정의에 해결할 문제·대상·만들 가치(경제적·사회적)가 모두 들어 있고, SDG 7 또는 13의 세부 내용과 연결한다.</td><td>정의는 썼지만 문제·대상·가치 가운데 하나가 빠졌거나, SDG 번호만 적고 연결 이유가 없다.</td><td>‘에너지 절약’ 수준의 정의에 머물고 SDGs 연결이 없다.</td></tr><tr><td>공동 선언문 작성<br><small class="muted">12기지04-01</small></td><td>누가·무엇을·언제 할지 드러난 실천 약속을 3개 이상 쓰고, 양국 팀원이 모두 서명한다.</td><td>약속이 3개 미만이거나, ‘노력한다’처럼 실천 행동이 드러나지 않는 문장이 섞여 있다.</td><td>약속이 1개 이하이거나 한 나라 팀원만 참여했다.</td></tr></tbody></table></div><p class="sheet-note">A·B·C는 이 과제의 채점 수준이에요. 학기 성취도(A~E)는 학교 성취평가 기준에 따라 따로 산출해요.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="exit"><h3>나가기 질문</h3><p>우리 모둠이 정의한 ‘에너지 기업가 정신’을 한 문장으로 쓰면? 에너지 ‘절약’과 무엇이 다른가요?</p><textarea class="pad" data-key="l2-exit" aria-label="나가기 질문 답"></textarea></div>
+  <div class="lnav" style="margin-top:2rem"><a href="lesson-1.html"><small>← 이전 차시</small>1차시 · 두 나라의 전력 데이터</a><a href="index.html"><small>프로그램 3 전체</small>수업 소개 · 4색 트랙 · 평가 · PPT</a><a class="next" href="lesson-3.html"><small>다음 차시 →</small>3차시 · 4색 트랙 집중 창작 ①</a></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+  <p>2026 에너지소양교육 교사연구회 「에너지참견시점」 · 프로그램 3 · 임은희(영훈고등학교) · 한국에너지정보문화재단 지원</p>
+  <p>자료: 최종보고서 별첨 교수·학습 지도안 및 활동지, 수업 PPT 「한-튀르키예 글로벌 기후 행동 프로젝트」 · 시간은 고등학교 50분 수업 기준(지도안의 2차시 블록을 차시 경계에서 나눔) · 수업 사진의 학생 얼굴과 이름은 흐리게 처리했습니다.</p>
+</div></footer>
+<script src="../assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+/* 공동 선언문: 입력 → 미리보기, 두 나라 서명이 모두 있으면 도장 */
+function $(s){return document.querySelector(s)}
+function mirror(inp){var el=document.getElementById(inp.dataset.mirror);if(!el)return;var v=inp.value.trim();if(v){el.textContent=v;el.classList.remove("ph")}else{el.textContent=el.dataset.ph||"";el.classList.add("ph")}}
+var stamp=$("#stamp");
+function stampCheck(){stamp.classList.toggle("on",!!($("#l2-kr").value.trim()&&$("#l2-tr").value.trim()))}
+Array.prototype.forEach.call(document.querySelectorAll("[data-mirror]"),function(i){mirror(i);i.addEventListener("input",function(){mirror(i);stampCheck()})});
+stampCheck();
+})();
+</script>
+</body></html>

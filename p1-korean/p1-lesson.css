@@ -1,0 +1,116 @@
+/* 프로그램 1 국어 · 차시 페이지 보충 (lesson-1~4 공통, C안 변수만 사용)
+   site.css → lesson.css 다음에 불러온다. */
+
+/* 단계 안 보조 요소 */
+.step .sub{color:var(--prog-ink);font-weight:700;margin:-.2rem 0 .7rem}
+.step .src-line{color:var(--grey);font-size:.95rem;margin:0}
+.pill{display:inline-block;background:var(--panel2);border:1px solid var(--line2);border-radius:8px;padding:.1rem .55rem;font-weight:700;color:var(--champ);font-variant-numeric:tabular-nums}
+.say{font-weight:700;font-size:clamp(1.1rem,2vw,1.4rem);line-height:1.55;border-left:4px solid var(--prog);padding:.2rem 0 .2rem 1rem;margin:.6rem 0 1rem;color:var(--ink)}
+.kv{display:grid;gap:.6rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));margin:.6rem 0 1rem}
+.kv > div{border:1px solid var(--line);border-radius:14px;padding:.8rem 1rem;background:var(--bg)}
+.kv > div b{display:block;color:var(--prog-ink);font-size:.92rem;margin-bottom:.2rem}
+.kv > div p{margin:0;color:var(--ink2)}
+.runner.stage .step .kv p{font-size:clamp(1rem,1.4vw,1.12rem)}
+.note{color:var(--grey);font-size:.95rem}
+.hidebtn{margin-left:.4rem;vertical-align:middle}
+.cover{transition:background .3s,color .3s;border-radius:6px}
+.cover.hidden{background:var(--champ);color:var(--champ)}
+
+/* 그림: 화면 캡처·슬라이드·보고서 예시 */
+.step figure.fig{margin:.4rem 0 1rem}
+.step figure.fig img{display:block;border:1px solid var(--line);background:#fff}
+.step figure.fig figcaption{font-size:.88rem}
+.runner.stage .step figure.fig.slide img{max-height:40vh}
+.step .two > figure.fig{margin-top:0}
+.step details.reveal-ans figure{margin:.6rem 0 0}
+.step details.reveal-ans figure img{max-height:none;width:100%}
+
+/* 학생 활동 상자 */
+.step .do ul{margin:.2rem 0 .4rem 1.2rem}
+.step .do .timer{margin-top:.4rem;background:var(--panel)}
+.step .do a.live{background:var(--panel)}
+.step .do .go-sheet{display:inline-block;margin-top:.5rem;font-weight:700;color:var(--prog-ink)}
+
+/* 기사 제목 카드 */
+.heads{display:grid;gap:.8rem;margin:.6rem 0 1rem}
+.headcard{display:flex;flex-direction:column;gap:.35rem;border:1px solid var(--line2);border-top:3px solid var(--prog);border-radius:12px;padding:.9rem 1.1rem;background:var(--panel);color:var(--ink);text-decoration:none;transition:border-color .25s}
+.headcard:hover,.headcard:focus-visible{border-color:var(--prog)}
+.headcard .meta{color:var(--grey);font-size:.88rem;font-weight:500}
+.headcard .ht{font-weight:900;font-size:clamp(1.15rem,2.2vw,1.5rem);line-height:1.45}
+.headcard .go{color:var(--prog-ink);font-size:.88rem;font-weight:700}
+
+/* 원인 도표 (ENTSO-E 12쪽 일부를 다시 그림) */
+.cause{max-width:460px;margin:.4rem 0 1rem}
+.cause svg{width:100%;height:auto;display:block}
+.cause .box{fill:var(--panel);stroke:var(--champ);stroke-width:1.5}
+.cause .hot{fill:var(--rust)}
+.cause text{font-family:var(--sans);fill:var(--ink)}
+.cause text.on-hot{fill:#fff}
+.cause .en{fill:var(--grey);font-size:13px}
+.cause .ar{stroke:var(--amber);stroke-width:3;fill:none;stroke-dasharray:120;stroke-dashoffset:120}
+.step.on .cause .ar{animation:drawln 1.2s .5s var(--ease) forwards}
+.cause .other{stroke:var(--grey);stroke-width:1.5;stroke-dasharray:5 6;fill:none}
+@keyframes drawln{to{stroke-dashoffset:0}}
+
+/* 활동지 */
+.lsheet .card .field small{display:block;color:var(--grey);font-size:.86rem;margin:-.2rem 0 .35rem}
+.lsheet .card .pad{min-height:96px}
+.lsheet .card.wide{grid-column:1/-1}
+.sheet-ex{margin-top:1.2rem}
+.sheet-ex img{width:100%;max-width:820px;border-radius:12px;border:1px solid var(--line)}
+
+/* 3차시: 근거 사슬 캔버스 */
+.chain{position:relative;margin-top:1rem}
+.chain svg.links{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:visible}
+.chain svg.links path{fill:none;stroke:var(--prog);stroke-width:2.5;stroke-linecap:round;transition:stroke-dashoffset 1s var(--ease)}
+.chain svg.links path.ghost{stroke:var(--line2);stroke-width:1.5;stroke-dasharray:4 7}
+.nodes{position:relative;z-index:1;display:grid;gap:2.4rem 2.2rem;grid-template-columns:1fr}
+@media (min-width:900px){.nodes{grid-template-columns:repeat(3,1fr);grid-template-rows:auto auto;grid-auto-flow:column}}
+.node{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:1rem 1.1rem 1.1rem;box-shadow:var(--shadow);transition:border-color .4s,box-shadow .4s}
+.node .n{display:flex;align-items:baseline;gap:.5rem}
+.node .n i{font-style:normal;color:var(--prog-ink);font-weight:700;font-size:.85rem;letter-spacing:.06em}
+.node .n b{font-size:1.15rem}
+.node .hint{color:var(--grey);font-size:.88rem;margin:.15rem 0 .55rem}
+.node .pad{min-height:96px}
+.node.lit{border-color:var(--prog);box-shadow:0 0 0 1px var(--prog) inset,var(--shadow)}
+.node .demo{display:none;min-height:96px;border:1px dashed var(--line2);border-radius:12px;padding:.8rem 1rem;color:var(--ink);background:var(--bg)}
+.chain.demo-on .node .demo{display:block}
+.chain.demo-on .node .pad{display:none}
+.chain-tools{display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;margin-top:1rem}
+.chain-tools .meter{margin-left:auto;color:var(--grey);font-variant-numeric:tabular-nums}
+.chain-tools .meter b{color:var(--prog-ink)}
+.draft{display:none;margin-top:1.2rem;background:var(--panel);border:1px solid var(--line);color:var(--ink);border-radius:16px;padding:1.3rem 1.4rem;box-shadow:var(--shadow)}
+.draft.show{display:block;animation:fadein .5s}
+.draft h4{margin:0 0 .6rem;color:var(--prog-ink)}
+.draft p{margin:0 0 .5rem}
+.draft .gap{color:var(--rust);font-weight:500}
+.draft small{color:var(--grey)}
+.typing::after{content:"";display:inline-block;width:.08em;height:.95em;background:var(--prog);margin-left:.06em;vertical-align:-.08em;animation:caret .7s steps(1) infinite}
+@keyframes caret{50%{opacity:0}}
+
+/* 4차시: 예상 질문 카드 · 고쳐쓰기 */
+.flips{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))}
+.flip{perspective:1200px;min-height:230px;cursor:pointer;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left}
+.flip .in{position:relative;width:100%;height:100%;min-height:230px;transition:transform .8s var(--ease);transform-style:preserve-3d}
+.flip[aria-pressed="true"] .in{transform:rotateY(180deg)}
+.flip .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:18px;padding:1.2rem;display:flex;flex-direction:column;gap:.4rem;border:1px solid var(--line2);box-shadow:var(--shadow)}
+.flip .front{background:var(--panel);border-top:4px solid var(--prog)}
+.flip .back{background:var(--progT);transform:rotateY(180deg);border-color:var(--prog)}
+.flip .tagl{font-size:.82rem;font-weight:700;letter-spacing:.06em;color:var(--prog-ink)}
+.flip .q{font-weight:900;font-size:1.2rem;line-height:1.45}
+.flip .more{margin-top:auto;font-size:.85rem;color:var(--grey)}
+.rewrite{margin-top:1.4rem;border:1px solid var(--line);border-radius:18px;padding:1.2rem 1.3rem;background:var(--panel);box-shadow:var(--shadow)}
+.rewrite .before{font-size:1.1rem;color:var(--ink);position:relative;display:inline;background-image:linear-gradient(var(--rust),var(--rust));background-repeat:no-repeat;background-size:0 2px;background-position:0 55%;transition:background-size 1s var(--ease),color .6s}
+.rewrite.done .before{background-size:100% 2px;color:var(--grey)}
+.rewrite .after{margin-top:.9rem;font-weight:700;font-size:clamp(1.1rem,2.2vw,1.4rem);line-height:1.55;color:var(--champ);min-height:1.5em}
+.rewrite .why{margin-top:.6rem;color:var(--ink2);opacity:0;transition:opacity .8s .3s}
+.rewrite.done .why{opacity:1}
+.rewrite .lab{color:var(--grey);font-size:.85rem;font-weight:500;display:block;margin-bottom:.25rem}
+
+.tri3{display:grid;gap:0 1rem}
+@media (min-width:900px){.tri3{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:480px){.step .timer{flex-wrap:wrap;max-width:100%;row-gap:.3rem}.step .timer .bar{width:56px}}
+/* lesson.css의 .runner.stage .step p 글자 크기가 .step .ask보다 우선해 발문이 작아지는 것을 되돌림 */
+.runner.stage .step p.ask{font-size:clamp(1.5rem,3.2vw,2.4rem);line-height:1.35}
+body.proj .runner.stage .step p.ask{font-size:clamp(1.8rem,3.8vw,2.9rem)}
+#sheet h3 > .n{display:inline-grid;place-items:center;width:1.8em;height:1.8em;border-radius:50%;background:var(--prog);color:#fff;font-size:.8em;margin-right:.4rem}

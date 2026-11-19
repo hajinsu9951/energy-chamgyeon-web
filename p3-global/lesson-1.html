@@ -1,0 +1,210 @@
+<!doctype html><html lang="ko"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>1차시 · 두 나라의 전력 데이터 · 프로그램 3 글로벌 · 에너지참견시점</title>
+<meta name="description" content="프로그램 3 글로벌 1차시: 한국과 튀르키예의 2024년 발전량을 비교하고, 설비용량과 발전량을 구분하며, 공공데이터로 두 나라 에너지 전환의 기회와 위기를 찾는 50분 수업 화면">
+<link rel="stylesheet" href="../assets/site.css"><link rel="stylesheet" href="../assets/lesson.css">
+<style>
+/* 프로그램 3 차시 페이지 보충 — 색은 C안 변수만. 트랙 글자색(--tXi) 4개만 고정값(공통 --prog-ink 계열과 같은 값) */
+:root{--tA:var(--yellow);--tB:var(--blue);--tC:var(--purple);--tD:var(--peach);--tAi:#8A6A00;--tBi:#16739E;--tCi:#6A3F8E;--tDi:#B85A2A;
+  --cFossil:var(--grey);--cNuc:var(--purple);--cHydro:var(--blue);--cRen:var(--amber);--cGeo:var(--peach);--cOther:var(--sage)}
+.lhero figure img{object-position:var(--pos,center)}
+.boxes{display:grid;gap:.8rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));margin:.6rem 0 1rem}
+.box{border:1px solid var(--line);border-left:4px solid var(--prog);border-radius:14px;padding:.9rem 1rem;background:var(--panel)}
+.box h4{margin:0 0 .35rem;font-size:1.1rem;color:var(--ink)}
+.box p{margin:0;color:var(--ink2)}
+.pill-row{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.pill{border:1px solid var(--line2);border-radius:12px;padding:.55rem .85rem;background:var(--panel)}
+.pill b{color:var(--prog-ink);display:block;font-size:.92rem}
+.sbar{display:flex;height:44px;border-radius:10px;overflow:hidden;margin:.6rem 0 1rem;background:var(--panel2)}
+.sbar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;color:#fff;font-size:.9rem;width:0;transition:width 1.2s var(--ease) .2s;white-space:nowrap;overflow:hidden}
+.step.on .sbar i{width:var(--w)}
+.keys{display:flex;flex-wrap:wrap;gap:.3rem 1rem;color:var(--ink2);font-size:.88rem;margin:.2rem 0 .8rem}
+.key{display:inline-flex;align-items:center;gap:.35rem}.key::before{content:"";width:11px;height:11px;border-radius:3px;background:var(--c)}
+.bigq{font-weight:900;font-size:clamp(1.35rem,2.8vw,2.05rem);line-height:1.45;color:var(--ink);border-left:5px solid var(--prog);padding-left:1rem;margin:.6rem 0 1rem}
+.jump{display:inline-flex;align-items:center;gap:.4rem;color:var(--prog-ink);font-weight:700;text-decoration:none;border-bottom:2px solid var(--progT);margin-top:.4rem}
+.jump:hover{border-color:var(--prog)}
+.tmr-row{display:flex;flex-wrap:wrap;gap:.6rem 1.2rem;align-items:center;margin:.6rem 0 1rem}
+.tmr-row > span{display:inline-flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+.tmr-row small{color:var(--prog-ink);font-weight:700;font-size:.9rem}
+.runner .step figure.sf{margin:.4rem 0 0}
+.runner .step figure.sf figcaption{font-size:.86rem}
+.runner .step .mini2{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin:.4rem 0 1rem}
+.runner .step .mini2 figure{margin:0;border-radius:12px;overflow:hidden;position:relative}
+.runner .step .mini2 figure img{width:100%;max-height:none;aspect-ratio:524/364;object-fit:cover;border-radius:0;box-shadow:none}
+.runner .step .mini2 figcaption{position:absolute;left:8px;bottom:8px;background:rgba(16,36,26,.8);color:#fff;border-radius:999px;padding:.1rem .7rem;font-size:.88rem;margin:0}
+.gloss{width:100%;border-collapse:collapse;font-size:.95rem}
+.gloss th,.gloss td{border-bottom:1px solid var(--line);padding:.4rem .5rem;text-align:left}
+.gloss th{color:var(--prog-ink)}
+.awards{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0}
+.awards span{border:1.5px solid var(--prog);border-radius:999px;padding:.3rem 1rem;font-weight:700;color:var(--prog-ink);background:var(--panel)}
+.trk{font-weight:900}
+.lsheet .card p.h,.lsheet small.h{color:var(--grey);font-size:.88rem;margin:.1rem 0 .4rem;display:block}
+input.pad{min-height:0}
+.pad.sm{min-height:76px}
+.sheet-note{color:var(--grey);font-size:.92rem}
+.deckhead{font-weight:700;margin:1.6rem 0 .6rem}
+.deckhead:first-of-type{margin-top:0}
+.rubtbl{min-width:720px}
+.rubtbl td:first-child{font-weight:700;min-width:9.5em}
+.rubtbl small{white-space:nowrap}
+.rubtbl th{color:var(--prog-ink)}
+
+/* 미니 활동: 설비용량 vs 발전량 */
+.cg-tog{display:flex;flex-wrap:wrap;gap:.5rem;margin:.6rem 0 1rem}
+.cg-tog button{appearance:none;border:1.5px solid var(--line2);background:var(--panel);color:var(--ink2);border-radius:999px;padding:.5rem 1.05rem;font:700 .98rem var(--sans);cursor:pointer}
+.cg-tog button[aria-pressed="true"]{background:var(--prog);border-color:var(--prog);color:var(--ink)}
+.cg-row{display:grid;grid-template-columns:7.4em 1fr;gap:.8rem;align-items:center;margin:.55rem 0}
+.cg-row .who{font-weight:700;line-height:1.3}
+.cg-row .who small{display:block;color:var(--grey);font-weight:400;font-size:.8rem}
+.cg-bar{display:flex;height:40px;border-radius:10px;overflow:hidden;background:var(--panel2)}
+.cg-bar i{display:flex;align-items:center;justify-content:center;font-style:normal;font-weight:700;color:#fff;font-size:.85rem;white-space:nowrap;overflow:hidden;width:var(--w);transition:width .9s var(--ease)}
+.cg-bar i.lt{color:var(--ink)}
+.cg-src{color:var(--grey);font-size:.86rem;margin:.4rem 0 1rem}
+.cmp{width:100%;border-collapse:collapse;font-size:.92rem;margin:.6rem 0}
+.cmp th,.cmp td{border-bottom:1px solid var(--line);padding:.4rem .45rem;text-align:right;font-variant-numeric:tabular-nums}
+.cmp th:first-child,.cmp td:first-child{text-align:left}
+.cmp th{color:var(--prog-ink)}
+@media (max-width:560px){.cg-row{grid-template-columns:1fr;gap:.25rem}.cg-bar i{font-size:.72rem}}
+</style></head>
+<body data-prog="p3">
+<!-- 프로그램 3 1차시 · 근거: index.html 「수업 진행」 1~2차시 탭의 ‘1차시 끝’ 경계 앞 단계(도입 10분 + 활동 1 40분), 「에너지 믹스」 미니 활동, 「활동지」 활동 1, 「평가」 1~2차시 1~3행 · 수업 PPT slides/p3/ -->
+<header class="top lesson-top"><div class="wrap">
+  <a class="brand" href="../index.html"><i></i><span>에너지참견시점</span></a>
+  <div class="crumb"><a class="back-hub" href="index.html">03 글로벌</a><b>1차시 · 두 나라의 전력 데이터</b></div>
+  <div class="tools"><button class="tbtn" type="button" data-toggle="tmode" aria-pressed="false">교사 모드</button><button class="tbtn" type="button" data-toggle="proj" aria-pressed="false">크게 보기</button><button class="tbtn" type="button" data-toggle="fs">전체 화면</button></div>
+</div></header>
+<main>
+<section class="lhero"><div class="wrap">
+  <div><span class="no">03 글로벌 · 1차시 / 6</span>
+    <h1>두 나라의 전기는<br><em>어디에서</em> 올까?</h1>
+    <p class="goal"><b>오늘의 목표</b>한-튀르키예 전력 데이터를 <b style="color:inherit;margin:0">기준 연도·지표와 함께</b> 비교하고, 두 나라 에너지 전환의 기회와 위기를 찾아요.</p>
+    <div class="meta"><span>고등학교 50분</span><span>한국–튀르키예 모둠</span><span>Ember · IEA · 빅카인즈 · Padlet</span><span>노트북 · 태블릿</span></div></div>
+  <figure><img src="img/class-12-1.jpg" alt="교사가 몸을 숙여 노트북과 태블릿으로 자료를 찾는 학생들에게 설명하는 교실 장면" loading="eager"><figcaption>▲ 1~2차시 활동사진 · 노트북으로 자료 찾기</figcaption></figure>
+</div><span class="skyline" aria-hidden="true"><svg viewBox="0 0 1200 70" preserveAspectRatio="xMidYMax slice" fill="currentColor"><path d="M0 70V60h36V44h24v16h18V34h28v26h14V48h20v12h28V38l10-6 10 6v22h22V52h18v8h40V46h26v14h16V36h32v24h28V52h20v8h34V40h22v20h24V50h22v10h38V44h28v16h20V32h26v28h22V48h20v12h34V42h24v18h22V54h18v6h38V38h28v22h18V48h22v12h38V42h26v18h28V50h20v10h22V36h28v24h18V46h24v14h38V44h26v16h22V52h40v18Z"/><g stroke="currentColor" stroke-width="2.4" stroke-linecap="round" fill="none"><path d="M250 60V16M250 16l-13-9M250 16l15-2M250 16l-2 15"/><path d="M290 60V24M290 24l-10-7M290 24l12-2M290 24l-2 12"/><path d="M930 60V12M930 12l-14-9M930 12l16-2M930 12l-2 16"/></g><path d="M470 60l10-12h40l-10 12Zm52 0l10-12h40l-10 12ZM700 60l10-12h40l-10 12Z"/><circle cx="118" cy="52" r="9"/><circle cx="640" cy="50" r="11"/><circle cx="1080" cy="51" r="10"/><circle cx="822" cy="53" r="8"/></svg></span></section>
+
+<section class="sec" id="run"><div class="wrap">
+  <p class="label">수업 흐름</p>
+  <div class="lplan"><div style="--m:10"><b>도입</b><small>10분</small></div><div style="--m:7"><b>시범 · 두 나라 데이터</b><small>7분</small></div><div style="--m:10"><b>설비용량 vs 발전량</b><small>10분</small></div><div style="--m:15"><b>공공데이터 조사</b><small>15분</small></div><div style="--m:8"><b>기회와 과제 공유</b><small>8분</small></div></div>
+  <p class="sheet-note">← → 키나 아래 버튼으로 넘겨요. 교사 모드를 켜면 발문·유의점이 보여요.</p>
+  <div class="runner stage">
+    <div class="runner-head"><span class="phase"></span><span class="time"></span><div class="runner-rail"></div></div>
+    <div class="steps">
+          <div class="step" data-phase="도입 · 동기유발" data-time="10분 중 ① (5분)">
+            <p class="ask">찬란한 두 도시의 밤,<br><em>우리는 어떤 에너지를 쓸까?</em></p><div class="mini2"><figure><img src="img/seoul_night.svg" alt="연구회가 직접 그린 서울의 밤 풍경 그림: 남산 서울타워와 한강 다리, 불 켜진 아파트"><figcaption>대한민국 서울</figcaption></figure><figure><img src="img/istanbul_night.svg" alt="연구회가 직접 그린 이스탄불의 밤 풍경 그림: 모스크의 돔과 첨탑, 갈라타 탑, 보스포루스 해협의 다리"><figcaption>튀르키예 이스탄불</figcaption></figure></div><div class="teacher">양국 대표 도시 야경(연구회가 그린 그림)과 전력 소비 비교 제시. 양국의 지리적·환경적 차이를 존중하도록 가이드.</div>
+          </div>
+          <div class="step" data-phase="도입 · 목표 확인" data-time="10분 중 ② (5분)">
+            <div class="two"><div><p class="ask">두 나라의 에너지 출처<br>(<em>에너지 믹스</em>)는 어떻게 다를까?</p><p>오늘의 목표: 한-튀르키예 전력 데이터를 <b>기준 연도·지표와 함께</b> 비교해요. 다음 시간에는 <b>공동 선언문</b>을 함께 써요.</p><div class="flow"><div class="st"><b>활동 1</b><small>오늘 · 발전량 데이터 탐구 + 설비 vs 발전</small></div><div class="st"><b>활동 2</b><small>2차시 · 기업가 정신 정의 + SDGs</small></div><div class="st"><b>활동 3</b><small>2차시 · 공동 선언문 + 트랙 선택</small></div></div></div><div><figure class="sf"><img src="../slides/p3/002.jpg" alt="수업 PPT 2장 슬라이드: 프로젝트 학습 목표(데이터 기반 분석 · 솔루션과 연대)" loading="lazy"><figcaption>▲ 수업 PPT 2장 · 프로젝트 학습 목표(데이터 기반 분석 · 솔루션과 연대)</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="전개 · 활동 1 데이터 탐구" data-time="40분 중 ① (시범 4분)">
+            <h3>데이터 탐구 1 · 한국의 전력 <span class="muted small">(2024년 발전량)</span></h3><div class="sbar" role="img" aria-label="한국 2024년 발전량: 화석연료 56.2%, 원자력 31.7%, 신재생 10.6%, 기타 1.5%"><i style="--w:56.2%;background:var(--cFossil)">화석 56.2%</i><i style="--w:31.7%;background:var(--cNuc)">원자력 31.7%</i><i style="--w:10.6%;background:var(--cRen)">10.6%</i><i style="--w:1.5%;background:var(--cOther)"></i></div><div class="pill-row"><div class="pill"><b>원자력 31.7%</b>18년 만에 1위 · 기저 전력</div><div class="pill"><b>가스 28.1% · 석탄 28.1%</b>화석연료 합계 56.2%</div><div class="pill"><b>신재생 10.6%</b>처음으로 10% 넘음</div></div><p>원자력이 가장 많고, 가스와 석탄이 비슷하게 뒤를 잇고 있어요.</p><p class="muted small">출처: 산업통상자원부 「2024년 에너지수급동향」(2025. 5.) · 총 발전량 595.6TWh</p>
+          </div>
+          <div class="step" data-phase="전개 · 활동 1 데이터 탐구" data-time="40분 중 ② (시범 3분)">
+            <h3>데이터 탐구 2 · 튀르키예의 전력 <span class="muted small">(2024년 발전량)</span></h3><div class="sbar" role="img" aria-label="튀르키예 2024년 발전량: 화석연료 54.4%, 수력 21.9%, 풍력·태양광 18.2%, 지열·바이오 5.5%"><i style="--w:54.4%;background:var(--cFossil)">화석 54.4%</i><i style="--w:21.9%;background:var(--cHydro)">수력 21.9%</i><i style="--w:18.2%;background:var(--cRen)">풍력·태양광 18.2%</i><i style="--w:5.5%;background:var(--cGeo)"></i></div><div class="pill-row"><div class="pill"><b>석탄 35.6%</b>가장 큰 발전원</div><div class="pill"><b>수력 21.9%</b>산악 지형의 강점</div><div class="pill"><b>풍력 10.7% · 태양광 7.5%</b>빠르게 늘어나는 중</div><div class="pill"><b>천연가스 18.5%</b>거의 전량 수입 → 에너지안보</div></div><p>원자력은 아직 0%예요(첫 원전 아쿠유 1호기 시운전 중).</p><p class="muted small">출처: Ember 「Türkiye Electricity Review 2025」·연간 전력 데이터 · 총 발전량 341.2TWh</p><a class="jump" href="index.html#mix">두 나라 도넛으로 겹쳐 비교하기 →</a>
+          </div>
+          <div class="step" data-phase="전개 · 활동 1 미니 활동" data-time="40분 중 ③ (10분)">
+            <div class="two"><div><p class="ask">수업 PPT의 튀르키예 숫자 <em>45 · 30 · 25</em>,<br>무엇을 센 걸까요?</p><p>발전소를 <b>지어 둔 크기(설비용량, GW)</b>와 1년 동안 <b>실제로 만든 전기(발전량, TWh)</b>는 비율이 달라요. 아래 버튼을 바꿔 가며 비교해 봅시다.</p><div class="do"><b>모둠 활동 · 숫자 탐정</b>PPT 값이 어느 쪽과 닮았는지 찾고, 이유를 <a href="#sheet">활동지 ②</a>에 적어요.</div><div class="tmr-row"><span class="timer" data-min="10"></span></div></div><div><figure class="sf"><img src="../slides/p3/006.jpg" alt="수업 PPT 6장 슬라이드: 튀르키예의 에너지 믹스(수력 30 · 풍력/태양광 25 · 화석 45)" loading="lazy"><figcaption>▲ 수업 PPT 6장 · 튀르키예의 에너지 믹스(수력 30 · 풍력/태양광 25 · 화석 45)</figcaption></figure></div></div><div class="cg" id="capgen">
+  <div class="cg-tog" role="group" aria-label="지표 고르기">
+    <button type="button" data-cg="ppt" aria-pressed="true">수업 PPT 원래 값</button>
+    <button type="button" data-cg="cap" aria-pressed="false">설비용량(GW) 비율</button>
+    <button type="button" data-cg="gen" aria-pressed="false">발전량(TWh) 비율</button>
+  </div>
+  <div id="cg-bars" aria-live="polite"></div>
+  <div class="keys"><span class="key" style="--c:var(--cFossil)">화석연료</span><span class="key" style="--c:var(--cNuc)">원자력</span><span class="key" style="--c:var(--cHydro)">수력</span><span class="key" style="--c:var(--cRen)">신재생 · 풍력/태양광</span><span class="key" style="--c:var(--cGeo)">지열·바이오·기타</span><span class="key" style="--c:var(--cOther)">기타</span></div>
+  <p class="cg-src" id="cg-src"></p>
+  <div class="boxes" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr))">
+    <details class="reveal-ans"><summary>① PPT의 튀르키예 45 · 30 · 25는 어느 쪽과 닮았나요?</summary><div><b>설비용량</b>(화석 약 40 · 수력 28 · 풍력/태양광 약 28)과 닮았어요. 발전량(54 · 22 · 18)과는 많이 달라요. 설비용량은 “발전소를 얼마나 크게 지어 두었나(GW)”, 발전량은 “1년 동안 실제로 전기를 얼마나 만들었나(TWh)”예요.</div></details>
+    <details class="reveal-ans"><summary>② 원자력·석탄은 설비 비중보다 발전 비중이 커요. 왜일까요?</summary><div>밤낮없이 거의 쉬지 않고 돌리는 발전소라서 같은 1GW로도 1년에 전기를 많이 만들어요. 태양광은 해가 있을 때만, 풍력은 바람이 불 때만 돌아서 설비에 비해 발전량이 작아요.
+      <table class="cmp"><tr><th>발전원</th><th>설비 비중</th><th>발전 비중</th><th>발전 ÷ 설비</th></tr>
+      <tr><td>한국 원자력</td><td>17.0%</td><td>31.7%</td><td>약 1.9</td></tr>
+      <tr><td>튀르키예 석탄</td><td>18.9%</td><td>35.6%</td><td>약 1.9</td></tr>
+      <tr><td>한국 신재생</td><td>22.7%</td><td>10.6%</td><td>약 0.47</td></tr>
+      <tr><td>튀르키예 태양광</td><td>16.7%</td><td>7.5%</td><td>약 0.45</td></tr></table></div></details>
+    <details class="reveal-ans"><summary>③ 계산해 봅시다 · 1GW 발전소는 1년에 전기를 얼마나 만들까요?</summary><div>1년 = 8,760시간. <b>설비이용률</b> = 실제 발전량 ÷ (설비용량 × 8,760시간).<br>원자력(이용률 약 85%): 1GW × 8,760h × 0.85 ≈ <b>7.4TWh</b><br>태양광(이용률 약 15%): 1GW × 8,760h × 0.15 ≈ <b>1.3TWh</b> → 약 <span class="ring" style="margin:0 .3em">5.7배</span> 차이!<br><span class="muted small">이용률 85%·15%는 계산을 위한 어림값이에요(교육용 단순화). 실제 값은 해마다·지역마다 달라요.</span></div></details>
+    <details class="reveal-ans"><summary>④ 데이터를 읽을 때 꼭 확인할 세 가지는?</summary><div>① <b>무엇을 셌나</b>(설비용량 GW인가, 발전량 TWh인가) ② <b>기준 연도</b> ③ <b>출처와 분류</b>(한국 ‘신재생’은 신에너지 포함). 활동지 1에 세 가지를 모두 적어요.</div></details>
+  </div>
+</div><div class="teacher"><b>진행(10분)</b> — ① PPT 수치를 띄우고 “이 숫자는 무엇을 센 걸까?” (1분) ② 버튼으로 설비용량 ↔ 발전량 비교, 모둠별로 ①번 답 말하기 (3분) ③ ②번 표의 ‘발전 ÷ 설비’ 계산, 원자력·석탄 vs 태양광 차이의 이유 토의 (4분) ④ ④번 세 가지를 활동지 1에 적고 마무리 (2분). 시간이 남으면 ③번 계산.<br>PPT 원래 수치는 설비용량에 가까움(튀르키예 2024년 11월 말 설비: 수력 28·가스 21.4·석탄 18.9·태양광 16.7·풍력 10.8%). 핵심 정리: “설비 비중 ≠ 발전 비중. 원자력·석탄은 이용률이 높고, 태양광·풍력은 낮다.”<br><b>예상 오개념</b> — “설비가 많으면 전기도 그만큼 많이 만든다”, “재생에너지 설비가 22%면 전기의 22%가 재생에너지다”. 정리 발문: “태양광을 늘리는 것만큼, 언제 만든 전기를 언제 쓰게 할지(저장·계통)도 중요하겠지?”(→ PPT의 튀르키예 과제 ‘계통망 안정화’와 연결)<br><b>수치 출처</b> — 한국 설비용량(2024년 말, 총 153.1GW): 가스 30.3·석탄 26.3·신재생 22.7·원자력 17.0%, 기타 3.7%는 100%에서 뺀 값 — 산업통상자원부 「2024년 에너지수급동향」(2025. 5.). 튀르키예 설비용량(2024년 11월 말, 약 115GW): 유럽환경청(EEA) 「Europe’s environment 2025」 튀르키예 국가 페이지(원자료 미표기 — 수업 전 튀르키예 에너지천연자원부·TEİAŞ 자료로 대조 권장).<br><b>먼저 끝난 모둠</b> — 한국 2024년 신재생 63.2TWh를 설비 34.7GW로 나눠 이용률 어림하기(63.2 ÷ (34.7 × 8.76) ≈ 21%).</div>
+          </div>
+          <div class="step" data-phase="전개 · 활동 1 직접 조사" data-time="40분 중 ④ (15분)">
+            <div class="two"><div><h3>직접 찾아봅시다: 공공데이터</h3><p>Ember·IEA에서 <b>발전원별 발전량</b>을, 빅카인즈에서 두 나라 <b>에너지 기사</b>를 찾아 활동지 1에 적어요. <b>지표(발전량)·기준 연도·출처</b> 세 가지를 꼭!</p><a class="live" href="https://ember-energy.org/countries-and-regions/turkiye/" target="_blank" rel="noopener"><i></i>Ember 튀르키예</a><a class="live" href="https://www.iea.org/data-and-statistics/data-tools/energy-statistics-data-browser" target="_blank" rel="noopener"><i></i>IEA 데이터 브라우저</a><a class="live" href="https://www.bigkinds.or.kr" target="_blank" rel="noopener"><i></i>빅카인즈</a><a class="live" href="https://padlet.com" target="_blank" rel="noopener"><i></i>Padlet</a><a class="live" href="https://www.deepl.com/translator" target="_blank" rel="noopener"><i></i>DeepL</a><div class="do"><b>모둠 조사 · 15분</b>찾은 수치를 <a href="#sheet">활동지 ①</a>에 지표·기준 연도·출처와 함께 적어요.</div><div class="tmr-row"><span class="timer" data-min="15"></span></div><details class="reveal-ans"><summary>3개 언어 용어 카드 (한국어 · English · Türkçe)</summary><div><table class="gloss">
+<tr><th>한국어</th><th>English</th><th>Türkçe</th></tr>
+<tr><td>석탄</td><td>Coal</td><td>Kömür</td></tr><tr><td>천연가스</td><td>Natural gas</td><td>Doğal gaz</td></tr>
+<tr><td>원자력</td><td>Nuclear power</td><td>Nükleer enerji</td></tr><tr><td>수력</td><td>Hydropower</td><td>Hidroelektrik</td></tr>
+<tr><td>풍력 / 태양광</td><td>Wind / Solar</td><td>Rüzgâr / Güneş enerjisi</td></tr><tr><td>지열</td><td>Geothermal</td><td>Jeotermal</td></tr>
+<tr><td>재생에너지</td><td>Renewable energy</td><td>Yenilenebilir enerji</td></tr><tr><td>발전량 / 설비용량</td><td>Generation / Installed capacity</td><td>Üretim / Kurulu güç</td></tr>
+<tr><td>기후 행동</td><td>Climate action</td><td>İklim eylemi</td></tr></table></div></details><div class="teacher">전문 용어는 영어/한국어/튀르키예어로 병기 안내(지도안). 튀르키예어 표기는 파트너 교사와 한 번 더 확인. 양국 언어 장벽 극복을 위해 실시간 다국어 패들렛 보드 운영. 검색이 막히는 모둠에는 프로그램 페이지 「에너지 믹스」 도넛 수치를 ‘기준값’으로 주고 기사 찾기에 집중시킴. IEA 데이터 브라우저: 국가(Korea / Türkiye) → Electricity generation by source. 학생이 찾은 값이 조금 달라도 ‘지표·연도·출처’를 적었으면 정답으로 인정.</div></div><div><figure class="sf"><img src="img/class-12-4.jpg" alt="과학실에서 학생들이 책상 사이에 서거나 앉아 노트북으로 모둠 작업을 하는 장면" loading="lazy"><figcaption>▲ 1~2차시 활동사진 · 노트북으로 모둠 조사</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="전개 · 활동 1 기회와 과제" data-time="40분 중 ⑤ (Padlet 공유 8분)">
+            <div class="two"><div><p class="ask">각 나라의 <em>기회</em>와 <em>과제</em>는 무엇일까요?</p><div class="boxes"><div class="box"><h4>한국 · 위기를 기회로</h4><p>장점: 안정적인 대규모 전력 공급망, 원전 기술력.<br>과제: 화석연료 56% → 탄소 감축 시급, 신재생 비율 확대, 석탄·가스 수입 의존.</p></div><div class="box"><h4>튀르키예 · 자원을 혁신으로</h4><p>장점: 수자원·바람·햇빛·지열, 재생에너지 46%.<br>과제: 천연가스·석탄 수입 의존(에너지안보), 날씨에 따라 출렁이는 수력·풍력·태양광의 계통 안정화.</p></div></div><details class="reveal-ans"><summary>PPT의 분석 더 보기</summary><div>한국은 배터리·ESS·스마트 그리드 같은 하드웨어 제조 기술로 전환 인프라를 만들 수 있어요. 튀르키예는 날씨에 따라 변동성이 큰 재생에너지의 계통 안정화 기술이 부족한 점이 과제예요.</div></details><div class="do"><b>Padlet 공유 · 8분</b><a href="#sheet">활동지 ③</a>에 두 나라의 기회와 위기 요인을 쓰고 Padlet에 올려요.</div><div class="tmr-row"><span class="timer" data-min="8"></span></div><div class="teacher">관찰 기준(1차시): 데이터 분석 결과를 근거로 양국의 에너지 전환 기회·위기 요인을 구체적으로 도출하는가. 먼저 끝난 모둠: 다른 모둠 Padlet 게시물에 ‘기준 연도·지표가 적혀 있는지’ 확인 댓글 2개.</div></div><div><figure class="sf"><img src="../slides/p3/007.jpg" alt="수업 PPT 7장 슬라이드: 양국 전력 생산 구조 대조표 [활동지 1]" loading="lazy"><figcaption>▲ 수업 PPT 7장 · 양국 전력 생산 구조 대조표 [활동지 1]</figcaption></figure></div></div>
+          </div>
+          <div class="step" data-phase="1차시 끝 · 정리" data-time="↳ 50분 지점">
+            <p class="ask"><em>1차시</em> 끝!</p><p>활동지 1을 저장하고, 조사한 수치(지표·연도·출처)를 Padlet에 올려 두세요. 다음 시간에는 이 데이터로 <b>에너지 기업가 정신</b>을 찾아요.</p><a class="jump" href="lesson-2.html">2차시 수업 화면으로 →</a><div class="teacher">블록 수업이 아니면 여기서 끊음. 기기가 바뀌는 학교는 바닥글 위 「내 기록 모두 복사」로 모둠 공유 문서에 붙여 두게 하기.</div>
+          </div>
+    </div>
+    <div class="runner-foot"><button class="btn ghost" data-run="prev" type="button">◀ 이전</button><span class="count"></span><button class="btn" data-run="next" type="button">다음 ▶</button></div>
+  </div>
+</div></section>
+
+<section class="sec panel" id="sheet"><div class="wrap">
+  <p class="label">활동지</p><h2 class="head">활동 1 · 공공데이터로 보는 <em>두 나라 에너지 믹스</em></h2>
+  <p class="sheet-note">쓴 내용은 이 기기의 브라우저에만 저장돼요. 수업이 끝나면 아래 「내 기록 모두 복사」로 모둠 문서에 붙여 두세요.</p>
+  <div class="lsheet cols">
+    <div class="card"><h3><span class="n">1</span>두 나라의 발전원별 비중</h3><p class="h">Ember·IEA 통계(발전원별 발전량)와 국가 전력 통계로 두 나라의 전력 생산 비율을 비교해요.</p><div class="field"><label for="l1-year">지표 · 기준 연도 · 출처</label><input class="pad" id="l1-year" data-key="l1-year" placeholder="예: 발전량 / ____년 / Ember"></div><div class="field"><label for="l1-kr">한국 (원자력 %, 석탄 %, 가스 %, 신재생 %, 기타 %)</label><textarea class="pad sm" id="l1-kr" data-key="l1-kr"></textarea></div><div class="field"><label for="l1-tr">튀르키예 (석탄 %, 천연가스 %, 수력 %, 풍력/태양광 %, 지열·바이오·기타 %)</label><textarea class="pad sm" id="l1-tr" data-key="l1-tr"></textarea></div></div>
+    <div class="card"><h3><span class="n">2</span>설비용량 vs 발전량</h3><p class="h">미니 활동 「숫자 탐정」에서 찾은 답을 적어요.</p><div class="field"><label for="l1-cap">수업 PPT의 튀르키예 45·30·25는 어느 쪽과 닮았고, 왜 두 값이 다를까?</label><textarea class="pad" id="l1-cap" data-key="l1-cap" placeholder="____ 쪽과 닮았다. 왜냐하면 ____는 밤낮없이 돌고, ____는 ____ 때만 전기를 만들기 때문이다."></textarea></div></div>
+    <div class="card"><h3><span class="n">3</span>에너지 전환의 기회와 위기 요인</h3><p class="h">나라마다 기회와 위기를 하나 이상 쓰고, 근거 수치나 기사를 붙여요.</p><div class="field"><label for="l1-op">한국과 튀르키예의 기회 · 위기 (근거 수치·기사와 함께)</label><textarea class="pad" id="l1-op" data-key="l1-op" placeholder="예: 튀르키예 · 위기 — 천연가스 거의 전량 수입(에너지안보), 근거: ____"></textarea></div></div>
+  </div>
+</div></section>
+
+<section class="sec" id="slides"><div class="wrap"><p class="label">이 차시 슬라이드</p>
+  <p class="deckhead">1차시 슬라이드 · 1~9장</p><div class="deck" data-dir="../slides/p3/" data-from="1" data-n="9" data-title="1차시 슬라이드 · 1~9장"></div>
+  
+</div></section>
+
+<section class="sec panel" id="rubric"><div class="wrap">
+  <p class="label">이 차시 평가</p><h2 class="head">데이터 근거로 <em>비교</em>했나요?</h2>
+  <p class="muted small">[10통과2-02-06] [10통과2-03-02] [12기지04-01] · 관찰 평가, 활동지 1</p><div class="tblwrap"><table class="tbl rubtbl"><thead><tr><th>기준</th><th>A</th><th>B</th><th>C</th></tr></thead><tbody><tr><td>데이터 기반 에너지 믹스 탐구<br><small class="muted">10통과2-03-02</small></td><td>공공데이터(Ember·IEA 등)에서 두 나라의 발전원별 비중을 찾아 지표(발전량)·기준 연도·출처를 모두 적고, 화석·원자력·재생에너지 비중 차이를 수치로 비교한다.</td><td>두 나라 수치를 적었지만 지표·기준 연도·출처 가운데 하나 이상이 빠졌거나, 비교 문장에 수치(%p·배)가 없다.</td><td>한 나라 수치만 적었거나, 출처 없이 수업 화면의 값을 그대로 옮겼다.</td></tr><tr><td>설비용량과 발전량 구분<br><small class="muted">10통과2-02-06</small></td><td>수업 PPT 수치가 설비용량에 가깝다는 것을 찾아내고, 원자력·석탄과 태양광의 ‘발전 ÷ 설비’ 차이를 이용률(가동 시간)로 설명한다.</td><td>어느 쪽(설비/발전)과 닮았는지는 맞혔지만, 두 값이 다른 이유를 쓰지 못했다.</td><td>설비용량과 발전량을 같은 것으로 보고 비교했다.</td></tr><tr><td>에너지 전환 기회와 위기 도출<br><small class="muted">12기지04-01</small></td><td>나라마다 기회와 위기를 1개 이상씩 쓰고, 각각에 근거 수치나 기사 1건을 붙인다(예: 가스 수입 의존 → 에너지안보).</td><td>기회·위기를 썼지만 근거 수치·기사가 붙은 항목이 하나뿐이다.</td><td>기회나 위기 가운데 한쪽만 썼거나, 근거가 하나도 없다.</td></tr></tbody></table></div><p class="sheet-note">A·B·C는 이 과제의 채점 수준이에요. 학기 성취도(A~E)는 학교 성취평가 기준에 따라 따로 산출해요.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="exit"><h3>나가기 질문</h3><p>데이터를 읽을 때 꼭 확인할 세 가지는 무엇인가요? 오늘 내가 찾은 수치에 세 가지가 모두 적혀 있나요?</p><textarea class="pad" data-key="l1-exit" aria-label="나가기 질문 답"></textarea></div>
+  <div class="lnav" style="margin-top:2rem"><a href="index.html"><small>프로그램 3 전체</small>수업 소개 · 4색 트랙 · 평가 · PPT</a><a class="next" href="lesson-2.html"><small>다음 차시 →</small>2차시 · 기업가 정신과 공동 선언문</a></div>
+</div></section>
+</main>
+<footer class="foot"><div class="wrap">
+  <p>2026 에너지소양교육 교사연구회 「에너지참견시점」 · 프로그램 3 · 임은희(영훈고등학교) · 한국에너지정보문화재단 지원</p>
+  <p>자료: 최종보고서 별첨 교수·학습 지도안 및 활동지, 수업 PPT 「한-튀르키예 글로벌 기후 행동 프로젝트」 · 시간은 고등학교 50분 수업 기준(지도안의 2차시 블록을 차시 경계에서 나눔) · 수업 사진의 학생 얼굴과 이름은 흐리게 처리했습니다.</p>
+</div></footer>
+<script src="../assets/site.js"></script>
+<script>
+(function(){
+"use strict";
+function $(s,r){return (r||document).querySelector(s)}
+function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+/* 미니 활동: 설비용량 vs 발전량 (index.html 「에너지 믹스」 아래 미니 활동과 같은 수치) */
+var CG={
+  ppt:{src:"수업 PPT 「데이터 탐구 1·2」 원래 값 — 기준 연도·지표가 적혀 있지 않아요.",
+    kr:[["화석",60,"cFossil"],["원자력",30,"cNuc"],["신재생",10,"cRen"]],
+    tr:[["화석",45,"cFossil"],["수력",30,"cHydro"],["풍력·태양광",25,"cRen"]]},
+  cap:{src:"설비용량 비율 · 한국: 2024년 말 153.1GW(산업통상자원부, 기타는 100%에서 뺀 값) · 튀르키예: 2024년 11월 말 약 115GW(EEA 「Europe's environment 2025」 튀르키예 국가 페이지, 원자료 미표기)",
+    kr:[["화석",56.6,"cFossil"],["원자력",17.0,"cNuc"],["신재생",22.7,"cRen"],["기타",3.7,"cOther"]],
+    tr:[["화석",40.3,"cFossil"],["수력",28.0,"cHydro"],["풍력·태양광",27.5,"cRen"],["지열·기타",4.2,"cGeo"]]},
+  gen:{src:"발전량 비율 · 2024년 · 한국: 산업통상자원부(595.6TWh) · 튀르키예: Ember(341.2TWh)",
+    kr:[["화석",56.2,"cFossil"],["원자력",31.7,"cNuc"],["신재생",10.6,"cRen"],["기타",1.5,"cOther"]],
+    tr:[["화석",54.4,"cFossil"],["수력",21.9,"cHydro"],["풍력·태양광",18.2,"cRen"],["지열·바이오",5.5,"cGeo"]]}
+};
+var box=$("#cg-bars"),src=$("#cg-src");if(!box)return;
+box.innerHTML=[["kr","한국"],["tr","튀르키예"]].map(function(c){return '<div class="cg-row"><span class="who">'+c[1]+'<small></small></span><div class="cg-bar" data-c="'+c[0]+'" role="img"><i></i><i></i><i></i><i></i></div></div>'}).join("");
+function show(k){
+  var d=CG[k];
+  $$(".cg-tog button").forEach(function(b){b.setAttribute("aria-pressed",b.dataset.cg===k)});
+  $$(".cg-bar",box).forEach(function(bar){
+    var rows=d[bar.dataset.c],nar=innerWidth<600;
+    $$("i",bar).forEach(function(el,i){var r=rows[i];if(r){el.style.setProperty("--w",r[1]+"%");el.style.background="var(--"+r[2]+")";el.classList.toggle("lt",r[2]==="cGeo");el.textContent=r[1]>=(nar?30:8)?(r[0]+" "+r[1]+"%"):(r[1]>=(nar?9:99)?(Math.round(r[1])+"%"):"");el.title=r[0]+" "+r[1]+"%"}else{el.style.setProperty("--w","0%");el.textContent="";el.title=""}});
+    bar.setAttribute("aria-label",(bar.dataset.c==="kr"?"한국 ":"튀르키예 ")+rows.map(function(r){return r[0]+" "+r[1]+"%"}).join(", "));
+    bar.parentNode.querySelector(".who small").textContent=k==="ppt"?"PPT 원래 값":(k==="cap"?"설비용량":"발전량");
+  });
+  src.textContent=d.src;
+}
+$$(".cg-tog button").forEach(function(b){b.onclick=function(){show(b.dataset.cg)}});
+show("ppt");
+})();
+</script>
+</body></html>

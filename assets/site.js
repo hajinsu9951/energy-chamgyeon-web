@@ -1,5 +1,5 @@
 /* 에너지참견시점 수업 웹 — 공통 동작 (의존성 없음)
-   - .intro      : 전체 화면 장면 시퀀스(영상·사진·자막, 자동 진행, 섬광 전환, 금빛 입자)
+   - .intro      : 전체 화면 장면 시퀀스(영상·사진·자막, 자동 진행, 섬광 전환, 빛 입자)
    - .reveal     : 스크롤하면 나타남      - [data-count-to] : 숫자 올라가기
    - .tabs       : 차시 탭                - .runner : 단계 진행기(← → 키)
    - .timer      : 활동 타이머            - .deck   : PPT 슬라이드 뷰어
@@ -34,7 +34,7 @@ var io="IntersectionObserver" in window?new IntersectionObserver(function(es){es
 })},{threshold:.18,rootMargin:"0px 0px -6% 0px"}):null;
 $$(".reveal,[data-count-to],.inview").forEach(function(el){if(io)io.observe(el);else{el.classList.add("in")}});
 
-/* ── 금빛 입자 캔버스 ── */
+/* ── 빛 입자 캔버스 ── */
 function motes(cv){
   var ctx=cv.getContext("2d"),W,H,ps=[],mode=cv.getAttribute("data-mode")||"rise",n=+cv.getAttribute("data-n")||70,raf;
   function size(){var r=cv.getBoundingClientRect(),d=Math.min(2,devicePixelRatio||1);W=cv.width=r.width*d;H=cv.height=r.height*d}
@@ -47,7 +47,7 @@ function motes(cv){
       p.w+=.02;p.y-=p.v*(devicePixelRatio||1);p.x+=Math.sin(p.w)*.3;
       if(p.y<-10)ps[i]=mk();
       var g=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
-      g.addColorStop(0,"rgba(255,226,170,"+p.a+")");g.addColorStop(1,"rgba(242,180,90,0)");
+      g.addColorStop(0,"rgba(255,252,225,"+p.a+")");g.addColorStop(1,"rgba(214,232,150,0)");
       ctx.fillStyle=g;ctx.beginPath();ctx.arc(p.x,p.y,p.r*4,0,7);ctx.fill();
     });
     raf=requestAnimationFrame(draw);
@@ -154,10 +154,10 @@ $$(".timer").forEach(function(t){
   draw();
 });
 
-/* ── 슬라이드 뷰어: <div class="deck" data-dir="../slides/p1/" data-n="47" data-title="..."> ── */
+/* ── 슬라이드 뷰어: <div class="deck" data-dir="../slides/p1/" data-n="47" data-from="1" data-title="..."> (data-from: 시작 장 번호) ── */
 $$(".deck").forEach(function(d){
-  var dir=d.getAttribute("data-dir"),n=+d.getAttribute("data-n"),ext=d.getAttribute("data-ext")||"jpg",i=0;
-  function src(k){var s=String(k+1);while(s.length<3)s="0"+s;return dir+s+"."+ext}
+  var dir=d.getAttribute("data-dir"),n=+d.getAttribute("data-n"),ext=d.getAttribute("data-ext")||"jpg",from=(+d.getAttribute("data-from")||1)-1,i=0;
+  function src(k){var s=String(k+1+from);while(s.length<3)s="0"+s;return dir+s+"."+ext}
   d.innerHTML='<div class="stage"><img alt=""></div><div class="bar"><span class="n"></span><button class="tbtn" data-a="p" type="button">◀ 이전</button><button class="tbtn" data-a="n" type="button">다음 ▶</button><button class="tbtn" data-a="f" type="button">전체 화면</button></div><div class="thumbs"></div>';
   var img=$("img",d),lab=$(".n",d),th=$(".thumbs",d);
   for(var k=0;k<n;k++){(function(k){var b=document.createElement("button");b.type="button";b.setAttribute("aria-label",(k+1)+"번 슬라이드");b.dataset.bg=src(k);b.onclick=function(){show(k)};th.appendChild(b)})(k)}
