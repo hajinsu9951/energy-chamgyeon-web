@@ -122,3 +122,10 @@ input.pad{min-height:0;height:auto;padding:.6rem .8rem}
 /* 활동지 */
 .lsheet .card .mini{margin:.2rem 0 .4rem}
 .lsheet h3 + .mini{margin-top:-.2rem}
+/* 확인 목록: 누르면 체크 */
+.checks li{cursor:pointer;user-select:none;-webkit-user-select:none;padding:.3rem .5rem .3rem .3rem;border-radius:8px;min-height:40px;transition:background .15s}
+.checks li:hover{background:var(--progT,rgba(58,133,93,.1))}
+.checks li:focus-visible{outline:2px solid var(--champ);outline-offset:2px}
+.checks li::before{display:grid;place-items:center;font-size:.8em;font-weight:800;line-height:1;color:#fff;transition:background .15s}
+.checks li.on::before{content:"✓";background:var(--champ)}
+.checks li.on{color:var(--champ);font-weight:700}
