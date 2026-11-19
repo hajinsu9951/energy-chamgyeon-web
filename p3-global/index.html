@@ -299,6 +299,20 @@ input.pad{min-height:0}
 @media (max-width:480px){.top .wrap{gap:.45rem}.tools{gap:.25rem}.tools .tbtn{padding:.3rem .5rem;font-size:.76rem}}
 .rubtbl td:first-child{font-weight:700;white-space:nowrap}
 .rubtbl td.g{color:var(--amber);font-weight:700;width:2em}
+
+/* 사진·이미지 보강(2026-11-19) — 색은 기존 변수만 사용 */
+.figrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr));gap:.8rem;margin:1rem 0}
+.step .figrow{max-width:760px}
+.fig{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.fig img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+.fig.wide img{aspect-ratio:16/9}
+.fig.slide img{aspect-ratio:16/9;object-fit:contain}
+.fig.one{max-width:520px;margin:1rem 0}
+.fig figcaption{padding:.5rem .75rem;color:var(--ink2);font-size:.85rem;line-height:1.45}
+.ivory .fig figcaption{color:var(--ink-sub)}
+.fieldgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.8rem;margin-top:1.6rem}
+@media (max-width:900px){.fieldgrid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:420px){.fieldgrid{gap:.5rem}.fieldgrid .fig figcaption{font-size:.78rem;padding:.4rem .5rem}}
 </style>
 </head>
 <body>
@@ -395,6 +409,22 @@ input.pad{min-height:0}
   <div class="scroll-hint"><i></i>스크롤</div>
 </section>
 
+<!-- ═════════ 수업 현장 사진 ═════════ -->
+<!-- 출처: 최종보고서(최종합본) 프로그램 3 활동사진 묶음(1~2차시 / 3~4차시 / 5~6차시 / 협·공·G 여름교실). 학생 얼굴·명찰·포스터 속 학번과 이름은 흐리게 처리. 원본은 사이트 밖 웹_원본사진_비공개/p3/ -->
+<section class="sec" id="field" aria-label="수업 현장 사진">
+  <div class="wrap">
+    <p class="label">수업 현장</p>
+    <h2 class="head">교실에서는 이렇게 진행됐어요</h2>
+    <p class="lead">최종보고서에 실린 활동사진이에요. 학생 얼굴과 이름은 흐리게 처리했어요.</p>
+    <div class="fieldgrid">
+      <div class="reveal"><figure class="fig"><img src="img/class-12-1.jpg" alt="교사가 몸을 숙여 노트북과 태블릿으로 자료를 찾는 학생들에게 설명하는 교실 장면" loading="lazy"><figcaption>▲ 1~2차시 · 노트북으로 자료 찾기</figcaption></figure></div>
+      <div class="reveal d1"><figure class="fig"><img src="img/class-34-2.jpg" alt="과학실 여러 책상에서 모둠별로 큰 종이를 펼쳐 놓고 산출물을 만드는 학생들" loading="lazy"><figcaption>▲ 3~4차시 · 모둠별 산출물 만들기</figcaption></figure></div>
+      <div class="reveal d2"><figure class="fig"><img src="img/class-56-2.jpg" alt="손그림 포스터를 벽에 붙여 두고 한 학생이 마이크와 노트를 들고 발표하는 장면" loading="lazy"><figcaption>▲ 5~6차시 · 포스터 앞 발표</figcaption></figure></div>
+      <div class="reveal d3"><figure class="fig"><img src="img/summer-3.jpg" alt="모둠 책상에 둘러앉은 학생들이 태블릿 화면을 함께 보며 작업하는 장면" loading="lazy"><figcaption>▲ 협·공·G 여름교실 활동</figcaption></figure></div>
+    </div>
+  </div>
+</section>
+
 <!-- ═════════ 질문 · 목표 · 흐름 ═════════ -->
 <section class="sec ivory" id="goal">
   <div class="wrap">
@@ -459,6 +489,9 @@ input.pad{min-height:0}
     <p class="label">데이터 탐구 · Energy Mix</p>
     <h2 class="head">두 나라의 전력은<br>무엇으로 만들어질까요?</h2>
     <p class="lead">2024년 한 해 동안 실제로 만든 전기(발전량)를 발전원별로 나눈 비율이에요. 스크롤하면 도넛이 자라고, 아래 버튼으로 발전원을 하나씩 골라 비교할 수 있어요.</p>
+    <!-- 보류(팔레트 결정 대기): AI 생성 이미지 2장. 결정되면 주석을 풀어 쓸 것.
+    <div class="figrow reveal" style="margin:0 0 1.6rem"><figure class="fig wide"><img src="img/ai-hanriver.jpg" alt="맑은 낮, 강변 공원 잔디밭 너머로 넓은 강과 긴 다리, 산 위 탑과 아파트 숲이 보이는 서울 한강 풍경" loading="lazy"><figcaption>▲ 대한민국 서울 · 한강 (AI 생성 이미지)</figcaption></figure><figure class="fig wide"><img src="img/ai-bosphorus.jpg" alt="맑은 낮, 첨탑이 선 모스크와 숲 언덕 앞으로 흰 여객선이 해협을 건너고 멀리 현수교가 보이는 이스탄불 풍경" loading="lazy"><figcaption>▲ 튀르키예 이스탄불 · 보스포루스 해협 (AI 생성 이미지)</figcaption></figure></div>
+    -->
 
     <div class="mixgrid inview" id="mixgrid">
       <div class="donut" data-country="kr">
@@ -691,6 +724,7 @@ input.pad{min-height:0}
               <div class="box"><h4>P2P 전력 거래 앱</h4><p>남는 태양광 전력을 이웃과 스마트폰으로 직거래하는 소규모 스마트그리드.</p></div>
             </div>
             <p style="margin-top:1rem">이 사례들은 어떤 문제를 <b>기회</b>로 바꾸었나요?</p>
+            <figure class="fig one"><img src="img/class-12-2.jpg" alt="칠판 화면에 적정기술 사례를 찾아 장단점을 정리하라는 과제가 떠 있고, 교사가 앞에서 설명하는 동안 학생들이 노트북으로 조사하는 교실" loading="lazy"><figcaption>▲ 1~2차시 활동사진 · 적정기술 사례를 찾아 정리하는 시간</figcaption></figure>
             <div class="teacher">자료: 해외 적정기술 및 그린 스타트업 사례집.</div>
           </div>
           <div class="step" data-phase="2차시 · 전개 · 활동 2 개념 탐구" data-time="25분 중 ③ (작성 10분)">
@@ -784,6 +818,7 @@ input.pad{min-height:0}
             <p class="ask"><em>40분</em> 집중 창작</p>
             <p>트랙별 작업 칸에서 바로 써도 돼요(이 브라우저에만 저장돼요).</p>
             <div style="margin:.6rem 0 1rem"><div class="timer" data-min="40"></div></div>
+            <div class="figrow"><figure class="fig"><img src="img/class-34-1.jpg" alt="두 학생이 책상에 몸을 숙이고 자를 대어 큰 종이에 밑그림 선을 긋는 장면" loading="lazy"><figcaption>▲ 3~4차시 활동사진 · 큰 종이에 밑그림 긋기</figcaption></figure><figure class="fig"><img src="img/class-34-4.jpg" alt="모둠 학생들이 장치 구조를 그린 큰 종이와 색연필, 태블릿을 앞에 두고 의견을 나누는 장면" loading="lazy"><figcaption>▲ 3~4차시 활동사진 · 그림과 글로 채워 가는 산출물</figcaption></figure></div>
             <a class="jump" href="#tracks">4색 트랙 작업 칸 열기 →</a>
             <div class="teacher">다국어 및 강점 기반 역할 분담형 상호 교수(Peer Teaching). 관찰 평가 및 산출물(스토리보드, 포스터, 콘티 등) 평가. 먼저 끝난 모둠: 다른 트랙 초안에 Padlet 질문 2개 남기기.</div>
           </div>
@@ -796,6 +831,7 @@ input.pad{min-height:0}
             <p class="ask">받은 피드백을<br><em>하나 이상</em> 반영해 완성해요</p>
             <p>Padlet 댓글 가운데 반영할 것을 고르고, 무엇을 어떻게 바꿨는지 한 줄로 남겨요.</p>
             <div style="margin:.6rem 0 1rem"><div class="timer" data-min="35"></div></div>
+            <figure class="fig one"><img src="img/class-34-3.jpg" alt="큰 종이 위에 집 모양 그림과 화살표, 설명 글을 색 마커로 채워 가는 모둠의 손과 필기구" loading="lazy"><figcaption>▲ 3~4차시 활동사진 · 색 마커로 완성해 가는 모둠 산출물</figcaption></figure>
             <a class="jump" href="#tracks">4색 트랙 작업 칸 열기 →</a>
           </div>
           <div class="step" data-phase="4차시 · 정리 · 중간 공유" data-time="15분">
@@ -818,6 +854,7 @@ input.pad{min-height:0}
           <div class="step" data-phase="5차시 · 도입 · 학습 문제" data-time="10분 중 ① (3분)">
             <p class="ask">한-튀르키예 그린 벤처<br><em>글로벌 데모데이</em></p>
             <p>데모데이는 우리가 만든 아이디어의 기능과 환경적·사회적 가치를 세상에 제안하는 자리예요.</p>
+            <div class="figrow"><figure class="fig"><img src="img/class-56-1.jpg" alt="장치 구조를 그린 손그림 포스터들을 칠판에 붙이고 두 학생이 마이크를 들고 발표하는 장면" loading="lazy"><figcaption>▲ 5~6차시 활동사진 · 포스터를 붙여 두고 발표</figcaption></figure><figure class="fig"><img src="img/class-56-4.jpg" alt="다른 모둠의 손그림 포스터 앞에서 한 학생이 손짓을 하며 마이크로 설명하는 장면" loading="lazy"><figcaption>▲ 5~6차시 활동사진 · 손짓을 섞어 설명하는 발표자</figcaption></figure></div>
             <div class="teacher">자료: 데모데이 안내 슬라이드.</div>
           </div>
           <div class="step" data-phase="5차시 · 도입 · 목표 확인" data-time="10분 중 ② (4분)">
@@ -1118,6 +1155,7 @@ input.pad{min-height:0}
         <div class="awards" aria-label="시상 부문"><span>공감상</span><span>혁신상</span><span>지속가능상</span></div>
       </div>
     </div>
+    <figure class="fig one reveal"><img src="img/class-56-3.jpg" alt="네 학생이 포스터들이 붙은 벽 앞에 나란히 서서 산출물을 들어 보이며 발표하는 장면, 앞쪽 책상에 모습이 비침" loading="lazy"><figcaption>▲ 5~6차시 활동사진 · 모둠 발표</figcaption></figure>
     <div style="margin-top:1.4rem">
       <a class="live" href="https://www.mentimeter.com" target="_blank" rel="noopener"><i></i>Mentimeter</a>
       <a class="live" href="https://padlet.com" target="_blank" rel="noopener"><i></i>Padlet</a>
@@ -1135,6 +1173,7 @@ input.pad{min-height:0}
 
     <h3>활동 1 · 공공데이터 기반 양국 에너지 믹스 탐구</h3>
     <p class="note">Ember·IEA 통계(발전원별 발전량)와 국가 전력 통계로 두 나라의 전력 생산 비율을 비교하고, 에너지 전환의 기회와 위기 요인을 분석해 봅시다.</p>
+    <figure class="fig one reveal"><img src="img/class-12-3.jpg" alt="교사가 몸을 숙여 노트북과 태블릿을 앞에 둔 모둠 학생들과 이야기를 나누는 장면" loading="lazy"><figcaption>▲ 1~2차시 활동사진 · 모둠과 함께 자료를 살피는 교사</figcaption></figure>
     <div class="grid g3">
       <div class="field"><label for="w1-year">지표 · 기준 연도 · 출처</label><input class="pad" id="w1-year" data-key="w1-year" placeholder="예: 발전량 / ____년 / Ember"></div>
       <div class="field"><label for="w1-kr">한국 (원자력 %, 석탄 %, 가스 %, 신재생 %, 기타 %)</label><textarea class="pad sm" id="w1-kr" data-key="w1-kr"></textarea></div>
@@ -1192,6 +1231,7 @@ input.pad{min-height:0}
     <p class="label">평가</p>
     <h2 class="head">과정 중심 관찰 평가</h2>
     <p class="lead">외형보다 데이터 근거, 양국 협력과 피드백 반영, 가치 제안의 설득력을 봐요. B·C 칸은 눈으로 확인할 수 있는 모습으로 적었어요.</p>
+    <figure class="fig slide one reveal"><img src="../slides/p3/033.jpg" alt="수업 PPT 슬라이드: 데모데이 평가 루브릭(가치 제안 설득력, 논증의 논리성, Q&amp;A 대응력)" loading="lazy"><figcaption>▲ 수업 PPT 33장 · 데모데이 평가 루브릭</figcaption></figure>
     <p class="muted small">A·B·C는 이 과제의 채점 수준이에요. 학기 성취도(A~E)는 학교 성취평가 기준에 따라 따로 산출해요.</p>
     <div class="tabs" role="tablist" data-key="p3-rubric">
       <button role="tab" id="tab-r1" aria-controls="r1">1~2차시</button>
@@ -1247,6 +1287,13 @@ input.pad{min-height:0}
       <figure class="reveal d1"><img src="img/rec_lecture.jpg" alt="화상 강의 화면: 기업가적 시선 커리큘럼 표와 '기후변화와 환경생태 에코프로너스' 표지" loading="lazy"><figcaption>3~4차시 에너지 기업가정신 강의</figcaption></figure>
       <figure class="reveal d2"><img src="img/rec_storybook_b.jpg" alt="화상 수업에서 공유한 영어 동화책 펼침면: 두 아이 캐릭터와 마을 지도 그림(상단 이름 표시는 흐리게 처리)" loading="lazy"><figcaption>동화책 발표회</figcaption></figure>
       <figure class="reveal d3"><img src="img/rec_padlet_b.jpg" alt="국제공동수업 패들렛 보드: SDGs 목표별 열에 학생 게시물이 모여 있는 화면(학생 이름이 보이지 않게 게시물은 흐리게 처리)" loading="lazy"><figcaption>수업 활동 Padlet</figcaption></figure>
+    </div>
+    <h3 style="margin-top:2.2rem">교실 속 장면</h3>
+    <div class="gallery">
+      <figure class="reveal"><img src="img/class-12-4.jpg" alt="과학실에서 학생들이 책상 사이에 서거나 앉아 노트북으로 모둠 작업을 하는 장면" loading="lazy"><figcaption>▲ 1~2차시 활동사진</figcaption></figure>
+      <figure class="reveal d1"><img src="img/summer-1.jpg" alt="아치형 창이 있는 넓은 교실에서 많은 학생이 모둠 책상에 앉아 태블릿으로 활동하는 장면" loading="lazy"><figcaption>▲ 협·공·G 여름교실 활동사진</figcaption></figure>
+      <figure class="reveal d2"><img src="img/summer-2.jpg" alt="모둠 책상 사이를 오가며 학생들이 서로의 작업을 살펴보는 교실 장면" loading="lazy"><figcaption>▲ 협·공·G 여름교실 활동사진</figcaption></figure>
+      <figure class="reveal d3"><img src="img/summer-4.jpg" alt="흰 책상 위 큰 종이에 학생들이 마커로 글과 도식을 쓰는 장면" loading="lazy"><figcaption>▲ 협·공·G 여름교실 활동사진</figcaption></figure>
     </div>
     <p class="photo-note">학생 얼굴과 이름은 흐리게 처리했습니다.</p>
 
